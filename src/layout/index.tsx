@@ -7,7 +7,7 @@ export const Layout = ({children}: any) => {
       <div className="px-[10%] w-full lg:fixed z-10 py-10">
         <Nav/>
       </div>
-      <div className="px-[10%] w-full flex flex-col lg:h-screen justify-center items-center lg:overflow-hidden py-40 lg:py-0">
+      <div className="px-[10%] w-full flex flex-col mt-100 lg:overflow-hidden py-40 lg:py-0">
         <div className="w-full">
         {children}
         </div>

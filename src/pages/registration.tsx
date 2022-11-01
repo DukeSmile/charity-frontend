@@ -12,34 +12,78 @@ export const RegistrationPage = () => {
   }
 
   return (
-    <Grid container>
+    <Grid container spacing={1}>
       <Grid item md={3}>
-        <p>Let's get you started!</p>
+        <p className="text-40">Let's get you started!</p>
         <button className={style.createBtn} onClick={() => SetCharityType('charity')}>Create Charity</button>
         <button className={style.createBtn} onClick={() => SetCharityType('fundraiser')}>Create FundRaiser</button>
       </Grid>
       <Grid item container spacing={1} md={9}>
-        <Grid item sm={12} className="flex items-center">
-          <label className="mr-20">Title of fundRaiser</label>
-          <TextField
-            hiddenLabel
-            id="filled-hidden-label-small"
-            defaultValue="FundRaiser"
-            variant="filled"
-            size="small"
-            autoFocus = {true}
-          />
+        <Grid item sm={12}>
+        <label className="mr-20 text-30">Sign up {charityType}</label>
         </Grid>
-        <Grid item sm={12} className="flex items-center">
-          <label className="mr-20">Your Full Name</label>
-          <TextField
-            hiddenLabel
-            id="filled-hidden-label-small"
-            defaultValue="Your Full Name"
-            variant="filled"
-            size="small"
-          />
-        </Grid>
+        {
+          charityType == 'charity' && (
+          <>
+            <Grid item sm={12} className="flex items-center">
+              <label className="mr-20">Charity Name</label>
+              <TextField
+                hiddenLabel
+                id="filled-hidden-label-small"
+                defaultValue="FundRaiser"
+                variant="filled"
+                size="small"
+                autoFocus = {true}
+              />
+            </Grid>
+            <Grid item sm={12} className="flex items-center">
+              <label className="mr-20">Charity Registration Number</label>
+              <TextField
+                hiddenLabel
+                id="filled-hidden-label-small"
+                defaultValue="Your Full Name"
+                variant="filled"
+                size="small"
+              />
+            </Grid>
+            <Grid item sm={12} className="flex items-center">
+              <label className="mr-20">Website</label>
+              <TextField
+                hiddenLabel
+                id="filled-hidden-label-small"
+                defaultValue="Your Full Name"
+                variant="filled"
+                size="small"
+              />
+            </Grid>
+          </>)
+        }
+        {
+          charityType == 'fundraiser' && (
+            <>
+              <Grid item sm={12} className="flex items-center">
+                <label className="mr-20">Title of fundRaiser</label>
+                <TextField
+                  hiddenLabel
+                  id="filled-hidden-label-small"
+                  defaultValue="FundRaiser"
+                  variant="filled"
+                  size="small"
+                  autoFocus = {true}
+                />
+              </Grid>
+              <Grid item sm={12} className="flex items-center">
+                <label className="mr-20">Your Full Name</label>
+                <TextField
+                  hiddenLabel
+                  id="filled-hidden-label-small"
+                  defaultValue="Your Full Name"
+                  variant="filled"
+                  size="small"
+                />
+              </Grid>
+            </>)
+        }
         <Grid item sm={12} className="flex items-center">
           <label className="mr-20">Contact Email</label>
           <TextField
@@ -51,7 +95,7 @@ export const RegistrationPage = () => {
           />
         </Grid>
         <Grid item sm={12}>
-          <p>Short summary of fundraise (100 characters max)</p>
+          <p>Short summary of {charityType} (100 characters max)</p>
           <TextareaAutosize
             minRows={4}
             maxRows={4}
@@ -63,7 +107,7 @@ export const RegistrationPage = () => {
           />
         </Grid>
         <Grid item sm={12}>
-          <p className="mr-20">Which country are you based?</p>
+          <p className="mr-20">Based in which country:</p>
           <TextField
             hiddenLabel
             id="filled-hidden-label-small"
@@ -74,7 +118,7 @@ export const RegistrationPage = () => {
           />
         </Grid>
         <Grid item sm={12}>
-          <p>Detailed summary of your fundraise(1000 characters max)</p>
+          <p>Detailed summary of {charityType}(1000 characters max)</p>
           <TextareaAutosize
             minRows={4}
             maxRows={4}
@@ -90,14 +134,16 @@ export const RegistrationPage = () => {
           <TextField
             hiddenLabel
             id="filled-hidden-label-small"
-            defaultValue=""
+            value={address}
             variant="filled"
             size="small"
             style={{ width: '100%'}}
+            disabled
           />
         </Grid>
         <Grid item sm={12}>
           <button className={style.createBtn}>Upload Photo</button>
+          <button className={style.createBtn}>Sign up</button>
         </Grid>
       </Grid>
     </Grid>
