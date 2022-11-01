@@ -6,11 +6,11 @@ export const ConnectWalletButton = () => {
     <div>
       {
         address === '' ? (
-          <button className="uppercase w-250 text-black text-1em rounded-7 border-2 px-24 py-10 font-medium hover:font-bold" onClick={connect}>
+          <button className="uppercase w-250 text-black text-1em rounded-7 border-2 shadow-default px-24 py-10 font-medium hover:font-bold" onClick={connect}>
             Connect wallet
           </button> ) :
           (
-            <button className="uppercase text-black text-1em rounded-7 border-2 shadow-squash px-24 py-10 font-medium" onClick={disconnect}>
+            <button className="uppercase text-black text-1em rounded-7 border-2 shadow-default px-24 py-10 font-medium hover:font-bold" onClick={disconnect}>
               Disconnect wallet
             </button>
           )

@@ -81,9 +81,7 @@ module.exports = {
         stormDust: '#626262',
       },
       boxShadow: {
-        skyblue: '0px 0px 24px rgb(27, 171, 251, 0.56)',
-        squash: '0px 0px 24px rgb(245, 166, 26, 0.56)',
-        tokenOption: 'inset 0px 4px 56px rgb(255, 255, 255, 0.18)',
+        default: 'inset 0px 4px 56px rgb(255, 255, 255, 0.18)',
       },
       margin: (theme, { negative }) => ({
         auto: 'auto',
