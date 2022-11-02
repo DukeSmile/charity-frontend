@@ -1,6 +1,7 @@
-import seasonalTokenABI from './abi/seasonalTokenABI.json';
-import ethBridgeABI from './abi/ethBridgeABI.json';
-import bscBridgeABI from './abi/bscBridgeABI.json';
+import ddaContractABI from './abi/ddaContractABI.json';
+import tusdtABI from './abi/tusdtABI.json';
+import tethABI from './abi/tethABI.json';
+import okapiTokenABI from './abi/okapiTokenABI.json';
 
 import EthereumIcon from "./assets/images/networks/ethereum.svg";
 import BscIcon from "./assets/images/networks/bsc.svg";
@@ -14,8 +15,7 @@ export enum NetworkIds {
   BscTestnet = 97
 }
 
-export const FromNetwork = NetworkIds.Ethereum;
-export const ToNetwork = NetworkIds.Bsc;
+export const FromNetwork = NetworkIds.BscTestnet;
 
 interface INetwork {
   name: string,

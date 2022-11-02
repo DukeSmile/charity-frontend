@@ -1,13 +1,8 @@
 import Web3 from 'web3';
 
-import { SeasonalToken } from '../interfaces/base';
 import { contractABIs, networks, FromNetwork} from '../../networks';
 import { chains } from '../../providers';
 
-import springImg from '../../assets/images/tokens/spring.png';
-import summerImg from '../../assets/images/tokens/summer.png';
-import autumnImg from '../../assets/images/tokens/autumn.png';
-import winterImg from '../../assets/images/tokens/winter.png';
 
 const ethWeb3 = new Web3(chains[FromNetwork].rpcUrls[0]);
 

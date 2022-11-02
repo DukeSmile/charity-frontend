@@ -260,7 +260,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({child
     console.log("disconnecting");
     web3Modal.clearCachedProvider();
     setConnected(false);
-
+    setAddress('');
     setTimeout(() => {
       window.location.reload();
     }, 1);
