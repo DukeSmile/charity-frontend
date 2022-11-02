@@ -89,11 +89,10 @@ export const chains: AllChainDetails = {
   [NetworkIds.BscTestnet]: new ChainDetails({
     networkName: 'BscTestnet',
     rpcUrls: [
-      'https://hidden-hidden-cloud.bsc-testnet.discover.quiknode.pro/43eefa63d448ff86df7bf351b38474aab4b43eaa/',
-      // 'https://data-seed-prebsc-2-s2.binance.org:8545',
+      'https://data-seed-prebsc-1-s1.binance.org:8545',
     ],
-    symbol: 'TBNB',
+    symbol: 'BNB',
     decimals: 18,
-    blockExplorerUrls: [],
+    blockExplorerUrls: ['https://bscscan.com'],
   }),
 };

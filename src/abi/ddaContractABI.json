@@ -350,23 +350,7 @@
         "name": "_type",
         "type": "uint8"
       },
-      {
-        "components": [
-          { "internalType": "string", "name": "vip", "type": "string" },
-          { "internalType": "string", "name": "website", "type": "string" },
-          { "internalType": "string", "name": "name", "type": "string" },
-          { "internalType": "string", "name": "email", "type": "string" },
-          { "internalType": "string", "name": "country", "type": "string" },
-          { "internalType": "string", "name": "summary", "type": "string" },
-          { "internalType": "string", "name": "detail", "type": "string" },
-          { "internalType": "string", "name": "photo", "type": "string" },
-          { "internalType": "string", "name": "title", "type": "string" },
-          { "internalType": "string", "name": "location", "type": "string" }
-        ],
-        "internalType": "struct DDAContract.Catalog",
-        "name": "_catalog",
-        "type": "tuple"
-      }
+      { "internalType": "string[]", "name": "_catalog", "type": "string[]" }
     ],
     "name": "createCharity",
     "outputs": [],

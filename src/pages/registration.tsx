@@ -1,11 +1,18 @@
 import { Grid, TextareaAutosize, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useWeb3Context } from "../hooks/web3Context";
 import { Formik, Field, useFormik } from "formik";
 import * as Yup from "yup";
+
+import { FromNetwork } from "../networks";
+import { getContract } from "../core/constants/base";
+import { callbackify } from "util";
+
 export const RegistrationPage = () => {
   
-  const {connect, address} = useWeb3Context();
+  const dispatch = useDispatch();
+  const {connected, address} = useWeb3Context();
   const [charityType, SetCharityType] = useState('charity');
   const [wallet, setWallet] = useState('');
   const style = {
@@ -61,12 +68,27 @@ export const RegistrationPage = () => {
       detail: '',
       photo: '',
       title: '',
-      location: '',
-      wallet: ''
+      location: ''
     },
     onSubmit:async (values:any) => {
-      values.wallet = address;
+      if(!connected){
+        
+        return;
+      }
+      // values.wallet = address;
       console.log(values);
+      if (address !== '') {
+        try{
+          let ddaContract = getContract(FromNetwork, 'DDAContract');
+          let okapi_address = await ddaContract.methods.OKAPI_ADDRESS().call();
+          console.log(okapi_address);
+          let charityInfo: [string, string, string, string, string, string, string, string, string, string] = [values.vip, values.website, values.name, values.email, values.country, values.summary, values.detail, values.photo, values.title, values.location];
+          await ddaContract.methods.createCharity('1', charityInfo).send({from: address});
+        }
+        catch(error){
+          console.log(error);
+        }
+      }
     },
     validationSchema: charityType === 'charity' ? validationCharity : validationFundRaiser
   });
@@ -236,8 +258,6 @@ export const RegistrationPage = () => {
               <p className="w-300 mr-20">Wallet address to receive</p>
               <TextField
                 fullWidth
-                id="wallet"
-                name="wallet"
                 type="text"
                 value={wallet}
                 disabled
