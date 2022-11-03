@@ -56,6 +56,27 @@ export const RegistrationPage = () => {
     location: Yup.string().required("Required"),
     // wallet: Yup.string().required("Required")
   });
+  // const CatalogStruct = (vip:string,
+  //             website: string,
+  //             name: string,
+  //             email: string,
+  //             country: string,
+  //             summary: string,
+  //             detail: string,
+  //             photo: string,
+  //             title: string,
+  //             location: string) {
+  //   this.vip = vip;
+  //   this.website = website;
+  //   this.name = name;
+  //   this.email = email;
+  //   this.country = country;
+  //   this.summary = summary;
+  //   this.detail = detail;
+  //   this.photo = photo;
+  //   this.title = title;
+  //   this.location = location;
+  // };
   const formik = useFormik({
     // enableReinitialize: true,
     initialValues: {
@@ -72,18 +93,29 @@ export const RegistrationPage = () => {
     },
     onSubmit:async (values:any) => {
       if(!connected){
-        
         return;
       }
       // values.wallet = address;
-      console.log(values);
       if (address !== '') {
+        console.log(values);
         try{
           let ddaContract = getContract(FromNetwork, 'DDAContract');
           let okapi_address = await ddaContract.methods.OKAPI_ADDRESS().call();
           console.log(okapi_address);
-          let charityInfo: [string, string, string, string, string, string, string, string, string, string] = [values.vip, values.website, values.name, values.email, values.country, values.summary, values.detail, values.photo, values.title, values.location];
-          await ddaContract.methods.createCharity('1', charityInfo).send({from: address});
+
+          const _catalog = {
+            vip: values.vip,
+            website: values.website,
+            name: values.name,
+            email: values.email,
+            country: values.country,
+            summary: values.summary,
+            detail: values.detail,
+            photo: 'saer',
+            title: values.title,
+            location: values.location
+          }
+          await ddaContract.methods.createCharity(charityType === 'charity' ? 0 : 1, _catalog).send({from: address});
         }
         catch(error){
           console.log(error);

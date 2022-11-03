@@ -81,7 +81,7 @@ module.exports = {
         stormDust: '#626262',
       },
       boxShadow: {
-        default: 'inset 0px 4px 56px rgb(255, 255, 255, 0.18)',
+        default: 'outset 0px 4px 56px rgb(15, 15, 15, 0.5)',
       },
       margin: (theme, { negative }) => ({
         auto: 'auto',

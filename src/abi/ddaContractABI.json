@@ -242,6 +242,27 @@
   },
   {
     "inputs": [],
+    "name": "ADMIN_ROLE",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "BLACK_ROLE",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "CHARITY_ROLE",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "DEFAULT_ADMIN_ROLE",
     "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "stateMutability": "view",
@@ -251,6 +272,13 @@
     "inputs": [],
     "name": "OKAPI_ADDRESS",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "OWNER_ROLE",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -350,7 +378,23 @@
         "name": "_type",
         "type": "uint8"
       },
-      { "internalType": "string[]", "name": "_catalog", "type": "string[]" }
+      {
+        "components": [
+          { "internalType": "string", "name": "vip", "type": "string" },
+          { "internalType": "string", "name": "website", "type": "string" },
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "string", "name": "email", "type": "string" },
+          { "internalType": "string", "name": "country", "type": "string" },
+          { "internalType": "string", "name": "summary", "type": "string" },
+          { "internalType": "string", "name": "detail", "type": "string" },
+          { "internalType": "string", "name": "photo", "type": "string" },
+          { "internalType": "string", "name": "title", "type": "string" },
+          { "internalType": "string", "name": "location", "type": "string" }
+        ],
+        "internalType": "struct DDAContract.Catalog",
+        "name": "_catalog",
+        "type": "tuple"
+      }
     ],
     "name": "createCharity",
     "outputs": [],
@@ -438,17 +482,6 @@
     ],
     "name": "getRoleAdmin",
     "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "pairAddress", "type": "address" },
-      { "internalType": "address", "name": "currency", "type": "address" },
-      { "internalType": "uint256", "name": "amount", "type": "uint256" }
-    ],
-    "name": "getTokenPrice",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },

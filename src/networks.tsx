@@ -43,7 +43,7 @@ export const networks: INetworks = {
     name: 'BSC Testnet',
     isEnabled: true,
     addresses: {
-      DDAContract:'0xd00269060B1F08eF8DAe53DeCFB253Cfe3fCc77f',
+      DDAContract:'0xC29218B784E7960FA35A74C92639F8dB95bFe1B7',
     },
     logo: BscIcon
   },
