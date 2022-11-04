@@ -7,6 +7,7 @@ import Web3 from "web3";
 import { charityProp } from "../core/interfaces/base";
 import { useWeb3Context } from "../hooks/web3Context";
 import { getContract } from "../core/constants/base";
+import { setLoading } from "../core/store/slices/bridgeSlice";
 
 export const CharitiesPage = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export const CharitiesPage = () => {
   };
   const blockCharity = async(index: number) => {
     if(connected && address != '') {
+      dispatch(setLoading(true));
       let ddaContract = getContract('DDAContract');
       try{
         await ddaContract.methods.blackCharity(index).send({from: address});
@@ -24,6 +26,7 @@ export const CharitiesPage = () => {
       catch (e) {
         console.log(e);
       }
+      dispatch(setLoading(false));
     }
   };
   return (

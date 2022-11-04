@@ -1,23 +1,27 @@
 import { Grid } from "@material-ui/core";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Web3 from "web3";
 
 import { CurrencySelect } from "../components/currencySelect";
 import { getContract, getTokenContract } from "../core/constants/base";
 import { charityProp } from "../core/interfaces/base";
+import { setLoading } from "../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../hooks/web3Context";
 import { FromNetwork, networks, tokenList } from "../networks";
 
 export const DonationPage = () => {
+
   let { index } = useParams();
-  let targetIndex:number = index === undefined ? -1 : parseInt(index);
   const {connected, address} = useWeb3Context();
+  const dispatch = useDispatch();
   const [currency, setCurrency] = useState(0);
   const [amount, setAmount] = useState(0);
   const charities:charityProp[] = useSelector((state:any) => state.app.allCharities);
+  let targetIndex:number = index === undefined ? -1 : parseInt(index);
   const targetCharity = charities[targetIndex];
+
   if (!targetCharity) {
     return (
       <div className="p-20">Please select one charity or fundraiser</div>
@@ -32,7 +36,8 @@ export const DonationPage = () => {
       alert("Amount can not be zero");
       return;
     }
-    if(connected && address != ''){
+    if(connected && address != ''){      
+      dispatch(setLoading(true));
       let currencyContract = getTokenContract(currency);
       // console.log(Web3.utils.toWei(amount.toString()), currency);
       const ddaAddress = networks[FromNetwork].addresses['DDAContract'];
@@ -46,6 +51,8 @@ export const DonationPage = () => {
       }
       let ddaContract = getContract('DDAContract');
       await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({from: address});
+      
+      dispatch(setLoading(false));
     }
     else
       alert('connect wallet');

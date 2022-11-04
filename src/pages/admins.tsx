@@ -7,6 +7,7 @@ import Web3 from "web3";
 import { adminUserProp } from "../core/interfaces/base";
 import { useWeb3Context } from "../hooks/web3Context";
 import { getContract } from "../core/constants/base";
+import { setLoading } from "../core/store/slices/bridgeSlice";
 
 export const AdminsPage = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export const AdminsPage = () => {
   }
   const registryNewAdmin = async () => {
     if(newUserAddr != '') {
+      dispatch(setLoading(true));
       let ddaContract = getContract('DDAContract');
       try{
         await ddaContract.methods.addAdmin(newUserAddr, newUserName).send({from: address});
@@ -36,10 +38,12 @@ export const AdminsPage = () => {
       catch (e) {
         console.log(e);
       }
+      dispatch(setLoading(false));
     }
   };
   const removeAdmin = async(index: number) => {
     if(connected && address != '') {
+      dispatch(setLoading(true));
       let ddaContract = getContract('DDAContract');
       try{
         await ddaContract.methods.removeAdmin(index).send({from: address});
@@ -47,6 +51,7 @@ export const AdminsPage = () => {
       catch (e) {
         console.log(e);
       }
+      dispatch(setLoading(false));
     }
   };
 

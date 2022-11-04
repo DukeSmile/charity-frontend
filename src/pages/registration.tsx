@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { FromNetwork } from "../networks";
 import { getContract } from "../core/constants/base";
 import { callbackify } from "util";
+import { setLoading } from "../core/store/slices/bridgeSlice";
 
 export const RegistrationPage = () => {
   
@@ -77,6 +78,7 @@ export const RegistrationPage = () => {
       // values.wallet = address;
       if (address !== '') {
         console.log(values);
+        dispatch(setLoading(true));
         try{
           let ddaContract = getContract('DDAContract');
           let okapi_address = await ddaContract.methods.OKAPI_ADDRESS().call();
@@ -100,6 +102,7 @@ export const RegistrationPage = () => {
         catch(error){
           console.log(error);
         }
+        dispatch(setLoading(false));
       }
     },
     validationSchema: charityType === 'charity' ? validationCharity : validationFundRaiser

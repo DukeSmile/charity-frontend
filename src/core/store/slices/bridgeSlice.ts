@@ -6,7 +6,8 @@ const initialState = {
   fundRaisers: [],
   allCharities: [],
   adminUsers: [],
-  isOwner: 0
+  isOwner: 0,
+  loading: false
 };
 
 export const bridgeSlice = createSlice({
@@ -28,9 +29,12 @@ export const bridgeSlice = createSlice({
     },
     setOwnerFlag: (state, {payload}) => {
       state.isOwner = payload;
+    },
+    setLoading: (state, {payload}) => {
+      state.loading = payload;
     }
   }
 });
 
-export const { setCharities, setFundRaisers, setAllCharities, setAdminUsers, setOwnerFlag } = bridgeSlice.actions;
+export const { setCharities, setFundRaisers, setAllCharities, setAdminUsers, setOwnerFlag, setLoading } = bridgeSlice.actions;
 export default bridgeSlice.reducer;

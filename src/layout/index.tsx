@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import LoadingBar from '../components/loadingBar';
 import { Nav } from '../components/Nav';
 import { getContract, roleList } from '../core/constants/base';
 import { adminUserProp, charityProp } from '../core/interfaces/base';
@@ -9,8 +10,10 @@ import { FromNetwork } from '../networks';
 
 export const Layout = ({children}: any) => {
   const dispatch = useDispatch();
-  const [count, setCount] = useState(0);
   const {connected, address} = useWeb3Context();
+  const [count, setCount] = useState(0);
+  const loading = useSelector((state:any) => state.app.loading);
+
   const getDDAInfo = async() => {
     const ddaContract = getContract('DDAContract');
     //get charities information from contract
@@ -83,6 +86,7 @@ export const Layout = ({children}: any) => {
         {children}
         </div>
       </div>
+      <LoadingBar open={loading}/>
     </div>
   )
 }

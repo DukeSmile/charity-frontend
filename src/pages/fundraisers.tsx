@@ -1,16 +1,17 @@
+import { Grid } from "@material-ui/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getContract } from "../core/constants/base";
-import { FromNetwork } from "../networks";
-
-import { charityProp } from "../core/interfaces/base";
-import { setCharities, setFundRaisers } from "../core/store/slices/bridgeSlice";
-import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import Web3 from "web3";
+
+import { getContract } from "../core/constants/base";
+import { FromNetwork } from "../networks";
+import { charityProp } from "../core/interfaces/base";
+import { setCharities, setFundRaisers, setLoading } from "../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../hooks/web3Context";
 
 export const FundRaisersPage = () => {
+  const dispatch = useDispatch();
   const fundRaisers = useSelector( (state:any) => state.app.fundRaisers);
   const {connected, address} = useWeb3Context();
   const style={
@@ -18,6 +19,7 @@ export const FundRaisersPage = () => {
   };
   const blockCharity = async(index: number) => {
     if(connected && address != '') {
+      dispatch(setLoading(true));
       let ddaContract = getContract('DDAContract');
       try{
         await ddaContract.methods.blackCharity(index).send({from: address});
@@ -25,6 +27,7 @@ export const FundRaisersPage = () => {
       catch (e) {
         console.log(e);
       }
+      dispatch(setLoading(false));
     }
   };
 
