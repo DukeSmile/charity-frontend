@@ -12,8 +12,19 @@ export interface charityProp {
     catalog: any
 }
 
+
 export interface adminUserProp {
     index: number;
     address: string;
     name: string;
+}
+
+interface networkTokenProp {
+    [key: number]: string
+}
+export interface tokenProp {
+    img: any;
+    name: string;
+    abi: any;
+    address: networkTokenProp;
 }

@@ -9,33 +9,33 @@ import { Grid } from "@material-ui/core";
 
 export const CharitiesPage = () => {
   const dispatch = useDispatch();
-  const getCharities = async() => {
-      let ddaContract = getContract(FromNetwork, 'DDAContract');
-      let allCharities = await ddaContract.methods.getCharities().call();
-      let charities:charityProp[] = [], fundRaisers:charityProp[] = [];
-      allCharities.forEach((charity: any, index:number) => {
-          const newOne:charityProp = {
-              index: index,
-              charityType: parseInt(charity.charityType),
-              fund: charity.fund,
-              address: charity.walletAddress,
-              catalog: charity.catalog
-          };
-          if (newOne.charityType === 1) {
-              fundRaisers.push(newOne);
-          }
-          else {
-              charities.push(newOne);
-          }
-      })
-      dispatch(setFundRaisers(fundRaisers));
-      dispatch(setCharities(charities));
-  }
+  // const getCharities = async() => {
+  //     let ddaContract = getContract(FromNetwork, 'DDAContract');
+  //     let allCharities = await ddaContract.methods.getCharities().call();
+  //     let charities:charityProp[] = [], fundRaisers:charityProp[] = [];
+  //     allCharities.forEach((charity: any, index:number) => {
+  //         const newOne:charityProp = {
+  //             index: index,
+  //             charityType: parseInt(charity.charityType),
+  //             fund: charity.fund,
+  //             address: charity.walletAddress,
+  //             catalog: charity.catalog
+  //         };
+  //         if (newOne.charityType === 1) {
+  //             fundRaisers.push(newOne);
+  //         }
+  //         else {
+  //             charities.push(newOne);
+  //         }
+  //     })
+  //     dispatch(setFundRaisers(fundRaisers));
+  //     dispatch(setCharities(charities));
+  // }
 
   const charities = useSelector( (state:any) => state.app.charities)
-  useEffect(() => {
-      getCharities();
-  }, []);
+  // useEffect(() => {
+  //     getCharities();
+  // }, []);
   return (
     <div className="p-20">
       <Grid container spacing={2}>

@@ -6,6 +6,8 @@ import okapiTokenABI from './abi/okapiTokenABI.json';
 
 import EthereumIcon from "./assets/images/networks/ethereum.svg";
 import BscIcon from "./assets/images/networks/bsc.svg";
+import { tokenProp } from './core/interfaces/base';
+import { tokenLogo } from './components/tokenLogo';
 
 export type NetworkId = number;
 
@@ -78,3 +80,24 @@ export const contractABIs: tokenABIS = {
 }
 
 export const enabledNetworkIds: NetworkId[] = Object.keys(networks).map(networkId => parseInt(networkId)).filter(networkId => networks[networkId].isEnabled);
+
+export const tokenList: tokenProp[] = [
+  {
+      img: tokenLogo.USDT,
+      name:'USDT',
+      abi: tusdtABI,
+      address: {
+          [NetworkIds.BscTestnet]: '0xbF68079500Ea88c84f95cfB8840C9F569b945a74',
+          [NetworkIds.Ethereum]: ''
+      }
+  },
+  {
+    img: tokenLogo.ETH,
+    name:'ETH',
+    abi: tethABI,
+    address: {
+        [NetworkIds.BscTestnet]: '0xC3685C54E792B17241F81e967DD3F95F7baF4115',
+        [NetworkIds.Ethereum]: ''
+    }
+}
+];

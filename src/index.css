@@ -39,7 +39,7 @@ label + .MuiInput-formControl{
 
 .MuiSelect-icon{
   right: 10px !important;
-  color:white !important;
+  color: black;
 }
 div.MuiPopover-root .MuiPaper-root{
   background-color: rgba(0,0,0,0) !important;
@@ -47,7 +47,7 @@ div.MuiPopover-root .MuiPaper-root{
 ul.MuiList-root{
   box-shadow: inset 0px 4px 56px rgb(255, 255, 255, 0.18);
   border-radius: 10px;
-  background-color: #030C1B;
+  background-color: #ffffff;
 }
 ul.MuiList-root li:first-child > div{
   border-top-left-radius: 10px;
@@ -60,5 +60,5 @@ ul.MuiList-root li:last-child > div{
 div.MuiInputBase-root > div > div{
   box-shadow: inset 0px 4px 56px rgb(255, 255, 255, 0.18);
   border-radius: 10px;
-  background-color: #030C1B;
+  background-color: #ffffff;
 }

@@ -41,9 +41,9 @@ export const App = (): JSX.Element => {
   }
 
   const fundRaisers = useSelector( (state:any) => state.app.fundRaisers)
-  useEffect(() => {
+  // useEffect(() => {
       getCharities();
-  }, []);
+  // }, []);
   return (
     <BrowserRouter>
       <Layout>
