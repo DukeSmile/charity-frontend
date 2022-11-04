@@ -79,6 +79,7 @@ module.exports = {
         charCoal: '#030C1B',
         limedSqruce: '#3C4955',
         stormDust: '#626262',
+        error: '#f44336'
       },
       boxShadow: {
         default: '0px 4px 10px rgb(15, 15, 15, 0.5)',

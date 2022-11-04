@@ -134,8 +134,10 @@ export const RegistrationPage = () => {
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     error={formik.touched.name && Boolean(formik.errors.name)}
-                    helperText={formik.touched.name && formik.errors.name}
+                    // helperText={formik.touched.name && formik.errors.name}
                     autoComplete='off'
+                    variant="outlined"
+                    size="small"
                   />
                 </Grid>
                 <Grid item sm={12} className="flex items-center">
@@ -148,8 +150,10 @@ export const RegistrationPage = () => {
                     value={formik.values.vip}
                     onChange={formik.handleChange}
                     error={formik.touched.vip && Boolean(formik.errors.vip)}
-                    helperText={formik.touched.vip && formik.errors.vip}
+                    // helperText={formik.touched.vip && formik.errors.vip}
                     autoComplete='off'
+                    variant="outlined"
+                    size="small"
                   />
                 </Grid>
                 <Grid item sm={12} className="flex items-center">
@@ -162,8 +166,10 @@ export const RegistrationPage = () => {
                     value={formik.values.website}
                     onChange={formik.handleChange}
                     error={formik.touched.website && Boolean(formik.errors.website)}
-                    helperText={formik.touched.website && formik.errors.website}
+                    // helperText={formik.touched.website && formik.errors.website}
                     autoComplete='off'
+                    variant="outlined"
+                    size="small"
                   />
                 </Grid>
               </>)
@@ -181,7 +187,7 @@ export const RegistrationPage = () => {
                       value={formik.values.title}
                       onChange={formik.handleChange}
                       error={formik.touched.title && Boolean(formik.errors.title)}
-                      helperText={formik.touched.title && formik.errors.title}
+                      // helperText={formik.touched.title && formik.errors.title}
                       autoComplete='off'
                     />
                   </Grid>
@@ -195,7 +201,7 @@ export const RegistrationPage = () => {
                       value={formik.values.name}
                       onChange={formik.handleChange}
                       error={formik.touched.name && Boolean(formik.errors.name)}
-                      helperText={formik.touched.name && formik.errors.name}
+                      // helperText={formik.touched.name && formik.errors.name}
                       autoComplete='off'
                     />
                   </Grid>
@@ -211,18 +217,20 @@ export const RegistrationPage = () => {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                // helperText={formik.touched.email && formik.errors.email}
                 autoComplete='off'
+                variant="outlined"
+                size="small"
               />
             </Grid>
             <Grid item sm={12}>
               <p>Short summary of {charityType} (100 characters max)</p>
               <TextareaAutosize
-                minRows={4}
-                maxRows={4}
+                minRows={2}
+                maxRows={2}
                 id="summary"
                 name="summary"
-                className="border-1 p-10"
+                className={"border-1 p-10 " + (formik.touched.summary && Boolean(formik.errors.summary) ? "border-error" : '' )}
                 style={{ width: '100%' }}
                 value={formik.values.summary}
                 onChange={formik.handleChange}
@@ -240,8 +248,10 @@ export const RegistrationPage = () => {
                 value={formik.values.country}
                 onChange={formik.handleChange}
                 error={formik.touched.country && Boolean(formik.errors.country)}
-                helperText={formik.touched.country && formik.errors.country}
+                // helperText={formik.touched.country && formik.errors.country}
                 autoComplete='off'
+                variant="outlined"
+                size="small"
               />
             </Grid>
             {
@@ -256,7 +266,7 @@ export const RegistrationPage = () => {
                   value={formik.values.location}
                   onChange={formik.handleChange}
                   error={formik.touched.location && Boolean(formik.errors.location)}
-                  helperText={formik.touched.location && formik.errors.location}
+                  // helperText={formik.touched.location && formik.errors.location}
                   autoComplete='off'
                 />
               </Grid>)
@@ -268,7 +278,7 @@ export const RegistrationPage = () => {
                 maxRows={4}
                 id="detail"
                 name="detail"
-                className="border-1 p-10"
+                className={"border-1 p-10 " + (formik.touched.detail && Boolean(formik.errors.detail) ? "border-error" : '' )}
                 style={{ width: '100%' }}
                 value={formik.values.detail}
                 onChange={formik.handleChange}
