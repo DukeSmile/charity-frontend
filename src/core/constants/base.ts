@@ -14,6 +14,5 @@ export const getContract = (type: string) => {
 
 export const getTokenContract = (index: number) => {
     const connectWeb3 = new Web3(Web3.givenProvider);
-    console.log(tokenList[index].address[FromNetwork]);
     return new connectWeb3.eth.Contract(tokenList[index].abi, tokenList[index].address[FromNetwork]);
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Nav } from '../components/Nav';
 import { getContract } from '../core/constants/base';
 import { charityProp } from '../core/interfaces/base';
-import { setCharities, setFundRaisers } from '../core/store/slices/bridgeSlice';
+import { setAllCharities, setCharities, setFundRaisers } from '../core/store/slices/bridgeSlice';
 import { FromNetwork } from '../networks';
 
 export const Layout = ({children}: any) => {
@@ -11,9 +11,11 @@ export const Layout = ({children}: any) => {
   const [count, setCount] = useState(0);
   const getCharities = async() => {
     let ddaContract = getContract('DDAContract');
-    let allCharities = await ddaContract.methods.getCharities().call();
-    let charities:charityProp[] = [], fundRaisers:charityProp[] = [];
-    allCharities.forEach((charity: any, index:number) => {
+    let charitiesFromContract = await ddaContract.methods.getCharities().call();
+    let charities:charityProp[] = [],
+        fundRaisers:charityProp[] = [],
+        allCharities:charityProp[] = [];
+    charitiesFromContract.forEach((charity: any, index:number) => {
         const newOne:charityProp = {
             index: index,
             charityType: parseInt(charity.charityType),
@@ -27,9 +29,11 @@ export const Layout = ({children}: any) => {
         else {
             charities.push(newOne);
         }
+        allCharities.push(newOne);
     })
     dispatch(setFundRaisers(fundRaisers));
     dispatch(setCharities(charities));
+    dispatch(setAllCharities(allCharities));
     setCount(count+1);
   }
   useEffect(() => {
@@ -52,7 +56,3 @@ export const Layout = ({children}: any) => {
     </div>
   )
 }
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}
-

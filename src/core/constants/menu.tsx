@@ -22,7 +22,7 @@ export const menuItems: MenuuItemProp[] = [
     },
     {
         name: 'Donation',
-        url: '/donate',
+        url: '/donate/:index',
         element: <DonationPage />
     }
 ];

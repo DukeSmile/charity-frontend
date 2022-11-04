@@ -1,16 +1,18 @@
+import { Grid } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getContract } from "../core/constants/base";
-import { FromNetwork } from "../networks";
-
 import { charityProp } from "../core/interfaces/base";
-import { setCharities, setFundRaisers } from "../core/store/slices/bridgeSlice";
-import { Grid } from "@material-ui/core";
+import Web3 from "web3";
 
 export const CharitiesPage = () => {
-  
   const dispatch = useDispatch();
-  const charities = useSelector( (state:any) => state.app.charities)
+  const charities = useSelector( (state:any) => state.app.charities);
+
+  const style={
+    btn: 'border-1 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
+  };
+
   return (
     <div className="p-20">
       <Grid container spacing={2}>
@@ -25,6 +27,11 @@ export const CharitiesPage = () => {
                 <div>Contact Email : {charity.catalog.email}</div>
                 <div>Summary : {charity.catalog.summary}</div>
                 <div>Country : {charity.catalog.country}</div>
+                <div>Fund : {Web3.utils.fromWei(charity.fund)}</div>
+                <div>
+                  <Link to={`/donate/${charity.index}`} className={style.btn}>Donate</Link>
+                  <button className={style.btn}>Block This</button>
+                </div>
               </Grid>
             )
           })

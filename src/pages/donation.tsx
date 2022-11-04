@@ -1,36 +1,48 @@
 import { Grid } from "@material-ui/core";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Web3 from "web3";
 
 import { CurrencySelect } from "../components/currencySelect";
 import { getContract, getTokenContract } from "../core/constants/base";
 import { charityProp } from "../core/interfaces/base";
 import { useWeb3Context } from "../hooks/web3Context";
-import { FromNetwork, networks } from "../networks";
+import { FromNetwork, networks, tokenList } from "../networks";
 
 export const DonationPage = () => {
+  let { index } = useParams();
+  let targetIndex:number = index === undefined ? -1 : parseInt(index);
   const {connected, address} = useWeb3Context();
-  let charities:charityProp[] = useSelector((state:any) => state.app.fundRaisers);
   const [currency, setCurrency] = useState(0);
   const [amount, setAmount] = useState(0);
-  if (charities.length === 0)
+  const charities:charityProp[] = useSelector((state:any) => state.app.allCharities);
+  const targetCharity = charities[targetIndex];
+  if (!targetCharity)
     return (<>Please select one charity or fundraiser</>);
-  let charity = charities[0];
+
   const style = {
     btn: 'border-1 p-5 text-black hover:text-white bg-artySkyBlue rounded-10'
   }
-
   const donate = async() => {
+    if (amount <= 0) {
+      alert("Amount can not be zero");
+      return;
+    }
     if(connected && address != ''){
-      let ddaContract = getContract('DDAContract');
       let currencyContract = getTokenContract(currency);
       // console.log(Web3.utils.toWei(amount.toString()), currency);
       const ddaAddress = networks[FromNetwork].addresses['DDAContract'];
+      const currencyAddress = tokenList[currency].address[FromNetwork];
       const weiOfAmount = Web3.utils.toWei(amount.toString());
-      await currencyContract.methods.approve(ddaAddress, weiOfAmount).send({from: address});
-
-      // await ddaContract.methods.createCharity(charityType === 'charity' ? 0 : 1, _catalog).send({from: address});
+      try{
+        await currencyContract.methods.approve(ddaAddress, weiOfAmount).send({from: address});
+      }
+      catch (e) {
+        console.log(e);
+      }
+      let ddaContract = getContract('DDAContract');
+      await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({from: address});
     }
     else
       alert('connect wallet');
@@ -42,8 +54,8 @@ export const DonationPage = () => {
       <Grid container spacing={3}>
         <Grid item lg={8} md={7} sm={12}>
           <div className="flex items-center">
-            <img src={charity.catalog.photo} alt={charity.catalog.name} className="w-100 h-100 border-1 mr-10"/>
-            <p>You are donating to <span className="font-bold">{charity.catalog.name}</span></p>
+            <img src={targetCharity.catalog.photo} alt={targetCharity.catalog.name} className="w-100 h-100 border-1 mr-10"/>
+            <p>You are donating to <span className="font-bold">{targetCharity.catalog.name}</span></p>
           </div>
           <div>
             <CurrencySelect currency={currency}
