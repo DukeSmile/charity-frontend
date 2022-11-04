@@ -2,17 +2,30 @@ import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { charityProp } from "../core/interfaces/base";
 import Web3 from "web3";
+
+import { charityProp } from "../core/interfaces/base";
+import { useWeb3Context } from "../hooks/web3Context";
+import { getContract } from "../core/constants/base";
 
 export const CharitiesPage = () => {
   const dispatch = useDispatch();
   const charities = useSelector( (state:any) => state.app.charities);
-
+  const {connected, address} = useWeb3Context();
   const style={
     btn: 'border-1 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
   };
-
+  const blockCharity = async(index: number) => {
+    if(connected && address != '') {
+      let ddaContract = getContract('DDAContract');
+      try{
+        await ddaContract.methods.blackCharity(index).send({from: address});
+      }
+      catch (e) {
+        console.log(e);
+      }
+    }
+  };
   return (
     <div className="p-20">
       <Grid container spacing={2}>
@@ -30,7 +43,7 @@ export const CharitiesPage = () => {
                 <div>Fund : {Web3.utils.fromWei(charity.fund)}</div>
                 <div>
                   <Link to={`/donate/${charity.index}`} className={style.btn}>Donate</Link>
-                  <button className={style.btn}>Block This</button>
+                  <button className={style.btn} onClick={() => blockCharity(charity.index)}>Block This</button>
                 </div>
               </Grid>
             )
