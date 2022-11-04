@@ -135,6 +135,7 @@ export const RegistrationPage = () => {
                     onChange={formik.handleChange}
                     error={formik.touched.name && Boolean(formik.errors.name)}
                     helperText={formik.touched.name && formik.errors.name}
+                    autoComplete='off'
                   />
                 </Grid>
                 <Grid item sm={12} className="flex items-center">
@@ -148,6 +149,7 @@ export const RegistrationPage = () => {
                     onChange={formik.handleChange}
                     error={formik.touched.vip && Boolean(formik.errors.vip)}
                     helperText={formik.touched.vip && formik.errors.vip}
+                    autoComplete='off'
                   />
                 </Grid>
                 <Grid item sm={12} className="flex items-center">
@@ -161,6 +163,7 @@ export const RegistrationPage = () => {
                     onChange={formik.handleChange}
                     error={formik.touched.website && Boolean(formik.errors.website)}
                     helperText={formik.touched.website && formik.errors.website}
+                    autoComplete='off'
                   />
                 </Grid>
               </>)
@@ -179,6 +182,7 @@ export const RegistrationPage = () => {
                       onChange={formik.handleChange}
                       error={formik.touched.title && Boolean(formik.errors.title)}
                       helperText={formik.touched.title && formik.errors.title}
+                      autoComplete='off'
                     />
                   </Grid>
                   <Grid item sm={12} className="flex items-center">
@@ -192,6 +196,7 @@ export const RegistrationPage = () => {
                       onChange={formik.handleChange}
                       error={formik.touched.name && Boolean(formik.errors.name)}
                       helperText={formik.touched.name && formik.errors.name}
+                      autoComplete='off'
                     />
                   </Grid>
                 </>)
@@ -207,6 +212,7 @@ export const RegistrationPage = () => {
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
+                autoComplete='off'
               />
             </Grid>
             <Grid item sm={12}>
@@ -235,6 +241,7 @@ export const RegistrationPage = () => {
                 onChange={formik.handleChange}
                 error={formik.touched.country && Boolean(formik.errors.country)}
                 helperText={formik.touched.country && formik.errors.country}
+                autoComplete='off'
               />
             </Grid>
             {
@@ -250,6 +257,7 @@ export const RegistrationPage = () => {
                   onChange={formik.handleChange}
                   error={formik.touched.location && Boolean(formik.errors.location)}
                   helperText={formik.touched.location && formik.errors.location}
+                  autoComplete='off'
                 />
               </Grid>)
             }

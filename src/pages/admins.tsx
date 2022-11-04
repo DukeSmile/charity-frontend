@@ -64,6 +64,7 @@ export const AdminsPage = () => {
                   size="small"
                   value={newUserName} 
                   onChange={(e) => setNewUserName(e.target.value)}
+                  autoComplete='off'
                 />
               </div>
               <div className="mx-20">
@@ -73,6 +74,7 @@ export const AdminsPage = () => {
                   size="small"
                   value={newUserAddr} 
                   onChange={(e) => setNewUserAddr(e.target.value)}
+                  autoComplete='off'
                 />
               </div>
               <button className="mx-10 border-2 p-5 px-10 mx-20 my-5 rounded-10" onClick={() => registryNewAdmin()}>Add Admin User</button>

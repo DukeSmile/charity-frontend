@@ -25,7 +25,7 @@ export const DonationPage = () => {
   }
 
   const style = {
-    btn: 'border-1 p-5 text-black hover:text-white bg-artySkyBlue rounded-10'
+    btn: 'border-1 py-5 px-10 text-black hover:text-white bg-artySkyBlue rounded-10'
   }
   const donate = async() => {
     if (amount <= 0) {
@@ -80,7 +80,7 @@ export const DonationPage = () => {
               Your data is secure and fully protected.
             </p>
           </div>
-          
+          <button className={style.btn} onClick={() => donate()}>Donate</button>
         </Grid>
         <Grid item lg={4} md={5} sm={12}>
           <div className="border-1 shadow-default p-10">
@@ -89,7 +89,6 @@ export const DonationPage = () => {
               <div>
                 <label>Total donated To this cause</label>
               </div>
-              <button className={style.btn} onClick={() => donate()}>Donate</button>
             </div>
             <div className="my-20">
               <label>Total donated To all causes</label>
