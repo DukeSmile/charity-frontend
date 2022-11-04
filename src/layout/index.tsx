@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav } from '../components/Nav';
 import { getContract } from '../core/constants/base';
@@ -7,8 +8,9 @@ import { FromNetwork } from '../networks';
 
 export const Layout = ({children}: any) => {
   const dispatch = useDispatch();
+  const [count, setCount] = useState(0);
   const getCharities = async() => {
-    let ddaContract = getContract(FromNetwork, 'DDAContract');
+    let ddaContract = getContract('DDAContract');
     let allCharities = await ddaContract.methods.getCharities().call();
     let charities:charityProp[] = [], fundRaisers:charityProp[] = [];
     allCharities.forEach((charity: any, index:number) => {
@@ -28,10 +30,14 @@ export const Layout = ({children}: any) => {
     })
     dispatch(setFundRaisers(fundRaisers));
     dispatch(setCharities(charities));
+    setCount(count+1);
   }
-  // useEffect(() => {
-  getCharities();
-  // }, []);
+  useEffect(() => {
+    const intervalId = setInterval(getCharities, 5000);
+    return ()=>{
+      clearInterval(intervalId);
+    }
+  }, [])
   
   return (
     <div className="w-full flex flex-col min-h-screen bg-cover font-poppins">

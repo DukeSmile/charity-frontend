@@ -16,7 +16,9 @@ export const CurrencySelect = (props: any) => {
     <div>
       <p className="text-24 font-bold">Enter your donation</p>
       <div className="flex items-center">
-        <TextField id="outlined-basic" variant="outlined" size="small" type="number" style={{ width: '100%' }}/>
+        <TextField id="outlined-basic" variant="outlined" size="small" type="number" style={{ width: '100%' }} value={props.amount}
+          onChange={props.updateAmount}
+        />
         <Select onChange={props.onChange} id="bsc-season" className="p-0 text-black" value={props.currency} MenuProps={selectMenuProps} disableUnderline>
           {
             tokenList.map((token, index:number) => {

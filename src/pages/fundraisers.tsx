@@ -9,34 +9,7 @@ import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 export const FundRaisersPage = () => {
-  const dispatch = useDispatch();
-  // const getCharities = async() => {
-  //     let ddaContract = getContract(FromNetwork, 'DDAContract');
-  //     let allCharities = await ddaContract.methods.getCharities().call();
-  //     let charities:charityProp[] = [], fundRaisers:charityProp[] = [];
-  //     allCharities.forEach((charity: any, index:number) => {
-  //         const newOne:charityProp = {
-  //             index: index,
-  //             charityType: parseInt(charity.charityType),
-  //             fund: charity.fund,
-  //             address: charity.walletAddress,
-  //             catalog: charity.catalog
-  //         };
-  //         if (newOne.charityType === 1) {
-  //             fundRaisers.push(newOne);
-  //         }
-  //         else {
-  //             charities.push(newOne);
-  //         }
-  //     })
-  //     dispatch(setFundRaisers(fundRaisers));
-  //     dispatch(setCharities(charities));
-  // }
-
-  const fundRaisers = useSelector( (state:any) => state.app.fundRaisers)
-  // useEffect(() => {
-  //     getCharities();
-  // }, []);
+  const fundRaisers = useSelector( (state:any) => state.app.fundRaisers);
 
   const style={
     btn: 'border-1 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'

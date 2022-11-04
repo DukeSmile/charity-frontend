@@ -56,27 +56,6 @@ export const RegistrationPage = () => {
     location: Yup.string().required("Required"),
     // wallet: Yup.string().required("Required")
   });
-  // const CatalogStruct = (vip:string,
-  //             website: string,
-  //             name: string,
-  //             email: string,
-  //             country: string,
-  //             summary: string,
-  //             detail: string,
-  //             photo: string,
-  //             title: string,
-  //             location: string) {
-  //   this.vip = vip;
-  //   this.website = website;
-  //   this.name = name;
-  //   this.email = email;
-  //   this.country = country;
-  //   this.summary = summary;
-  //   this.detail = detail;
-  //   this.photo = photo;
-  //   this.title = title;
-  //   this.location = location;
-  // };
   const formik = useFormik({
     // enableReinitialize: true,
     initialValues: {
@@ -99,7 +78,7 @@ export const RegistrationPage = () => {
       if (address !== '') {
         console.log(values);
         try{
-          let ddaContract = getContract(FromNetwork, 'DDAContract');
+          let ddaContract = getContract('DDAContract');
           let okapi_address = await ddaContract.methods.OKAPI_ADDRESS().call();
           console.log(okapi_address);
 
@@ -115,7 +94,8 @@ export const RegistrationPage = () => {
             title: values.title,
             location: values.location
           }
-          await ddaContract.methods.createCharity(charityType === 'charity' ? 0 : 1, _catalog).send({from: address});
+          const numOfCharityType = charityType === 'charity' ? 0 : 1;
+          await ddaContract.methods.createCharity(numOfCharityType, _catalog).send({from: address});
         }
         catch(error){
           console.log(error);
