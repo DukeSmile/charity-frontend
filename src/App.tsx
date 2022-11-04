@@ -16,7 +16,6 @@ import { setCharities, setFundRaisers } from './core/store/slices/bridgeSlice';
 
 export const App = (): JSX.Element => {
   const dispatch = useDispatch();
-  const fundRaisers = useSelector( (state:any) => state.app.fundRaisers)
   return (
     <BrowserRouter>
       <Layout>

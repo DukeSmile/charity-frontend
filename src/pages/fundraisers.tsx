@@ -14,7 +14,7 @@ export const FundRaisersPage = () => {
   const fundRaisers = useSelector( (state:any) => state.app.fundRaisers);
   const {connected, address} = useWeb3Context();
   const style={
-    btn: 'border-1 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
+    btn: 'border-2 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
   };
   const blockCharity = async(index: number) => {
     if(connected && address != '') {
@@ -35,20 +35,22 @@ export const FundRaisersPage = () => {
         {
           fundRaisers.map((charity:charityProp) => {
             return (
-              <Grid sm={6} md={4} lg={3} item className="border rounded-10 shadow-default p-10" key={charity.index}>
-                <div className="font-bold text-center">{charity.catalog.title}</div>
-                <div>Full Name : {charity.catalog.name}</div>
-                <div>Contact Email : {charity.catalog.email}</div>
-                <div className="flex">
-                  <div>Summary:</div>
-                  <div>{charity.catalog.summary}</div>
-                </div>
-                <div>Country : {charity.catalog.country}</div>
-                <div>Location : {charity.catalog.country}</div>
-                <div>Fund : {Web3.utils.fromWei(charity.fund)}</div>
-                <div>
-                  <Link to={`/donate/${charity.index}`} className={style.btn}>Donate</Link>
-                  <button className={style.btn} onClick={() => blockCharity(charity.index)}>Block This</button>
+              <Grid sm={6} md={4} lg={3} item key={charity.index}>
+                <div className="shadow-default p-10 rounded-10 h-full w-full">
+                  <div className="font-bold text-center">{charity.catalog.title}</div>
+                  <div>Full Name : {charity.catalog.name}</div>
+                  <div>Contact Email : {charity.catalog.email}</div>
+                  <div className="flex">
+                    <div>Summary:</div>
+                    <div>{charity.catalog.summary}</div>
+                  </div>
+                  <div>Country : {charity.catalog.country}</div>
+                  <div>Location : {charity.catalog.country}</div>
+                  <div>Fund : {Web3.utils.fromWei(charity.fund)}</div>
+                  <div>
+                    <Link to={`/donate/${charity.index}`} className={style.btn}>Donate</Link>
+                    <button className={style.btn} onClick={() => blockCharity(charity.index)}>Block This</button>
+                  </div>
                 </div>
               </Grid>
             )

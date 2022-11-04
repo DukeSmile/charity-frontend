@@ -2,7 +2,7 @@ import { Grid, TextareaAutosize, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useWeb3Context } from "../hooks/web3Context";
-import { Formik, Field, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { FromNetwork } from "../networks";

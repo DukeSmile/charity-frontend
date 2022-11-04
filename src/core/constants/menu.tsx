@@ -3,6 +3,7 @@ import { RegistrationPage } from "../../pages/registration";
 import { FundRaisersPage } from "../../pages/fundraisers";
 import { CharitiesPage } from "../../pages/charities";
 import { DonationPage } from "../../pages/donation";
+import { AdminsPage } from "../../pages/admins";
 
 export const menuItems: MenuuItemProp[] = [
     {
@@ -24,5 +25,10 @@ export const menuItems: MenuuItemProp[] = [
         name: 'Donation',
         url: '/donate/:index',
         element: <DonationPage />
+    },
+    {
+        name: 'Admins',
+        url: '/admins',
+        element: <AdminsPage />
     }
 ];

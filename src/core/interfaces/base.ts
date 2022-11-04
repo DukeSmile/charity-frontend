@@ -12,6 +12,11 @@ export interface charityProp {
     catalog: any
 }
 
+export interface adminUserProp {
+    index: number;
+    name: string;
+    address: string;
+}
 
 export interface adminUserProp {
     index: number;

@@ -18,8 +18,11 @@ export const DonationPage = () => {
   const [amount, setAmount] = useState(0);
   const charities:charityProp[] = useSelector((state:any) => state.app.allCharities);
   const targetCharity = charities[targetIndex];
-  if (!targetCharity)
-    return (<>Please select one charity or fundraiser</>);
+  if (!targetCharity) {
+    return (
+      <div className="p-20">Please select one charity or fundraiser</div>
+    );
+  }
 
   const style = {
     btn: 'border-1 p-5 text-black hover:text-white bg-artySkyBlue rounded-10'
@@ -49,7 +52,7 @@ export const DonationPage = () => {
   };
 
   return (
-    <div>
+    <div className="p-20">
       <button className="border-1 p-5 my-10">Return</button>
       <Grid container spacing={3}>
         <Grid item lg={8} md={7} sm={12}>

@@ -13,7 +13,7 @@ export const CharitiesPage = () => {
   const charities = useSelector( (state:any) => state.app.charities);
   const {connected, address} = useWeb3Context();
   const style={
-    btn: 'border-1 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
+    btn: 'border-2 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
   };
   const blockCharity = async(index: number) => {
     if(connected && address != '') {
@@ -33,17 +33,19 @@ export const CharitiesPage = () => {
         {
           charities.map((charity:charityProp) => {
             return (
-              <Grid sm={6} md={4} lg={3} item className="border rounded-10 p-5" key={charity.index}>
-                <div className="font-bold text-center">{charity.catalog.name}</div>
-                <div>Registration Number : {charity.catalog.vip}</div>
-                <div>Website : {charity.catalog.website}</div>
-                <div>Contact Email : {charity.catalog.email}</div>
-                <div>Summary : {charity.catalog.summary}</div>
-                <div>Country : {charity.catalog.country}</div>
-                <div>Fund : {Web3.utils.fromWei(charity.fund)}</div>
-                <div>
-                  <Link to={`/donate/${charity.index}`} className={style.btn}>Donate</Link>
-                  <button className={style.btn} onClick={() => blockCharity(charity.index)}>Block This</button>
+              <Grid sm={6} md={4} lg={3} item key={charity.index}>
+                <div className="shadow-default p-10 rounded-10 h-full w-full">
+                  <div className="font-bold text-center">{charity.catalog.name}</div>
+                  <div>Registration Number : {charity.catalog.vip}</div>
+                  <div>Website : {charity.catalog.website}</div>
+                  <div>Contact Email : {charity.catalog.email}</div>
+                  <div>Summary : {charity.catalog.summary}</div>
+                  <div>Country : {charity.catalog.country}</div>
+                  <div>Fund : {Web3.utils.fromWei(charity.fund)}</div>
+                  <div>
+                    <Link to={`/donate/${charity.index}`} className={style.btn}>Donate</Link>
+                    <button className={style.btn} onClick={() => blockCharity(charity.index)}>Block This</button>
+                  </div>
                 </div>
               </Grid>
             )

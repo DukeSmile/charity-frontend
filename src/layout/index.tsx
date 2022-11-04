@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav } from '../components/Nav';
-import { getContract } from '../core/constants/base';
-import { charityProp } from '../core/interfaces/base';
-import { setAllCharities, setCharities, setFundRaisers } from '../core/store/slices/bridgeSlice';
+import { getContract, roleList } from '../core/constants/base';
+import { adminUserProp, charityProp } from '../core/interfaces/base';
+import { setAdminUsers, setAllCharities, setCharities, setFundRaisers, setOwnerFlag } from '../core/store/slices/bridgeSlice';
+import { useWeb3Context } from '../hooks/web3Context';
 import { FromNetwork } from '../networks';
 
 export const Layout = ({children}: any) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
-  const getCharities = async() => {
-    let ddaContract = getContract('DDAContract');
-    let charitiesFromContract = await ddaContract.methods.getCharities().call();
+  const {connected, address} = useWeb3Context();
+  const getDDAInfo = async() => {
+    const ddaContract = getContract('DDAContract');
+    //get charities information from contract
+    const charitiesFromContract = await ddaContract.methods.getCharities().call();
     let charities:charityProp[] = [],
         fundRaisers:charityProp[] = [],
         allCharities:charityProp[] = [];
@@ -34,21 +37,48 @@ export const Layout = ({children}: any) => {
     dispatch(setFundRaisers(fundRaisers));
     dispatch(setCharities(charities));
     dispatch(setAllCharities(allCharities));
+    
+    // get AdminUsers from contract
+    const adminsFromContract = await ddaContract.methods.getAdminUsers().call();
+    let admins:adminUserProp[] = [];
+    adminsFromContract.forEach((admin: any, index:number) => {
+      const newOne:adminUserProp = {
+          index: index,
+          name: admin.name,
+          address: admin.walletAddress
+      };
+      admins.push(newOne);
+    })
+    dispatch(setAdminUsers(admins));
     setCount(count+1);
   }
   useEffect(() => {
-    const intervalId = setInterval(getCharities, 5000);
+    const intervalId = setInterval(getDDAInfo, 5000);
     return ()=>{
       clearInterval(intervalId);
     }
   }, [])
   
+  useEffect(() => {
+    const isOwnerCheck = async () => {
+      let ddaContract = getContract('DDAContract');
+      let isOwner:boolean = await ddaContract.methods.hasRole(roleList['owner'], address).call();
+      let isAdmin:boolean = await ddaContract.methods.hasRole(roleList['admin'], address).call();
+      let roleValue = isOwner ? 2 : (isAdmin ? 1 : 0);
+      dispatch(setOwnerFlag(roleValue));
+    };
+    if (address === '')
+      dispatch(setOwnerFlag(0));
+    else
+      isOwnerCheck();
+  }, [address]);
+
   return (
     <div className="w-full flex flex-col min-h-screen bg-cover font-poppins">
-      <div className="lg:fixed z-10 py-10">
+      <div className="w-full z-10 py-10">
         <Nav/>
       </div>
-      <div className="w-[80%] mx-auto flex flex-col mt-100 lg:overflow-hidden py-40 lg:py-0">
+      <div className="w-[95%] md:w-[80%] mx-auto flex flex-col mt-0 py-20 lg:py-0">
         <div className="w-full">
         {children}
         </div>
