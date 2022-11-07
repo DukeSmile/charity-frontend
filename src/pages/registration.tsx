@@ -11,6 +11,7 @@ import { getContract } from "../core/constants/base";
 import { PhotoUpload } from "../components/photoUpload";
 import { callbackify } from "util";
 import { setLoading } from "../core/store/slices/bridgeSlice";
+import { Link } from "react-router-dom";
 
 export const RegistrationPage = () => {
   
@@ -322,7 +323,9 @@ export const RegistrationPage = () => {
               />
             </Grid>
             <Grid item sm={12} className="flex items-center">
-              <p className="w-300 mr-20">Photo Url</p>
+              <p className="w-300 mr-20">
+                <Link to="/upload" className={style.createBtn}>Upload photo</Link>
+              </p>
               <TextField
                   fullWidth
                   id="photo"
@@ -334,6 +337,7 @@ export const RegistrationPage = () => {
                   autoComplete='off'
                   variant="outlined"
                   size="small"
+                  disabled
                 />
             </Grid>
             <Grid item sm={12} className="flex flex-row-reverse">
@@ -341,10 +345,6 @@ export const RegistrationPage = () => {
             </Grid>
           </Grid>
         </form>
-        
-        <div>
-          <PhotoUpload />
-        </div>
       </Grid>
     </Grid>
   );

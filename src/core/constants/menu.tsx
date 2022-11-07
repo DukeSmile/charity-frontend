@@ -1,34 +1,53 @@
-import { MenuuItemProp } from "../interfaces/base";
+import { MenuuItemProp, RouteItemProp } from "../interfaces/base";
 import { RegistrationPage } from "../../pages/registration";
 import { FundRaisersPage } from "../../pages/fundraisers";
 import { CharitiesPage } from "../../pages/charities";
 import { DonationPage } from "../../pages/donation";
 import { AdminsPage } from "../../pages/admins";
+import { PhotoUpload } from "../../components/photoUpload";
 
 export const menuItems: MenuuItemProp[] = [
     {
         name: 'Registration',
+        url: '/registration'
+    },
+    {
+        name: 'FundRaisers',
+        url: '/fundraisers'
+    },
+    {
+        name: 'Charities',
+        url: '/charities'
+    },
+    {
+        name: 'Admins',
+        url: '/admins'
+    }
+];
+
+export const routeItems: RouteItemProp[] = [
+    {
         url: '/registration',
         element: <RegistrationPage />
     },
     {
-        name: 'FundRaisers',
         url: '/fundraisers',
         element: <FundRaisersPage />
     },
     {
-        name: 'Charities',
         url: '/charities',
         element: <CharitiesPage />
     },
     {
-        name: 'Donation',
         url: '/donate/:index',
         element: <DonationPage />
     },
     {
-        name: 'Admins',
         url: '/admins',
         element: <AdminsPage />
+    },
+    {
+        url: '/upload',
+        element: <PhotoUpload />
     }
 ];

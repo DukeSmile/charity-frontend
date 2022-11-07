@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ImageUpload } from '@sekmet/react-ipfs-uploader'
-import { create, CID, IPFSHTTPClient } from "ipfs-http-client";
+import { create, CID, IPFSHTTPClient } from 'ipfs-http-client';
+import { projectId, projectSecret } from '../core/constants/base';
 
 export const PhotoUpload = (props) => {
   const [fileUrl, setFileUrl] = useState('');
@@ -8,9 +9,14 @@ export const PhotoUpload = (props) => {
 
   let ipfs;
   try {
-    ipfs = create({
-      url: "https://ipfs.infura.io:5001/api/v0",
-
+    const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+    const ipfs = create({
+        host: 'ipfs.infura.io',
+        port: 5001,
+        protocol: 'https',
+        headers: {
+            authorization: auth,
+        },
     });
   } catch (error) {
     console.error("IPFS error ", error);
@@ -49,7 +55,6 @@ export const PhotoUpload = (props) => {
         {ipfs && (
           <>
             <p>Upload File using IPFS</p>
-
             <form onSubmit={onSubmitHandler}>
               <input name="file" type="file" />
 
