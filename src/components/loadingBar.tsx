@@ -1,7 +1,6 @@
 import { Box, CircularProgress, Modal } from "@material-ui/core";
 
 const LoadingBar = (props: any) => {
-  console.log(props.open);
   return (
     <Modal
       open={props.open}

@@ -23,5 +23,7 @@ export const roleList:{[key:string]: string} = {
 };
 
 
+export const birthDDAContractNumber = 24268944;
+export const maximumAllDoantion = 20;
 export const projectId = '1qmt...XXX';
 export const projectSecret = 'c920...XXX';

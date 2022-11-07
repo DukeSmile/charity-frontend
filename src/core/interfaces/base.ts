@@ -37,3 +37,12 @@ export interface tokenProp {
     abi: any;
     address: networkTokenProp;
 }
+
+export interface donationProp {
+    transaction: string;
+    from: string;
+    to: string;
+    currency: string;
+    amount: string;
+    timeStamp: number;
+}

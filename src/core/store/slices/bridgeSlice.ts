@@ -8,7 +8,9 @@ const initialState = {
   adminUsers: [],
   isOwner: 0,
   loading: false,
-  uploadUrl: ''
+  uploadUrl: '',
+  caseDonateHistory: [],
+  donateHistory: []
 };
 
 export const bridgeSlice = createSlice({
@@ -36,9 +38,25 @@ export const bridgeSlice = createSlice({
     },
     setUploadUrl: (state, {payload}) => {
       state.uploadUrl = payload;
-    }
+    },
+    setDonateHistory: (state, {payload}) => {
+      state.donateHistory = payload;
+    },
+    setCaseDonateHistory: (state, {payload}) => {
+      state.caseDonateHistory = payload;
+    },
   }
 });
 
-export const { setCharities, setFundRaisers, setAllCharities, setAdminUsers, setOwnerFlag, setLoading } = bridgeSlice.actions;
+export const { 
+  setCharities,
+  setFundRaisers,
+  setAllCharities,
+  setAdminUsers,
+  setOwnerFlag,
+  setLoading,
+  setUploadUrl,
+  setCaseDonateHistory,
+  setDonateHistory
+} = bridgeSlice.actions;
 export default bridgeSlice.reducer;
