@@ -262,7 +262,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({child
     setConnected(false);
     setAddress('');
     setTimeout(() => {
-      window.location.reload();
+      window.location.href= "/";
     }, 1);
   }, [provider, web3Modal, connected]);
 

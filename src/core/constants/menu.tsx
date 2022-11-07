@@ -5,6 +5,7 @@ import { CharitiesPage } from "../../pages/charities";
 import { DonationPage } from "../../pages/donation";
 import { AdminsPage } from "../../pages/admins";
 import { PhotoUpload } from "../../components/photoUpload";
+import { AboutPage } from "../../pages/about";
 
 export const menuItems: MenuuItemProp[] = [
     {
@@ -22,6 +23,10 @@ export const menuItems: MenuuItemProp[] = [
     {
         name: 'Admins',
         url: '/admins'
+    },
+    {
+        name: 'About',
+        url: '/about'
     }
 ];
 
@@ -49,5 +54,9 @@ export const routeItems: RouteItemProp[] = [
     {
         url: '/upload',
         element: <PhotoUpload />
+    },
+    {
+        url: '/about',
+        element: <AboutPage />
     }
 ];
