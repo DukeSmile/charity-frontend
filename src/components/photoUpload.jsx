@@ -42,30 +42,32 @@ export const PhotoUpload = (props) => {
   };
   return (
     <div className="App">
-      {!ipfs && (
-        <p>Oh oh, Not connected to IPFS. Checkout out the logs for errors</p>
-      )}
-      {ipfs && (
-        <>
-          <p>Upload File using IPFS</p>
+      <header className="App-header">
+        {!ipfs && (
+          <p>Oh oh, Not connected to IPFS. Checkout out the logs for errors</p>
+        )}
+        {ipfs && (
+          <>
+            <p>Upload File using IPFS</p>
 
-          <form onSubmit={onSubmitHandler}>
-            <input name="file" type="file" />
+            <form onSubmit={onSubmitHandler}>
+              <input name="file" type="file" />
 
-            <button className="p-5 px-10 border" type="submit">Upload File</button>
-          </form>
-          <div>
-            {images.map((image, index) => (
-              <img
-                alt={`Uploaded #${index + 1}`}
-                src={"https://ipfs.infura.io/ipfs/" + image.path}
-                style={{ maxWidth: "400px", margin: "15px" }}
-                key={image.cid.toString() + index}
-              />
-            ))}
-          </div>
-        </>
-      )}
+              <button className="p-5 px-10 border" type="submit">Upload File</button>
+            </form>
+            <div>
+              {images.map((image, index) => (
+                <img
+                  alt={`Uploaded #${index + 1}`}
+                  src={"https://ipfs.infura.io/ipfs/" + image.path}
+                  style={{ maxWidth: "400px", margin: "15px" }}
+                  key={image.cid.toString() + index}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </header>
     </div>
   );
   // return (

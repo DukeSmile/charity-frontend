@@ -19,9 +19,9 @@ export const Layout = ({children}: any) => {
     //get charities information from contract
     const charitiesFromContract = await ddaContract.methods.getCharities().call();
     let charities:charityProp[] = [],
-        fundRaisers:charityProp[] = [],
-        allCharities:charityProp[] = [];
-    charitiesFromContract.forEach((charity: any, index:number) => {
+      fundRaisers:charityProp[] = [],
+      allCharities:charityProp[] = [];
+      charitiesFromContract.forEach((charity: any, index:number) => {
         const newOne:charityProp = {
             index: index,
             charityType: parseInt(charity.charityType),
@@ -36,24 +36,24 @@ export const Layout = ({children}: any) => {
             charities.push(newOne);
         }
         allCharities.push(newOne);
-    })
-    dispatch(setFundRaisers(fundRaisers));
-    dispatch(setCharities(charities));
-    dispatch(setAllCharities(allCharities));
+      })
+      dispatch(setFundRaisers(fundRaisers));
+      dispatch(setCharities(charities));
+      dispatch(setAllCharities(allCharities));
     
-    // get AdminUsers from contract
-    const adminsFromContract = await ddaContract.methods.getAdminUsers().call();
-    let admins:adminUserProp[] = [];
-    adminsFromContract.forEach((admin: any, index:number) => {
-      const newOne:adminUserProp = {
-          index: index,
-          name: admin.name,
-          address: admin.walletAddress
-      };
-      admins.push(newOne);
-    })
-    dispatch(setAdminUsers(admins));
-    setCount(count+1);
+      // get AdminUsers from contract
+      const adminsFromContract = await ddaContract.methods.getAdminUsers().call();
+      let admins:adminUserProp[] = [];
+      adminsFromContract.forEach((admin: any, index:number) => {
+        const newOne:adminUserProp = {
+            index: index,
+            name: admin.name,
+            address: admin.walletAddress
+        };
+        admins.push(newOne);
+      })
+      dispatch(setAdminUsers(admins));
+      setCount(count+1);
   }
   useEffect(() => {
     const intervalId = setInterval(getDDAInfo, 5000);
