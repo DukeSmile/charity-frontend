@@ -7,7 +7,8 @@ const initialState = {
   allCharities: [],
   adminUsers: [],
   isOwner: 0,
-  loading: false
+  loading: false,
+  uploadUrl: ''
 };
 
 export const bridgeSlice = createSlice({
@@ -32,6 +33,9 @@ export const bridgeSlice = createSlice({
     },
     setLoading: (state, {payload}) => {
       state.loading = payload;
+    },
+    setUploadUrl: (state, {payload}) => {
+      state.uploadUrl = payload;
     }
   }
 });
