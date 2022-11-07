@@ -6,13 +6,14 @@ import { getContract, roleList } from '../core/constants/base';
 import { adminUserProp, charityProp } from '../core/interfaces/base';
 import { setAdminUsers, setAllCharities, setCharities, setFundRaisers, setOwnerFlag } from '../core/store/slices/bridgeSlice';
 import { useWeb3Context } from '../hooks/web3Context';
+import { FromNetwork } from '../networks';
 
 export const Layout = ({children}: any) => {
   const dispatch = useDispatch();
-  const {address} = useWeb3Context();
+  const {address, switchEthereumChain} = useWeb3Context();
   const [count, setCount] = useState(0);
   const loading = useSelector((state:any) => state.app.loading);
-
+  
   const getDDAInfo = async() => {
     const ddaContract = getContract('DDAContract');
     //get charities information from contract
@@ -55,6 +56,11 @@ export const Layout = ({children}: any) => {
       setCount(count+1);
   }
   useEffect(() => {
+    const checkFromNetwork = async () => {
+      await switchEthereumChain(FromNetwork, true);
+    };
+    checkFromNetwork();
+
     const intervalId = setInterval(getDDAInfo, 5000);
     return ()=>{
       clearInterval(intervalId);
