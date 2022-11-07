@@ -1,12 +1,14 @@
 import { Grid, TextareaAutosize, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useWeb3Context } from "../hooks/web3Context";
+import { create, CID, IPFSHTTPClient } from "ipfs-http-client";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { useWeb3Context } from "../hooks/web3Context";
 import { FromNetwork } from "../networks";
 import { getContract } from "../core/constants/base";
+import { PhotoUpload } from "../components/photoUpload";
 import { callbackify } from "util";
 import { setLoading } from "../core/store/slices/bridgeSlice";
 
@@ -16,6 +18,9 @@ export const RegistrationPage = () => {
   const {connected, address} = useWeb3Context();
   const [charityType, SetCharityType] = useState('charity');
   const [wallet, setWallet] = useState('');
+  const [fileUrl, setFileUrl] = useState('');
+  let ipfs: IPFSHTTPClient | undefined;
+
   const style = {
     createBtn : 'border-1 w-200 m-10 p-10 bg-artySkyBlue rounded-10 hover:text-white',
     formInput: 'px-10 py-10 h-50 w-full outline-none rounded-8 border border-solid border-darkblue focus:text-gray-700 focus:bg-white focus:border-orange focus:outline-none',
@@ -110,7 +115,19 @@ export const RegistrationPage = () => {
 
   useEffect(() => {
     setWallet(address);
-  }, [address])
+  }, [address]);
+
+  useEffect(() => {
+    try {
+      ipfs = create({
+        url: "https://ipfs.infura.io:5001/api/v0",
+
+      });
+    } catch (error) {
+      console.error("IPFS error ", error);
+      ipfs = undefined;
+    }
+  }, [])
   return (
     <Grid container spacing={1}>
       <Grid item md={3}>
@@ -192,6 +209,8 @@ export const RegistrationPage = () => {
                       error={formik.touched.title && Boolean(formik.errors.title)}
                       // helperText={formik.touched.title && formik.errors.title}
                       autoComplete='off'
+                      variant="outlined"
+                      size="small"
                     />
                   </Grid>
                   <Grid item sm={12} className="flex items-center">
@@ -206,6 +225,8 @@ export const RegistrationPage = () => {
                       error={formik.touched.name && Boolean(formik.errors.name)}
                       // helperText={formik.touched.name && formik.errors.name}
                       autoComplete='off'
+                      variant="outlined"
+                      size="small"
                     />
                   </Grid>
                 </>)
@@ -271,6 +292,8 @@ export const RegistrationPage = () => {
                   error={formik.touched.location && Boolean(formik.errors.location)}
                   // helperText={formik.touched.location && formik.errors.location}
                   autoComplete='off'
+                  variant="outlined"
+                  size="small"
                 />
               </Grid>)
             }
@@ -294,14 +317,34 @@ export const RegistrationPage = () => {
                 type="text"
                 value={wallet}
                 disabled
+                variant="outlined"
+                size="small"
               />
             </Grid>
-            <Grid item sm={12}>
-              <button type="button" className={style.createBtn}>Upload Photo</button>
+            <Grid item sm={12} className="flex items-center">
+              <p className="w-300 mr-20">Photo Url</p>
+              <TextField
+                  fullWidth
+                  id="photo"
+                  name="photo"
+                  type="text"
+                  value={formik.values.photo}
+                  onChange={formik.handleChange}
+                  error={formik.touched.photo && Boolean(formik.errors.photo)}
+                  autoComplete='off'
+                  variant="outlined"
+                  size="small"
+                />
+            </Grid>
+            <Grid item sm={12} className="flex flex-row-reverse">
               <button type="submit" className={style.createBtn}>Sign up</button>
             </Grid>
           </Grid>
         </form>
+        
+        <div>
+          <PhotoUpload />
+        </div>
       </Grid>
     </Grid>
   );

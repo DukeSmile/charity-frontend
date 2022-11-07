@@ -1,4 +1,3 @@
-import { env } from 'process';
 import ddaContractABI from './abi/ddaContractABI.json';
 import tusdtABI from './abi/tusdtABI.json';
 import tethABI from './abi/tethABI.json';
