@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
-import { ImageUpload } from '@sekmet/react-ipfs-uploader'
-import { create, CID, IPFSHTTPClient } from 'ipfs-http-client';
+import { useState } from 'react'
+import { create } from 'ipfs-http-client';
 import { projectId, projectSecret } from '../core/constants/base';
 
 export const PhotoUpload = (props) => {
-  const [fileUrl, setFileUrl] = useState('');
   const [images, setImages] = useState([]);
 
   let ipfs;

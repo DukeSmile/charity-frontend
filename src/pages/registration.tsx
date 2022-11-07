@@ -1,15 +1,12 @@
 import { Grid, TextareaAutosize, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { create, CID, IPFSHTTPClient } from "ipfs-http-client";
+import { create, IPFSHTTPClient } from "ipfs-http-client";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { useWeb3Context } from "../hooks/web3Context";
-import { FromNetwork } from "../networks";
 import { getContract } from "../core/constants/base";
-import { PhotoUpload } from "../components/photoUpload";
-import { callbackify } from "util";
 import { setLoading } from "../core/store/slices/bridgeSlice";
 import { Link } from "react-router-dom";
 
@@ -19,7 +16,6 @@ export const RegistrationPage = () => {
   const {connected, address} = useWeb3Context();
   const [charityType, SetCharityType] = useState('charity');
   const [wallet, setWallet] = useState('');
-  const [fileUrl, setFileUrl] = useState('');
   let ipfs: IPFSHTTPClient | undefined;
 
   const style = {
@@ -64,7 +60,7 @@ export const RegistrationPage = () => {
     // wallet: Yup.string().required("Required")
   });
   const formik = useFormik({
-    // enableReinitialize: true,
+    enableReinitialize: true,
     initialValues: {
       name: '',
       vip: '',
@@ -98,7 +94,7 @@ export const RegistrationPage = () => {
             country: values.country,
             summary: values.summary,
             detail: values.detail,
-            photo: 'saer',
+            photo: 'https://infura.io/v2/',
             title: values.title,
             location: values.location
           }
@@ -117,6 +113,23 @@ export const RegistrationPage = () => {
   useEffect(() => {
     setWallet(address);
   }, [address]);
+
+  useEffect(() => {
+    formik.resetForm({
+      values: {
+        name: '',
+        vip: '',
+        website: '',
+        email: '',
+        country: '',
+        summary: '',
+        detail: '',
+        photo: '',
+        title: '',
+        location: ''
+      }
+    });
+  }, [charityType]);
 
   useEffect(() => {
     try {

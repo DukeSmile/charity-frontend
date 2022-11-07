@@ -6,11 +6,10 @@ import { getContract, roleList } from '../core/constants/base';
 import { adminUserProp, charityProp } from '../core/interfaces/base';
 import { setAdminUsers, setAllCharities, setCharities, setFundRaisers, setOwnerFlag } from '../core/store/slices/bridgeSlice';
 import { useWeb3Context } from '../hooks/web3Context';
-import { FromNetwork } from '../networks';
 
 export const Layout = ({children}: any) => {
   const dispatch = useDispatch();
-  const {connected, address} = useWeb3Context();
+  const {address} = useWeb3Context();
   const [count, setCount] = useState(0);
   const loading = useSelector((state:any) => state.app.loading);
 

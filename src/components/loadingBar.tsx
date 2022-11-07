@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Modal } from "@material-ui/core";
+import { CircularProgress, Modal } from "@material-ui/core";
 
 const LoadingBar = (props: any) => {
   return (

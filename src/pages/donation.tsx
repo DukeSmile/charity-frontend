@@ -45,7 +45,7 @@ export const DonationPage = () => {
           'toBlock': i,
         });
         allEvents.forEach(event => {
-          const currency = tokenList.find((token) => token.address[FromNetwork] == event.returnValues._currency);
+          const currency = tokenList.find((token) => token.address[FromNetwork] === event.returnValues._currency);
           let history:donationProp = {
             transaction: event.transactionHash,
             from: event.returnValues._from,
@@ -73,7 +73,7 @@ export const DonationPage = () => {
     let caseEvents: donationProp[] = []
     for (let i = lastBlock; i >= birthDDAContractNumber - blockCountIteration; i -= blockCountIteration) {
       //get all events between current wallet address and selected charity
-      if (address != '') {
+      if (address !== '') {
         const pastEvents = await ddaContract.getPastEvents('Donate', {
             'filter': {
               '_from': address.toLowerCase(),
@@ -83,7 +83,7 @@ export const DonationPage = () => {
             'toBlock': i,
         });
         pastEvents.forEach(event => {
-          const currency = tokenList.find((token) => token.address[FromNetwork] == event.returnValues._currency);
+          const currency = tokenList.find((token) => token.address[FromNetwork] === event.returnValues._currency);
           let history:donationProp = {
             transaction: event.transactionHash,
             from: event.returnValues._from,
@@ -106,7 +106,7 @@ export const DonationPage = () => {
       alert("Amount can not be zero");
       return;
     }
-    if(connected && address != ''){
+    if(connected && address !== ''){
       dispatch(setLoading(true));
       let currencyContract = getTokenContract(currency);
       // console.log(Web3.utils.toWei(amount.toString()), currency);
@@ -143,6 +143,7 @@ export const DonationPage = () => {
     getLast20History();
     getCaseHistory();
   }, [address]);
+  
   if (!targetCharity) {
     return (
       <div className="p-20">Please select one charity or fundraiser</div>

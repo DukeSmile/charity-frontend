@@ -1,15 +1,12 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Routes ,Route } from 'react-router-dom';
-import { Layout } from './layout';
-import { routeItems } from './core/constants/menu';
 
 import './App.css';
+import { Layout } from './layout';
+import { routeItems } from './core/constants/menu';
 import { RouteItemProp } from './core/interfaces/base';
 import { RegistrationPage } from './pages/registration';
-import { useDispatch } from 'react-redux';
 
 export const App = (): JSX.Element => {
-  const dispatch = useDispatch();
   return (
     <BrowserRouter>
       <Layout>

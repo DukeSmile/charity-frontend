@@ -12,7 +12,7 @@ export const DonationHistoryAll = (props:any) => {
   return (
     <div className="my-20">
       <div className="flex items-center">
-        <p className="py-10">Total donated To all causes</p>
+        <p className="py-10 font-bold">Total donated To all causes</p>
         {props.loading &&(          
           <div className="p-10 mx-20 flex items-center">
             <CircularProgress size='2vh'/>
