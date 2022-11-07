@@ -48,9 +48,19 @@ export const DonationPage = () => {
       }
       catch (e) {
         console.log(e);
+        dispatch(setLoading(false));
+        return;
       }
+      
       let ddaContract = getContract('DDAContract');
-      await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({from: address});
+      try{
+        await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({from: address});
+      }
+      catch (e){
+        console.log(e);
+        dispatch(setLoading(false));
+        return;
+      }
       
       dispatch(setLoading(false));
     }
