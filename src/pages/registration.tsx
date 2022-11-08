@@ -95,7 +95,7 @@ export const RegistrationPage = () => {
             country: values.country,
             summary: values.summary,
             detail: values.detail,
-            photo: 'https://infura.io/v2/',
+            photo: uploadUrl,
             title: values.title,
             location: values.location
           }
@@ -125,7 +125,7 @@ export const RegistrationPage = () => {
         country: '',
         summary: '',
         detail: '',
-        photo: '',
+        photo: uploadUrl,
         title: '',
         location: ''
       }
