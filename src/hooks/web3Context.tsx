@@ -261,9 +261,9 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({child
     web3Modal.clearCachedProvider();
     setConnected(false);
     setAddress('');
-    setTimeout(() => {
-      window.location.href= "/";
-    }, 1);
+    // setTimeout(() => {
+    //   window.location.href= "/";
+    // }, 1);
   }, [provider, web3Modal, connected]);
 
   const onChainProvider = useMemo(

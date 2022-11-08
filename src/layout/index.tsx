@@ -60,7 +60,7 @@ export const Layout = ({children}: any) => {
       await switchEthereumChain(FromNetwork, true);
     };
     checkFromNetwork();
-
+    getDDAInfo();
     const intervalId = setInterval(getDDAInfo, 5000);
     return ()=>{
       clearInterval(intervalId);

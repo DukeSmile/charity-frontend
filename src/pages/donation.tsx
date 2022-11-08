@@ -22,6 +22,7 @@ export const DonationPage = () => {
   const dispatch = useDispatch();
   const [currency, setCurrency] = useState(0);
   const [amount, setAmount] = useState(0);
+  const [availableAmount, setAvailableAmount] = useState('0');
   const [allHLoading, setAllHLoading] = useState(false);
   const [caseHLoading, setCaseHLoading] = useState(false);
   const charities: charityProp[] = useSelector((state: any) => state.app.allCharities);
@@ -38,32 +39,38 @@ export const DonationPage = () => {
     const lastBlock = await connectWeb3.eth.getBlockNumber();
     const blockCountIteration = 5000;
     let totalEvents: donationProp[] = [];
-    for (let i = lastBlock; i >= birthDDAContractNumber - blockCountIteration; i -= blockCountIteration) {
-      //get all events related with selected charity
-      if (totalEvents.length < maximumAllDoantion) {
-        const allEvents = await ddaContract.getPastEvents('Donate', {
-          'filter': {
-            '_from': address.toLowerCase()
-          },
-          'fromBlock': i - blockCountIteration + 1,
-          'toBlock': i,
-        });
-        allEvents.reverse().forEach(event => {
-          const currency = tokenList.find((token) => token.address[FromNetwork] === event.returnValues._currency);
-          let history: donationProp = {
-            transaction: event.transactionHash,
-            from: event.returnValues._from,
-            to: event.returnValues._to,
-            currency: currency ? currency.name : 'event.returnValues._to',
-            amount: event.returnValues.amount,
-            timeStamp: event.returnValues.timestamp
-          };
-          if (totalEvents.length < maximumAllDoantion)
-            totalEvents.push(history);
-        });
+    try{
+      for (let i = lastBlock; i >= birthDDAContractNumber - blockCountIteration; i -= blockCountIteration) {
+        //get all events related with selected charity
+        if (totalEvents.length < maximumAllDoantion) {
+          const allEvents = await ddaContract.getPastEvents('Donate', {
+            // 'filter': {
+            //   '_from': address.toLowerCase()
+            // },
+            'fromBlock': i - blockCountIteration + 1,
+            'toBlock': i,
+          });
+          allEvents.reverse().forEach(event => {
+            const currency = tokenList.find((token) => token.address[FromNetwork] === event.returnValues._currency);
+            let history: donationProp = {
+              transaction: event.transactionHash,
+              from: event.returnValues._from,
+              to: event.returnValues._to,
+              currency: currency ? currency.name : 'event.returnValues._to',
+              amount: event.returnValues.amount,
+              timeStamp: event.returnValues.timestamp
+            };
+            if (totalEvents.length < maximumAllDoantion)
+              totalEvents.push(history);
+          });
+          let res = totalEvents;
+        }
+        else
+          break;
       }
-      else
-        break;
+    }
+    catch(e) {
+      setAllHLoading(false);
     }
     dispatch(setDonateHistory(totalEvents));
     setAllHLoading(false);
@@ -143,10 +150,23 @@ export const DonationPage = () => {
       alert('connect wallet');
   };
 
+  const getCurrentAmount = async () => {
+    if ( !connected || address === '')
+      return;
+    let currencyContract = getTokenContract(currency);
+    let cAmount = await currencyContract.methods.balanceOf(address).call();
+    setAvailableAmount(Web3.utils.fromWei(cAmount));
+  };
+
   useEffect(() => {
     getLast20History();
     getCaseHistory();
+    getCurrentAmount();
   }, [address]);
+
+  useEffect(() => {
+    getCurrentAmount();
+  }, [currency]);
 
   if (!targetCharity) {
     return (
@@ -168,6 +188,7 @@ export const DonationPage = () => {
               onChange={(event: any) => setCurrency(event.target.value)}
               updateAmount={(event: any) => setAmount(event.target.value >= 0 ? event.target.value : 0)}
               amount={amount}
+              cAmount={availableAmount}
             />
           </div>
           <div>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FromNetwork, tokenList } from "../networks";
 
 export const CurrencySelect = (props: any) => {
+
   const selectMenuProps: Partial<MenuPropsType> = {
     variant: 'menu',
     anchorOrigin: { vertical: "bottom", horizontal: "left" },
@@ -40,6 +41,7 @@ export const CurrencySelect = (props: any) => {
           }
         </Select>
       </div>
+      <p className="text-right mr-10">Available amount : {props.cAmount}</p>
     </div>
   );
 };
