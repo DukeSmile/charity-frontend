@@ -8,7 +8,7 @@ export const PhotoUpload = (props) => {
   let ipfs;
   try {
     const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
-    const ipfs = create({
+    ipfs = create({
         host: 'ipfs.infura.io',
         port: 5001,
         protocol: 'https',
@@ -31,6 +31,7 @@ export const PhotoUpload = (props) => {
     }
 
     const file = files[0];
+    console.log(file);
     // upload files
     const result = await (ipfs).add(file);
 
