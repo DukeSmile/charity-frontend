@@ -151,6 +151,7 @@ export const RegistrationPage = () => {
         location: ''
       }
     });
+    setUploadFile(null);
   }, [charityType]);
 
   return (
@@ -346,10 +347,13 @@ export const RegistrationPage = () => {
                 size="small"
               />
             </Grid>
-            <Grid item sm={12} className="flex items-center">
-              <p className="w-300 mr-20">
+            <Grid item sm={12} className="flex">
+              <p className="w-230 mr-20">
                 <button type="button" className={style.createBtn} onClick={() => setUploadShow(true)}>Upload photo</button>
               </p>
+              <div>
+                <img src={uploadFile ? URL.createObjectURL(uploadFile) : ''} className="w-200"/>
+              </div>
             </Grid>
             <Grid item sm={12} className="flex flex-row-reverse">
               <button type="submit" className={style.createBtn}>Sign up</button>
