@@ -348,7 +348,7 @@ export const RegistrationPage = () => {
             </Grid>
             <Grid item sm={12} className="flex items-center">
               <p className="w-300 mr-20">
-                <button className={style.createBtn} onClick={() => setUploadShow(true)}>Upload photo</button>
+                <button type="button" className={style.createBtn} onClick={() => setUploadShow(true)}>Upload photo</button>
               </p>
             </Grid>
             <Grid item sm={12} className="flex flex-row-reverse">
