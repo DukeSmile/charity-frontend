@@ -52,10 +52,6 @@ export const routeItems: RouteItemProp[] = [
         element: <AdminsPage />
     },
     {
-        url: '/upload',
-        element: <PhotoUpload />
-    },
-    {
         url: '/about',
         element: <AboutPage />
     }

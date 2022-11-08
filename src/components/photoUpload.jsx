@@ -1,10 +1,11 @@
+import { CircularProgress, Modal, Box } from "@material-ui/core";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { create } from 'ipfs-http-client';
 import { projectId, projectSecret } from '../core/constants/base';
 import { setIPFS, setUploadUrl } from '../core/store/slices/bridgeSlice';
 
-export const PhotoUpload = () => {
+export const PhotoUpload = (props:any) => {
   const dispatch = useDispatch();
   const [image, setImage] = useState({
     cid: 0,
@@ -55,8 +56,12 @@ export const PhotoUpload = () => {
     form.reset();
   };
   return (
-    <div className="App">
-      <header className="App-header">
+    <Modal
+      open={props.open}
+      onClose={props.handleClose}
+      className="w-500 mx-auto mt-35 justify-center items-between "
+    >
+      <Box className="bg-white p-35 rounded-15">
         {!ipfsInfo && (
           <p>Oh oh, Not connected to IPFS. Checkout out the logs for errors</p>
         )}
@@ -78,8 +83,8 @@ export const PhotoUpload = () => {
             </div>
           </>
         )}
-      </header>
-    </div>
+      </Box>
+    </Modal>
   );
   // return (
   //   <div>

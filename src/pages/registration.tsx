@@ -1,14 +1,13 @@
 import { Grid, TextareaAutosize, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { create, IPFSHTTPClient } from "ipfs-http-client";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { useWeb3Context } from "../hooks/web3Context";
 import { getContract } from "../core/constants/base";
 import { setLoading } from "../core/store/slices/bridgeSlice";
-import { Link } from "react-router-dom";
+import { PhotoUpload } from "../components/photoUpload";
 
 export const RegistrationPage = () => {
   
@@ -16,13 +15,15 @@ export const RegistrationPage = () => {
   const {connected, address} = useWeb3Context();
   const [charityType, SetCharityType] = useState('charity');
   const [wallet, setWallet] = useState('');
-  let ipfs: IPFSHTTPClient | undefined;
-
+  const [uploadShow, setUploadShow] = useState(false);
+  const uploadUrl = useSelector((state:any) => state.app.uploadUrl);
+  
   const style = {
     createBtn : 'border-1 w-200 m-10 p-10 bg-artySkyBlue rounded-10 hover:text-white',
     formInput: 'px-10 py-10 h-50 w-full outline-none rounded-8 border border-solid border-darkblue focus:text-gray-700 focus:bg-white focus:border-orange focus:outline-none',
     label: 'mr-20'
   }
+
   const validationCharity = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Must be 2 characters at least')
@@ -131,17 +132,6 @@ export const RegistrationPage = () => {
     });
   }, [charityType]);
 
-  useEffect(() => {
-    try {
-      ipfs = create({
-        url: "https://ipfs.infura.io:5001/api/v0",
-
-      });
-    } catch (error) {
-      console.error("IPFS error ", error);
-      ipfs = undefined;
-    }
-  }, [])
   return (
     <Grid container spacing={1}>
       <Grid item md={3}>
@@ -337,17 +327,14 @@ export const RegistrationPage = () => {
             </Grid>
             <Grid item sm={12} className="flex items-center">
               <p className="w-300 mr-20">
-                <Link to="/upload" className={style.createBtn}>Upload photo</Link>
+                <button className={style.createBtn} onClick={() => setUploadShow(true)}>Upload photo</button>
               </p>
               <TextField
                   fullWidth
                   id="photo"
                   name="photo"
                   type="text"
-                  value={formik.values.photo}
-                  onChange={formik.handleChange}
-                  error={formik.touched.photo && Boolean(formik.errors.photo)}
-                  autoComplete='off'
+                  value={uploadUrl}
                   variant="outlined"
                   size="small"
                   disabled
@@ -359,6 +346,7 @@ export const RegistrationPage = () => {
           </Grid>
         </form>
       </Grid>
+      <PhotoUpload open={uploadShow} handleClose={() => setUploadShow(false)}/>
     </Grid>
   );
 }
