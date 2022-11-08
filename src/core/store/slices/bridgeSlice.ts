@@ -10,7 +10,8 @@ const initialState = {
   loading: false,
   uploadUrl: '',
   caseDonateHistory: [],
-  donateHistory: []
+  donateHistory: [],
+  ipfs:undefined
 };
 
 export const bridgeSlice = createSlice({
@@ -45,6 +46,9 @@ export const bridgeSlice = createSlice({
     setCaseDonateHistory: (state, {payload}) => {
       state.caseDonateHistory = payload;
     },
+    setIPFS: (state, {payload}) => {
+      state.ipfs = payload;
+    },
   }
 });
 
@@ -57,6 +61,7 @@ export const {
   setLoading,
   setUploadUrl,
   setCaseDonateHistory,
-  setDonateHistory
+  setDonateHistory,
+  setIPFS
 } = bridgeSlice.actions;
 export default bridgeSlice.reducer;
