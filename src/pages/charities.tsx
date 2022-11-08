@@ -42,7 +42,7 @@ export const CharitiesPage = () => {
                   <div><label className="font-mendium">Registration Number</label> : {charity.catalog.vip}</div>
                   <div>Website : <a href={charity.catalog.website} target="_blank"> visit site</a></div>
                   <div>Contact Email : {charity.catalog.email}</div>
-                  <div>Summary : {charity.catalog.summary}</div>
+                  <div className="h-60">Summary : {charity.catalog.summary}</div>
                   <div>Country : {charity.catalog.country}</div>
                   <div>Fund : {Web3.utils.fromWei(charity.fund)}</div>
                   <div>
