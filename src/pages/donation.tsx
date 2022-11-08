@@ -160,7 +160,7 @@ export const DonationPage = () => {
       <Grid container spacing={3}>
         <Grid item lg={8} md={7} sm={12}>
           <div className="flex items-center">
-            <img src={targetCharity.catalog.photo} alt={targetCharity.catalog.name} className="w-100 h-100 border-1 mr-10" />
+            <img src={"https://ipfs.io/ipfs/" + targetCharity.catalog.photo} alt={targetCharity.catalog.name} className="w-100 h-100 border-1 mr-10" />
             <p>You are donating to <span className="font-bold">{targetCharity.catalog.name}</span></p>
           </div>
           <div>
