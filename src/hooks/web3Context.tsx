@@ -258,11 +258,11 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({child
   
   const disconnect = useCallback(async () => {
     console.log("disconnecting");
-    web3Modal.clearCachedProvider();
+    // web3Modal.clearCachedProvider();
     setConnected(false);
     setAddress('');
     // setTimeout(() => {
-    //   window.location.href= "/";
+    //   window.location.reload();
     // }, 1);
   }, [provider, web3Modal, connected]);
 

@@ -2,10 +2,11 @@ import { Grid, TextareaAutosize, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
+import { create } from 'ipfs-http-client';
 import * as Yup from "yup";
 
 import { useWeb3Context } from "../hooks/web3Context";
-import { getContract } from "../core/constants/base";
+import { getContract, projectId, projectSecret } from "../core/constants/base";
 import { setLoading } from "../core/store/slices/bridgeSlice";
 import { PhotoUpload } from "../components/photoUpload";
 
@@ -16,8 +17,9 @@ export const RegistrationPage = () => {
   const [charityType, SetCharityType] = useState('charity');
   const [wallet, setWallet] = useState('');
   const [uploadShow, setUploadShow] = useState(false);
-  const uploadUrl = useSelector((state:any) => state.app.uploadUrl);
-  
+  const [uploadFile, setUploadFile] = useState(null);
+  const ipfsInfo = useSelector((state:any) => state.app.ipfs);
+
   const style = {
     createBtn : 'border-1 w-200 m-10 p-10 bg-artySkyBlue rounded-10 hover:text-white',
     formInput: 'px-10 py-10 h-50 w-full outline-none rounded-8 border border-solid border-darkblue focus:text-gray-700 focus:bg-white focus:border-orange focus:outline-none',
@@ -70,7 +72,6 @@ export const RegistrationPage = () => {
       country: '',
       summary: '',
       detail: '',
-      photo: '',
       title: '',
       location: ''
     },
@@ -78,14 +79,35 @@ export const RegistrationPage = () => {
       if(!connected){
         return;
       }
-      // values.wallet = address;
+      // check ipfs is enabled
+      let ipfs;
+      try {
+        const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+        ipfs = create({
+            host: 'ipfs.infura.io',
+            port: 5001,
+            protocol: 'https',
+            headers: {
+                authorization: auth,
+            },
+        });
+      } catch (error) {
+        console.error("IPFS error ", error);
+        ipfs = undefined;
+      }
+      // signup charity
       if (address !== '') {
         console.log(values);
         dispatch(setLoading(true));
         try{
+          let uploadUrl = '';
+          if (ipfsInfo && uploadFile) {
+            console.log(uploadFile);
+            const result = await (ipfsInfo).add(uploadFile);
+            uploadUrl = result.path;
+          }
           let ddaContract = getContract('DDAContract');
           let okapi_address = await ddaContract.methods.OKAPI_ADDRESS().call();
-          console.log(okapi_address);
 
           const _catalog = {
             vip: values.vip,
@@ -125,7 +147,6 @@ export const RegistrationPage = () => {
         country: '',
         summary: '',
         detail: '',
-        photo: uploadUrl,
         title: '',
         location: ''
       }
@@ -329,16 +350,6 @@ export const RegistrationPage = () => {
               <p className="w-300 mr-20">
                 <button className={style.createBtn} onClick={() => setUploadShow(true)}>Upload photo</button>
               </p>
-              <TextField
-                  fullWidth
-                  id="photo"
-                  name="photo"
-                  type="text"
-                  value={uploadUrl}
-                  variant="outlined"
-                  size="small"
-                  disabled
-                />
             </Grid>
             <Grid item sm={12} className="flex flex-row-reverse">
               <button type="submit" className={style.createBtn}>Sign up</button>
@@ -346,7 +357,17 @@ export const RegistrationPage = () => {
           </Grid>
         </form>
       </Grid>
-      <PhotoUpload open={uploadShow} handleClose={() => setUploadShow(false)}/>
+      <PhotoUpload open={uploadShow} 
+          handleClose={() => setUploadShow(false)} 
+          onChange = {(event:any) => {
+            event.preventDefault();
+            const files = event.target.files;
+            if (!files || files.length === 0) {
+              return alert("No files selected");
+            }
+            const file = files[0];
+            setUploadFile(file);
+          }}/>
     </Grid>
   );
 }

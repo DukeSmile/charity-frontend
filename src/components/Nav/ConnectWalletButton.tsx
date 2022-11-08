@@ -10,7 +10,7 @@ export const ConnectWalletButton = () => {
             Connect wallet
           </button> ) :
           (
-            <button className="uppercase text-black text-1em rounded-7 border-2 shadow-default px-24 py-10 font-medium hover:font-bold" onClick={disconnect}>
+            <button className="uppercase w-250 text-black text-1em rounded-7 border-2 shadow-default px-24 py-10 font-medium hover:font-bold" onClick={disconnect}>
               Disconnect wallet
             </button>
           )
