@@ -6,14 +6,13 @@ import { useParams } from "react-router-dom";
 import Web3 from "web3";
 
 import { CurrencySelect } from "../components/currencySelect";
-import { birthDDAContractNumber, connectWeb3, getContract, getTokenContract, maximumAllDoantion } from "../core/constants/base";
-import { charityProp } from "../core/interfaces/base";
+import { birthDDAContractNumber, connectWeb3, getContract, getTokenContract, maximumAllDoantion, ethTokenAddr } from "../core/constants/base";
+import { charityProp, donationProp } from "../core/interfaces/base";
 import { setDonateHistory, setCaseDonateHistory, setLoading } from "../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../hooks/web3Context";
 import { FromNetwork, networks, tokenList } from "../networks";
 import { DonationHistoryAll } from "../components/donationHistoryAll";
 import { DonationHistoryCase } from "../components/donationHistoryCase";
-import { donationProp } from "../core/interfaces/base";
 
 export const DonationPage = () => {
 
@@ -153,6 +152,15 @@ export const DonationPage = () => {
   const getCurrentAmount = async () => {
     if ( !connected || address === '')
       return;
+    if (tokenList[currency].address[FromNetwork] === '') {
+      setAvailableAmount('0');
+      return;
+    }
+    if (tokenList[currency].address[FromNetwork] === ethTokenAddr) {
+      let cAmount = await connectWeb3.eth.getBalance(address);
+      setAvailableAmount(Web3.utils.fromWei(cAmount));
+      return;
+    }
     let currencyContract = getTokenContract(currency);
     let cAmount = await currencyContract.methods.balanceOf(address).call();
     setAvailableAmount(Web3.utils.fromWei(cAmount));

@@ -49,14 +49,14 @@ ul.MuiList-root{
   border-radius: 10px;
   background-color: #ffffff;
 }
-ul.MuiList-root li:first-child > div{
+/* ul.MuiList-root li:first-child > div{
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 ul.MuiList-root li:last-child > div{
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-}
+} */
 div.MuiInputBase-root > div > div{
   box-shadow: inset 0px 4px 56px rgb(255, 255, 255, 0.18);
   border-radius: 10px;

@@ -44,7 +44,7 @@ export const networks: INetworks = {
     name: 'BSC Testnet',
     isEnabled: true,
     addresses: {
-      DDAContract:'0x4ffD4652b77b6a368e948B229EeFC225eACd422B',
+      DDAContract:'0xb48A7817F37F4F4C763e64d87482e1b1Bb5dC356',
     },
     logo: BscIcon
   },
@@ -82,21 +82,30 @@ export const enabledNetworkIds: NetworkId[] = Object.keys(networks).map(networkI
 
 export const tokenList: tokenProp[] = [
   {
-      img: tokenLogo.USDT,
-      name:'USDT',
-      abi: tusdtABI,
-      address: {
-          [NetworkIds.BscTestnet]: '0xbF68079500Ea88c84f95cfB8840C9F569b945a74',
-          [NetworkIds.Ethereum]: ''
-      }
+    img: tokenLogo.USDT,
+    name:'USDT',
+    abi: tusdtABI,
+    address: {
+      [NetworkIds.BscTestnet]: '0xbF68079500Ea88c84f95cfB8840C9F569b945a74',
+      [NetworkIds.Ethereum]: ''
+    }
+  },
+  {
+    img: tokenLogo.BNB,
+    name:'BNB',
+    abi: tethABI,
+    address: {
+      [NetworkIds.BscTestnet]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+      [NetworkIds.Ethereum]: ''
+    }
   },
   {
     img: tokenLogo.ETH,
     name:'ETH',
     abi: tethABI,
     address: {
-        [NetworkIds.BscTestnet]: '0xC3685C54E792B17241F81e967DD3F95F7baF4115',
-        [NetworkIds.Ethereum]: ''
+      [NetworkIds.BscTestnet]: '',
+      [NetworkIds.Ethereum]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
     }
-}
+  }
 ];

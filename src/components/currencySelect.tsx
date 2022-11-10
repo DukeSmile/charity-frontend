@@ -29,6 +29,8 @@ export const CurrencySelect = (props: any) => {
         <Select onChange={props.onChange} id="bsc-season" className="p-0 text-black" value={props.currency} MenuProps={selectMenuProps} disableUnderline>
           {
             tokenList.map((token, index:number) => {
+              if (token.address[FromNetwork] === '')
+                return <div className="hidden" key={index}></div>;
               return <MenuItem value={index} key={index}>
                 <div className={optionStyle}>
                   <div className="flex items-center">
