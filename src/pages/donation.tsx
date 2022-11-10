@@ -144,6 +144,7 @@ export const DonationPage = () => {
       dispatch(setLoading(false));
       getLast20History();
       getCaseHistory();
+      getCurrentAmount();
     }
     else
       alert('connect wallet');
