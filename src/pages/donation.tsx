@@ -123,18 +123,23 @@ export const DonationPage = () => {
       const ddaAddress = networks[FromNetwork].addresses['DDAContract'];
       const currencyAddress = tokenList[currency].address[FromNetwork];
       const weiOfAmount = Web3.utils.toWei(amount.toString());
-      try {
-        await currencyContract.methods.approve(ddaAddress, weiOfAmount).send({ from: address });
-      }
-      catch (e) {
-        console.log(e);
-        dispatch(setLoading(false));
-        return;
-      }
-
       let ddaContract = getContract('DDAContract');
       try {
-        await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({ from: address });
+        if(currencyAddress === ethTokenAddr){
+          console.log(amount);
+          await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({ from: address, value: weiOfAmount });
+        }
+        else {
+          try {
+            await currencyContract.methods.approve(ddaAddress, weiOfAmount).send({ from: address });
+          }
+          catch (e) {
+            console.log(e);
+            dispatch(setLoading(false));
+            return;
+          }
+          await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({ from: address });
+        }
       }
       catch (e) {
         console.log(e);

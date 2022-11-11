@@ -22,7 +22,7 @@ export const roleList:{[key:string]: string} = {
     'admin': '0xa49807205ce4d355092ef5a8a18f56e8913cf4a201fbe287825b095693c21775'
 };
 
-export const birthDDAContractNumber = 24386588;
+export const birthDDAContractNumber = 7931008;
 export const maximumAllDoantion = 20;
 export const projectId = '2HE3I80EtQeKwCEjmvXVxWooFzx';
 export const projectSecret = '6691d66e4959b01f15a45bbe767326e9';

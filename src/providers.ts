@@ -67,15 +67,15 @@ export const chains: AllChainDetails = {
     decimals: 18,
     blockExplorerUrls: ['https://etherscan.io/'],
   }),
-  [NetworkIds.Rinkeby]: new ChainDetails({
-    networkName: 'Rinkeby',
+  [NetworkIds.Goerli]: new ChainDetails({
+    networkName: 'Goerli',
     rpcUrls: [
-      // 'https://rinkeby.infura.io/v3/1ff71c39bddd4d93971b23697b82bc0e',
-      'https://eth-rinkeby.alchemyapi.io/v2/y1kcvsoSiVJTHDHfhIjt21dDrm-2vtPe'
+      'https://goerli.infura.io/v3/6f6ce7575ada4ad3a5991a8be0fb2e19',
+      'https://eth-goerli.public.blastapi.io'
     ],
     symbol: 'ETH',
     decimals: 18,
-    blockExplorerUrls: ['https://rinkeby.etherscan.io/'],
+    blockExplorerUrls: ['https://goerli.etherscan.io'],
   }),
   [NetworkIds.Bsc]: new ChainDetails({
     networkName: 'Bsc',

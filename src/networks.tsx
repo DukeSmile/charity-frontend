@@ -13,11 +13,12 @@ export type NetworkId = number;
 export enum NetworkIds {
   Ethereum = 1,
   Rinkeby = 4,
+  Goerli = 5,
   Bsc = 56,
-  BscTestnet = 97
+  BscTestnet = 97,
 }
 
-export const FromNetwork = NetworkIds.BscTestnet;
+export const FromNetwork = NetworkIds.Goerli;
 
 interface INetwork {
   name: string,
@@ -31,22 +32,13 @@ interface INetworks {
 }
 
 export const networks: INetworks = {
-  [NetworkIds.Rinkeby]: {
-    name: 'Ethereum Rinkeby',
+  [NetworkIds.Goerli]: {
+    name: 'Ethereum Goerli',
     isEnabled: true,
     addresses: {
-      DDAContract: '',
-      OKAPI: ''
+      DDAContract: '0x506bB945bf3D131E2315c0D81D6E402f83F96A66'
     },
     logo: EthereumIcon
-  },
-  [NetworkIds.BscTestnet]: {
-    name: 'BSC Testnet',
-    isEnabled: true,
-    addresses: {
-      DDAContract:'0xb48A7817F37F4F4C763e64d87482e1b1Bb5dC356',
-    },
-    logo: BscIcon
   },
   [NetworkIds.Ethereum]: {
     name: 'Ethereum',
@@ -63,6 +55,14 @@ export const networks: INetworks = {
     addresses: {
       DDAContract: '',
       OKAPI: ''
+    },
+    logo: BscIcon
+  },
+  [NetworkIds.BscTestnet]: {
+    name: 'BSC Testnet',
+    isEnabled: true,
+    addresses: {
+      DDAContract:'0xE5E1a756E164b619495A55C2699D64Fc538f32B9',
     },
     logo: BscIcon
   }
@@ -87,7 +87,7 @@ export const tokenList: tokenProp[] = [
     abi: tusdtABI,
     address: {
       [NetworkIds.BscTestnet]: '0xbF68079500Ea88c84f95cfB8840C9F569b945a74',
-      [NetworkIds.Ethereum]: ''
+      [NetworkIds.Goerli]: '0xFB9D86a6469B0bb5C79136b3700b743738b1F0eB'
     }
   },
   {
@@ -96,7 +96,7 @@ export const tokenList: tokenProp[] = [
     abi: tethABI,
     address: {
       [NetworkIds.BscTestnet]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-      [NetworkIds.Ethereum]: ''
+      [NetworkIds.Goerli]: ''
     }
   },
   {
@@ -105,7 +105,7 @@ export const tokenList: tokenProp[] = [
     abi: tethABI,
     address: {
       [NetworkIds.BscTestnet]: '',
-      [NetworkIds.Ethereum]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+      [NetworkIds.Goerli]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
     }
   }
 ];
