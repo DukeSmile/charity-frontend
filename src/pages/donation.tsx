@@ -190,7 +190,7 @@ export const DonationPage = () => {
 
   return (
     <div className="p-20">
-      <button className="border-1 p-5 my-10">Return</button>
+      <div className="my-10"><Link to="/registration" className="border-1 p-5 my-10">Return</Link></div>
       <Grid container spacing={3}>
         <Grid item lg={8} md={7} sm={12}>
           <div className="flex items-center">
