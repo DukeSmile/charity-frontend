@@ -68,17 +68,23 @@ export const Layout = ({children}: any) => {
   }, [])
   
   useEffect(() => {
-    const isOwnerCheck = async () => {
+    const isOwnerCheck = async (cAddress:string) => {
       let ddaContract = getContract('DDAContract');
-      let isOwner:boolean = await ddaContract.methods.hasRole(roleList['owner'], address).call();
-      let isAdmin:boolean = await ddaContract.methods.hasRole(roleList['admin'], address).call();
-      let roleValue = isOwner ? 2 : (isAdmin ? 1 : 0);
+      let roleValue = 0;
+      if(await ddaContract.methods.hasRole(roleList['owner'], cAddress).call())
+        roleValue = 4;
+      else if(await ddaContract.methods.hasRole(roleList['admin'], cAddress).call())
+        roleValue = 3;
+      else if(await ddaContract.methods.hasRole(roleList['charity'], cAddress).call())
+        roleValue = 2;
+      else if(await ddaContract.methods.hasRole(roleList['black'], cAddress).call())
+        roleValue = 1;
       dispatch(setOwnerFlag(roleValue));
     };
     if (address === '')
       dispatch(setOwnerFlag(0));
     else
-      isOwnerCheck();
+      isOwnerCheck(address);
   }, [address]);
 
   return (

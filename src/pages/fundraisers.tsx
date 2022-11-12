@@ -13,6 +13,7 @@ import { useWeb3Context } from "../hooks/web3Context";
 export const FundRaisersPage = () => {
   const dispatch = useDispatch();
   const fundRaisers = useSelector( (state:any) => state.app.fundRaisers);
+  const isOwner = useSelector( (state:any) => state.app.isOwner);
   const {connected, address} = useWeb3Context();
   const style={
     btn: 'border-2 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
@@ -48,11 +49,13 @@ export const FundRaisersPage = () => {
                     <div>{charity.catalog.summary}</div>
                   </div>
                   <div><label className="font-bold">Country</label> : {charity.catalog.country}</div>
-                  <div><label className="font-bold">Location</label> : {charity.catalog.country}</div>
+                  <div><label className="font-bold">Location</label> : {charity.catalog.location}</div>
                   <div><label className="font-bold">Fund</label> : {Web3.utils.fromWei(charity.fund)}</div>
-                  <div>
+                  <div className="my-10">
                     <Link to={`/donate/${charity.index}`} className={style.btn}>Donate</Link>
-                    <button className={style.btn} onClick={() => blockCharity(charity.index)}>Block This</button>
+                    {isOwner > 2 && 
+                      (<button className={style.btn} onClick={() => blockCharity(charity.index)}>Block This</button>)
+                    }
                   </div>
                 </div>
               </Grid>

@@ -2,12 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Drawer, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import { useState } from 'react';
 
 import { ConnectWalletButton } from './ConnectWalletButton';
 import { menuItems } from '../../core/constants/menu';
 import { MenuuItemProp } from '../../core/interfaces/base';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -34,12 +35,13 @@ export const Nav = () => {
   const handleDrawerToggle = () => {
     setToggleMenu(!toggleMenu);
   };
-
+  const ownerFlag = useSelector((state:any) => state.app.isOwner);
+  
   return (
     <div className="w-[95%] md:w-[80%] mx-auto flex flex-between justify-between items-center">
       <div className="flex hidden md:block">
         {
-          menuItems.map((menu: MenuuItemProp, index: number) => {
+          menuItems.filter((item:MenuuItemProp) => item.owner <= ownerFlag).map((menu: MenuuItemProp, index: number) => {
             return (
               <Link to={menu.url} key={index} className={linkStyle}>{menu.name}</Link>
             )

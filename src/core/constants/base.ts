@@ -19,7 +19,9 @@ export const getTokenContract = (index: number) => {
 
 export const roleList:{[key:string]: string} = {
     'owner': '0xb19546dff01e856fb3f010c267a7b1c60363cf8a4664e21cc89c26224620214e',
-    'admin': '0xa49807205ce4d355092ef5a8a18f56e8913cf4a201fbe287825b095693c21775'
+    'admin': '0xa49807205ce4d355092ef5a8a18f56e8913cf4a201fbe287825b095693c21775',
+    'charity': '0x838cb9e68162e54d2dfda44baa96273d8a6cb729c0d42995215e0f52841feb77',
+    'black': '0x5b326b543500ae5b817995ef8271cedfc72db65652666aced238ae8d58d8b949'
 };
 
 export const birthDDAContractNumber = 7931008;

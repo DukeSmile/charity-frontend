@@ -10,22 +10,27 @@ import { AboutPage } from "../../pages/about";
 export const menuItems: MenuuItemProp[] = [
     {
         name: 'Registration',
+        owner: 0,
         url: '/registration'
     },
     {
         name: 'FundRaisers',
+        owner: 0,
         url: '/fundraisers'
     },
     {
         name: 'Charities',
+        owner: 0,
         url: '/charities'
     },
     {
         name: 'Admins',
+        owner: 3,
         url: '/admins'
     },
     {
         name: 'About',
+        owner: 0,
         url: '/about'
     }
 ];
@@ -33,26 +38,32 @@ export const menuItems: MenuuItemProp[] = [
 export const routeItems: RouteItemProp[] = [
     {
         url: '/registration',
+        owner: 0,
         element: <RegistrationPage />
     },
     {
         url: '/fundraisers',
+        owner: 0,
         element: <FundRaisersPage />
     },
     {
         url: '/charities',
+        owner: 0,
         element: <CharitiesPage />
     },
     {
         url: '/donate/:index',
+        owner: 0,
         element: <DonationPage />
     },
     {
         url: '/admins',
+        owner: 3,
         element: <AdminsPage />
     },
     {
         url: '/about',
+        owner: 0,
         element: <AboutPage />
     }
 ];

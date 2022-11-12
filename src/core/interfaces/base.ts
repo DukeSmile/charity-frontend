@@ -1,10 +1,12 @@
 export interface MenuuItemProp {
     name: string;
+    owner: number;
     url: string;
 }
 
 export interface RouteItemProp {
     url: string;
+    owner: number;
     element: JSX.Element;
 }
 

@@ -6,12 +6,13 @@ import Web3 from "web3";
 
 import { adminUserProp } from "../core/interfaces/base";
 import { useWeb3Context } from "../hooks/web3Context";
-import { getContract } from "../core/constants/base";
+import { getContract, roleList } from "../core/constants/base";
 import { setLoading } from "../core/store/slices/bridgeSlice";
 
 export const AdminsPage = () => {
   const dispatch = useDispatch();
   const isOwner = useSelector( (state:any) => state.app.isOwner);
+  console.log(isOwner);
   const adminUsers = useSelector( (state:any) => state.app.adminUsers);
   const {connected, address} = useWeb3Context();
   const [newUserAddr, setNewUserAddr] = useState('');
@@ -19,7 +20,7 @@ export const AdminsPage = () => {
   const style={
     btn: 'border-2 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
   };
-  if (isOwner == 0) {
+  if (isOwner < 3) {
     return (
         <div className="p-20">
             You can not access this pages
@@ -28,9 +29,26 @@ export const AdminsPage = () => {
   }
   const registryNewAdmin = async () => {
     if(newUserAddr != '') {
-      dispatch(setLoading(true));
       let ddaContract = getContract('DDAContract');
+      if(await ddaContract.methods.hasRole(roleList['owner'], newUserAddr).call()) {
+        alert("This wallet address is owner address.");
+        return;
+      }
+      else if(await ddaContract.methods.hasRole(roleList['admin'], newUserAddr).call()) {
+        alert("This wallet address is admin address.");
+        return;
+      }
+      else if(await ddaContract.methods.hasRole(roleList['charity'], newUserAddr).call()) {
+        alert("This wallet address is charity/fundraiser address.");
+        return;
+      }
+      else if(await ddaContract.methods.hasRole(roleList['black'], newUserAddr).call()) {
+        alert("This wallet address is blacklist address.");
+        return;
+      }
+      dispatch(setLoading(true));
       try{
+        
         await ddaContract.methods.addAdmin(newUserAddr, newUserName).send({from: address});
         setNewUserAddr('');
         setNewUserName('AdminUser');
@@ -60,7 +78,7 @@ export const AdminsPage = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} className="text-24 font-bold text-center">Admin Users</Grid> 
         {
-          isOwner == 2 && (  <Grid item xs={12}>
+          isOwner === 4 && (  <Grid item xs={12}>
             <div className="text-20 flex flex-wrap justify-center shadow-default p-10 rounded-10 text-center">
               <div className="mx-20">
                 <p>User name </p>
@@ -95,7 +113,7 @@ export const AdminsPage = () => {
                   <div className="font-bold text-center">{user.name}</div>
                   <p className="break-all">{user.address}</p>
                   {
-                    isOwner == 2 && (
+                    isOwner === 4 && (
                       <button className={style.btn} onClick={() => removeAdmin(user.index)}>Remove This</button>
                     )
                   }

@@ -19,7 +19,7 @@ export const RegistrationPage = () => {
   const [uploadShow, setUploadShow] = useState(false);
   const [uploadFile, setUploadFile] = useState(null);
   const ipfsInfo = useSelector((state:any) => state.app.ipfs);
-
+  const ownerFlag = useSelector((state:any) => state.app.isOwner);
   const style = {
     createBtn : 'border-1 w-200 m-10 p-10 bg-artySkyBlue rounded-10 hover:text-white',
     formInput: 'px-10 py-10 h-50 w-full outline-none rounded-8 border border-solid border-darkblue focus:text-gray-700 focus:bg-white focus:border-orange focus:outline-none',
@@ -77,6 +77,11 @@ export const RegistrationPage = () => {
     },
     onSubmit:async (values:any) => {
       if(!connected){
+        return;
+      }
+      if(ownerFlag > 0)
+      {
+        alert("You can not create charity/fundraiser with this wallet address");
         return;
       }
       // check ipfs is enabled
