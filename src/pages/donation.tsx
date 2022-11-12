@@ -25,6 +25,7 @@ export const DonationPage = () => {
   const [allHLoading, setAllHLoading] = useState(false);
   const [caseHLoading, setCaseHLoading] = useState(false);
   const charities: charityProp[] = useSelector((state: any) => state.app.allCharities);
+  const ownerFlag = useSelector((state:any) => state.app.isOwner);
   let targetIndex: number = index === undefined ? -1 : parseInt(index);
   const targetCharity = charities[targetIndex];
 
@@ -117,6 +118,10 @@ export const DonationPage = () => {
       return;
     }
     if (connected && address !== '') {
+      if (ownerFlag == 1) {
+        alert("This address is in black list");
+        return;
+      }
       dispatch(setLoading(true));
       let currencyContract = getTokenContract(currency);
       // console.log(Web3.utils.toWei(amount.toString()), currency);
