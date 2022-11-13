@@ -23,7 +23,9 @@ export const RegistrationPage = () => {
   const style = {
     createBtn : 'border-1 w-200 m-10 p-10 bg-artySkyBlue rounded-10 hover:text-white',
     formInput: 'px-10 py-10 h-50 w-full outline-none rounded-8 border border-solid border-darkblue focus:text-gray-700 focus:bg-white focus:border-orange focus:outline-none',
-    label: 'mr-20'
+    label: 'mr-20',
+    tab: 'border-1 p-10 bg-white',
+    activeTab: 'border-1 p-10 bg-stormDust'
   }
 
   const validationCharity = Yup.object().shape({
@@ -66,9 +68,14 @@ export const RegistrationPage = () => {
     enableReinitialize: true,
     initialValues: {
       name: '',
-      vip: '',
-      website: '',
-      email: '',
+      vip: '', // charity information
+      website: '', // charity information
+      phone: '', // charity information
+      linkedin: '', // charity information
+      twitter: '', // charity information
+      facebook: '', // charity information
+      instagram: '', // charity information
+      email: '', // charity information
       country: '',
       summary: '',
       detail: '',
@@ -112,11 +119,14 @@ export const RegistrationPage = () => {
             uploadUrl = result.path;
           }
           let ddaContract = getContract('DDAContract');
-          let okapi_address = await ddaContract.methods.OKAPI_ADDRESS().call();
-
           const _catalog = {
             vip: values.vip,
             website: values.website,
+            phone: values.phone,
+            linkedin: values.linkedin,
+            twitter: values.twitter,
+            facebook: values.facebook,
+            instagram: values.instagram,
             name: values.name,
             email: values.email,
             country: values.country,
@@ -126,6 +136,7 @@ export const RegistrationPage = () => {
             title: values.title,
             location: values.location
           }
+          console.log(_catalog);
           const numOfCharityType = charityType === 'charity' ? 0 : 1;
           await ddaContract.methods.createCharity(numOfCharityType, _catalog).send({from: address});
         }
@@ -146,9 +157,14 @@ export const RegistrationPage = () => {
     formik.resetForm({
       values: {
         name: '',
-        vip: '',
-        website: '',
-        email: '',
+        vip: '', // charity information
+        website: '', // charity information
+        phone: '', // charity information
+        linkedin: '', // charity information
+        twitter: '', // charity information
+        facebook: '', // charity information
+        instagram: '', // charity information
+        email: '', // charity information
         country: '',
         summary: '',
         detail: '',
@@ -161,17 +177,16 @@ export const RegistrationPage = () => {
 
   return (
     <Grid container spacing={1}>
-      <Grid item md={3}>
-        <p className="text-40">Let's get you started!</p>
-        <button className={style.createBtn} onClick={() => SetCharityType('charity')}>Create Charity</button>
-        <button className={style.createBtn} onClick={() => SetCharityType('fundraiser')}>Create FundRaiser</button>
+      <Grid item md={12} className="border-b-2">
+        <button className={charityType === 'charity' ? style.activeTab : style.tab} onClick={() => SetCharityType('charity')}>Create Charity</button>
+        <button className={charityType === 'fundraiser' ? style.activeTab : style.tab} onClick={() => SetCharityType('fundraiser')}>Create FundRaiser</button>
       </Grid>
-      <Grid item md={9}>
+      <Grid item md={4} className="text-center">
+        <label className="mr-20 text-30">Let's begin your fundraising journey as a {charityType}</label>
+      </Grid>
+      <Grid item md={8}>
         <form className="w-full" onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item sm={12}>
-              <label className="mr-20 text-30">Sign up {charityType}</label>
-            </Grid>
             {
               charityType === 'charity' && (
               <>
@@ -218,6 +233,82 @@ export const RegistrationPage = () => {
                     onChange={formik.handleChange}
                     error={formik.touched.website && Boolean(formik.errors.website)}
                     // helperText={formik.touched.website && formik.errors.website}
+                    autoComplete='off'
+                    variant="outlined"
+                    size="small"
+                  />
+                </Grid>
+                <Grid item sm={12} className="flex items-center">
+                  <label className="w-300 mr-20">Phone</label>
+                  <TextField
+                    fullWidth
+                    id="phone"
+                    name="phone"
+                    type="text"
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                    error={formik.touched.phone && Boolean(formik.errors.phone)}
+                    autoComplete='off'
+                    variant="outlined"
+                    size="small"
+                  />
+                </Grid>
+                <Grid item sm={12} className="flex items-center">
+                  <label className="w-300 mr-20">Linkedin</label>
+                  <TextField
+                    fullWidth
+                    id="linkedin"
+                    name="linkedin"
+                    type="text"
+                    value={formik.values.linkedin}
+                    onChange={formik.handleChange}
+                    error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
+                    autoComplete='off'
+                    variant="outlined"
+                    size="small"
+                  />
+                </Grid>
+                <Grid item sm={12} className="flex items-center">
+                  <label className="w-300 mr-20">Twitter</label>
+                  <TextField
+                    fullWidth
+                    id="twitter"
+                    name="twitter"
+                    type="text"
+                    value={formik.values.twitter}
+                    onChange={formik.handleChange}
+                    error={formik.touched.twitter && Boolean(formik.errors.twitter)}
+                    autoComplete='off'
+                    variant="outlined"
+                    size="small"
+                  />
+                </Grid>
+                <Grid item sm={12} className="flex items-center">
+                  <label className="w-300 mr-20">Facebook</label>
+                  <TextField
+                    fullWidth
+                    id="facebook"
+                    name="facebook"
+                    type="text"
+                    value={formik.values.facebook}
+                    onChange={formik.handleChange}
+                    error={formik.touched.facebook && Boolean(formik.errors.facebook)}
+                    // helperText={formik.touched.facebook && formik.errors.facebook}
+                    autoComplete='off'
+                    variant="outlined"
+                    size="small"
+                  />
+                </Grid>
+                <Grid item sm={12} className="flex items-center">
+                  <label className="w-300 mr-20">Instagram</label>
+                  <TextField
+                    fullWidth
+                    id="instagram"
+                    name="instagram"
+                    type="text"
+                    value={formik.values.instagram}
+                    onChange={formik.handleChange}
+                    error={formik.touched.instagram && Boolean(formik.errors.instagram)}
                     autoComplete='off'
                     variant="outlined"
                     size="small"
@@ -361,7 +452,7 @@ export const RegistrationPage = () => {
               </div>
             </Grid>
             <Grid item sm={12} className="flex flex-row-reverse">
-              <button type="submit" className={style.createBtn}>Sign up</button>
+              <button type="submit" className={style.createBtn}>Create</button>
             </Grid>
           </Grid>
         </form>

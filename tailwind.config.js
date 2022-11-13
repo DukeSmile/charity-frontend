@@ -78,7 +78,7 @@ module.exports = {
         squash: '#F5A61A',
         charCoal: '#030C1B',
         limedSqruce: '#3C4955',
-        stormDust: '#626262',
+        stormDust: '#E2E2E2',
         error: '#f44336'
       },
       boxShadow: {
