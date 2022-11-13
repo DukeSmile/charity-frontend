@@ -122,16 +122,20 @@ export const DonationPage = () => {
         alert("This address is in black list");
         return;
       }
-      dispatch(setLoading(true));
       let currencyContract = getTokenContract(currency);
       // console.log(Web3.utils.toWei(amount.toString()), currency);
       const ddaAddress = networks[FromNetwork].addresses['DDAContract'];
       const currencyAddress = tokenList[currency].address[FromNetwork];
       const weiOfAmount = Web3.utils.toWei(amount.toString());
       let ddaContract = getContract('DDAContract');
+      const fundRaiserAddr = await ddaContract.methods.charities(targetIndex).call();
+      if (fundRaiserAddr.walletAddress === address) {
+        alert('You can not donate to yourself');
+        return;
+      }
+      dispatch(setLoading(true));
       try {
         if(currencyAddress === ethTokenAddr){
-          console.log(amount);
           await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({ from: address, value: weiOfAmount });
         }
         else {

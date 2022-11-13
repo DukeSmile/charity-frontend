@@ -42,6 +42,11 @@ export const CharitiesPage = () => {
                   <div className="font-bold text-center">{charity.catalog.name}</div>
                   <div><label className="font-bold">Registration ID</label> : {charity.catalog.vip}</div>
                   <div><label className="font-bold">Website</label> : <a href={charity.catalog.website} target="_blank"> visit site</a></div>
+                  <div><label className="font-bold">Phone Number</label> : {charity.catalog.phone}</div>
+                  <div><label className="font-bold">Linkedin</label> : {charity.catalog.linkedin}</div>
+                  <div><label className="font-bold">Twitter</label> : {charity.catalog.twitter}</div>
+                  <div><label className="font-bold">Facebook</label> : {charity.catalog.facebook}</div>
+                  <div><label className="font-bold">Instagram</label> : {charity.catalog.instagram}</div>
                   <div><label className="font-bold">Contact Email</label> : {charity.catalog.email}</div>
                   <div className="flex h-60 overflow-hidden">
                     <div className="font-bold">Summary:</div>
