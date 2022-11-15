@@ -6,36 +6,52 @@ import { DonationPage } from "../../pages/donation";
 import { AdminsPage } from "../../pages/admins";
 import { PhotoUpload } from "../../components/photoUpload";
 import { AboutPage } from "../../pages/about";
+import { HomePage } from "../../pages/home";
 
 export const menuItems: MenuuItemProp[] = [
     {
-        name: 'Registration',
+        name: 'Categories',
         owner: 0,
         url: '/registration'
     },
     {
-        name: 'FundRaisers',
+        name: 'Register',
         owner: 0,
-        url: '/fundraisers'
+        url: '/registration'
     },
-    {
-        name: 'Charities',
-        owner: 0,
-        url: '/charities'
-    },
-    {
-        name: 'Admins',
-        owner: 3,
-        url: '/admins'
-    },
-    {
-        name: 'About',
-        owner: 0,
-        url: '/about'
-    }
+    // {
+    //     name: 'Registration',
+    //     owner: 0,
+    //     url: '/registration'
+    // },
+    // {
+    //     name: 'FundRaisers',
+    //     owner: 0,
+    //     url: '/fundraisers'
+    // },
+    // {
+    //     name: 'Charities',
+    //     owner: 0,
+    //     url: '/charities'
+    // },
+    // {
+    //     name: 'Admins',
+    //     owner: 3,
+    //     url: '/admins'
+    // },
+    // {
+    //     name: 'About',
+    //     owner: 0,
+    //     url: '/about'
+    // }
 ];
 
 export const routeItems: RouteItemProp[] = [
+    {
+        url: '/',
+        owner: 0,
+        element: <HomePage />
+    },
     {
         url: '/registration',
         owner: 0,

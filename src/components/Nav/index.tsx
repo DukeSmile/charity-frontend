@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { ConnectWalletButton } from './ConnectWalletButton';
 import { menuItems } from '../../core/constants/menu';
 import { MenuuItemProp } from '../../core/interfaces/base';
+import logoImg from '../../assets/images/logo-white.png';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -30,7 +31,7 @@ export const Nav = () => {
   console.log(isMobile);
   
   const [toggleMenu, setToggleMenu] = useState(false);
-  const linkStyle = 'mx-10 border-1 rounded-full p-10 hover:text-white hover:bg-limedSqruce';
+  const linkStyle = 'mx-10 uppercase text-16 text-black p-10 hover:text-white hover:bg-limedSqruce';
   const menuStyle = 'mx-10 border-y-1 p-10 px-20 text-24';
   const handleDrawerToggle = () => {
     setToggleMenu(!toggleMenu);
@@ -38,7 +39,7 @@ export const Nav = () => {
   const ownerFlag = useSelector((state:any) => state.app.isOwner);
   
   return (
-    <div className="w-[95%] md:w-[80%] mx-auto flex flex-between justify-between items-center">
+    <div className="w-[95%] md:w-[80%] mx-auto h-80 flex flex-between justify-between items-center">
       <div className="flex hidden md:block">
         {
           menuItems.filter((item:MenuuItemProp) => item.owner <= ownerFlag).map((menu: MenuuItemProp, index: number) => {
@@ -63,6 +64,9 @@ export const Nav = () => {
         </div>
       </div>
       <button className={"p-5 px-10 border md:hidden " + (!toggleMenu ? 'block' : 'hidden')} onClick={() => setToggleMenu(!toggleMenu)}><FontAwesomeIcon icon={faBars} /></button>
+      <div>
+        <img src={logoImg} className="mt-30"/>
+      </div>
       <ConnectWalletButton />
     </div>
   )

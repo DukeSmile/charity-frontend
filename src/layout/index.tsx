@@ -89,13 +89,11 @@ export const Layout = ({children}: any) => {
 
   return (
     <div className="w-full flex flex-col min-h-screen bg-cover font-poppins">
-      <div className="w-full z-10 py-10">
+      <div className="w-full z-10 py-10 bg-white fixed top-0 left-0">
         <Nav/>
       </div>
-      <div className="w-[95%] md:w-[80%] mx-auto flex flex-col mt-0 py-20 lg:py-0">
-        <div className="w-full">
+      <div className="w-full">
         {children}
-        </div>
       </div>
       <LoadingBar open={loading}/>
     </div>

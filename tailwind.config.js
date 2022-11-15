@@ -68,18 +68,12 @@ module.exports = {
         0: '0px',
         ...range(minSpacingPixel, maxSpacingPixel).reduce((merged, f) => ({ ...merged, [f]: `${f}px` }), {})
       },
-      backgroundImage: {
-        'main': "url('./assets/images/swap-bg.png');"
-      },
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
-        artySkyBlue: '#00C3FF',
-        squash: '#F5A61A',
-        charCoal: '#030C1B',
-        limedSqruce: '#3C4955',
-        stormDust: '#E2E2E2',
-        error: '#f44336'
+        brown: '#512C29',
+        green: '#07931C',
+
       },
       boxShadow: {
         default: '0px 4px 10px rgb(15, 15, 15, 0.5)',
@@ -101,6 +95,9 @@ module.exports = {
       maxWidth: {
         ...range(minSpacingPixel, maxSpacingPixel, spacingPixelIncrement).reduce((merged, f) => ({ ...merged, [f]: `${f}px` }), {})
       },
+      backgroundImage: {
+        'home' : "url('./assets/images/home.png')"
+      }
     },
   },
   plugins: [],

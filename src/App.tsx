@@ -5,7 +5,7 @@ import './App.css';
 import { Layout } from './layout';
 import { routeItems } from './core/constants/menu';
 import { RouteItemProp } from './core/interfaces/base';
-import { RegistrationPage } from './pages/registration';
+import { HomePage } from './pages/home';
 
 export const App = (): JSX.Element => {
   const ownerFlag = useSelector((state:any) => state.app.isOwner);
@@ -13,7 +13,7 @@ export const App = (): JSX.Element => {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path='/' element={<RegistrationPage />} />
+          <Route path='/' element={<HomePage />} />
           {
             routeItems.filter((item:RouteItemProp) => item.owner <= ownerFlag).map((item:RouteItemProp, index:number) => {
               return (
