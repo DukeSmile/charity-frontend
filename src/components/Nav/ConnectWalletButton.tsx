@@ -2,6 +2,7 @@ import { faSignOut, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, MenuItem, Button } from '@material-ui/core';
 import { useState } from 'react';
+import { baseStyles } from '../../core/constants/style';
 import { useWeb3Context } from '../../hooks/web3Context';
 
 export const ConnectWalletButton = () => {
@@ -12,21 +13,18 @@ export const ConnectWalletButton = () => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const style = {
-    connectBtn: 'px-20 py-17 text-16 text-white bg-green rounded-full hover:text-brown'
-  };
 
   return (
     <div>
       {
         address === '' ? (
-          <button className={style.connectBtn} onClick={connect}>
+          <button className={baseStyles.greenBtn} onClick={connect}>
             <FontAwesomeIcon icon={faWallet} className="mr-10"/>Connect wallet
           </button> ) :
           (
             <div className="relative">
               <button 
-                className={style.connectBtn}
+                className={baseStyles.greenBtn}
                 onClick={handleClick}
                 aria-controls={showMenu ? 'basic-menu' : undefined}
                 aria-haspopup="true"

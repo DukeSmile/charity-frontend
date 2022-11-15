@@ -10,7 +10,8 @@ import { adminUserProp } from "../../core/interfaces/base";
 import { useWeb3Context } from "../../hooks/web3Context";
 import { getContract, roleList } from "../../core/constants/base";
 import { setLoading } from "../../core/store/slices/bridgeSlice";
-import { FeaturesOfCharity } from "./features";
+import { FeaturesOfCharity, FeaturedCharities } from "./featuredCharities";
+import { FundRaiseForPage } from "./fundraiseFor";
 import bgImg from "../../assets/images/home.png";
 
 export const HomePage = () => {
@@ -93,6 +94,8 @@ export const HomePage = () => {
       </div>
       <div>
         <FeaturesOfCharity />
+        <FeaturedCharities />
+        <FundRaiseForPage />
       </div>
     </div>
   );

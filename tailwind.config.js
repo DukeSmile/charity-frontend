@@ -73,10 +73,13 @@ module.exports = {
         current: 'currentColor',
         brown: '#512C29',
         green: '#07931C',
+        iron: '#D6D6D6',
+        lightgrey: '#D9D9D9',
+        alabaster: '#FAFAFA',
 
       },
       boxShadow: {
-        default: '0px 4px 10px rgb(15, 15, 15, 0.5)',
+        default: '5px 10px 40px -5px rgba(0, 0, 0, 0.08)'
       },
       margin: (theme, { negative }) => ({
         auto: 'auto',
