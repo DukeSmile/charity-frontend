@@ -103,7 +103,7 @@ export const HomePage = () => {
         <BecomeMemberPage />
         <LastFundRaisers />
       </div>
-      <div className="w-[95%] md:w-[80%] mx-auto p-20 flex justify-between items-center">
+      <div className="w-[95%] md:w-[80%] mx-auto p-20 px-40 flex justify-between items-center rounded-40 bg-alabaster">
         <div>
           <p className="text-40 font-bold">Ready to get started? Raise Your Helping Hand For Animals</p>
           <p className="text-16 my-15">Thanks to the help of our generous supporters, ACE has been working to improve animal welfare for the last decade—influencing millions of donations, conducting rigorous charity evaluations, and funding new.</p>

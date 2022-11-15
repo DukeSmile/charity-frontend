@@ -55,6 +55,7 @@ module.exports = {
         '3xl': '1.5rem',
         full: '9999px',
         ...range(1, 10).reduce((merged, f) => ({ ...merged, [f]: `${f}px`}), {}),
+        '40': '40px',
       },
       borderWidth: {
         1: '1px',
