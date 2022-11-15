@@ -1,4 +1,4 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
@@ -67,6 +67,56 @@ export const FeaturedCharities = () => {
                           {charity.catalog.summary}
                         </div>
                         <div className="py-15">
+                          <Link to={`/donate/${charity.index}`} className={baseStyles.brownBtn}>Donate now</Link>
+                        </div>
+                      </div>
+                    </div>
+                  </Grid>
+                )
+              })
+            }
+          </Grid>
+        </div>
+        <div className="flex justify-center">
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export const LastFundRaisers = () => {
+  const donateTypes = ['health','education','environmental','animal'];
+  const fundRaisers = useSelector((state:any) => state.app.fundRaisers);
+
+  return (
+    <div className="bg-alabaster">
+      <div className="w-[95%] md:w-[80%] mx-auto py-100">
+        <div className="text-38 font-bold flex justify-between">
+          <label>Last News</label>
+          <div>
+            <button className={baseStyles.normalBtn + ' hover:bg-green mr-20'}>
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+            <button className={baseStyles.normalBtn + ' hover:bg-green mr-20'}>
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
+        </div>
+        <div className="my-40">
+          <Grid container spacing={1}>
+            {
+              fundRaisers.map((charity:charityProp) => {
+                return (
+                  <Grid item xs={12} sm={6} md={6} lg={4} key={charity.index} >
+                    <div className="shadow-default m-10 rounded-10 cursor-pointer">
+                      <img src={"https://ipfs.io/ipfs/" + charity.catalog.photo} alt={charity.catalog.name} className="rounded-t-10 h-250 w-full"/>
+                      <div className="p-10 md:p-20">
+                        <div className="flex h-50 overflow-hidden text-16 my-15">
+                          {charity.catalog.summary}
+                        </div>
+                        <hr></hr>
+                        <div className="py-15">
+                          <button className={baseStyles.brownBtn + ' mr-20'}>Read More</button>
                           <Link to={`/donate/${charity.index}`} className={baseStyles.brownBtn}>Donate now</Link>
                         </div>
                       </div>

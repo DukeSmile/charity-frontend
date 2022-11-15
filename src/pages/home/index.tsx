@@ -10,11 +10,15 @@ import { adminUserProp } from "../../core/interfaces/base";
 import { useWeb3Context } from "../../hooks/web3Context";
 import { getContract, roleList } from "../../core/constants/base";
 import { setLoading } from "../../core/store/slices/bridgeSlice";
-import { FeaturesOfCharity, FeaturedCharities } from "./featuredCharities";
+import { FeaturesOfCharity, FeaturedCharities, LastFundRaisers } from "./featuredCharities";
 import { FundRaiseForPage } from "./fundraiseFor";
 import bgImg from "../../assets/images/home.png";
+import { BecomeMemberPage } from "./becomeMember";
+import { baseStyles } from "../../core/constants/style";
+import donateImg from "../../assets/images/donate.png";
 
 export const HomePage = () => {
+
   const dispatch = useDispatch();
   const isOwner = useSelector( (state:any) => state.app.isOwner);
   console.log(isOwner);
@@ -78,7 +82,7 @@ export const HomePage = () => {
           <p className="capitalize text-70 text-white font-bold">every donation makes a difference</p>
           <p className="text-20 text-white">Nullam eu nibh vitae est tempor molestie id sed ex. Quisque dignissim maximus ipsum, sed rutrum metus tincidunt et. Sed eget tincidunt ipsum.</p>
           <div className="flex justify-center mt-40">
-            <button className="px-20 py-17 text-16 text-white bg-green rounded-full hover:text-brown mr-30">
+            <button className={baseStyles.greenBtn + ' mr-30'}>
               Donate Now <FontAwesomeIcon icon={faArrowRight} />
             </button>
             <button className="flex items-center text-white hover:text-brown">
@@ -96,6 +100,23 @@ export const HomePage = () => {
         <FeaturesOfCharity />
         <FeaturedCharities />
         <FundRaiseForPage />
+        <BecomeMemberPage />
+        <LastFundRaisers />
+      </div>
+      <div className="w-[95%] md:w-[80%] mx-auto p-20 flex justify-between items-center">
+        <div>
+          <p className="text-40 font-bold">Ready to get started? Raise Your Helping Hand For Animals</p>
+          <p className="text-16 my-15">Thanks to the help of our generous supporters, ACE has been working to improve animal welfare for the last decade—influencing millions of donations, conducting rigorous charity evaluations, and funding new.</p>
+          <div className="flex mt-40">
+            <button className={baseStyles.normalBtn + ' text-green hover:bg-green mr-30'}>
+                Donate Now <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+            <button className={baseStyles.normalBtn + ' text-green hover:bg-green'}>
+                Register with Okapi <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
+        </div>
+        <img src={donateImg} className="sm:max-w-200 sm:max-h-200 md:max-w-300 md:max-h-300 lg:max-w-400 lg:max-h-400"/>
       </div>
     </div>
   );

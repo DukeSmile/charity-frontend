@@ -73,6 +73,8 @@ module.exports = {
         current: 'currentColor',
         brown: '#512C29',
         green: '#07931C',
+        seagreen: '#2A8D39',
+        algae: '#58B065',
         iron: '#D6D6D6',
         lightgrey: '#D9D9D9',
         alabaster: '#FAFAFA',
