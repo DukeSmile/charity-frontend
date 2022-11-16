@@ -31,7 +31,7 @@ export const Nav = () => {
   console.log(isMobile);
   
   const [toggleMenu, setToggleMenu] = useState(false);
-  const linkStyle = 'mx-10 uppercase text-16 text-black p-10 hover:text-white hover:bg-limedSqruce';
+  const linkStyle = 'mx-10 uppercase text-16 text-black p-10 hover:text-brown hover:bg-limedSqruce';
   const menuStyle = 'mx-10 border-y-1 p-10 px-20 text-24';
   const handleDrawerToggle = () => {
     setToggleMenu(!toggleMenu);

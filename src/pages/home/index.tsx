@@ -111,9 +111,9 @@ export const HomePage = () => {
             <button className={baseStyles.normalBtn + ' text-green hover:bg-green mr-30'}>
                 Donate Now <FontAwesomeIcon icon={faArrowRight} />
             </button>
-            <button className={baseStyles.normalBtn + ' text-green hover:bg-green'}>
+            <Link to="/registration" className={baseStyles.normalBtn + ' text-green hover:bg-green'}>
                 Register with Okapi <FontAwesomeIcon icon={faArrowRight} />
-            </button>
+            </Link>
           </div>
         </div>
         <img src={donateImg} className="sm:max-w-200 sm:max-h-200 md:max-w-300 md:max-h-300 lg:max-w-400 lg:max-h-400"/>
