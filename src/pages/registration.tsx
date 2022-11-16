@@ -85,7 +85,7 @@ export const RegistrationPage = () => {
       detail: '',
       title: '',
       location: '',
-      goal: '',
+      goal: 0,
       type: ''
     },
     onSubmit:async (values:any) => {
@@ -176,7 +176,7 @@ export const RegistrationPage = () => {
         detail: '',
         title: '',
         location: '',
-        goal: '',
+        goal: 0,
         type: ''
       }
     });

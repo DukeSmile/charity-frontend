@@ -45,6 +45,31 @@
       {
         "indexed": true,
         "internalType": "address",
+        "name": "adminAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "typeName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "AddDonateType",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "walletAddress",
         "type": "address"
       },
@@ -80,6 +105,12 @@
         "type": "uint8"
       },
       {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "donateType",
+        "type": "bytes32"
+      },
+      {
         "components": [
           { "internalType": "string", "name": "vip", "type": "string" },
           { "internalType": "string", "name": "website", "type": "string" },
@@ -106,6 +137,12 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "fund",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "goal",
         "type": "uint256"
       },
       {
@@ -172,6 +209,31 @@
       }
     ],
     "name": "RemoveAdmin",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "adminAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "typeName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "RemoveDonateType",
     "type": "event"
   },
   {
@@ -308,6 +370,15 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "bytes32", "name": "_type", "type": "bytes32" }
+    ],
+    "name": "addDonateType",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "name": "adminUsers",
     "outputs": [
@@ -337,6 +408,8 @@
         "type": "uint8"
       },
       { "internalType": "uint256", "name": "fund", "type": "uint256" },
+      { "internalType": "uint256", "name": "goal", "type": "uint256" },
+      { "internalType": "bytes32", "name": "donateType", "type": "bytes32" },
       {
         "components": [
           { "internalType": "string", "name": "vip", "type": "string" },
@@ -370,6 +443,8 @@
         "name": "_type",
         "type": "uint8"
       },
+      { "internalType": "bytes32", "name": "_donateType", "type": "bytes32" },
+      { "internalType": "uint256", "name": "_goal", "type": "uint256" },
       {
         "components": [
           { "internalType": "string", "name": "vip", "type": "string" },
@@ -410,6 +485,13 @@
     "type": "function"
   },
   {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "donateTypes",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getAdminUsers",
     "outputs": [
@@ -447,6 +529,12 @@
             "type": "uint8"
           },
           { "internalType": "uint256", "name": "fund", "type": "uint256" },
+          { "internalType": "uint256", "name": "goal", "type": "uint256" },
+          {
+            "internalType": "bytes32",
+            "name": "donateType",
+            "type": "bytes32"
+          },
           {
             "components": [
               { "internalType": "string", "name": "vip", "type": "string" },
@@ -491,6 +579,15 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "getDonateTypes",
+    "outputs": [
+      { "internalType": "bytes32[]", "name": "", "type": "bytes32[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       { "internalType": "bytes32", "name": "role", "type": "bytes32" }
     ],
@@ -521,9 +618,18 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "index", "type": "uint256" }
+      { "internalType": "uint256", "name": "_index", "type": "uint256" }
     ],
     "name": "removeAdmin",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_index", "type": "uint256" }
+    ],
+    "name": "removeDonateType",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
