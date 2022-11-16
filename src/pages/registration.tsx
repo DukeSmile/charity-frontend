@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { create } from 'ipfs-http-client';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import { useWeb3Context } from "../hooks/web3Context";
@@ -21,8 +21,8 @@ export const RegistrationPage = () => {
   
   const dispatch = useDispatch();
   let { feature } = useParams();
+  const navigate = useNavigate();
   const {connected, address} = useWeb3Context();
-  console.log(feature);
   const [charityType, SetCharityType] = useState(feature === '0' ? 'charity' : 'fundraiser');
   const [wallet, setWallet] = useState('');
   const [uploadShow, setUploadShow] = useState(false);
@@ -147,7 +147,8 @@ export const RegistrationPage = () => {
           }
           console.log(_catalog);
           const numOfCharityType = charityType === 'charity' ? 0 : 1;
-          await ddaContract.methods.createCharity(numOfCharityType, values.type, values.goal, _catalog).send({from: address});
+          await ddaContract.methods.createCharity(numOfCharityType, values.type, charityType === 'charity' ? 1 : values.goal, _catalog).send({from: address});
+          navigate('/celebrate');
         }
         catch(error){
           console.log(error);

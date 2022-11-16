@@ -1,7 +1,7 @@
 import { Grid, TextField } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
@@ -20,8 +20,8 @@ import donateImg from "../../assets/images/donate.png";
 export const HomePage = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isOwner = useSelector( (state:any) => state.app.isOwner);
-  console.log(isOwner);
   const adminUsers = useSelector( (state:any) => state.app.adminUsers);
   const {connected, address} = useWeb3Context();
   const [newUserAddr, setNewUserAddr] = useState('');

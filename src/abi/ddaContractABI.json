@@ -80,6 +80,12 @@
         "type": "uint8"
       },
       {
+        "indexed": false,
+        "internalType": "string",
+        "name": "donateType",
+        "type": "string"
+      },
+      {
         "components": [
           { "internalType": "string", "name": "vip", "type": "string" },
           { "internalType": "string", "name": "website", "type": "string" },
@@ -106,6 +112,12 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "fund",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "goal",
         "type": "uint256"
       },
       {
@@ -144,6 +156,12 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "_comment",
+        "type": "string"
       },
       {
         "indexed": false,
@@ -337,6 +355,8 @@
         "type": "uint8"
       },
       { "internalType": "uint256", "name": "fund", "type": "uint256" },
+      { "internalType": "uint256", "name": "goal", "type": "uint256" },
+      { "internalType": "string", "name": "donateType", "type": "string" },
       {
         "components": [
           { "internalType": "string", "name": "vip", "type": "string" },
@@ -370,6 +390,8 @@
         "name": "_type",
         "type": "uint8"
       },
+      { "internalType": "string", "name": "_donateType", "type": "string" },
+      { "internalType": "uint256", "name": "_goal", "type": "uint256" },
       {
         "components": [
           { "internalType": "string", "name": "vip", "type": "string" },
@@ -402,7 +424,8 @@
     "inputs": [
       { "internalType": "uint256", "name": "_to", "type": "uint256" },
       { "internalType": "address", "name": "_currency", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
+      { "internalType": "string", "name": "_comment", "type": "string" }
     ],
     "name": "donate",
     "outputs": [],
@@ -447,6 +470,8 @@
             "type": "uint8"
           },
           { "internalType": "uint256", "name": "fund", "type": "uint256" },
+          { "internalType": "uint256", "name": "goal", "type": "uint256" },
+          { "internalType": "string", "name": "donateType", "type": "string" },
           {
             "components": [
               { "internalType": "string", "name": "vip", "type": "string" },
@@ -521,7 +546,7 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "index", "type": "uint256" }
+      { "internalType": "uint256", "name": "_index", "type": "uint256" }
     ],
     "name": "removeAdmin",
     "outputs": [],

@@ -7,8 +7,6 @@ import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from 'react';
 
 import { ConnectWalletButton } from './ConnectWalletButton';
-import { menuItems } from '../../core/constants/menu';
-import { MenuuItemProp } from '../../core/interfaces/base';
 import logoImg from '../../assets/images/logo-white.png';
 import { fundTypes } from "../../core/constants/base";
 

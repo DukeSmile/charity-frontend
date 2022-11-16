@@ -7,44 +7,7 @@ import { AdminsPage } from "../../pages/admins";
 import { PhotoUpload } from "../../components/photoUpload";
 import { AboutPage } from "../../pages/about";
 import { HomePage } from "../../pages/home";
-
-export const menuItems: MenuuItemProp[] = [
-    {
-        name: 'Categories',
-        owner: 0,
-        url: '/registration'
-    },
-    {
-        name: 'Register',
-        owner: 0,
-        url: '/registration'
-    },
-    // {
-    //     name: 'Registration',
-    //     owner: 0,
-    //     url: '/registration'
-    // },
-    // {
-    //     name: 'FundRaisers',
-    //     owner: 0,
-    //     url: '/fundraisers'
-    // },
-    // {
-    //     name: 'Charities',
-    //     owner: 0,
-    //     url: '/charities'
-    // },
-    // {
-    //     name: 'Admins',
-    //     owner: 3,
-    //     url: '/admins'
-    // },
-    // {
-    //     name: 'About',
-    //     owner: 0,
-    //     url: '/about'
-    // }
-];
+import { CelebratePage } from "../../pages/celebration";
 
 export const routeItems: RouteItemProp[] = [
     {
@@ -81,5 +44,10 @@ export const routeItems: RouteItemProp[] = [
         url: '/about',
         owner: 0,
         element: <AboutPage />
+    },
+    {
+        url: '/celebrate',
+        owner: 0,
+        element: <CelebratePage />
     }
 ];
