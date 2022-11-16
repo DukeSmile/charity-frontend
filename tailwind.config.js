@@ -79,6 +79,8 @@ module.exports = {
         iron: '#D6D6D6',
         lightgrey: '#D9D9D9',
         alabaster: '#FAFAFA',
+        dark: '#1F2533',
+        gunsmoke: '#81848C'
 
       },
       boxShadow: {
@@ -102,7 +104,7 @@ module.exports = {
         ...range(minSpacingPixel, maxSpacingPixel, spacingPixelIncrement).reduce((merged, f) => ({ ...merged, [f]: `${f}px` }), {})
       },
       backgroundImage: {
-        'home' : "url('./assets/images/home.png')"
+        'home' : "url('./assets/images/home.png')",
       }
     },
   },

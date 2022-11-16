@@ -49,7 +49,7 @@ export const Nav = () => {
           })
         }
       </div>
-      <div
+      {/* <div
         className={(toggleMenu ? 'block' : 'hidden') + " md:hidden"}
         onClick={() => setToggleMenu(false)}
       >
@@ -63,7 +63,7 @@ export const Nav = () => {
           }
         </div>
       </div>
-      <button className={"p-5 px-10 border md:hidden " + (!toggleMenu ? 'block' : 'hidden')} onClick={() => setToggleMenu(!toggleMenu)}><FontAwesomeIcon icon={faBars} /></button>
+      <button className={"p-5 px-10 border md:hidden " + (!toggleMenu ? 'block' : 'hidden')} onClick={() => setToggleMenu(!toggleMenu)}><FontAwesomeIcon icon={faBars} /></button> */}
       <div>
         <img src={logoImg} className="mt-30"/>
       </div>

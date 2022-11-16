@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { FooterTab } from '../components/footer';
 import LoadingBar from '../components/loadingBar';
 import { Nav } from '../components/Nav';
 import { getContract, roleList } from '../core/constants/base';
@@ -95,6 +96,7 @@ export const Layout = ({children}: any) => {
       <div className="w-full">
         {children}
       </div>
+      <FooterTab/>
       <LoadingBar open={loading}/>
     </div>
   )
