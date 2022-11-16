@@ -80,7 +80,9 @@ module.exports = {
         lightgrey: '#D9D9D9',
         alabaster: '#FAFAFA',
         dark: '#1F2533',
-        gunsmoke: '#81848C'
+        gunsmoke: '#81848C',
+        asphalt: '#140701',
+        blue: '#4271EA'
 
       },
       boxShadow: {

@@ -90,7 +90,7 @@ export const Layout = ({children}: any) => {
 
   return (
     <div className="w-full flex flex-col min-h-screen bg-cover font-poppins">
-      <div className="w-full z-10 py-10 bg-white fixed top-0 left-0">
+      <div className="w-full z-10 py-10 bg-white fixed top-0 left-0 border-b-2">
         <Nav/>
       </div>
       <div className="w-full">
