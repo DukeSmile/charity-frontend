@@ -29,7 +29,7 @@ export const CelebratePage = () => {
         </div>
         <div className="py-100 px-20 sm:px-100 w-full flex flex-col justify-center items-center">
           <p className="text-24 text-gunsmoke my-20">We will be in touch via email once the information you have provided has been reviewed by our team</p>
-          <button onClick={() => navigate('/')} className={baseStyles.normalBtn + " bg-brown text-white m-10 w-200"}>Click to Continue <FontAwesomeIcon icon={faArrowRight} /></button>
+          <button onClick={() => navigate('/')} className={baseStyles.normalBtn + " hover:bg-iron m-10 w-200"}>Click to Continue <FontAwesomeIcon icon={faArrowRight} /></button>
         </div>
       </div>
     </div>

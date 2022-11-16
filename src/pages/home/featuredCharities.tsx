@@ -69,7 +69,7 @@ export const FeaturedCharities = () => {
                           {charity.catalog.summary}
                         </div>
                         <div className="py-15">
-                          <Link to={`/donate/${charity.index}`} className={baseStyles.brownBtn}>Donate now</Link>
+                          <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn}>Donate now</Link>
                         </div>
                       </div>
                     </div>
@@ -117,8 +117,8 @@ export const LastFundRaisers = () => {
                       </div>
                       <hr></hr>
                       <div className="py-15">
-                        <button className={baseStyles.brownBtn + ' mr-20 font-bold'}>Read More</button>
-                        <Link to={`/donate/${charity.index}`} className={baseStyles.brownBtn}>Donate now</Link>
+                        <button className={baseStyles.normalBtn + ' mr-20 font-bold'}>Read More</button>
+                        <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn}>Donate now</Link>
                       </div>
                     </div>
                   </div>
