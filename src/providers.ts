@@ -70,7 +70,7 @@ export const chains: AllChainDetails = {
   [NetworkIds.Goerli]: new ChainDetails({
     networkName: 'Goerli',
     rpcUrls: [
-      'https://goerli.infura.io/v3/6f6ce7575ada4ad3a5991a8be0fb2e19',
+      'https://eth-goerli.g.alchemy.com/v2/9LMwna_qFe9VoTN0xx8424BaIcr8vLnR',
       'https://eth-goerli.public.blastapi.io'
     ],
     symbol: 'ETH',

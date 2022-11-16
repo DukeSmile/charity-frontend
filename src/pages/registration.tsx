@@ -1,8 +1,11 @@
 import { Grid, TextareaAutosize, TextField } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { create } from 'ipfs-http-client';
+import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 
 import { useWeb3Context } from "../hooks/web3Context";
@@ -13,14 +16,14 @@ import { PhotoUpload } from "../components/photoUpload";
 import remoteImg from "../assets/images/components/remote.png";
 import currenciesImg from "../assets/images/components/currencies.png";
 import { baseStyles } from "../core/constants/style";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 export const RegistrationPage = () => {
   
   const dispatch = useDispatch();
+  let { feature } = useParams();
   const {connected, address} = useWeb3Context();
-  const [charityType, SetCharityType] = useState('charity');
+  console.log(feature);
+  const [charityType, SetCharityType] = useState(feature === '0' ? 'charity' : 'fundraiser');
   const [wallet, setWallet] = useState('');
   const [uploadShow, setUploadShow] = useState(false);
   const [uploadFile, setUploadFile] = useState(null);
@@ -182,6 +185,10 @@ export const RegistrationPage = () => {
     });
     setUploadFile(null);
   }, [charityType]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>

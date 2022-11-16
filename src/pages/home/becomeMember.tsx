@@ -24,7 +24,7 @@ export const BecomeMemberPage = () => {
                     <button className={baseStyles.normalBtn + ' text-white hover:bg-white mr-30'}>
                         Donate Now <FontAwesomeIcon icon={faArrowRight} />
                     </button>
-                    <Link to="/registration" className={baseStyles.normalBtn + ' text-white hover:bg-white'}>
+                    <Link to="/registration/0" className={baseStyles.normalBtn + ' text-white hover:bg-white'}>
                         Register with Okapi <FontAwesomeIcon icon={faArrowRight} />
                     </Link>
                 </div>

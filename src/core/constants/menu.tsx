@@ -53,7 +53,7 @@ export const routeItems: RouteItemProp[] = [
         element: <HomePage />
     },
     {
-        url: '/registration',
+        url: '/registration/:feature',
         owner: 0,
         element: <RegistrationPage />
     },

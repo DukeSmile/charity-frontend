@@ -107,6 +107,9 @@ module.exports = {
       },
       backgroundImage: {
         'home' : "url('./assets/images/home.png')",
+      },
+      zIndex: {
+        ...range(minSpacingPixel, maxSpacingPixel, spacingPixelIncrement).reduce((merged, f) => ({ ...merged, [f]: `${f}` }), {})
       }
     },
   },

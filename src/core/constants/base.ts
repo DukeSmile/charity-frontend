@@ -30,6 +30,14 @@ export const projectId = '2HE3I80EtQeKwCEjmvXVxWooFzx';
 export const projectSecret = '6691d66e4959b01f15a45bbe767326e9';
 export const ethTokenAddr = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
 
+export const fundTypes:string [] = [
+    'medical',
+    'emergency',
+    'memorial',
+    'non-profit',
+    'crisis relief'
+]; 
+
 export const aboutStrs:string [] = [
     'In todays world many regular people are still generally unaware or uncertain of cryptocurrency and the role that blockchain technology will play in our future. The best way to spread the word and bridge the gap between IRL and crypto isn’t for them to read about multimillion dollar hacks on the mainstream media. For this reason Okapi has decided it is important for us to have a long-lasting positive effect on society using blockchain technology to spread love, kindness, and good will. We know that currently charity/relief organizations can be hard to access, and even harder to donate too; especially with large amounts of money.',
     'For example those who want to donate to a charitable organization must provide all of their personal information, and then use either credit card, bank transfer, or PayPal. All of these methods take time, require patience, and also require personal information which many people find intrusive thus discouraging them to leave a donation.',

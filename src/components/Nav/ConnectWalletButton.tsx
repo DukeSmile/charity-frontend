@@ -1,19 +1,31 @@
 import { faSignOut, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, MenuItem, Button } from '@material-ui/core';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { baseStyles } from '../../core/constants/style';
 import { useWeb3Context } from '../../hooks/web3Context';
 
 export const ConnectWalletButton = () => {
-  const { connect, disconnect, address } = useWeb3Context();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const showMenu = Boolean(anchorEl);
   
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
+  const ref = useRef<HTMLDivElement | null>(null);
+  const { connect, disconnect, address } = useWeb3Context();
+  const [showMenu, setShowMenu] = useState(false);
+  useEffect(() => {
+    const listener = (event: MouseEvent) => {
+      if (
+        ref.current &&
+        event.target &&
+        ref.current.contains(event.target as Node)
+      ) {
+        return;
+      }
+      setShowMenu(false);
+    };
+    document.addEventListener("click", listener, { capture: true });
+    return () => {
+      document.removeEventListener("click", listener, { capture: true });
+    };
+  }, []);
   return (
     <div>
       {
@@ -22,20 +34,25 @@ export const ConnectWalletButton = () => {
             <FontAwesomeIcon icon={faWallet} className="mr-10"/>Connect wallet
           </button> ) :
           (
-            <div className="relative">
+            <div className="relative" ref={ref}>
               <button 
-                className={baseStyles.greenBtn}
-                onClick={handleClick}
-                aria-controls={showMenu ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={showMenu ? 'true' : undefined}
+                className={baseStyles.greenBtn + ' z-100'}
+                onClick={() => setShowMenu(!showMenu)}
               >
                 <div className="lowercase overflow-hidden">
                   <FontAwesomeIcon icon={faWallet} className="mr-10"/>
                   {address.slice(0,7)} ..... {address.slice(address.length-5, address.length)}
                 </div>
               </button>
-              <Menu
+              <div className={'w-200 absolute bg-white border-1 ' + (showMenu ? '' : 'hidden')}>
+                <div>
+                  <Button className="text-center w-full" onClick={() => {
+                    setShowMenu(false);
+                    disconnect();
+                  }}>Disconnect</Button>
+                </div>
+              </div>
+              {/* <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
                 open={showMenu}
@@ -45,9 +62,9 @@ export const ConnectWalletButton = () => {
                 }}
                 PaperProps={{
                   style: {
-                    width: "250px",
+                    width: "200px",
                     marginTop: "40px",
-                    position: "absolute",
+                    position: "relative",
                     top: "0px"
                   }
                 }}
@@ -58,7 +75,7 @@ export const ConnectWalletButton = () => {
                 }}>
                   <Button className="text-center w-full">Disconnect</Button>
                 </MenuItem>
-              </Menu>
+              </Menu> */}
             </div>
           )
       }

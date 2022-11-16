@@ -2,7 +2,7 @@ import { Grid, TextField } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
 
@@ -75,6 +75,10 @@ export const HomePage = () => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <div>
       <div className="w-full h-screen bg-home bg-cover bg-no-repeat flex items-center justify-center">
@@ -111,7 +115,7 @@ export const HomePage = () => {
             <button className={baseStyles.normalBtn + ' text-green hover:bg-green mr-30'}>
                 Donate Now <FontAwesomeIcon icon={faArrowRight} />
             </button>
-            <Link to="/registration" className={baseStyles.normalBtn + ' text-green hover:bg-green'}>
+            <Link to="/registration/0" className={baseStyles.normalBtn + ' text-green hover:bg-green'}>
                 Register with Okapi <FontAwesomeIcon icon={faArrowRight} />
             </Link>
           </div>

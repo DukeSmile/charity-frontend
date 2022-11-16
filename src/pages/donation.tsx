@@ -30,6 +30,7 @@ export const DonationPage = () => {
   const [currency, setCurrency] = useState(0);
   const [amount, setAmount] = useState(0);
   const [availableAmount, setAvailableAmount] = useState('0');
+  const [donateComment, setDonatecomment] = useState('');
   const [allHLoading, setAllHLoading] = useState(false);
   const [caseHLoading, setCaseHLoading] = useState(false);
   const charities: charityProp[] = useSelector((state: any) => state.app.allCharities);
@@ -174,7 +175,7 @@ export const DonationPage = () => {
             dispatch(setLoading(false));
             return;
           }
-          await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({ from: address });
+          await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount, donateComment).send({ from: address });
         }
       }
       catch (e) {
@@ -186,6 +187,8 @@ export const DonationPage = () => {
       getLast20History();
       getCaseHistory();
       getCurrentAmount();
+      setDonatecomment('');
+      setAmount(0);
     }
     else
       alert('connect wallet');
@@ -217,7 +220,10 @@ export const DonationPage = () => {
   useEffect(() => {
     getCurrentAmount();
   }, [currency]);
-
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // if (!targetCharity) {
   //   return (
   //     <div className="p-20">Please select one charity or fundraiser</div>
@@ -311,7 +317,12 @@ export const DonationPage = () => {
               <div className="my-20">
                 <p className="text-20 font-medium my-10">Designate to Animal Charity Evaluators</p>
                 <p className="text-20 font-medium my-10">Leave comments</p>
-                <textarea className="w-full my-10 border-1 p-20 text-20" rows={4}>
+                <textarea 
+                  className="w-full my-10 border-1 p-20 text-20" 
+                  rows={4} 
+                  value={donateComment} 
+                  onChange={(event) => setDonatecomment(event.target.value)}
+                >
 
                 </textarea>
               </div>
