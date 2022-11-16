@@ -48,3 +48,9 @@ export interface donationProp {
     amount: string;
     timeStamp: number;
 }
+
+export interface fundTypeProp {
+    title: string;
+    img: string;
+    detail: string;
+}

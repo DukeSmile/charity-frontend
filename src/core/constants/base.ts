@@ -2,6 +2,7 @@ import Web3 from 'web3';
 
 import { contractABIs, networks, FromNetwork, tokenList } from '../../networks';
 import { chains } from '../../providers';
+import { fundTypeProp } from '../interfaces/base';
 
 const connectWeb3 = new Web3(chains[FromNetwork].rpcUrls[0]);
 
@@ -30,13 +31,76 @@ export const projectId = '2HE3I80EtQeKwCEjmvXVxWooFzx';
 export const projectSecret = '6691d66e4959b01f15a45bbe767326e9';
 export const ethTokenAddr = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
 
-export const fundTypes:string [] = [
-    'medical',
-    'emergency',
-    'memorial',
-    'non-profit',
-    'crisis relief'
-]; 
+export const menuFundTypes:string [] = [
+    'medical', 'emergency', 'memorial', 'nonprofit', 'relief'
+];
+
+export const raiserFundTypes: string [] = [
+    'family', 'yourself', 'education', 'volunteer'
+];
+
+export const allFundTypes: {[key:string]: fundTypeProp} = {
+    health: {
+        title: 'health',
+        img: 'health',
+        detail: ''
+    },
+    education: {
+        title: 'education',
+        img: 'education',
+        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
+    },
+    environmental: {
+        title: 'environmental',
+        img: 'environmental',
+        detail: ''
+    },
+    animal: {
+        title: 'animal',
+        img: 'animal',
+        detail: '',
+    },
+    volunteer: {
+        title: 'volunteer',
+        img: 'volunteer',
+        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
+    },
+    yourself: {
+        title: 'yourself',
+        img: 'yourself',
+        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
+    },
+    family: {
+        title: 'Friends Family',
+        img: 'family',
+        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
+    },
+    medical: {
+        title: 'medical',
+        img: 'medical',
+        detail: ''
+    },
+    emergency: {
+        title: 'emergency',
+        img: 'emergency',
+        detail: ''
+    },
+    memorial: {
+        title: 'memorial',
+        img: 'memorial',
+        detail: ''
+    },
+    nonprofit: {
+        title: 'non-profit',
+        img: 'nonprofit',
+        detail: ''
+    },
+    relief: {
+        title: 'crisis relief',
+        img: 'relief',
+        detail: ''
+    }
+};
 
 export const aboutStrs:string [] = [
     'In todays world many regular people are still generally unaware or uncertain of cryptocurrency and the role that blockchain technology will play in our future. The best way to spread the word and bridge the gap between IRL and crypto isn’t for them to read about multimillion dollar hacks on the mainstream media. For this reason Okapi has decided it is important for us to have a long-lasting positive effect on society using blockchain technology to spread love, kindness, and good will. We know that currently charity/relief organizations can be hard to access, and even harder to donate too; especially with large amounts of money.',

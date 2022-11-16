@@ -1,3 +1,4 @@
+import defaultImg from "../../assets/images/icons/default.svg";
 import healthImg from "../../assets/images/icons/health.svg";
 import educationImg from "../../assets/images/icons/education.svg";
 import environmentalImg from "../../assets/images/icons/environmental.svg";
@@ -10,26 +11,17 @@ export interface baseIconProp {
     img: any;
 }
 
-export const baseIcons: {[key: string]: baseIconProp} = {
-    health: {
-        img: healthImg
-    },
-    education: {
-        img: educationImg
-    },
-    environmental: {
-        img: environmentalImg
-    },
-    animal: {
-        img: animalImg
-    },
-    volunteer: {
-        img: volunteerImg
-    },
-    yourself: {
-        img: yourselfImg
-    },
-    family: {
-        img: familyImg
-    },
+export const baseIcons: {[key: string]: any} = {
+    animal: animalImg,
+    education: educationImg,
+    emergency: defaultImg,
+    environmental: environmentalImg,
+    family: familyImg,
+    health: healthImg,
+    medical: defaultImg,
+    memorial: defaultImg,
+    nonprofit: defaultImg,
+    relief: defaultImg,
+    volunteer: volunteerImg,
+    yourself: yourselfImg,
 }

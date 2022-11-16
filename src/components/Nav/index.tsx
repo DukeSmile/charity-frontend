@@ -8,7 +8,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import { ConnectWalletButton } from './ConnectWalletButton';
 import logoImg from '../../assets/images/logo-white.png';
-import { fundTypes } from "../../core/constants/base";
+import { allFundTypes, menuFundTypes } from "../../core/constants/base";
+import { fundTypeProp } from "../../core/interfaces/base";
+import { baseIcons } from "../../core/constants/icons";
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -37,7 +39,7 @@ export const Nav = () => {
   const handleDrawerToggle = () => {
     setToggleMenu(!toggleMenu);
   };
-  const ownerFlag = useSelector((state:any) => state.app.isOwner);
+  const isOwner = useSelector((state:any) => state.app.isOwner);
   
   const showMenubar = (type:string, flag:boolean) => {
     setCategoryShow(false);
@@ -76,12 +78,16 @@ export const Nav = () => {
             </button>
             <div className={'w-200 absolute bg-white border-1 ' + (categoryShow ? '' : 'hidden')}>
               {
-                fundTypes.map((fundType, index) => {
+                menuFundTypes.map((typeName, index) => {
+                  const fundType = allFundTypes[typeName];
                   return (
                     <div key={index}>
-                      <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
+                      <button className="w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize flex justify-between items-center" onClick={() => {
                         showMenubar('category', false);
-                      }}>{fundType}</button>
+                      }}>
+                        <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/>
+                        <div className="text-center w-full">{fundType.title}</div>
+                      </button>
                     </div>
                   )
                 })
@@ -106,6 +112,13 @@ export const Nav = () => {
                   navigate('/registration/1');
                 }}>Create Fundraiser</button>
               </div>
+              {isOwner >= 3 && (<div>
+                  <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
+                    showMenubar('registry', false);
+                    navigate('/admins');
+                  }}>Admin users</button>
+                </div>
+              )}
             </div>
           </div>
         </div>

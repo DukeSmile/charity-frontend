@@ -108,7 +108,7 @@ export const HomePage = () => {
         <LastFundRaisers />
       </div>
       <div className="w-[95%] md:w-[80%] mx-auto p-20 px-40 flex justify-between items-center rounded-40 bg-alabaster">
-        <div>
+        <div className="z-100 w-[90%] sm:w-[70%] md:max-w-[50%]">
           <p className="text-40 font-bold">Ready to get started? Raise Your Helping Hand For Animals</p>
           <p className="text-16 my-15">Thanks to the help of our generous supporters, ACE has been working to improve animal welfare for the last decade—influencing millions of donations, conducting rigorous charity evaluations, and funding new.</p>
           <div className="flex mt-40">
@@ -120,7 +120,7 @@ export const HomePage = () => {
             </Link>
           </div>
         </div>
-        <img src={donateImg} className="sm:max-w-200 sm:max-h-200 md:max-w-300 md:max-h-300 lg:max-w-400 lg:max-h-400"/>
+        <img src={donateImg} className="absolute md:relative right-0 hidden sm:block md:max-w-300 md:max-h-300 z-10 mr-10"/>
       </div>
     </div>
   );

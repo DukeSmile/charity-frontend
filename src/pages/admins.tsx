@@ -12,7 +12,6 @@ import { setLoading } from "../core/store/slices/bridgeSlice";
 export const AdminsPage = () => {
   const dispatch = useDispatch();
   const isOwner = useSelector( (state:any) => state.app.isOwner);
-  console.log(isOwner);
   const adminUsers = useSelector( (state:any) => state.app.adminUsers);
   const {connected, address} = useWeb3Context();
   const [newUserAddr, setNewUserAddr] = useState('');
@@ -74,55 +73,59 @@ export const AdminsPage = () => {
   };
 
   return (
-    <div className="p-20">
-      <Grid container spacing={2}>
-        <Grid item xs={12} className="text-24 font-bold text-center">Admin Users</Grid> 
-        {
-          isOwner === 4 && (  <Grid item xs={12}>
-            <div className="text-20 flex flex-wrap justify-center shadow-default p-10 rounded-10 text-center">
-              <div className="mx-20">
-                <p>User name </p>
-                <TextField id="outlined-basic" 
-                  variant="outlined" 
-                  size="small"
-                  value={newUserName} 
-                  onChange={(e) => setNewUserName(e.target.value)}
-                  autoComplete='off'
-                />
-              </div>
-              <div className="mx-20">
-                <p>Wallet Address</p>
-                <TextField id="outlined-basic" 
-                  variant="outlined" 
-                  size="small"
-                  value={newUserAddr} 
-                  onChange={(e) => setNewUserAddr(e.target.value)}
-                  autoComplete='off'
-                />
-              </div>
-              <button className="mx-10 border-2 p-5 px-10 mx-20 my-5 rounded-10" onClick={() => registryNewAdmin()}>Add Admin User</button>
-            </div>
-          </Grid>
-          )
-        }
-        {
-          adminUsers.map((user:adminUserProp) => {
-            return (
-              <Grid xs={12} sm={12} md={6} lg={4} item key={user.index}>
-                <div className="shadow-default p-10 rounded-10 h-full w-full">
-                  <div className="font-bold text-center">{user.name}</div>
-                  <p className="break-all">{user.address}</p>
-                  {
-                    isOwner === 4 && (
-                      <button className={style.btn} onClick={() => removeAdmin(user.index)}>Remove This</button>
-                    )
-                  }
+    <div>
+      <div className="relative bg-gradient-to-r from-algae to-seagreen w-full h-200 flex items-end justify-between overflow-hidden">
+      </div>
+      <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70">
+        <Grid container spacing={2}>
+          <Grid item xs={12} className="text-24 font-bold text-center">Admin Users</Grid> 
+          {
+            isOwner === 4 && (  <Grid item xs={12}>
+              <div className="text-20 flex flex-wrap justify-center shadow-default p-10 rounded-10 text-center">
+                <div className="mx-20">
+                  <p>User name </p>
+                  <TextField id="outlined-basic" 
+                    variant="outlined" 
+                    size="small"
+                    value={newUserName} 
+                    onChange={(e) => setNewUserName(e.target.value)}
+                    autoComplete='off'
+                  />
                 </div>
-              </Grid>
+                <div className="mx-20">
+                  <p>Wallet Address</p>
+                  <TextField id="outlined-basic" 
+                    variant="outlined" 
+                    size="small"
+                    value={newUserAddr} 
+                    onChange={(e) => setNewUserAddr(e.target.value)}
+                    autoComplete='off'
+                  />
+                </div>
+                <button className="mx-10 border-2 p-5 px-10 mx-20 my-5 rounded-10" onClick={() => registryNewAdmin()}>Add Admin User</button>
+              </div>
+            </Grid>
             )
-          })
-        }
-      </Grid>
+          }
+          {
+            adminUsers.map((user:adminUserProp) => {
+              return (
+                <Grid xs={12} sm={12} md={6} lg={4} item key={user.index}>
+                  <div className="shadow-default p-10 rounded-10 h-full w-full">
+                    <div className="font-bold text-center">{user.name}</div>
+                    <p className="break-all">{user.address}</p>
+                    {
+                      isOwner === 4 && (
+                        <button className={style.btn} onClick={() => removeAdmin(user.index)}>Remove This</button>
+                      )
+                    }
+                  </div>
+                </Grid>
+              )
+            })
+          }
+        </Grid>
+      </div>
     </div>
   );
 }
