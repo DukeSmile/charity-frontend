@@ -36,7 +36,7 @@ export const networks: INetworks = {
     name: 'Ethereum Goerli',
     isEnabled: true,
     addresses: {
-      DDAContract: '0x5220fb6cA171B3b35E743153061ff971Fa2F2FdE'
+      DDAContract: '0x1B5ef3677BE0FfAbDdD1074f248956aa49FBCE4A'
     },
     logo: EthereumIcon
   },

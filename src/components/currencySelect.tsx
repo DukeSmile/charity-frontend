@@ -1,6 +1,6 @@
-import { makeStyles, MenuItem, Select, TextField } from "@material-ui/core";
+import { MenuItem, Select, TextField } from "@material-ui/core";
 import { MenuProps as MenuPropsType } from "@material-ui/core/Menu";
-import { useState } from "react";
+import { NumericFormat } from 'react-number-format';
 
 import { FromNetwork, tokenList } from "../networks";
 
@@ -15,9 +15,15 @@ export const CurrencySelect = (props: any) => {
   const optionStyle = 'flex justify-between items-center text-center w-full text-black text-18 font-medium border-1 border-limedSqruce py-5 px-10 pr-60';
   return (
     <div>
-      <p className="text-24 font-bold">Enter your donation</p>
+      <p className="text-20 font-medium">Enter your donation</p>
       <div className="flex items-center">
-        <TextField id="outlined-basic" 
+        <NumericFormat 
+          value={props.amount} 
+          thousandSeparator=","
+          className="w-full p-7 border-1 -mr-25"
+          onChange={props.updateAmount}
+        />
+        {/* <TextField id="outlined-basic" 
             variant="outlined" 
             size="small" 
             type="number" 
@@ -25,7 +31,7 @@ export const CurrencySelect = (props: any) => {
             value={props.amount}
             onChange={props.updateAmount}
             autoComplete='off'
-        />
+        /> */}
         <Select onChange={props.onChange} id="bsc-season" className="p-0 text-black" value={props.currency} MenuProps={selectMenuProps} disableUnderline>
           {
             tokenList.map((token, index:number) => {
@@ -43,7 +49,9 @@ export const CurrencySelect = (props: any) => {
           }
         </Select>
       </div>
-      <p className="text-right mr-10">Available amount : {props.cAmount}</p>
+      <p className="text-right mr-10 flex">
+        <label>Available : {Intl.NumberFormat().format(parseFloat(props.cAmount))} {tokenList[props.currency].name}</label>
+      </p>
     </div>
   );
 };

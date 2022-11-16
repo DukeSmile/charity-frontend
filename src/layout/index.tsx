@@ -62,10 +62,10 @@ export const Layout = ({children}: any) => {
     };
     checkFromNetwork();
     getDDAInfo();
-    const intervalId = setInterval(getDDAInfo, 5000);
-    return ()=>{
-      clearInterval(intervalId);
-    }
+    // const intervalId = setInterval(getDDAInfo, 5000);
+    // return ()=>{
+    //   clearInterval(intervalId);
+    // }
   }, [])
   
   useEffect(() => {
