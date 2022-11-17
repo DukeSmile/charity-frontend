@@ -186,7 +186,7 @@ export const Nav = () => {
         }
       </div>
       <ConnectWalletButton />
-      <div className="absolute left-0 w-full h-full cursor-pointer flex sm:justify-center items-end mt-40 z-10" onClick={() => navigate('/')}>
+      <div className="absolute left-0 w-full h-full cursor-pointer flex md:justify-center items-end mt-40 z-10" onClick={() => navigate('/')}>
         <img src={logoImg} className="ml-20"/>
       </div>
     </div>

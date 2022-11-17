@@ -2,11 +2,14 @@ import { faSignOut, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, MenuItem, Button } from '@material-ui/core';
 import { useEffect, useRef, useState } from 'react';
+import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram } from "react-icons/fa";
+
 import { baseStyles } from '../../core/constants/style';
 import { useWeb3Context } from '../../hooks/web3Context';
 
 export const ConnectWalletButton = () => {
   
+  const resumeStyle = 'm-5 hover:text-black';
   const ref = useRef<HTMLDivElement | null>(null);
   const { connect, disconnect, address } = useWeb3Context();
   const [showMenu, setShowMenu] = useState(false);
@@ -27,7 +30,14 @@ export const ConnectWalletButton = () => {
     };
   }, []);
   return (
-    <div className="z-100">
+    <div className="z-100 flex">
+      <div className="text-24 text-iron cursor-pointer m-10 hidden sm:flex">
+        <FaLinkedin className={resumeStyle} />
+        <FaTwitter className={resumeStyle} />
+        <FaFacebook className={resumeStyle} />
+        <FaInstagram className={resumeStyle} />
+        <FaGoogle className={resumeStyle}/>
+      </div>
       {
         address === '' ? (
           <button className={baseStyles.greenBtn} onClick={connect}>

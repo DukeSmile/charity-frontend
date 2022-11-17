@@ -1,7 +1,8 @@
 import { Grid } from "@material-ui/core"
+import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export const FooterTab = () => {
-
+  const resumeStyle = 'm-5 hover:text-white';
   const menuStyle = 'text-gunsmoke text-16 my-5 hover:text-white cursor-pointer';
   const subMenus1 = [
     'Medical',
@@ -34,6 +35,13 @@ export const FooterTab = () => {
           <p className="text-40 font-bold">Okapi</p>
           <p className="text-16 my-10">Thanks to the help of our generous supporters, ACE has been working</p>
           <p className="text-20 font-bold my-10">Follow us</p>
+          <div className="text-24 flex text-iron cursor-pointer my-10">
+            <FaLinkedin className={resumeStyle} />
+            <FaTwitter className={resumeStyle} />
+            <FaFacebook className={resumeStyle} />
+            <FaInstagram className={resumeStyle} />
+            <FaGoogle className={resumeStyle}/>
+          </div>
         </div>
         <Grid container spacing={1} className="max-w-700">
           <Grid item xs={12} sm={6} md={4}>
