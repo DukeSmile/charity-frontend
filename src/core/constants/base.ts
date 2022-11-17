@@ -36,68 +36,80 @@ export const menuFundTypes:string [] = [
 ];
 
 export const raiserFundTypes: string [] = [
-    'family', 'yourself', 'education', 'volunteer'
+    'family', 'personal', 'education', 'volunteer'
 ];
 
 export const allFundTypes: {[key:string]: fundTypeProp} = {
     health: {
         title: 'health',
         img: 'health',
+        type: 'charities',
         detail: ''
     },
     education: {
         title: 'education',
         img: 'education',
+        type: 'charities',
         detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
     },
     environmental: {
         title: 'environmental',
         img: 'environmental',
+        type: 'charities',
         detail: ''
     },
     animal: {
         title: 'animal',
         img: 'animal',
+        type: 'charities',
         detail: '',
     },
     volunteer: {
         title: 'volunteer',
         img: 'volunteer',
+        type: 'charities',
         detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
     },
-    yourself: {
-        title: 'yourself',
-        img: 'yourself',
+    personal: {
+        title: 'personal',
+        img: 'personal',
+        type: 'charities',
         detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
     },
     family: {
-        title: 'Friends Family',
+        title: 'family and friend',
         img: 'family',
+        type: 'fundraisers',
         detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
     },
     medical: {
         title: 'medical',
         img: 'medical',
+        type: 'charities',
         detail: ''
     },
     emergency: {
         title: 'emergency',
         img: 'emergency',
+        type: 'charities',
         detail: ''
     },
     memorial: {
         title: 'memorial',
         img: 'memorial',
+        type: 'charities',
         detail: ''
     },
     nonprofit: {
         title: 'non-profit',
         img: 'nonprofit',
+        type: 'charities',
         detail: ''
     },
     relief: {
         title: 'crisis relief',
         img: 'relief',
+        type: 'charities',
         detail: ''
     }
 };

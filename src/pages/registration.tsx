@@ -23,7 +23,7 @@ export const RegistrationPage = () => {
   let { feature } = useParams();
   const navigate = useNavigate();
   const {connected, address} = useWeb3Context();
-  const [charityType, SetCharityType] = useState(feature === '0' ? 'charity' : 'fundraiser');
+  const [charityType, SetCharityType] = useState(feature);
   const [wallet, setWallet] = useState('');
   const [uploadShow, setUploadShow] = useState(false);
   const [uploadFile, setUploadFile] = useState(null);
@@ -189,7 +189,8 @@ export const RegistrationPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    SetCharityType(feature);
+  }, [feature]);
 
   return (
     <div>

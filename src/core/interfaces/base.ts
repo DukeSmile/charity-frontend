@@ -53,4 +53,5 @@ export interface fundTypeProp {
     title: string;
     img: string;
     detail: string;
+    type: string;
 }

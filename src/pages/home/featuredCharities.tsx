@@ -8,10 +8,12 @@ import { baseIconProp, baseIcons } from "../../core/constants/icons";
 import { baseStyles } from "../../core/constants/style";
 import { charityProp } from "../../core/interfaces/base";
 
-export const FeaturesOfCharity = () => {
+export const FeaturedCategories = () => {
+  
+  const navigate = useNavigate();
   return (
     <div className="w-[95%] md:w-[80%] mx-auto my-100 lg:py-0">
-      <p className="text-center text-38 font-bold">Featured Charities</p>
+      <p className="text-center text-38 font-bold">Featured Categories</p>
       <div className="my-40">
         <Grid container spacing={1}>
           {
@@ -19,11 +21,12 @@ export const FeaturesOfCharity = () => {
               const fundType = allFundTypes[key];
               return (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={index} >
-                  <div className="shadow-default mx-10 p-10 hover:bg-iron rounded-10 cursor-pointer flex items-center">
+                  <div className="shadow-default mx-10 p-10 hover:bg-iron rounded-10 cursor-pointer flex items-center"
+                    onClick={() => navigate('/all')}>
                     <img src={baseIcons[fundType.img]} />
                     <div className="text-20 capitalize ml-20">
                       <p>{fundType.title}</p>
-                      <p>Charities</p>
+                      <p>{fundType.type}</p>
                     </div>
                   </div>
                 </Grid>
@@ -31,11 +34,6 @@ export const FeaturesOfCharity = () => {
             })
           }
         </Grid>
-      </div>
-      <div className="flex justify-center">
-        <button className={baseStyles.normalBtn}>
-          Donate Now <FontAwesomeIcon icon={faArrowRight} />
-        </button>
       </div>
     </div>
   );

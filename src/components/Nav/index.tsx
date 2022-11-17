@@ -79,14 +79,15 @@ export const Nav = () => {
             </button>
             <div className={'w-200 absolute bg-white border-1 ' + (categoryShow ? '' : 'hidden')}>
               {
-                menuFundTypes.map((typeName, index) => {
+                Object.keys(allFundTypes).map((typeName, index) => {
                   const fundType = allFundTypes[typeName];
                   return (
                     <div key={index}>
-                      <button className="w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize flex justify-between items-center" onClick={() => {
+                      <button className="w-full border-t-1 border-b-1 p-5 py-10 hover:bg-iron capitalize flex justify-between items-center" onClick={() => {
                         showMenubar('category', false);
+                        navigate('/all');
                       }}>
-                        <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/>
+                        {/* <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/> */}
                         <div className="text-center w-full">{fundType.title}</div>
                       </button>
                     </div>
@@ -104,13 +105,13 @@ export const Nav = () => {
               <div>
                 <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
                   showMenubar('registry', false);
-                  navigate('/registration/0');
+                  navigate('/registration/charity');
                 }}>Create Charity</button>
               </div>
               <div>
                 <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
                   showMenubar('registry', false);
-                  navigate('/registration/1');
+                  navigate('/registration/fundraiser');
                 }}>Create Fundraiser</button>
               </div>
               {isOwner >= 3 && (<div>
@@ -137,12 +138,13 @@ export const Nav = () => {
             </div>
             
             {categoryShow && (
-              menuFundTypes.map((typeName, index) => {
+              Object.keys(allFundTypes).map((typeName, index) => {
                 const fundType = allFundTypes[typeName];
                 return (
                   <div key={index}>
                     <button className="w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize flex justify-between items-center" onClick={() => {
                       showMenubar('category', false);
+                      navigate('/all');
                     }}>
                       <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/>
                       <div className="text-center w-full">{fundType.title}</div>
@@ -186,8 +188,8 @@ export const Nav = () => {
         }
       </div>
       <ConnectWalletButton />
-      <div className="absolute left-0 w-full h-full cursor-pointer flex md:justify-center items-end mt-40 z-10" onClick={() => navigate('/')}>
-        <img src={logoImg} className="ml-20"/>
+      <div className="absolute left-0 w-full h-full cursor-pointer flex md:justify-center items-end mt-40 z-10">
+        <img src={logoImg} className="ml-20" onClick={() => navigate('/')}/>
       </div>
     </div>
   )

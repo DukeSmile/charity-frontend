@@ -8,6 +8,7 @@ import { PhotoUpload } from "../../components/photoUpload";
 import { AboutPage } from "../../pages/about";
 import { HomePage } from "../../pages/home";
 import { CelebratePage } from "../../pages/celebration";
+import { AllCharitiesPage } from "../../pages/allCharities";
 
 export const routeItems: RouteItemProp[] = [
     {
@@ -44,6 +45,11 @@ export const routeItems: RouteItemProp[] = [
         url: '/about',
         owner: 0,
         element: <AboutPage />
+    },
+    {
+        url: '/all',
+        owner: 0,
+        element: <AllCharitiesPage />
     },
     {
         url: '/celebrate',

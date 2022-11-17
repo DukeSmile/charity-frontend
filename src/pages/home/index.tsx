@@ -10,7 +10,7 @@ import { adminUserProp } from "../../core/interfaces/base";
 import { useWeb3Context } from "../../hooks/web3Context";
 import { getContract, roleList } from "../../core/constants/base";
 import { setLoading } from "../../core/store/slices/bridgeSlice";
-import { FeaturesOfCharity, FeaturedCharities, LastFundRaisers } from "./featuredCharities";
+import { FeaturedCategories, FeaturedCharities, LastFundRaisers } from "./featuredCharities";
 import { FundRaiseForPage } from "./fundraiseFor";
 import bgImg from "../../assets/images/home.png";
 import { BecomeMemberPage } from "./becomeMember";
@@ -86,10 +86,10 @@ export const HomePage = () => {
           <p className="capitalize text-70 text-white font-bold">every donation makes a difference</p>
           <p className="text-20 text-white">Nullam eu nibh vitae est tempor molestie id sed ex. Quisque dignissim maximus ipsum, sed rutrum metus tincidunt et. Sed eget tincidunt ipsum.</p>
           <div className="flex justify-center mt-40">
-            <button className={baseStyles.greenBtn + ' mr-30'}>
+            <button className={baseStyles.greenBtn + ' mr-30'} onClick={() => navigate('/all')}>
               Donate Now <FontAwesomeIcon icon={faArrowRight} />
             </button>
-            <button className="flex items-center text-white hover:text-brown">
+            <button className="flex items-center text-white hover:text-brown" onClick={() => navigate('/about')}>
               <div className="w-50 h-50 border-1 border-white rounded-full mr-20 flex items-center justify-center">
                 <div className="w-35 h-35 border-1 border-white rounded-full bg-white text-black flex items-center justify-center">
                   <FontAwesomeIcon icon={faCaretRight} />
@@ -101,7 +101,7 @@ export const HomePage = () => {
         </div>
       </div>
       <div>
-        <FeaturesOfCharity />
+        <FeaturedCategories />
         <FeaturedCharities />
         <FundRaiseForPage />
         <BecomeMemberPage />
@@ -112,7 +112,7 @@ export const HomePage = () => {
           <p className="text-40 font-bold">Ready to get started? Raise Your Helping Hand For Animals</p>
           <p className="text-16 my-15">Thanks to the help of our generous supporters, ACE has been working to improve animal welfare for the last decade—influencing millions of donations, conducting rigorous charity evaluations, and funding new.</p>
           <div className="flex mt-40">
-            <button className={baseStyles.normalBtn + ' text-green hover:bg-green mr-30'}>
+            <button className={baseStyles.normalBtn + ' text-green hover:bg-green mr-30'} onClick={() => navigate('/all')}>
                 Donate Now <FontAwesomeIcon icon={faArrowRight} />
             </button>
             <Link to="/registration/0" className={baseStyles.normalBtn + ' text-green hover:bg-green'}>
