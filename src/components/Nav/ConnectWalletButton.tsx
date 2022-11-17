@@ -31,7 +31,7 @@ export const ConnectWalletButton = () => {
       {
         address === '' ? (
           <button className={baseStyles.greenBtn} onClick={connect}>
-            <FontAwesomeIcon icon={faWallet} className="mr-10"/>Connect wallet
+            <div className="h-20 overflow-hidden"><FontAwesomeIcon icon={faWallet} className="mr-10"/>Connect wallet</div>
           </button> ) :
           (
             <div className="relative" ref={ref}>
@@ -39,7 +39,7 @@ export const ConnectWalletButton = () => {
                 className={baseStyles.greenBtn + ' z-100'}
                 onClick={() => setShowMenu(!showMenu)}
               >
-                <div className="lowercase overflow-hidden">
+                <div className="lowercase overflow-hidden h-20">
                   <FontAwesomeIcon icon={faWallet} className="mr-10"/>
                   {address.slice(0,7)} ..... {address.slice(address.length-5, address.length)}
                 </div>

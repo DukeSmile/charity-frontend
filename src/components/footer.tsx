@@ -29,14 +29,14 @@ export const FooterTab = () => {
   ];
   return (
     <div className="bg-dark">
-      <div className="w-[95%] md:w-[80%] mx-auto py-60 flex items-center justify-between">
-        <div className="text-white max-w-270 mr-50">
+      <div className="w-[95%] md:w-[80%] mx-auto py-40 flex items-center justify-between flex-wrap px-20">
+        <div className="text-white max-w-270 mr-50 my-20">
           <p className="text-40 font-bold">Okapi</p>
           <p className="text-16 my-10">Thanks to the help of our generous supporters, ACE has been working</p>
           <p className="text-20 font-bold my-10">Follow us</p>
         </div>
         <Grid container spacing={1} className="max-w-700">
-          <Grid item xs={6} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <p className="text-white text-22 font-bold">Fundraise for</p>
             {
               subMenus1.map((menu, index) => {
@@ -48,7 +48,7 @@ export const FooterTab = () => {
               })
             }
           </Grid>
-          <Grid item xs={6} md={4}>
+          <Grid item xs={12} sm={6}  md={4}>
             <p className="text-white text-22 font-bold">Learn more</p>
             {
               subMenus2.map((menu, index) => {
@@ -60,7 +60,7 @@ export const FooterTab = () => {
               })
             }
           </Grid>
-          <Grid item xs={6} md={4}>
+          <Grid item xs={12} md={4}>
             <p className="text-white text-22 font-bold">Ways to give</p>
             {
               subMenus3.map((menu, index) => {
