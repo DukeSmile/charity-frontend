@@ -26,8 +26,8 @@ export const BecomeMemberPage = () => {
                 </Link>
             </div>
         </div>
-        <div className="absolute bottom-0 w-full h-full flex items-end justify-between z-0">
-            <img src={currenciesImg} className="w-300 h-100 ml-20 sm:w-600 sm:h-200 md:ml-[5%]"/>
+        <div className="absolute bottom-0 w-full h-full flex items-end justify-between z-0 overflow-hidden">
+            <img src={currenciesImg} className="w-300 h-100 ml-20 md:w-600 sm:h-200 md:ml-[5%]"/>
             <img src={leaveImg} className="w-200 h-180 mr-20 md:w-400 md:h-360 md:mr-[5%]"/>
         </div>
     </div>

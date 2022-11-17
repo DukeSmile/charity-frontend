@@ -19,6 +19,7 @@
     "@types/node": "^16.11.43",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@types/react-icons": "^3.0.0",
     "@types/socket.io-client": "^3.0.0",
     "@walletconnect/web3-provider": "^1.7.8",
     "assert": "^2.0.0",

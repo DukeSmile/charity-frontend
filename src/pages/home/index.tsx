@@ -81,7 +81,7 @@ export const HomePage = () => {
   
   return (
     <div>
-      <div className="w-full h-screen bg-home bg-cover bg-no-repeat flex items-center justify-center">
+      <div className="w-full h-screen bg-home bg-cover bg-center bg-no-repeat flex items-center justify-center">
         <div className="text-center max-w-900 mx-auto px-20">
           <p className="capitalize text-70 text-white font-bold">every donation makes a difference</p>
           <p className="text-20 text-white">Nullam eu nibh vitae est tempor molestie id sed ex. Quisque dignissim maximus ipsum, sed rutrum metus tincidunt et. Sed eget tincidunt ipsum.</p>

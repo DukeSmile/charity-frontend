@@ -27,7 +27,7 @@ export const ConnectWalletButton = () => {
     };
   }, []);
   return (
-    <div>
+    <div className="z-100">
       {
         address === '' ? (
           <button className={baseStyles.greenBtn} onClick={connect}>

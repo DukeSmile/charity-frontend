@@ -60,6 +60,7 @@ export const Nav = () => {
       }
       setCategoryShow(false);
       setRegistryShow(false);
+      setToggleMenu(false);
     };
     document.addEventListener("click", listener, { capture: true });
     return () => {
@@ -68,10 +69,10 @@ export const Nav = () => {
   }, []);
 
   return (
-    <div className="w-[95%] md:w-[80%] mx-auto h-80 flex flex-between justify-between items-center">
-      <div className="hidden md:block">
+    <div className="w-[95%] md:w-[80%] mx-auto h-80 flex flex-between justify-between items-center" ref={ref}>
+      <div className="hidden md:block z-100">
         <div className="flex">
-          <div className="relative mr-20 cursor-pointer" ref={ref}>
+          <div className="relative mr-20 cursor-pointer">
             <button onClick={() => showMenubar('category', !categoryShow)} className="cursor-pointer">
               <label className="mx-5 cursor-pointer font-bold">CATEGORIES</label> 
               { !categoryShow ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} /> }
@@ -123,25 +124,71 @@ export const Nav = () => {
           </div>
         </div>
       </div>
-      {/* <div
-        className={(toggleMenu ? 'block' : 'hidden') + " md:hidden"}
-        onClick={() => setToggleMenu(false)}
-      >
-        <div className="flex flex-col fixed top-20 left-20 bg-white p-20 border-2">
-          {
-            menuItems.map((menu: MenuuItemProp, index: number) => {
-              return (
-                <Link to={menu.url} key={index} className={menuStyle}>{menu.name}</Link>
+      
+      <div className="relative z-100">
+        <button className={"p-5 px-10 border md:hidden bg-white"} onClick={() => setToggleMenu(true)}><FontAwesomeIcon icon={faBars} /></button>
+        {toggleMenu && (
+          <div className="absolute w-200 top-65 -left-10 bg-white border-1">
+            <div className="relative mr-20 cursor-pointer p-10">
+              <button onClick={() => showMenubar('category', !categoryShow)} className="cursor-pointer text-center">
+                <label className="mx-5 cursor-pointer font-bold">CATEGORIES</label> 
+                { !categoryShow ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} /> }
+              </button>
+            </div>
+            
+            {categoryShow && (
+              menuFundTypes.map((typeName, index) => {
+                const fundType = allFundTypes[typeName];
+                return (
+                  <div key={index}>
+                    <button className="w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize flex justify-between items-center" onClick={() => {
+                      showMenubar('category', false);
+                    }}>
+                      <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/>
+                      <div className="text-center w-full">{fundType.title}</div>
+                    </button>
+                  </div>
+                )
+              }))
+            }
+            <div className="relative cursor-pointer p-10">
+              <button onClick={() => showMenubar('registry', !registryShow)} className="cursor-pointer text-center">
+                <label className="mx-5 cursor-pointer font-bold">REGISTER</label>
+                { !registryShow ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} /> }
+              </button>
+            </div>
+            {
+              registryShow && (
+                <>
+                  <div>
+                    <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
+                      showMenubar('registry', false);
+                      navigate('/registration/0');
+                    }}>Create Charity</button>
+                  </div>
+                  <div>
+                    <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
+                      showMenubar('registry', false);
+                      navigate('/registration/1');
+                    }}>Create Fundraiser</button>
+                  </div>
+                  {isOwner >= 3 && (<div>
+                      <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
+                        showMenubar('registry', false);
+                        navigate('/admins');
+                      }}>Admin users</button>
+                    </div>
+                  )}
+                </>
               )
-            })
-          }
-        </div>
-      </div>
-      <button className={"p-5 px-10 border md:hidden " + (!toggleMenu ? 'block' : 'hidden')} onClick={() => setToggleMenu(!toggleMenu)}><FontAwesomeIcon icon={faBars} /></button> */}
-      <div className="cursor-pointer" onClick={() => navigate('/')}>
-        <img src={logoImg} className="mt-30"/>
+            }
+          </div>)
+        }
       </div>
       <ConnectWalletButton />
+      <div className="absolute left-0 w-full h-full cursor-pointer flex sm:justify-center items-end mt-40 z-10" onClick={() => navigate('/')}>
+        <img src={logoImg} className="ml-20"/>
+      </div>
     </div>
   )
 }

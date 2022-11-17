@@ -8,7 +8,9 @@ import { charityProp } from "../core/interfaces/base";
 import { useWeb3Context } from "../hooks/web3Context";
 import { getContract } from "../core/constants/base";
 import { setLoading } from "../core/store/slices/bridgeSlice";
-
+import { baseStyles } from "../core/constants/style";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram, FaPhoneAlt, FaNetworkWired } from "react-icons/fa";
 export const CharitiesPage = () => {
   const dispatch = useDispatch();
   const charities = useSelector( (state:any) => state.app.charities);
@@ -30,6 +32,8 @@ export const CharitiesPage = () => {
       dispatch(setLoading(false));
     }
   };
+
+  const resumeStyle = 'm-5 hover:text-brown';
   return (
     <div>
       <div className="relative bg-gradient-to-r from-algae to-seagreen w-full h-200 flex items-end justify-between overflow-hidden">
@@ -41,27 +45,30 @@ export const CharitiesPage = () => {
             charities.map((charity:charityProp) => {
               return (
                 <Grid xs={12} sm={6} md={4} lg={3} item key={charity.index}>
-                  <div className="shadow-default p-10 rounded-10 h-full w-full">
-                    <div className="font-bold text-center">{charity.catalog.name}</div>
+                  <div className="shadow-default p-10 rounded-10 h-full w-full text-16">
+                    <img src={"https://ipfs.io/ipfs/" + charity.catalog.photo} className="w-full h-300"/>
+                    <div className="font-bold text-center text-20 my-10">{charity.catalog.name}</div>
                     <div><label className="font-bold">Registration ID</label> : {charity.catalog.vip}</div>
-                    <div><label className="font-bold">Website</label> : <a href={charity.catalog.website} target="_blank"> visit site</a></div>
-                    <div><label className="font-bold">Phone Number</label> : {charity.catalog.phone}</div>
-                    <div><label className="font-bold">Linkedin</label> : {charity.catalog.linkedin}</div>
-                    <div><label className="font-bold">Twitter</label> : {charity.catalog.twitter}</div>
-                    <div><label className="font-bold">Facebook</label> : {charity.catalog.facebook}</div>
-                    <div><label className="font-bold">Instagram</label> : {charity.catalog.instagram}</div>
-                    <div><label className="font-bold">Contact Email</label> : {charity.catalog.email}</div>
                     <div className="flex h-60 overflow-hidden">
                       <div className="font-bold">Summary:</div>
                       <div>{charity.catalog.summary}</div>
                     </div>
+                    <div className="text-24 flex text-asphalt cursor-pointer my-10">
+                      <FaNetworkWired className={resumeStyle}/>
+                      <FaPhoneAlt className={resumeStyle}/>
+                      <FaLinkedin className={resumeStyle}/>
+                      <FaTwitter className={resumeStyle}/>
+                      <FaFacebook className={resumeStyle}/>
+                      <FaInstagram className={resumeStyle}/>
+                      <FaGoogle className={resumeStyle}/>
+                    </div>
                     <div><label className="font-bold">Country</label> : {charity.catalog.country}</div>
                     <div><label className="font-bold">Fund</label> : {Web3.utils.fromWei(charity.fund)}</div>
                     <div className="my-10">
-                      <Link to={`/donate/${charity.index}`} className={style.btn}>Donate</Link>
-                      {isOwner > 2 &&
-                        (<button className={style.btn} onClick={() => blockCharity(charity.index)}>Block This</button>)
-                      }
+                      <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn + ' mr-10'}>Donate</Link>
+                      {/* {isOwner > 2 && (*/}
+                        <button className={baseStyles.normalBtn} onClick={() => blockCharity(charity.index)}>Block This</button>
+                      {/* )} */}
                     </div>
                   </div>
                 </Grid>
