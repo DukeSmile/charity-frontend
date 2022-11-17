@@ -10,7 +10,7 @@ import { getContract } from "../core/constants/base";
 import { setLoading } from "../core/store/slices/bridgeSlice";
 import { baseStyles } from "../core/constants/style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram, FaPhoneAlt, FaNetworkWired } from "react-icons/fa";
+import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram, FaPhoneAlt, FaNetworkWired, FaFlag, FaBook, FaRegistered } from "react-icons/fa";
 export const CharitiesPage = () => {
   const dispatch = useDispatch();
   const charities = useSelector( (state:any) => state.app.charities);
@@ -48,11 +48,13 @@ export const CharitiesPage = () => {
                   <div className="shadow-default p-10 rounded-10 h-full w-full text-16">
                     <img src={"https://ipfs.io/ipfs/" + charity.catalog.photo} className="w-full h-300"/>
                     <div className="font-bold text-center text-20 my-10">{charity.catalog.name}</div>
-                    <div><label className="font-bold">Registration ID</label> : {charity.catalog.vip}</div>
-                    <div className="flex h-60 overflow-hidden">
-                      <div className="font-bold">Summary:</div>
+                    <div className="flex text-20 items-center capitalize"><FaRegistered className="mx-5" />{charity.catalog.vip}</div>
+                    <div className="flex text-20 items-center"><FaGoogle className="mx-5"/>{charity.catalog.email}</div>
+                    <div className="flex h-80 overflow-hidden text-20 items-start">
+                      <FaBook className="m-5"/>
                       <div>{charity.catalog.summary}</div>
                     </div>
+                    <div className="flex text-20 items-center capitalize"><FaFlag className="mx-5"/>{charity.catalog.country}</div>
                     <div className="text-24 flex text-asphalt cursor-pointer my-10">
                       <FaNetworkWired className={resumeStyle}/>
                       <FaPhoneAlt className={resumeStyle}/>
@@ -60,10 +62,7 @@ export const CharitiesPage = () => {
                       <FaTwitter className={resumeStyle}/>
                       <FaFacebook className={resumeStyle}/>
                       <FaInstagram className={resumeStyle}/>
-                      <FaGoogle className={resumeStyle}/>
                     </div>
-                    <div><label className="font-bold">Country</label> : {charity.catalog.country}</div>
-                    <div><label className="font-bold">Fund</label> : {Web3.utils.fromWei(charity.fund)}</div>
                     <div className="my-10">
                       <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn + ' mr-10'}>Donate</Link>
                       {/* {isOwner > 2 && (*/}
