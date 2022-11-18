@@ -9,24 +9,26 @@ import { baseStyles } from "../../core/constants/style";
 import { charityProp } from "../../core/interfaces/base";
 
 export const FeaturedCategories = () => {
-  
+
   const navigate = useNavigate();
+  const allCategories = useSelector((state:any) => state.app.categories);
+
   return (
     <div className="w-[95%] md:w-[80%] mx-auto my-100 lg:py-0">
-      <p className="text-center text-38 font-bold">Featured Categories</p>
+      <p className="text-center text-38 font-bold">Categories</p>
       <div className="my-40">
         <Grid container spacing={1}>
           {
-            Object.keys(allFundTypes).map((key, index:number) => {
-              const fundType = allFundTypes[key];
+            Object.keys(allCategories).map((key, index:number) => {
+              const category = allCategories[key];
               return (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={index} >
                   <div className="shadow-default mx-10 p-10 hover:bg-iron rounded-10 cursor-pointer flex items-center"
-                    onClick={() => navigate('/all')}>
-                    <img src={baseIcons[fundType.img]} />
+                    onClick={() => navigate('/all/'+key)}>
+                    <img src={baseIcons[category.img]} className="w-60 h-60"/>
                     <div className="text-20 capitalize ml-20">
-                      <p>{fundType.title}</p>
-                      <p>{fundType.type}</p>
+                      <p>{category.title}</p>
+                      <p>{category.count}</p>
                     </div>
                   </div>
                 </Grid>

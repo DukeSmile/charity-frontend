@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FooterTab } from '../components/footer';
 import LoadingBar from '../components/loadingBar';
 import { Nav } from '../components/Nav';
-import { getContract, roleList } from '../core/constants/base';
+import { allFundTypes, getContract, roleList } from '../core/constants/base';
 import { adminUserProp, charityProp } from '../core/interfaces/base';
-import { setAdminUsers, setAllCharities, setCharities, setFundRaisers, setOwnerFlag } from '../core/store/slices/bridgeSlice';
+import { setAdminUsers, setAllCharities, setCategories, setCharities, setFundRaisers, setOwnerFlag } from '../core/store/slices/bridgeSlice';
 import { useWeb3Context } from '../hooks/web3Context';
 import { FromNetwork } from '../networks';
 
@@ -14,7 +14,8 @@ export const Layout = ({children}: any) => {
   const {address, switchEthereumChain} = useWeb3Context();
   const [count, setCount] = useState(0);
   const loading = useSelector((state:any) => state.app.loading);
-  
+  const initialCategories = allFundTypes;
+
   const getDDAInfo = async() => {
     const ddaContract = getContract('DDAContract');
     //get charities information from contract
@@ -23,39 +24,43 @@ export const Layout = ({children}: any) => {
     let charities:charityProp[] = [],
       fundRaisers:charityProp[] = [],
       allCharities:charityProp[] = [];
-      charitiesFromContract.forEach((charity: any, index:number) => {
-        const newOne:charityProp = {
-            index: index,
-            charityType: parseInt(charity.charityType),
-            fund: charity.fund,
-            fundType: charity.donateType,
-            address: charity.walletAddress,
-            catalog: charity.catalog
-        };
-        if (newOne.charityType === 1) {
-            fundRaisers.push(newOne);
-        }
-        else {
-            charities.push(newOne);
-        }
-        allCharities.push(newOne);
-      })
-      dispatch(setFundRaisers(fundRaisers));
-      dispatch(setCharities(charities));
-      dispatch(setAllCharities(allCharities));
-      // get AdminUsers from contract
-      const adminsFromContract = await ddaContract.methods.getAdminUsers().call();
-      let admins:adminUserProp[] = [];
-      adminsFromContract.forEach((admin: any, index:number) => {
-        const newOne:adminUserProp = {
-            index: index,
-            name: admin.name,
-            address: admin.walletAddress
-        };
-        admins.push(newOne);
-      })
-      dispatch(setAdminUsers(admins));
-      setCount(count+1);
+    charitiesFromContract.forEach((charity: any, index:number) => {
+      const newOne:charityProp = {
+          index: index,
+          charityType: parseInt(charity.charityType),
+          fund: charity.fund,
+          fundType: charity.donateType,
+          address: charity.walletAddress,
+          catalog: charity.catalog
+      };
+      if (initialCategories[charity.donateType] != undefined) {
+        initialCategories[charity.donateType].count += 1;
+      }
+      if (newOne.charityType === 1) {
+          fundRaisers.push(newOne);
+      }
+      else {
+          charities.push(newOne);
+      }
+      allCharities.push(newOne);
+    })
+    dispatch(setFundRaisers(fundRaisers));
+    dispatch(setCharities(charities));
+    dispatch(setAllCharities(allCharities));
+    // get AdminUsers from contract
+    const adminsFromContract = await ddaContract.methods.getAdminUsers().call();
+    let admins:adminUserProp[] = [];
+    adminsFromContract.forEach((admin: any, index:number) => {
+      const newOne:adminUserProp = {
+          index: index,
+          name: admin.name,
+          address: admin.walletAddress
+      };
+      admins.push(newOne);
+    })
+    dispatch(setAdminUsers(admins));
+    dispatch(setCategories(initialCategories));
+    setCount(count+1);
   }
   useEffect(() => {
     const checkFromNetwork = async () => {

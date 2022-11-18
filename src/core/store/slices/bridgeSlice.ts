@@ -6,6 +6,7 @@ const initialState = {
   fundRaisers: [],
   allCharities: [],
   adminUsers: [],
+  categories: {},
   isOwner: 0,
   loading: false,
   uploadUrl: '',
@@ -49,6 +50,9 @@ export const bridgeSlice = createSlice({
     setIPFS: (state, {payload}) => {
       state.ipfs = payload;
     },
+    setCategories: (state, {payload}) => {
+      state.categories = payload;
+    },
   }
 });
 
@@ -62,6 +66,7 @@ export const {
   setUploadUrl,
   setCaseDonateHistory,
   setDonateHistory,
-  setIPFS
+  setIPFS,
+  setCategories
 } = bridgeSlice.actions;
 export default bridgeSlice.reducer;

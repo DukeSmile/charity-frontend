@@ -39,78 +39,90 @@ export const raiserFundTypes: string [] = [
     'family', 'personal', 'education', 'volunteer'
 ];
 
-export const allFundTypes: {[key:string]: fundTypeProp} = {
+export let allFundTypes: {[key:string]: fundTypeProp} = {
     health: {
         title: 'health',
         img: 'health',
         type: 'charities',
-        detail: ''
+        detail: '',
+        count:0
     },
     education: {
         title: 'education',
         img: 'education',
         type: 'charities',
-        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
+        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.',
+        count:0
     },
     environmental: {
         title: 'environmental',
         img: 'environmental',
         type: 'charities',
-        detail: ''
+        detail: '',
+        count: 0
     },
     animal: {
         title: 'animal',
         img: 'animal',
         type: 'charities',
         detail: '',
+        count: 0
     },
     volunteer: {
         title: 'volunteer',
         img: 'volunteer',
         type: 'charities',
-        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
+        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.',
+        count: 0
     },
     personal: {
         title: 'personal',
         img: 'personal',
         type: 'charities',
-        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
+        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.',
+        count: 0
     },
     family: {
         title: 'family and friend',
         img: 'family',
         type: 'fundraisers',
-        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.'
+        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.',
+        count: 0
     },
     medical: {
         title: 'medical',
         img: 'medical',
         type: 'charities',
-        detail: ''
+        detail: '',
+        count: 0
     },
     emergency: {
         title: 'emergency',
         img: 'emergency',
         type: 'charities',
-        detail: ''
+        detail: '',
+        count: 0
     },
     memorial: {
         title: 'memorial',
         img: 'memorial',
         type: 'charities',
-        detail: ''
+        detail: '',
+        count: 0
     },
     nonprofit: {
         title: 'non-profit',
         img: 'nonprofit',
         type: 'charities',
-        detail: ''
+        detail: '',
+        count: 0
     },
     relief: {
         title: 'crisis relief',
         img: 'relief',
         type: 'charities',
-        detail: ''
+        detail: '',
+        count: 0
     }
 };
 

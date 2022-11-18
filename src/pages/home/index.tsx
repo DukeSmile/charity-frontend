@@ -115,7 +115,7 @@ export const HomePage = () => {
             <button className={baseStyles.normalBtn + ' text-green hover:bg-green mr-30'} onClick={() => navigate('/all/animal')}>
                 Donate Now <FontAwesomeIcon icon={faArrowRight} />
             </button>
-            <Link to="/registration/0" className={baseStyles.normalBtn + ' text-green hover:bg-green'}>
+            <Link to="/registration/charity" className={baseStyles.normalBtn + ' text-green hover:bg-green'}>
                 Register with Okapi <FontAwesomeIcon icon={faArrowRight} />
             </Link>
           </div>

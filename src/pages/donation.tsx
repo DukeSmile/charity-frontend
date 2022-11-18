@@ -144,6 +144,8 @@ export const DonationPage = () => {
   }
 
   const getLast20History = async () => {
+    if(targetCharity.address === '')
+      return;
     setAllHLoading(true);
     let ddaContract = getContract('DDAContract');
     const lastBlock = await connectWeb3.eth.getBlockNumber();
@@ -154,9 +156,9 @@ export const DonationPage = () => {
         //get all events related with selected charity
         if (totalEvents.length < maximumAllDoantion) {
           const allEvents = await ddaContract.getPastEvents('Donate', {
-            // 'filter': {
-            //   '_from': address.toLowerCase()
-            // },
+            'filter': {
+              '_to': targetCharity ? targetCharity.address.toLowerCase() : ''
+            },
             'fromBlock': i - blockCountIteration + 1,
             'toBlock': i,
           });
@@ -296,6 +298,9 @@ export const DonationPage = () => {
                 </div>
                 <div>
                   <DonationHistoryCase loading={caseHLoading} />
+                </div>
+                <div>
+                  <DonationHistoryAll loading={allHLoading} />
                 </div>
               </div>
             </Grid>

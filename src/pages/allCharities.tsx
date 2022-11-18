@@ -14,7 +14,6 @@ import { baseStyles } from "../core/constants/style";
 export const AllCharitiesPage = () => {
 
   let { category } = useParams();
-  console.log(category);
   const dispatch = useDispatch();
   let charities = useSelector((state: any) => state.app.charities);
   let fundRaisers = useSelector((state: any) => state.app.fundRaisers);

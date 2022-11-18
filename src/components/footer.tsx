@@ -1,16 +1,19 @@
 import { Grid } from "@material-ui/core"
+import { useNavigate } from "react-router-dom";
 import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export const FooterTab = () => {
+
+  const navigate = useNavigate();
   const resumeStyle = 'm-5 hover:text-white';
-  const menuStyle = 'text-gunsmoke text-16 my-5 hover:text-white cursor-pointer';
+  const menuStyle = 'text-gunsmoke text-16 my-5 hover:text-white cursor-pointer capitalize';
   const subMenus1 = [
-    'Medical',
-    'Emergency',
-    'Memorial',
-    'Education',
-    'Nonprofit',
-    'Crisis Relief'
+    'medical',
+    'emergency',
+    'memorial',
+    'education',
+    'nonprofit',
+    'crisis relief'
   ];
   const subMenus2 = [
     'How GoFundMe Works',
@@ -49,7 +52,7 @@ export const FooterTab = () => {
             {
               subMenus1.map((menu, index) => {
                 return (
-                  <p key={index} className={menuStyle}>
+                  <p key={index} className={menuStyle} onClick={() => navigate('/all/'+menu)}>
                     {menu}
                   </p>
                 )

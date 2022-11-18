@@ -55,4 +55,5 @@ export interface fundTypeProp {
     img: string;
     detail: string;
     type: string;
+    count: number;
 }

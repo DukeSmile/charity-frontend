@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import { ConnectWalletButton } from './ConnectWalletButton';
 import logoImg from '../../assets/images/logo-white.png';
-import { allFundTypes, menuFundTypes } from "../../core/constants/base";
 import { fundTypeProp } from "../../core/interfaces/base";
 import { baseIcons } from "../../core/constants/icons";
 
@@ -31,11 +30,16 @@ export const Nav = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const ref = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+  const allCategories = useSelector((state:any) => state.app.categories);
+  const allCharities = useSelector((state:any) => state.app.charities);
+  const allFundraisers = useSelector((state:any) => state.app.fundRaisers);
   const [toggleMenu, setToggleMenu] = useState(false);
   const [categoryShow, setCategoryShow] = useState(false);
   const [registryShow, setRegistryShow] = useState(false);
+
   const linkStyle = 'mx-10 uppercase text-16 text-black p-10 hover:text-brown hover:bg-limedSqruce';
-  const menuStyle = 'mx-10 border-y-1 p-10 px-20 text-24';
+  const menuStyle = 'w-full border-t-1 border-b-1 p-5 py-10 hover:bg-iron capitalize flex justify-between items-center';
+
   const handleDrawerToggle = () => {
     setToggleMenu(!toggleMenu);
   };
@@ -79,21 +83,37 @@ export const Nav = () => {
             </button>
             <div className={'w-200 absolute bg-white border-1 ' + (categoryShow ? '' : 'hidden')}>
               {
-                Object.keys(allFundTypes).map((typeName, index) => {
-                  const fundType = allFundTypes[typeName];
+                Object.keys(allCategories).map((typeName, index) => {
+                  const fundType = allCategories[typeName];
                   return (
                     <div key={index}>
-                      <button className="w-full border-t-1 border-b-1 p-5 py-10 hover:bg-iron capitalize flex justify-between items-center" onClick={() => {
+                      <button className={menuStyle} onClick={() => {
                         showMenubar('category', false);
                         navigate('/all/'+typeName);
                       }}>
                         {/* <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/> */}
-                        <div className="text-center w-full">{fundType.title}</div>
+                        <div className="text-center w-full">{fundType.title} ({fundType.count})</div>
                       </button>
                     </div>
                   )
                 })
               }
+              <div>
+                <button className={menuStyle} key="charities" onClick={() => {
+                  showMenubar('category', false);
+                  navigate('/charities');
+                }}>
+                  <div className="text-center w-full">All Charities ({allCharities.length})</div>
+                </button>
+              </div>
+              <div>
+                <button className={menuStyle} key="fundraisers" onClick={() => {
+                  showMenubar('category', false);
+                  navigate('/fundraisers');
+                }}>
+                  <div className="text-center w-full">All FundRaisers ({allFundraisers.length})</div>
+                </button>
+              </div>
             </div>
           </div>
           <div className="relative cursor-pointer">
@@ -138,20 +158,40 @@ export const Nav = () => {
             </div>
             
             {categoryShow && (
-              Object.keys(allFundTypes).map((typeName, index) => {
-                const fundType = allFundTypes[typeName];
-                return (
-                  <div key={index}>
-                    <button className="w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize flex justify-between items-center" onClick={() => {
-                      showMenubar('category', false);
-                      navigate('/all/'+typeName);
-                    }}>
-                      <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/>
-                      <div className="text-center w-full">{fundType.title}</div>
-                    </button>
-                  </div>
-                )
-              }))
+            <>
+              {
+                Object.keys(allCategories).map((typeName, index) => {
+                  const fundType = allCategories[typeName];
+                  return (
+                    <div key={index}>
+                      <button className={menuStyle} onClick={() => {
+                        showMenubar('category', false);
+                        navigate('/all/'+typeName);
+                      }}>
+                        {/* <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/> */}
+                        <div className="text-center w-full">{fundType.title} ({fundType.count})</div>
+                      </button>
+                    </div>
+                  )
+                })
+              }
+              <div>
+                <button className={menuStyle} key="charities" onClick={() => {
+                  showMenubar('category', false);
+                  navigate('/charities');
+                }}>
+                  <div className="text-center w-full">All Charities ({allCharities.length})</div>
+                </button>
+              </div>
+              <div>
+                <button className={menuStyle} key="fundraisers" onClick={() => {
+                  showMenubar('category', false);
+                  navigate('/fundraisers');
+                }}>
+                  <div className="text-center w-full">All FundRaisers ({allFundraisers.length})</div>
+                </button>
+              </div>
+            </>)
             }
             <div className="relative cursor-pointer p-10">
               <button onClick={() => showMenubar('registry', !registryShow)} className="cursor-pointer text-center">
