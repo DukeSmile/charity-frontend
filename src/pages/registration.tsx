@@ -1,4 +1,4 @@
-import { Grid, TextareaAutosize, TextField } from "@material-ui/core";
+import { Grid, TextareaAutosize, TextField, NativeSelect, MenuItem } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import { useWeb3Context } from "../hooks/web3Context";
-import { getContract, projectId, projectSecret } from "../core/constants/base";
+import { allFundTypes, getContract, projectId, projectSecret } from "../core/constants/base";
 import { setLoading } from "../core/store/slices/bridgeSlice";
 import { PhotoUpload } from "../components/photoUpload";
 
@@ -92,6 +92,7 @@ export const RegistrationPage = () => {
       type: ''
     },
     onSubmit:async (values:any) => {
+      console.log(values);
       if(!connected){
         return;
       }
@@ -118,7 +119,6 @@ export const RegistrationPage = () => {
       }
       // signup charity
       if (address !== '') {
-        console.log(values);
         dispatch(setLoading(true));
         try{
           let uploadUrl = '';
@@ -145,7 +145,6 @@ export const RegistrationPage = () => {
             title: values.title,
             location: values.location
           }
-          console.log(_catalog);
           const numOfCharityType = charityType === 'charity' ? 0 : 1;
           await ddaContract.methods.createCharity(numOfCharityType, values.type, charityType === 'charity' ? 1 : values.goal, _catalog).send({from: address});
           navigate('/celebrate');
@@ -488,19 +487,23 @@ export const RegistrationPage = () => {
               }
               <Grid item sm={12}>
                 <p className={style.label}>Fundraiser type:</p>
-                <TextField
-                  fullWidth
+                <select
                   id="type"
                   name="type"
-                  type="type"
                   value={formik.values.type}
                   onChange={formik.handleChange}
-                  error={formik.touched.type && Boolean(formik.errors.type)}
-                  inputProps={{style:{ backgroundColor: '#E6EAF0'}}}
-                  autoComplete='off'
-                  variant="outlined"
-                  placeholder="Enter your fundraising type"
-                />
+                  className="w-full h-55 border-1 p-5 pl-10 capitalize bg-[#E6EAF0]"
+                >
+                  <option aria-label="None" value="" >Default</option>
+                  {
+                    Object.keys(allFundTypes).map((typeName, index) => {
+                      const fundType = allFundTypes[typeName];
+                      return (
+                        <option key={fundType.title} className="capitalize">{fundType.title}</option>
+                      )
+                    })
+                  }
+                </select>
               </Grid>
               <Grid item sm={12}>
                 <p className={style.label}>Detailed summary of {charityType}(1000 characters max)</p>

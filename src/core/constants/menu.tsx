@@ -47,7 +47,7 @@ export const routeItems: RouteItemProp[] = [
         element: <AboutPage />
     },
     {
-        url: '/all',
+        url: '/all/:category',
         owner: 0,
         element: <AllCharitiesPage />
     },

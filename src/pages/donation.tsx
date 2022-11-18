@@ -33,6 +33,7 @@ export const DonationPage = () => {
   const [donateComment, setDonatecomment] = useState('');
   const [allHLoading, setAllHLoading] = useState(false);
   const [caseHLoading, setCaseHLoading] = useState(false);
+  const [approveFlag, setApproveFlag] = useState(false);
   const charities: charityProp[] = useSelector((state: any) => state.app.allCharities);
   const ownerFlag = useSelector((state:any) => state.app.isOwner);
   let targetIndex: number = index === undefined ? -1 : parseInt(index);
@@ -59,6 +60,87 @@ export const DonationPage = () => {
 
   const style = {
     btn: 'border-1 py-5 px-10 text-black hover:text-white bg-artySkyBlue rounded-10'
+  }
+
+  const approve = async () => {
+    if (connected && address !== '') {
+      if (ownerFlag == 1) {
+        alert("This address is in black list");
+        return;
+      }
+      let currencyContract = getTokenContract(currency);
+      const ddaAddress = networks[FromNetwork].addresses['DDAContract'];
+      const weiOfAmount = Web3.utils.toWei('1000000000000');
+      dispatch(setLoading(true));
+      try {
+        await currencyContract.methods.approve(ddaAddress, weiOfAmount).send({ from: address });
+      }
+      catch (e) {
+        console.log(e);
+        dispatch(setLoading(false));
+        return;
+      }
+      setApproveFlag(true);
+      dispatch(setLoading(false));
+    }
+    else
+      alert('connect wallet');
+  };
+
+  const donate = async () => {
+    if (connected && address !== '') {
+      if (ownerFlag == 1) {
+        alert("This address is in black list");
+        return;
+      }
+      if (amount <= 0) {
+        alert("Amount can not be zero");
+        return;
+      }
+      const currencyAddress = tokenList[currency].address[FromNetwork];
+      const weiOfAmount = Web3.utils.toWei(amount.toString());
+      let ddaContract = getContract('DDAContract');
+      const fundRaiserAddr = await ddaContract.methods.charities(targetIndex).call();
+      if (fundRaiserAddr.walletAddress === address) {
+        alert('You can not donate to yourself');
+        return;
+      }
+      dispatch(setLoading(true));
+      try {
+        if(currencyAddress === ethTokenAddr){
+          await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount, donateComment).send({ from: address, value: weiOfAmount });
+        }
+        else {
+          await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount, donateComment).send({ from: address });
+        }
+      }
+      catch (e) {
+        console.log(e);
+        dispatch(setLoading(false));
+        return;
+      }
+      dispatch(setLoading(false));
+      getLast20History();
+      getCaseHistory();
+      getCurrentAmount();
+      setDonatecomment('');
+      setAmount(0);
+    }
+    else
+      alert('connect wallet');
+  };
+
+  const getApproveStatus = async () => {
+    setApproveFlag(true);
+    if (connected && address !== '') {
+      let currencyContract = getTokenContract(currency);
+      const ddaAddress = networks[FromNetwork].addresses['DDAContract'];
+      const allowance = await currencyContract.methods.allowance(address, ddaAddress).call();
+      const ethAmount = Web3.utils.fromWei(allowance);
+      if (parseFloat(ethAmount) < amount) {
+        setApproveFlag(false);
+      }
+    }
   }
 
   const getLast20History = async () => {
@@ -140,60 +222,6 @@ export const DonationPage = () => {
     setCaseHLoading(false);
   };
 
-  const donate = async () => {
-    if (amount <= 0) {
-      alert("Amount can not be zero");
-      return;
-    }
-    if (connected && address !== '') {
-      if (ownerFlag == 1) {
-        alert("This address is in black list");
-        return;
-      }
-      let currencyContract = getTokenContract(currency);
-      // console.log(Web3.utils.toWei(amount.toString()), currency);
-      const ddaAddress = networks[FromNetwork].addresses['DDAContract'];
-      const currencyAddress = tokenList[currency].address[FromNetwork];
-      const weiOfAmount = Web3.utils.toWei(amount.toString());
-      let ddaContract = getContract('DDAContract');
-      const fundRaiserAddr = await ddaContract.methods.charities(targetIndex).call();
-      if (fundRaiserAddr.walletAddress === address) {
-        alert('You can not donate to yourself');
-        return;
-      }
-      dispatch(setLoading(true));
-      try {
-        if(currencyAddress === ethTokenAddr){
-          await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount).send({ from: address, value: weiOfAmount });
-        }
-        else {
-          try {
-            await currencyContract.methods.approve(ddaAddress, weiOfAmount).send({ from: address });
-          }
-          catch (e) {
-            console.log(e);
-            dispatch(setLoading(false));
-            return;
-          }
-          await ddaContract.methods.donate(targetIndex, currencyAddress, weiOfAmount, donateComment).send({ from: address });
-        }
-      }
-      catch (e) {
-        console.log(e);
-        dispatch(setLoading(false));
-        return;
-      }
-      dispatch(setLoading(false));
-      getLast20History();
-      getCaseHistory();
-      getCurrentAmount();
-      setDonatecomment('');
-      setAmount(0);
-    }
-    else
-      alert('connect wallet');
-  };
-
   const getCurrentAmount = async () => {
     if ( !connected || address === '')
       return;
@@ -214,12 +242,13 @@ export const DonationPage = () => {
   useEffect(() => {
     getLast20History();
     getCaseHistory();
-    getCurrentAmount();
+    setAmount(0);
   }, [address]);
 
   useEffect(() => {
     getCurrentAmount();
-  }, [currency]);
+    getApproveStatus();
+  }, [currency, address, amount]);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -326,9 +355,16 @@ export const DonationPage = () => {
 
                 </textarea>
               </div>
-              <button className={baseStyles.greenBtn + ' w-full'} onClick={() => donate()}>
-                Donate <FontAwesomeIcon icon={faArrowRight} />
-              </button>
+              {!approveFlag && (
+                <button className={baseStyles.greenBtn + ' w-full'} onClick={() => approve()}>
+                  Approve Now <FontAwesomeIcon icon={faArrowRight} />
+                </button>
+              )}
+              {approveFlag && (
+                <button className={baseStyles.greenBtn + ' w-full'} onClick={() => donate()}>
+                  Donate Now <FontAwesomeIcon icon={faArrowRight} />
+                </button>
+              )}
             </Grid>
             {/* <Grid item lg={4} md={5} sm={12}>
               <div className="border-1 shadow-default p-10">

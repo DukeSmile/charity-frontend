@@ -19,6 +19,7 @@ export const Layout = ({children}: any) => {
     const ddaContract = getContract('DDAContract');
     //get charities information from contract
     const charitiesFromContract = await ddaContract.methods.getCharities().call();
+    // console.log(charitiesFromContract);
     let charities:charityProp[] = [],
       fundRaisers:charityProp[] = [],
       allCharities:charityProp[] = [];
@@ -27,6 +28,7 @@ export const Layout = ({children}: any) => {
             index: index,
             charityType: parseInt(charity.charityType),
             fund: charity.fund,
+            fundType: charity.donateType,
             address: charity.walletAddress,
             catalog: charity.catalog
         };
@@ -41,7 +43,6 @@ export const Layout = ({children}: any) => {
       dispatch(setFundRaisers(fundRaisers));
       dispatch(setCharities(charities));
       dispatch(setAllCharities(allCharities));
-    
       // get AdminUsers from contract
       const adminsFromContract = await ddaContract.methods.getAdminUsers().call();
       let admins:adminUserProp[] = [];

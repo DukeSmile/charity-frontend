@@ -14,6 +14,7 @@ export interface charityProp {
     index: number;
     charityType: number | '0' | '1';
     fund: string;
+    fundType: string;
     address: string;
     catalog: any
 }

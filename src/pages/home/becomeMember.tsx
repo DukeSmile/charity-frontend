@@ -15,7 +15,7 @@ export const BecomeMemberPage = () => {
             <p className="text-center text-48 font-bold text-white">Your monthly gifts save lives</p>
             <p className="text-center text-16 text-white p-20">Thanks to the help of our generous supporters, ACE has been working to improve animal welfare for the last decade—influencing millions of donations, conducting rigorous charity evaluations, and funding new.</p>
             <div className="flex justify-center mt-20">
-                <button className={baseStyles.normalBtn + ' text-white hover:bg-white mr-30'} onClick={() => navigate('/all')}>
+                <button className={baseStyles.normalBtn + ' text-white hover:bg-white mr-30'} onClick={() => navigate('/all/all')}>
                     Donate Now <FontAwesomeIcon icon={faArrowRight} />
                 </button>
                 <Link to="/registration/0" className={baseStyles.normalBtn + ' text-white hover:bg-white'}>

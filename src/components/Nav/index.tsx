@@ -85,7 +85,7 @@ export const Nav = () => {
                     <div key={index}>
                       <button className="w-full border-t-1 border-b-1 p-5 py-10 hover:bg-iron capitalize flex justify-between items-center" onClick={() => {
                         showMenubar('category', false);
-                        navigate('/all');
+                        navigate('/all/'+typeName);
                       }}>
                         {/* <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/> */}
                         <div className="text-center w-full">{fundType.title}</div>
@@ -144,7 +144,7 @@ export const Nav = () => {
                   <div key={index}>
                     <button className="w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize flex justify-between items-center" onClick={() => {
                       showMenubar('category', false);
-                      navigate('/all');
+                      navigate('/all/'+typeName);
                     }}>
                       <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/>
                       <div className="text-center w-full">{fundType.title}</div>

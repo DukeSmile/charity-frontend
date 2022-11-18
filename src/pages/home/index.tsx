@@ -86,7 +86,7 @@ export const HomePage = () => {
           <p className="capitalize text-70 text-white font-bold">every donation makes a difference</p>
           <p className="text-20 text-white">Nullam eu nibh vitae est tempor molestie id sed ex. Quisque dignissim maximus ipsum, sed rutrum metus tincidunt et. Sed eget tincidunt ipsum.</p>
           <div className="flex justify-center mt-40">
-            <button className={baseStyles.greenBtn + ' mr-30'} onClick={() => navigate('/all')}>
+            <button className={baseStyles.greenBtn + ' mr-30'} onClick={() => navigate('/all/all')}>
               Donate Now <FontAwesomeIcon icon={faArrowRight} />
             </button>
             <button className="flex items-center text-white hover:text-brown" onClick={() => navigate('/about')}>
@@ -112,7 +112,7 @@ export const HomePage = () => {
           <p className="text-40 font-bold">Ready to get started? Raise Your Helping Hand For Animals</p>
           <p className="text-16 my-15">Thanks to the help of our generous supporters, ACE has been working to improve animal welfare for the last decade—influencing millions of donations, conducting rigorous charity evaluations, and funding new.</p>
           <div className="flex mt-40">
-            <button className={baseStyles.normalBtn + ' text-green hover:bg-green mr-30'} onClick={() => navigate('/all')}>
+            <button className={baseStyles.normalBtn + ' text-green hover:bg-green mr-30'} onClick={() => navigate('/all/animal')}>
                 Donate Now <FontAwesomeIcon icon={faArrowRight} />
             </button>
             <Link to="/registration/0" className={baseStyles.normalBtn + ' text-green hover:bg-green'}>

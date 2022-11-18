@@ -17,13 +17,13 @@ export const CurrencySelect = (props: any) => {
     <div>
       <p className="text-20 font-medium">Enter your donation</p>
       <div className="flex items-center">
-        <NumericFormat 
+        {/* <NumericFormat 
           value={props.amount} 
           thousandSeparator=","
           className="w-full p-7 border-1 -mr-25"
           onChange={props.updateAmount}
-        />
-        {/* <TextField id="outlined-basic" 
+        /> */}
+        <TextField id="outlined-basic" 
             variant="outlined" 
             size="small" 
             type="number" 
@@ -31,7 +31,7 @@ export const CurrencySelect = (props: any) => {
             value={props.amount}
             onChange={props.updateAmount}
             autoComplete='off'
-        /> */}
+        />
         <Select onChange={props.onChange} id="bsc-season" className="p-0 text-black" value={props.currency} MenuProps={selectMenuProps} disableUnderline>
           {
             tokenList.map((token, index:number) => {
