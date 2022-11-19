@@ -86,22 +86,20 @@ export const FeaturedCharities = () => {
   );
 }
 
-export const LastFundRaisers = () => {
+export const FeaturedFundRaisers = () => {
   const donateTypes = ['health','education','environmental','animal'];
+  const navigate = useNavigate();
   const allCharities = useSelector((state:any) => state.app.allCharities);
   const fundRaisers = allCharities.slice(allCharities.length-3, allCharities.length);
   return (
     <div className="w-[95%] md:w-[80%] mx-auto py-100">
       <div className="text-38 font-bold flex justify-between">
-        <label>Last News</label>
-        <div>
-          <button className={baseStyles.normalBtn + ' hover:bg-green mr-20'}>
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </button>
-          <button className={baseStyles.normalBtn + ' hover:bg-green mr-20'}>
-            <FontAwesomeIcon icon={faArrowRight} />
-          </button>
-        </div>
+        <label>Featured FundRaisers</label>
+        <button className="px-20 py-15 text-16 text-white bg-green border-1 border-black rounded-full hover:text-brown mr-30"
+          onClick={() => navigate('/charities')}  
+        >
+          All FundRaisers <FontAwesomeIcon icon={faArrowRight} />
+        </button>
       </div>
       <div className="my-40">
         <Grid container spacing={1}>

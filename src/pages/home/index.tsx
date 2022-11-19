@@ -10,7 +10,7 @@ import { adminUserProp } from "../../core/interfaces/base";
 import { useWeb3Context } from "../../hooks/web3Context";
 import { getContract, roleList } from "../../core/constants/base";
 import { setLoading } from "../../core/store/slices/bridgeSlice";
-import { FeaturedCategories, FeaturedCharities, LastFundRaisers } from "./featuredCharities";
+import { FeaturedCategories, FeaturedCharities, FeaturedFundRaisers } from "./featuredCharities";
 import { FundRaiseForPage } from "./fundraiseFor";
 import bgImg from "../../assets/images/home.png";
 import { BecomeMemberPage } from "./becomeMember";
@@ -105,7 +105,7 @@ export const HomePage = () => {
         <FeaturedCharities />
         <FundRaiseForPage />
         <BecomeMemberPage />
-        <LastFundRaisers />
+        <FeaturedFundRaisers />
       </div>
       <div className="w-[95%] md:w-[80%] mx-auto p-20 px-40 flex justify-between items-center rounded-40 bg-alabaster">
         <div className="z-100 w-[90%] sm:w-[70%] md:max-w-[50%]">
