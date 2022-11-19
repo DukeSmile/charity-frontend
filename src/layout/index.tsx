@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FooterTab } from '../components/footer';
 import LoadingBar from '../components/loadingBar';
@@ -13,8 +13,11 @@ export const Layout = ({children}: any) => {
   const dispatch = useDispatch();
   const {address, switchEthereumChain} = useWeb3Context();
   const [count, setCount] = useState(0);
+  const [footerHeight, setFooterHeight] = useState(0);
   const loading = useSelector((state:any) => state.app.loading);
-  const initialCategories = allFundTypes;
+
+  useEffect(() => {
+  });
 
   const getDDAInfo = async() => {
     const ddaContract = getContract('DDAContract');
@@ -24,17 +27,21 @@ export const Layout = ({children}: any) => {
     let charities:charityProp[] = [],
       fundRaisers:charityProp[] = [],
       allCharities:charityProp[] = [];
+    let initialCategories:{[key:string]: {count:number}} = {};
     charitiesFromContract.forEach((charity: any, index:number) => {
       const newOne:charityProp = {
-          index: index,
-          charityType: parseInt(charity.charityType),
-          fund: charity.fund,
-          fundType: charity.donateType,
-          address: charity.walletAddress,
-          catalog: charity.catalog
+        index: index,
+        charityType: parseInt(charity.charityType),
+        fund: charity.fund,
+        fundType: charity.donateType,
+        address: charity.walletAddress,
+        catalog: charity.catalog
       };
       if (initialCategories[charity.donateType] != undefined) {
-        initialCategories[charity.donateType].count += 1;
+        initialCategories[charity.donateType]['count'] = initialCategories[charity.donateType]['count'] + 1;
+      }
+      else {
+        initialCategories[charity.donateType] = {count: 1};
       }
       if (newOne.charityType === 1) {
           fundRaisers.push(newOne);
@@ -68,10 +75,10 @@ export const Layout = ({children}: any) => {
     };
     checkFromNetwork();
     getDDAInfo();
-    const intervalId = setInterval(getDDAInfo, 10000);
-    return ()=>{
-      clearInterval(intervalId);
-    }
+    // const intervalId = setInterval(getDDAInfo, 10000);
+    // return ()=>{
+    //   clearInterval(intervalId);
+    // }
   }, [])
   
   useEffect(() => {
@@ -95,14 +102,16 @@ export const Layout = ({children}: any) => {
   }, [address]);
 
   return (
-    <div className="w-full flex flex-col min-h-screen bg-cover font-poppins">
+    <div className="w-full min-h-screen flex flex-col justify-between bg-cover font-poppins">
       <div className="w-full z-10 py-10 bg-white fixed top-0 left-0 border-b-2 z-200">
         <Nav/>
       </div>
-      <div className="w-full">
+      <div className="w-full min-h-[calc(100%-332px)]">
         {children}
       </div>
-      <FooterTab/>
+      <div className="">
+        <FooterTab/>
+      </div>
       <LoadingBar open={loading}/>
     </div>
   )

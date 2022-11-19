@@ -19,16 +19,16 @@ export const FeaturedCategories = () => {
       <div className="my-40">
         <Grid container spacing={1}>
           {
-            Object.keys(allCategories).map((key, index:number) => {
-              const category = allCategories[key];
+            Object.keys(allFundTypes).map((key, index:number) => {
+              const category = allFundTypes[key];
               return (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={index} >
                   <div className="shadow-default mx-10 p-10 hover:bg-iron rounded-10 cursor-pointer flex items-center"
-                    onClick={() => navigate('/all/'+key)}>
+                    onClick={() => navigate('/filter/'+key)}>
                     <img src={baseIcons[category.img]} className="w-60 h-60"/>
                     <div className="text-20 capitalize ml-20">
                       <p>{category.title}</p>
-                      <p>{category.count}</p>
+                      <p>{category.type}</p>
                     </div>
                   </div>
                 </Grid>

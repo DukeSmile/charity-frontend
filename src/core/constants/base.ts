@@ -39,7 +39,7 @@ export const raiserFundTypes: string [] = [
     'family', 'personal', 'education', 'volunteer'
 ];
 
-export let allFundTypes: {[key:string]: fundTypeProp} = {
+export const allFundTypes: {[key:string]: fundTypeProp} = {
     health: {
         title: 'health',
         img: 'health',

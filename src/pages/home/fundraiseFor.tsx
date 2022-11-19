@@ -18,7 +18,7 @@ export const FundRaiseForPage = () => {
                         return (
                             <Grid item xs={12} sm={6} key={index}>
                             <div className="shadow-default m-5 p-20 bg-white rounded-10 cursor-pointer flex items-center"
-                              onClick={() => navigate('/all/'+key)}
+                              onClick={() => navigate('/filter/'+key)}
                             >
                                 <div className="text-20 capitalize mr-20">
                                     <p className="font-bold">{fundType.title}</p>

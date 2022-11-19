@@ -52,7 +52,7 @@ export const FooterTab = () => {
             {
               subMenus1.map((menu, index) => {
                 return (
-                  <p key={index} className={menuStyle} onClick={() => navigate('/all/'+menu)}>
+                  <p key={index} className={menuStyle} onClick={() => navigate('/filter/'+menu)}>
                     {menu}
                   </p>
                 )
