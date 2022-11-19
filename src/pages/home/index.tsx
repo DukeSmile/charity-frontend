@@ -16,6 +16,7 @@ import bgImg from "../../assets/images/home.png";
 import { BecomeMemberPage } from "./becomeMember";
 import { baseStyles } from "../../core/constants/style";
 import donateImg from "../../assets/images/donate.png";
+import { LatestNews } from "./lastedNews";
 
 export const HomePage = () => {
 
@@ -106,6 +107,7 @@ export const HomePage = () => {
         <FundRaiseForPage />
         <BecomeMemberPage />
         <FeaturedFundRaisers />
+        <LatestNews />
       </div>
       <div className="w-[95%] md:w-[80%] mx-auto p-20 px-40 flex justify-between items-center rounded-40 bg-alabaster">
         <div className="z-100 w-[90%] sm:w-[70%] md:max-w-[50%]">

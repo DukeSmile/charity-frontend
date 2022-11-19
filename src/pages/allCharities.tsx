@@ -11,6 +11,7 @@ import { getContract } from "../core/constants/base";
 import { setLoading } from "../core/store/slices/bridgeSlice";
 import { baseStyles } from "../core/constants/style";
 import { CharityInfo } from "../components/charityInfo";
+import { FundraiserInfo } from "../components/fundraiserInfo";
 export const AllCharitiesPage = () => {
 
   let { category } = useParams();
@@ -44,7 +45,9 @@ export const AllCharitiesPage = () => {
             {
               charities.map((charity: charityProp, index:number) => {
                 return (
-                  <CharityInfo info={charity} key={index}/>
+                  <Grid xs={12} sm={6} md={4} lg={3} item key={charity.index}>
+                    <CharityInfo info={charity}/>
+                  </Grid>
                 )
               })
             }
@@ -58,7 +61,9 @@ export const AllCharitiesPage = () => {
             {
               fundRaisers.map((charity:charityProp, index:number) => {
                 return (
-                  <CharityInfo info={charity} key={index}/>
+                  <Grid xs={12} sm={6} md={4} lg={3} item key={charity.index}>
+                    <FundraiserInfo info={charity} key={index}/>
+                  </Grid>
                 )
               })
             }
