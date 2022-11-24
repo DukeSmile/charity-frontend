@@ -3,7 +3,7 @@ import { FaMedium, FaTwitter } from "react-icons/fa"
 
 export const LatestNews = () =>  {
   return (
-    <div className="w-[95%] md:w-[80%] mx-auto py-100">
+    <div className="w-[95%] md:w-[80%] mx-auto pb-100">
       <div className="text-38 font-bold flex justify-between">
         <label>Latest News</label>
       </div>

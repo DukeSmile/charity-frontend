@@ -8,7 +8,7 @@ import { PhotoUpload } from "../../components/photoUpload";
 import { AboutPage } from "../../pages/about";
 import { HomePage } from "../../pages/home";
 import { CelebratePage } from "../../pages/celebration";
-import { AllCharitiesPage } from "../../pages/allCharities";
+import { FilterCharitiesPage } from "../../pages/filterPage";
 
 export const routeItems: RouteItemProp[] = [
     {
@@ -49,7 +49,7 @@ export const routeItems: RouteItemProp[] = [
     {
         url: '/filter/:category',
         owner: 0,
-        element: <AllCharitiesPage />
+        element: <FilterCharitiesPage />
     },
     {
         url: '/celebrate',

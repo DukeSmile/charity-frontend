@@ -45,11 +45,11 @@ export const FundraiserInfo = (props:any) => {
       </div>
       <div className="flex text-20 items-center capitalize"><FaFlag className="mx-5"/>{charity.catalog.country}</div>
       <div className="flex text-20 items-center capitalize"><FaMapMarkedAlt className="mx-5"/>{charity.catalog.location}</div>
-      <div className="flex text-20 items-center"><FaBtc className="mx-5"/>{Web3.utils.fromWei(charity.fund)}</div>
-      <div className="my-10">
-          <Link to={`/donate/${charity.index}`} className={style.btn}>Donate</Link>
+      <div className="flex text-20 items-center mb-10"><FaBtc className="mx-5"/>{Web3.utils.fromWei(charity.fund)}</div>
+      <div className="py-10">
+          <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn}>Donate</Link>
           {isOwner > 2 && 
-          (<button className={style.btn} onClick={() => blockCharity(charity.index)}>Block This</button>)
+          (<button className={baseStyles.normalBtn} onClick={() => blockCharity(charity.index)}>Block This</button>)
           }
       </div>
     </div>
