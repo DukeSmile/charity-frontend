@@ -8,14 +8,14 @@ import { create } from 'ipfs-http-client';
 import { useParams, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-import { useWeb3Context } from "../hooks/web3Context";
-import { allFundTypes, getContract, projectId, projectSecret } from "../core/constants/base";
-import { setLoading } from "../core/store/slices/bridgeSlice";
-import { PhotoUpload } from "../components/photoUpload";
+import { useWeb3Context } from "../../hooks/web3Context";
+import { allFundTypes, getContract, projectId, projectSecret } from "../../core/constants/base";
+import { setLoading } from "../../core/store/slices/bridgeSlice";
+import { PhotoUpload } from "../../components/photoUpload";
 
-import remoteImg from "../assets/images/components/remote.png";
-import currenciesImg from "../assets/images/components/currencies.png";
-import { baseStyles } from "../core/constants/style";
+import remoteImg from "../../assets/images/components/remote.png";
+import currenciesImg from "../../assets/images/components/currencies.png";
+import { baseStyles } from "../../core/constants/style";
 
 export const RegistrationPage = () => {
   

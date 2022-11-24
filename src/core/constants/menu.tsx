@@ -1,13 +1,13 @@
 import { MenuuItemProp, RouteItemProp } from "../interfaces/base";
-import { RegistrationPage } from "../../pages/registration";
-import { FundRaisersPage } from "../../pages/fundraisers";
-import { CharitiesPage } from "../../pages/charities";
+import { RegistrationPage } from "../../pages/registry/registration";
+import { FundRaisersPage } from "../../pages/registry/fundraisers";
+import { CharitiesPage } from "../../pages/registry/charities";
 import { DonationPage } from "../../pages/donation";
-import { AdminsPage } from "../../pages/admins";
+import { AdminsPage } from "../../pages/registry/admins";
 import { PhotoUpload } from "../../components/photoUpload";
 import { AboutPage } from "../../pages/about";
 import { HomePage } from "../../pages/home";
-import { CelebratePage } from "../../pages/celebration";
+import { CelebratePage } from "../../pages/registry/celebration";
 import { FilterCharitiesPage } from "../../pages/filterPage";
 import { DetailPage } from "../../pages/detailPage";
 export const routeItems: RouteItemProp[] = [

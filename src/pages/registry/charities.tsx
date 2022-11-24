@@ -6,12 +6,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
 
-import { charityProp } from "../core/interfaces/base";
-import { useWeb3Context } from "../hooks/web3Context";
-import { getContract } from "../core/constants/base";
-import { setLoading } from "../core/store/slices/bridgeSlice";
-import { baseStyles } from "../core/constants/style";
-import { CharityInfo } from "../components/charityInfo";
+import { charityProp } from "../../core/interfaces/base";
+import { useWeb3Context } from "../../hooks/web3Context";
+import { getContract } from "../../core/constants/base";
+import { setLoading } from "../../core/store/slices/bridgeSlice";
+import { baseStyles } from "../../core/constants/style";
+import { CharityInfo } from "../../components/charityInfo";
 
 export const CharitiesPage = () => {
   const dispatch = useDispatch();

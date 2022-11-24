@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Web3 from "web3";
 
-import { getContract } from "../core/constants/base";
-import { FromNetwork } from "../networks";
-import { charityProp } from "../core/interfaces/base";
-import { setCharities, setFundRaisers, setLoading } from "../core/store/slices/bridgeSlice";
-import { useWeb3Context } from "../hooks/web3Context";
+import { getContract } from "../../core/constants/base";
+import { FromNetwork } from "../../networks";
+import { charityProp } from "../../core/interfaces/base";
+import { setCharities, setFundRaisers, setLoading } from "../../core/store/slices/bridgeSlice";
+import { useWeb3Context } from "../../hooks/web3Context";
 import { FaBook, FaBtc, FaFlag, FaGoogle, FaMapMarkedAlt, FaUser } from "react-icons/fa";
-import { FundraiserInfo } from "../components/fundraiserInfo";
+import { FundraiserInfo } from "../../components/fundraiserInfo";
 
 export const FundRaisersPage = () => {
   const dispatch = useDispatch();

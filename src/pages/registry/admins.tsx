@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
 
-import { adminUserProp } from "../core/interfaces/base";
-import { useWeb3Context } from "../hooks/web3Context";
-import { getContract, roleList } from "../core/constants/base";
-import { setLoading } from "../core/store/slices/bridgeSlice";
+import { adminUserProp } from "../../core/interfaces/base";
+import { useWeb3Context } from "../../hooks/web3Context";
+import { getContract, roleList } from "../../core/constants/base";
+import { setLoading } from "../../core/store/slices/bridgeSlice";
 
 export const AdminsPage = () => {
   const dispatch = useDispatch();

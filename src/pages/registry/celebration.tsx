@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import checkedImg from "../assets/images/components/checked.png";
+import checkedImg from "../../assets/images/components/checked.png";
 
-import { baseStyles } from "../core/constants/style";
+import { baseStyles } from "../../core/constants/style";
 
 export const CelebratePage = () => {
 
