@@ -17,7 +17,13 @@ export const FilterCharity = (props:any) => {
   const dispatch = useDispatch();
   const isOwner = useSelector((state: any) => state.app.isOwner);
   const { connected, address } = useWeb3Context();
-    
+  const fundPrice = parseFloat(Web3.utils.fromWei(charity.fund));
+  const fundLabel = Intl.NumberFormat().format(fundPrice);
+
+  let fundGoal = parseFloat(Web3.utils.fromWei(charity.goal));
+  fundGoal = fundGoal > 1 ? fundGoal : 1;
+  let fundPercent = fundPrice / fundGoal * 100;
+  fundPercent = fundPercent > 100 ? 100 : fundPercent;
   const blockCharity = async (index: number) => {
     if (connected && address != '') {
       dispatch(setLoading(true));
@@ -46,11 +52,11 @@ export const FilterCharity = (props:any) => {
       }        
       </div>
       <div className="h-5 bg-greenwhite my-10">
-        <div className="h-5 bg-algae w-[50%]"></div>
+        <div className={`h-5 bg-algae`} style={{width: fundPercent+'%'}}></div>
       </div>
       <div className="my-10 py-10 flex justify-between">
         <Link to={`/donate/${charity.index}`} className={baseStyles.normalLink}>Read more <FontAwesomeIcon icon={faArrowRight} /></Link>
-        <label>$ {Intl.NumberFormat().format(parseFloat(Web3.utils.fromWei(charity.goal)))} <span className="text-gunsmoke">{charity.charityType == '0' ? '' : 'Raised'}</span></label>
+        <label>$ {fundLabel} <span className="text-gunsmoke">{charity.charityType == '0' ? '' : 'Raised'}</span></label>
       </div>
       <div className="absolute top-270 right-20">
         <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn}>Donate</Link>

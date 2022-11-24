@@ -299,9 +299,9 @@ export const DonationPage = () => {
                 <div>
                   <DonationHistoryCase loading={caseHLoading} />
                 </div>
-                <div>
+                {/* <div>
                   <DonationHistoryAll loading={allHLoading} />
-                </div>
+                </div> */}
               </div>
             </Grid>
             <Grid item sm={12} md={6}>

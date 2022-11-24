@@ -31,8 +31,9 @@ export const CharityInfo = (props:any) => {
   return (
     <div className="shadow-default p-10 rounded-10 h-full w-full text-16">
       <img src={"https://ipfs.io/ipfs/" + charity.catalog.photo} className="w-full h-300" />
-      <div className="font-bold text-center text-20 my-10">{charity.catalog.name}</div>
-      <div className="flex text-20 items-center capitalize"><FaRegistered className="mx-5" />{charity.catalog.vip}</div>
+      <div className="font-bold text-center text-24 my-10">{charity.catalog.name}</div>
+      <p className="text-16 h-50 overflow-hidden">{charity.catalog.summary}</p>
+      {/* <div className="flex text-20 items-center capitalize"><FaRegistered className="mx-5" />{charity.catalog.vip}</div>
       <div className="flex text-20 items-center"><FaGoogle className="mx-5" />{charity.catalog.email}</div>
       <div className="flex h-80 overflow-hidden text-20 items-start">
         <FaBook className="m-5" />
@@ -46,12 +47,13 @@ export const CharityInfo = (props:any) => {
         <FaTwitter className={resumeStyle} />
         <FaFacebook className={resumeStyle} />
         <FaInstagram className={resumeStyle} />
-      </div>
-      <div className="py-10">
-        <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn + ' mr-10'}>Donate</Link>
-        {isOwner > 2 && (
+      </div> */}
+      <div className="py-10 my-10">
+        {/* <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn + ' mr-10 hover:bg-brown hover:text-white'}>Read more</Link> */}
+        <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn + ' mr-10 hover:bg-brown hover:text-white'}>Donate Now</Link>
+        {/* {isOwner > 2 && (
           <button className={baseStyles.normalBtn} onClick={() => blockCharity(charity.index)}>Block This</button>
-        )}
+        )} */}
       </div>
     </div>
   )
