@@ -16,7 +16,8 @@ export interface charityProp {
     fund: string;
     fundType: string;
     address: string;
-    catalog: any
+    catalog: any;
+    goal: string;
 }
 
 export interface adminUserProp {

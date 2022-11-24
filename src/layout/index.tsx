@@ -35,7 +35,8 @@ export const Layout = ({children}: any) => {
         fund: charity.fund,
         fundType: charity.donateType,
         address: charity.walletAddress,
-        catalog: charity.catalog
+        catalog: charity.catalog,
+        goal: charity.goal,
       };
       if (initialCategories[charity.donateType] != undefined) {
         initialCategories[charity.donateType]['count'] = initialCategories[charity.donateType]['count'] + 1;

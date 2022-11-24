@@ -66,7 +66,9 @@ export const RegistrationPage = () => {
     detail: Yup.string()
       .max(1000, 'Can not exceed 12 characters')
       .required("Required"),
-    // photo: Yup.string().required("Required"),
+    goal: Yup.string()
+      .min(1, 'Goal can\'t be zero')
+      .required("Required"),
     title: Yup.string().required("Required"),
     location: Yup.string().required("Required"),
     // wallet: Yup.string().required("Required")
@@ -88,7 +90,7 @@ export const RegistrationPage = () => {
       detail: '',
       title: '',
       location: '',
-      goal: 0,
+      goal: 1,
       type: ''
     },
     onSubmit:async (values:any) => {
@@ -146,7 +148,7 @@ export const RegistrationPage = () => {
             location: values.location
           }
           const numOfCharityType = charityType === 'charity' ? 0 : 1;
-          await ddaContract.methods.createCharity(numOfCharityType, values.type, charityType === 'charity' ? 1 : values.goal, _catalog).send({from: address});
+          await ddaContract.methods.createCharity(numOfCharityType, values.type, values.goal, _catalog).send({from: address});
           navigate('/celebrate');
         }
         catch(error){
@@ -179,7 +181,7 @@ export const RegistrationPage = () => {
         detail: '',
         title: '',
         location: '',
-        goal: 0,
+        goal: 1,
         type: ''
       }
     });
@@ -340,7 +342,7 @@ export const RegistrationPage = () => {
                   maxRows={4}
                   id="summary"
                   name="summary"
-                  className={"border-1 p-10 " + (formik.touched.summary && Boolean(formik.errors.summary) ? "border-error" : '' )}
+                  className={"border-1 p-10 " + (formik.touched.summary || Boolean(formik.errors.summary) ? "border-error" : '' )}
                   style={{ width: '100%' }}
                   value={formik.values.summary}
                   onChange={formik.handleChange}

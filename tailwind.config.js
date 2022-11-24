@@ -74,6 +74,7 @@ module.exports = {
         current: 'currentColor',
         brown: '#512C29',
         green: '#07931C',
+        greenwhite: '#DEECE0',
         seagreen: '#2A8D39',
         algae: '#58B065',
         iron: '#D6D6D6',
@@ -103,6 +104,9 @@ module.exports = {
         xl: '1920px',
       },
       maxWidth: {
+        ...range(minSpacingPixel, maxSpacingPixel, spacingPixelIncrement).reduce((merged, f) => ({ ...merged, [f]: `${f}px` }), {})
+      },
+      minWidth: {
         ...range(minSpacingPixel, maxSpacingPixel, spacingPixelIncrement).reduce((merged, f) => ({ ...merged, [f]: `${f}px` }), {})
       },
       backgroundImage: {

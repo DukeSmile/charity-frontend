@@ -1,0 +1,63 @@
+
+import { Grid } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { FaGoogle, FaFlag, FaBook, FaMapMarkedAlt, FaUser, FaBtc } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import Web3 from "web3";
+import { charityProp } from "../core/interfaces/base";
+import { baseStyles } from "../core/constants/style";
+import { useWeb3Context } from "../hooks/web3Context";
+import { setLoading } from "../core/store/slices/bridgeSlice";
+import { getContract } from "../core/constants/base";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+
+export const FilterCharity = (props:any) => {
+  const charity:charityProp = props.info;
+  const dispatch = useDispatch();
+  const isOwner = useSelector((state: any) => state.app.isOwner);
+  const { connected, address } = useWeb3Context();
+    
+  const blockCharity = async (index: number) => {
+    if (connected && address != '') {
+      dispatch(setLoading(true));
+      let ddaContract = getContract('DDAContract');
+      try {
+        await ddaContract.methods.blackCharity(index).send({ from: address });
+      }
+      catch (e) {
+        console.log(e);
+      }
+      dispatch(setLoading(false));
+    }
+  };
+
+  const style={
+    btn: 'border-2 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
+  };
+  return (
+    <div className="relative shadow-default p-10 rounded-10 h-full w-full text-16">
+      <img src={"https://ipfs.io/ipfs/" + charity.catalog.photo} className="w-full h-300"/>
+      <div className="font-bold text-22 mt-20 capitalize">{charity.charityType == '0' ? charity.catalog.name : charity.catalog.title}</div>
+      <div className="text-16">
+      {
+        charity.charityType == '0' ? 'This is charity'
+        : (<>by <label className="capitalize">{charity.catalog.name}</label></>)
+      }        
+      </div>
+      <div className="h-5 bg-greenwhite my-10">
+        <div className="h-5 bg-algae w-[50%]"></div>
+      </div>
+      <div className="my-10 py-10 flex justify-between">
+        <Link to={`/donate/${charity.index}`} className={baseStyles.normalLink}>Read more <FontAwesomeIcon icon={faArrowRight} /></Link>
+        <label>$ {Intl.NumberFormat().format(parseFloat(Web3.utils.fromWei(charity.goal)))} <span className="text-gunsmoke">{charity.charityType == '0' ? '' : 'Raised'}</span></label>
+      </div>
+      <div className="absolute top-270 right-20">
+        <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn}>Donate</Link>
+        {isOwner > 2 && 
+        (<button className={baseStyles.normalBtn} onClick={() => blockCharity(charity.index)}>Block This</button>)
+        }
+      </div>
+    </div>
+  )
+}
