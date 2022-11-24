@@ -35,6 +35,10 @@ export const menuFundTypes:string [] = [
     'medical', 'emergency', 'memorial', 'nonprofit', 'relief'
 ];
 
+export const blogFundTypes:string [] = [
+    'education', 'business', 'animal', 'environmental', 'family', 'nonprofit', 'medical'
+];
+
 export const raiserFundTypes: string [] = [
     'family', 'personal', 'education', 'volunteer'
 ];
@@ -120,6 +124,13 @@ export const allFundTypes: {[key:string]: fundTypeProp} = {
     relief: {
         title: 'crisis relief',
         img: 'relief',
+        type: 'charities',
+        detail: '',
+        count: 0
+    },
+    business: {
+        title: 'business',
+        img: 'business',
         type: 'charities',
         detail: '',
         count: 0

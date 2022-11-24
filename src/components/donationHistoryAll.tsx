@@ -12,7 +12,6 @@ export const DonationHistoryAll = (props:any) => {
   return (
     <div className="my-20">
       <div className="flex items-center">
-        <p className="py-10 font-bold text-28">All donations on this channel</p>
         {props.loading &&(          
           <div className="p-10 mx-20 flex items-center">
             <CircularProgress size='2vh'/>
@@ -24,7 +23,7 @@ export const DonationHistoryAll = (props:any) => {
             const charityIndex = charities.findIndex((item) => item.address === history.to);
             const wAddress = charities[charityIndex].address;
             return (
-              <Grid container spacing={1} key={index} className="border p-5 ">
+              <Grid container spacing={1} key={index} className="border-b-1 p-5 ">
                 <Grid item xs={4} className="overflow-hidden text-center">
                     { charityIndex >= 0 ? (wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length)) : 'black charity' }
                 </Grid>

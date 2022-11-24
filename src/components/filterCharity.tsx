@@ -55,7 +55,7 @@ export const FilterCharity = (props:any) => {
         <div className={`h-5 bg-algae`} style={{width: fundPercent+'%'}}></div>
       </div>
       <div className="my-10 py-10 flex justify-between">
-        <Link to={`/donate/${charity.index}`} className={baseStyles.normalLink}>Read more <FontAwesomeIcon icon={faArrowRight} /></Link>
+        <Link to={`/detail/${charity.index}`} className={baseStyles.normalLink}>Read more <FontAwesomeIcon icon={faArrowRight} /></Link>
         <label>$ {fundLabel} <span className="text-gunsmoke">{charity.charityType == '0' ? '' : 'Raised'}</span></label>
       </div>
       <div className="absolute top-270 right-20">

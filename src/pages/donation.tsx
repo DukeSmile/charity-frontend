@@ -168,7 +168,7 @@ export const DonationPage = () => {
               transaction: event.transactionHash,
               from: event.returnValues._from,
               to: event.returnValues._to,
-              currency: currency ? currency.name : 'event.returnValues._to',
+              currency: currency ? currency.name : '',
               amount: event.returnValues.amount,
               timeStamp: event.returnValues.timestamp
             };
@@ -211,7 +211,7 @@ export const DonationPage = () => {
             transaction: event.transactionHash,
             from: event.returnValues._from,
             to: event.returnValues._to,
-            currency: currency ? currency.name : 'event.returnValues._to',
+            currency: currency ? currency.name : '',
             amount: event.returnValues.amount,
             timeStamp: event.returnValues.timestamp
           };

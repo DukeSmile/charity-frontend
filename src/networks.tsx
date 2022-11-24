@@ -87,7 +87,7 @@ export const tokenList: tokenProp[] = [
     abi: tusdtABI,
     address: {
       [NetworkIds.BscTestnet]: '0xbF68079500Ea88c84f95cfB8840C9F569b945a74',
-      [NetworkIds.Goerli]: 'z'
+      [NetworkIds.Goerli]: '0xFB9D86a6469B0bb5C79136b3700b743738b1F0eB'
     }
   },
   {

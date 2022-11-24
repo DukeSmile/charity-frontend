@@ -9,7 +9,7 @@ import { AboutPage } from "../../pages/about";
 import { HomePage } from "../../pages/home";
 import { CelebratePage } from "../../pages/celebration";
 import { FilterCharitiesPage } from "../../pages/filterPage";
-
+import { DetailPage } from "../../pages/detailPage";
 export const routeItems: RouteItemProp[] = [
     {
         url: '/',
@@ -35,6 +35,11 @@ export const routeItems: RouteItemProp[] = [
         url: '/donate/:index',
         owner: 0,
         element: <DonationPage />
+    },
+    {
+        url: '/detail/:index',
+        owner: 0,
+        element: <DetailPage />
     },
     {
         url: '/admins',

@@ -48,7 +48,7 @@ export const FundraiserInfo = (props:any) => {
       <div className="flex text-20 items-center mb-10"><FaBtc className="mx-5"/>{Web3.utils.fromWei(charity.fund)}</div> */}
       <div className="h-[1px] my-10 mb-20 bg-lightgrey"></div>
       <div className="py-10 my-10">
-        <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn + ' mr-10 hover:bg-brown hover:text-white'}>Read more</Link>
+        <Link to={`/detail/${charity.index}`} className={baseStyles.normalBtn + ' mr-10 hover:bg-brown hover:text-white'}>Read more</Link>
         <label></label>
       </div>
     </div>

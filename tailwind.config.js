@@ -83,7 +83,8 @@ module.exports = {
         dark: '#1F2533',
         gunsmoke: '#81848C',
         asphalt: '#140701',
-        blue: '#4271EA'
+        blue: '#4271EA',
+        romance: '#696464',
 
       },
       boxShadow: {
