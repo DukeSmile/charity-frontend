@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RegistrationPage } from "../pages/registry/registration";
-import { FundRaisersPage } from "../pages/fundraisers";
+import { FundRaisersPage } from "../pages/registry/fundraisers";
 import { CharitiesPage } from "../pages/registry/charities";
 import { DonationPage } from "../pages/donation";
 

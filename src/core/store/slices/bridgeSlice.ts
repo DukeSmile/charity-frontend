@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   value: 0,
+  loginUser: '',
   charities: [],
   fundRaisers: [],
   allCharities: [],
@@ -12,7 +13,8 @@ const initialState = {
   uploadUrl: '',
   caseDonateHistory: [],
   donateHistory: [],
-  ipfs:undefined
+  ipfs:undefined,
+  signHash: ''
 };
 
 export const bridgeSlice = createSlice({
@@ -53,6 +55,12 @@ export const bridgeSlice = createSlice({
     setCategories: (state, {payload}) => {
       state.categories = payload;
     },
+    setSignHash: (state, {payload}) => {
+      state.signHash = payload;
+    },
+    setLoginUser: (state, {payload}) => {
+      state.loginUser = payload;
+    },
   }
 });
 
@@ -67,6 +75,8 @@ export const {
   setCaseDonateHistory,
   setDonateHistory,
   setIPFS,
-  setCategories
+  setCategories,
+  setSignHash,
+  setLoginUser
 } = bridgeSlice.actions;
 export default bridgeSlice.reducer;

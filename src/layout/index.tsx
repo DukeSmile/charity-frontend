@@ -1,17 +1,18 @@
+import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FooterTab } from '../components/footer';
 import LoadingBar from '../components/loadingBar';
 import { Nav } from '../components/Nav';
-import { allFundTypes, getContract, roleList } from '../core/constants/base';
+import { allFundTypes, baseServerUrl, getContract, handleSignMessage, roleList } from '../core/constants/base';
 import { adminUserProp, charityProp } from '../core/interfaces/base';
-import { setAdminUsers, setAllCharities, setCategories, setCharities, setFundRaisers, setOwnerFlag } from '../core/store/slices/bridgeSlice';
+import { setAdminUsers, setAllCharities, setCategories, setCharities, setFundRaisers, setLoginUser, setOwnerFlag, setSignHash } from '../core/store/slices/bridgeSlice';
 import { useWeb3Context } from '../hooks/web3Context';
 import { FromNetwork } from '../networks';
 
 export const Layout = ({children}: any) => {
   const dispatch = useDispatch();
-  const {address, switchEthereumChain} = useWeb3Context();
+  const {address, switchEthereumChain, provider} = useWeb3Context();
   const [count, setCount] = useState(0);
   const [footerHeight, setFooterHeight] = useState(0);
   const loading = useSelector((state:any) => state.app.loading);
@@ -95,9 +96,28 @@ export const Layout = ({children}: any) => {
       else if(await ddaContract.methods.hasRole(roleList['black'], cAddress).call())
         roleValue = 1;
       dispatch(setOwnerFlag(roleValue));
+      
+      if (provider != null){
+        const signHash = await handleSignMessage(address, provider);
+        dispatch(setSignHash(signHash));
+        let response;
+        try {
+          response = await axios.post(`${baseServerUrl}/auth/login`, {
+            sign_hash: signHash
+          });
+          setLoginUser(response);
+        }
+        catch (e: any) {
+          console.log(e);
+        }
+        // console.log(signHash);
+      }
     };
-    if (address === '')
+    if (address === '') {
       dispatch(setOwnerFlag(0));
+      dispatch(setSignHash(''));
+      dispatch(setLoginUser(''));
+    }
     else
       isOwnerCheck(address);
   }, [address]);

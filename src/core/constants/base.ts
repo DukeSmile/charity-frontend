@@ -1,8 +1,11 @@
+import { JsonRpcProvider } from '@ethersproject/providers';
 import Web3 from 'web3';
 
 import { contractABIs, networks, FromNetwork, tokenList } from '../../networks';
 import { chains } from '../../providers';
 import { fundTypeProp } from '../interfaces/base';
+
+export const baseServerUrl = 'http://localhost:3100/api';
 
 const connectWeb3 = new Web3(chains[FromNetwork].rpcUrls[0]);
 
@@ -30,6 +33,20 @@ export const maximumAllDoantion = 20;
 export const projectId = '2HE3I80EtQeKwCEjmvXVxWooFzx';
 export const projectSecret = '6691d66e4959b01f15a45bbe767326e9';
 export const ethTokenAddr = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
+
+export const WEB3_SIGN_MESSAGE = "Welcome to DDA project!\n\nTo get started, click Sign In and accept  Service\n\nThis request will not trigger a blockchain transaction or cost any gas fees.";
+
+export const handleSignMessage = async (
+  address: string,
+  provider: JsonRpcProvider
+): Promise<string> => {
+  const signer = provider.getSigner(address);
+  try {
+    return (await signer.signMessage(WEB3_SIGN_MESSAGE)) as string;
+  } catch (e) {
+    return "";
+  }
+};
 
 export const menuFundTypes:string [] = [
     'medical', 'emergency', 'memorial', 'nonprofit', 'relief'
@@ -153,3 +170,4 @@ export const aboutStrs:string [] = [
     '.03% of all donations between 100-250k will be used to buy back and burn Okapi tokens on the open market',
     '.01% of all donations above 250k will be used to buy back and burn Okapi tokens on the open market'
 ];
+

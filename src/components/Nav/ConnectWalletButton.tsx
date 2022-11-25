@@ -2,17 +2,22 @@ import { faSignOut, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, MenuItem, Button } from '@material-ui/core';
 import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram } from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
 
 import { baseStyles } from '../../core/constants/style';
 import { useWeb3Context } from '../../hooks/web3Context';
 
 export const ConnectWalletButton = () => {
   
+  const navigate = useNavigate();
   const resumeStyle = 'm-5 hover:text-black';
   const ref = useRef<HTMLDivElement | null>(null);
   const { connect, disconnect, address } = useWeb3Context();
   const [showMenu, setShowMenu] = useState(false);
+  const loginedUser = useSelector((state:any) => state.app.loginedUser);
+
   useEffect(() => {
     const listener = (event: MouseEvent) => {
       if (
@@ -55,6 +60,12 @@ export const ConnectWalletButton = () => {
                 </div>
               </button>
               <div className={'w-200 absolute bg-white border-1 ' + (showMenu ? '' : 'hidden')}>
+                <div>
+                  <Button className="text-center w-full" onClick={() => {
+                    setShowMenu(false);
+                    navigate('/profile');
+                  }}>Profile</Button>
+                </div>
                 <div>
                   <Button className="text-center w-full" onClick={() => {
                     setShowMenu(false);

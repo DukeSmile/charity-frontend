@@ -7,10 +7,11 @@ import { useFormik } from "formik";
 import { create } from 'ipfs-http-client';
 import { useParams, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import axios from "axios";
 
 import { useWeb3Context } from "../../hooks/web3Context";
-import { allFundTypes, getContract, projectId, projectSecret } from "../../core/constants/base";
-import { setLoading } from "../../core/store/slices/bridgeSlice";
+import { allFundTypes, baseServerUrl, getContract, projectId, projectSecret } from "../../core/constants/base";
+import { setLoading, setLoginUser } from "../../core/store/slices/bridgeSlice";
 import { PhotoUpload } from "../../components/photoUpload";
 
 import remoteImg from "../../assets/images/components/remote.png";
@@ -22,7 +23,7 @@ export const RegistrationPage = () => {
   const dispatch = useDispatch();
   let { feature } = useParams();
   const navigate = useNavigate();
-  const {connected, address} = useWeb3Context();
+  const {connected, address, provider} = useWeb3Context();
   const [charityType, SetCharityType] = useState(feature);
   const [wallet, setWallet] = useState('');
   const [uploadShow, setUploadShow] = useState(false);
@@ -94,7 +95,6 @@ export const RegistrationPage = () => {
       type: ''
     },
     onSubmit:async (values:any) => {
-      console.log(values);
       if(!connected){
         return;
       }
@@ -120,15 +120,18 @@ export const RegistrationPage = () => {
         ipfs = undefined;
       }
       // signup charity
-      if (address !== '') {
+      if (address !== '' && provider != null) {
         dispatch(setLoading(true));
         try{
+          //upload image to IPFS
           let uploadUrl = '';
           if (ipfsInfo && uploadFile) {
             console.log(uploadFile);
             const result = await (ipfsInfo).add(uploadFile);
             uploadUrl = result.path;
           }
+
+          // Make transaction for creating
           let ddaContract = getContract('DDAContract');
           const _catalog = {
             vip: values.vip,
@@ -148,8 +151,52 @@ export const RegistrationPage = () => {
             location: values.location
           }
           const numOfCharityType = charityType === 'charity' ? 0 : 1;
-          await ddaContract.methods.createCharity(numOfCharityType, values.type, values.goal, _catalog).send({from: address});
-          navigate('/celebrate');
+          // await ddaContract.methods.createCharity(numOfCharityType, values.type, values.goal, _catalog).send({from: address});
+
+          //send signup to backend
+          const ajax_info = {
+            "wallet_address": address.toLowerCase(),
+            "charity_type": numOfCharityType,
+            "goal": values.goal,
+            "fund_type": values.type,
+            "name": values.name,
+            "title": values.title,
+            "photo": uploadUrl,
+            "country": values.country,
+            "location": values.location,
+            "email": values.email,
+            "summary": values.summary,
+            "detail": values.detail,
+            "vip": values.vip,
+            "website": values.website,
+            "phone": values.phone,
+            "linkedin": values.linkedin,
+            "twitter": values.twitter,
+            "facebook": values.facebook,
+            "instagram": values.instagram
+          };
+          let response;
+          try {
+            response = await axios.post(`${baseServerUrl}/users/create`,
+              ajax_info,
+              {
+                headers: {
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Allow-Methods":
+                    "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+                  "Access-Control-Allow-Headers":
+                    "Origin, Content-Type, X-Auth-Token",
+                },
+              }
+            );
+            dispatch(setLoginUser(response));
+          }
+          catch(e:any){
+            console.log(e.response.data.message);
+          }
+
+          
+          // navigate('/celebrate');
         }
         catch(error){
           console.log(error);
