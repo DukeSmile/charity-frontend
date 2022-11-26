@@ -6,7 +6,7 @@ import LoadingBar from '../components/loadingBar';
 import { Nav } from '../components/Nav';
 import { allFundTypes, baseServerUrl, getContract, handleSignMessage, roleList } from '../core/constants/base';
 import { adminUserProp, charityProp } from '../core/interfaces/base';
-import { setAdminUsers, setAllCharities, setCategories, setCharities, setFundRaisers, setLoginUser, setOwnerFlag, setSignHash } from '../core/store/slices/bridgeSlice';
+import { demoLoginUser, setAdminUsers, setAllCharities, setCategories, setCharities, setFundRaisers, setLoginUser, setOwnerFlag, setSignHash } from '../core/store/slices/bridgeSlice';
 import { useWeb3Context } from '../hooks/web3Context';
 import { FromNetwork } from '../networks';
 
@@ -116,7 +116,7 @@ export const Layout = ({children}: any) => {
     if (address === '') {
       dispatch(setOwnerFlag(0));
       dispatch(setSignHash(''));
-      dispatch(setLoginUser(''));
+      dispatch(setLoginUser(demoLoginUser));
     }
     else
       isOwnerCheck(address);

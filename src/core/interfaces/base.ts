@@ -58,3 +58,27 @@ export interface fundTypeProp {
     type: string;
     count: number;
 }
+
+export interface loginUserProp {
+    id: string;
+    wallet_address: string;
+    charity_type: number;
+    goal: number;
+    fund_type: number;
+    name: string;
+    title: string;
+    photo: string;
+    country: string;
+    location: string;
+    email: string; // charity information
+    summary: string;
+    detail: string;
+    vip: string; // charity information
+    website: string; // charity information
+    phone: string; // charity information
+    linkedin: string; // charity information
+    twitter: string; // charity information
+    facebook: string; // charity information
+    instagram: string; // charity information
+    created_at: string;
+}

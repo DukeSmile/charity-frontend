@@ -85,7 +85,7 @@ module.exports = {
         asphalt: '#140701',
         blue: '#4271EA',
         romance: '#696464',
-
+        logo: '#F5F7FA'
       },
       boxShadow: {
         default: '5px 10px 40px -5px rgba(0, 0, 0, 0.08)'

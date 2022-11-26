@@ -10,6 +10,7 @@ import { HomePage } from "../../pages/home";
 import { CelebratePage } from "../../pages/registry/celebration";
 import { FilterCharitiesPage } from "../../pages/filterPage";
 import { DetailPage } from "../../pages/detailPage";
+import { ProfilePage } from "../../pages/registry/profile";
 export const routeItems: RouteItemProp[] = [
     {
         url: '/',
@@ -60,5 +61,10 @@ export const routeItems: RouteItemProp[] = [
         url: '/celebrate',
         owner: 0,
         element: <CelebratePage />
+    },
+    {
+        url: '/profile',
+        owner: 0,
+        element: <ProfilePage />
     }
 ];

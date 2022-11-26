@@ -1,8 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { loginUserProp } from '../../interfaces/base';
+
+export const demoLoginUser:loginUserProp = {
+  id: '',
+  wallet_address: '',
+  charity_type: 0,
+  goal: 0,
+  fund_type: 0,
+  name: '',
+  title: '',
+  photo: '',
+  country: '',
+  location: '',
+  email: '', // charity information
+  summary: '',
+  detail: '',
+  vip: '', // charity information
+  website: '', // charity information
+  phone: '', // charity information
+  linkedin: '', // charity information
+  twitter: '', // charity information
+  facebook: '', // charity information
+  instagram: '', // charity information
+  created_at: '',
+}
 
 const initialState = {
   value: 0,
-  loginUser: '',
+  loginUser: demoLoginUser,
   charities: [],
   fundRaisers: [],
   allCharities: [],
@@ -16,6 +41,8 @@ const initialState = {
   ipfs:undefined,
   signHash: ''
 };
+
+
 
 export const bridgeSlice = createSlice({
   name: 'app',
