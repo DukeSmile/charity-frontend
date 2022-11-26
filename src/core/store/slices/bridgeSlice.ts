@@ -40,7 +40,7 @@ const initialState = {
   donateHistory: [],
   ipfs:undefined,
   signHash: '',
-  charityType: 'charity'
+  charityType: 'fundraiser'
 };
 
 

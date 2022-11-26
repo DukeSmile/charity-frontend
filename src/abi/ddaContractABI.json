@@ -25,12 +25,6 @@
       },
       {
         "indexed": false,
-        "internalType": "string",
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "indexed": false,
         "internalType": "uint256",
         "name": "timestamp",
         "type": "uint256"
@@ -68,57 +62,27 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "walletAddress",
         "type": "address"
       },
       {
-        "indexed": false,
-        "internalType": "enum DDAContract.CharityType",
-        "name": "charityType",
-        "type": "uint8"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "donateType",
-        "type": "string"
-      },
-      {
         "components": [
-          { "internalType": "string", "name": "vip", "type": "string" },
-          { "internalType": "string", "name": "website", "type": "string" },
-          { "internalType": "string", "name": "phone", "type": "string" },
-          { "internalType": "string", "name": "linkedin", "type": "string" },
-          { "internalType": "string", "name": "twitter", "type": "string" },
-          { "internalType": "string", "name": "facebook", "type": "string" },
-          { "internalType": "string", "name": "instagram", "type": "string" },
-          { "internalType": "string", "name": "name", "type": "string" },
-          { "internalType": "string", "name": "email", "type": "string" },
-          { "internalType": "string", "name": "country", "type": "string" },
-          { "internalType": "string", "name": "summary", "type": "string" },
-          { "internalType": "string", "name": "detail", "type": "string" },
-          { "internalType": "string", "name": "photo", "type": "string" },
-          { "internalType": "string", "name": "title", "type": "string" },
-          { "internalType": "string", "name": "location", "type": "string" }
+          {
+            "internalType": "enum DDAContract.CharityType",
+            "name": "charityType",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "fund", "type": "uint256" },
+          { "internalType": "uint256", "name": "goal", "type": "uint256" },
+          { "internalType": "string", "name": "donateType", "type": "string" },
+          { "internalType": "string", "name": "photo", "type": "string" }
         ],
         "indexed": false,
         "internalType": "struct DDAContract.Catalog",
         "name": "catalog",
         "type": "tuple"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "fund",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "goal",
-        "type": "uint256"
       },
       {
         "indexed": false,
@@ -317,8 +281,7 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_newAddress", "type": "address" },
-      { "internalType": "string", "name": "_name", "type": "string" }
+      { "internalType": "address", "name": "_newAddress", "type": "address" }
     ],
     "name": "addAdmin",
     "outputs": [],
@@ -328,10 +291,7 @@
   {
     "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "name": "adminUsers",
-    "outputs": [
-      { "internalType": "address", "name": "walletAddress", "type": "address" },
-      { "internalType": "string", "name": "name", "type": "string" }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -350,30 +310,16 @@
     "outputs": [
       { "internalType": "address", "name": "walletAddress", "type": "address" },
       {
-        "internalType": "enum DDAContract.CharityType",
-        "name": "charityType",
-        "type": "uint8"
-      },
-      { "internalType": "uint256", "name": "fund", "type": "uint256" },
-      { "internalType": "uint256", "name": "goal", "type": "uint256" },
-      { "internalType": "string", "name": "donateType", "type": "string" },
-      {
         "components": [
-          { "internalType": "string", "name": "vip", "type": "string" },
-          { "internalType": "string", "name": "website", "type": "string" },
-          { "internalType": "string", "name": "phone", "type": "string" },
-          { "internalType": "string", "name": "linkedin", "type": "string" },
-          { "internalType": "string", "name": "twitter", "type": "string" },
-          { "internalType": "string", "name": "facebook", "type": "string" },
-          { "internalType": "string", "name": "instagram", "type": "string" },
-          { "internalType": "string", "name": "name", "type": "string" },
-          { "internalType": "string", "name": "email", "type": "string" },
-          { "internalType": "string", "name": "country", "type": "string" },
-          { "internalType": "string", "name": "summary", "type": "string" },
-          { "internalType": "string", "name": "detail", "type": "string" },
-          { "internalType": "string", "name": "photo", "type": "string" },
-          { "internalType": "string", "name": "title", "type": "string" },
-          { "internalType": "string", "name": "location", "type": "string" }
+          {
+            "internalType": "enum DDAContract.CharityType",
+            "name": "charityType",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "fund", "type": "uint256" },
+          { "internalType": "uint256", "name": "goal", "type": "uint256" },
+          { "internalType": "string", "name": "donateType", "type": "string" },
+          { "internalType": "string", "name": "photo", "type": "string" }
         ],
         "internalType": "struct DDAContract.Catalog",
         "name": "catalog",
@@ -386,29 +332,16 @@
   {
     "inputs": [
       {
-        "internalType": "enum DDAContract.CharityType",
-        "name": "_type",
-        "type": "uint8"
-      },
-      { "internalType": "string", "name": "_donateType", "type": "string" },
-      { "internalType": "uint256", "name": "_goal", "type": "uint256" },
-      {
         "components": [
-          { "internalType": "string", "name": "vip", "type": "string" },
-          { "internalType": "string", "name": "website", "type": "string" },
-          { "internalType": "string", "name": "phone", "type": "string" },
-          { "internalType": "string", "name": "linkedin", "type": "string" },
-          { "internalType": "string", "name": "twitter", "type": "string" },
-          { "internalType": "string", "name": "facebook", "type": "string" },
-          { "internalType": "string", "name": "instagram", "type": "string" },
-          { "internalType": "string", "name": "name", "type": "string" },
-          { "internalType": "string", "name": "email", "type": "string" },
-          { "internalType": "string", "name": "country", "type": "string" },
-          { "internalType": "string", "name": "summary", "type": "string" },
-          { "internalType": "string", "name": "detail", "type": "string" },
-          { "internalType": "string", "name": "photo", "type": "string" },
-          { "internalType": "string", "name": "title", "type": "string" },
-          { "internalType": "string", "name": "location", "type": "string" }
+          {
+            "internalType": "enum DDAContract.CharityType",
+            "name": "charityType",
+            "type": "uint8"
+          },
+          { "internalType": "uint256", "name": "fund", "type": "uint256" },
+          { "internalType": "uint256", "name": "goal", "type": "uint256" },
+          { "internalType": "string", "name": "donateType", "type": "string" },
+          { "internalType": "string", "name": "photo", "type": "string" }
         ],
         "internalType": "struct DDAContract.Catalog",
         "name": "_catalog",
@@ -436,19 +369,7 @@
     "inputs": [],
     "name": "getAdminUsers",
     "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "walletAddress",
-            "type": "address"
-          },
-          { "internalType": "string", "name": "name", "type": "string" }
-        ],
-        "internalType": "struct DDAContract.AdminStruct[]",
-        "name": "",
-        "type": "tuple[]"
-      }
+      { "internalType": "address[]", "name": "", "type": "address[]" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -465,42 +386,20 @@
             "type": "address"
           },
           {
-            "internalType": "enum DDAContract.CharityType",
-            "name": "charityType",
-            "type": "uint8"
-          },
-          { "internalType": "uint256", "name": "fund", "type": "uint256" },
-          { "internalType": "uint256", "name": "goal", "type": "uint256" },
-          { "internalType": "string", "name": "donateType", "type": "string" },
-          {
             "components": [
-              { "internalType": "string", "name": "vip", "type": "string" },
-              { "internalType": "string", "name": "website", "type": "string" },
-              { "internalType": "string", "name": "phone", "type": "string" },
+              {
+                "internalType": "enum DDAContract.CharityType",
+                "name": "charityType",
+                "type": "uint8"
+              },
+              { "internalType": "uint256", "name": "fund", "type": "uint256" },
+              { "internalType": "uint256", "name": "goal", "type": "uint256" },
               {
                 "internalType": "string",
-                "name": "linkedin",
+                "name": "donateType",
                 "type": "string"
               },
-              { "internalType": "string", "name": "twitter", "type": "string" },
-              {
-                "internalType": "string",
-                "name": "facebook",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "instagram",
-                "type": "string"
-              },
-              { "internalType": "string", "name": "name", "type": "string" },
-              { "internalType": "string", "name": "email", "type": "string" },
-              { "internalType": "string", "name": "country", "type": "string" },
-              { "internalType": "string", "name": "summary", "type": "string" },
-              { "internalType": "string", "name": "detail", "type": "string" },
-              { "internalType": "string", "name": "photo", "type": "string" },
-              { "internalType": "string", "name": "title", "type": "string" },
-              { "internalType": "string", "name": "location", "type": "string" }
+              { "internalType": "string", "name": "photo", "type": "string" }
             ],
             "internalType": "struct DDAContract.Catalog",
             "name": "catalog",

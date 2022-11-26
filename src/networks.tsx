@@ -36,7 +36,7 @@ export const networks: INetworks = {
     name: 'Ethereum Goerli',
     isEnabled: true,
     addresses: {
-      DDAContract: '0xAA36Ad1F6B6486CE5cfe31F55F26c279aee5039E'
+      DDAContract: '0xa11CA86ff63310534d64aC0B04e6beD389DBA182'
     },
     logo: EthereumIcon
   },
@@ -87,7 +87,7 @@ export const tokenList: tokenProp[] = [
     abi: tusdtABI,
     address: {
       [NetworkIds.BscTestnet]: '0xbF68079500Ea88c84f95cfB8840C9F569b945a74',
-      [NetworkIds.Goerli]: '0xFB9D86a6469B0bb5C79136b3700b743738b1F0eB'
+      [NetworkIds.Goerli]: '0x2926EFc3923094478a51f3C476fb7144D562d2c1'
     }
   },
   {

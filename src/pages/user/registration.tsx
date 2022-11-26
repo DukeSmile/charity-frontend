@@ -140,24 +140,14 @@ export const RegistrationPage = (props: any) => {
           // Make transaction for creating
           let ddaContract = getContract('DDAContract');
           const _catalog = {
-            vip: values.vip,
-            website: values.website,
-            phone: values.phone,
-            linkedin: values.linkedin,
-            twitter: values.twitter,
-            facebook: values.facebook,
-            instagram: values.instagram,
-            name: values.name,
-            email: values.email,
-            country: values.country,
-            summary: values.summary,
-            detail: values.detail,
-            photo: uploadUrl,
-            title: values.title,
-            location: values.location
+            charityType: charityType === 'charity' ? 0 : 1,
+            fund: 0,
+            goal: values.goal,
+            donateType: values.type,
+            photo:uploadUrl
           }
           const numOfCharityType = charityType === 'charity' ? 0 : 1;
-          // await ddaContract.methods.createCharity(numOfCharityType, values.type, values.goal, _catalog).send({from: address});
+          await ddaContract.methods.createCharity(_catalog).send({from: address});
 
           //send signup to backend
           const ajax_info = {
