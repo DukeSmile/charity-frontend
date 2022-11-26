@@ -6,8 +6,8 @@ export const demoLoginUser:loginUserProp = {
   wallet_address: '',
   charity_type: 0,
   goal: 0,
-  fund_type: 0,
-  name: 'Undefined Name',
+  fund_type: '',
+  name: '',
   title: '',
   photo: '',
   country: '',
@@ -39,7 +39,8 @@ const initialState = {
   caseDonateHistory: [],
   donateHistory: [],
   ipfs:undefined,
-  signHash: ''
+  signHash: '',
+  charityType: 'charity'
 };
 
 
@@ -88,6 +89,9 @@ export const bridgeSlice = createSlice({
     setLoginUser: (state, {payload}) => {
       state.loginUser = payload;
     },
+    setCharityType: (state, {payload}) => {
+      state.charityType = payload;
+    },
   }
 });
 
@@ -104,6 +108,7 @@ export const {
   setIPFS,
   setCategories,
   setSignHash,
-  setLoginUser
+  setLoginUser,
+  setCharityType
 } = bridgeSlice.actions;
 export default bridgeSlice.reducer;

@@ -11,31 +11,37 @@ import axios from "axios";
 
 import { useWeb3Context } from "../../hooks/web3Context";
 import { allFundTypes, baseServerUrl, getContract, projectId, projectSecret } from "../../core/constants/base";
-import { setLoading, setLoginUser } from "../../core/store/slices/bridgeSlice";
+import { demoLoginUser, setCharityType, setLoading, setLoginUser } from "../../core/store/slices/bridgeSlice";
 import { PhotoUpload } from "../../components/photoUpload";
 
 import remoteImg from "../../assets/images/components/remote.png";
 import currenciesImg from "../../assets/images/components/currencies.png";
 import { baseStyles } from "../../core/constants/style";
 
-export const RegistrationPage = () => {
+export const RegistrationPage = (props: any) => {
   
   const dispatch = useDispatch();
-  let { feature } = useParams();
   const navigate = useNavigate();
+  const loginUser = useSelector((state:any) => state.app.loginUser);
   const {connected, address, provider} = useWeb3Context();
-  const [charityType, SetCharityType] = useState(feature);
+  // const [charityType, SetCharityType] = useState('fundraiser');
   const [wallet, setWallet] = useState('');
   const [uploadShow, setUploadShow] = useState(false);
   const [uploadFile, setUploadFile] = useState(null);
   const ipfsInfo = useSelector((state:any) => state.app.ipfs);
   const ownerFlag = useSelector((state:any) => state.app.isOwner);
+  const charityType = useSelector((state:any) => state.app.charityType);
   const style = {
     label: 'text-18 my-15',
-    tab: 'rounded-full py-12 px-40 text-20 text-brown',
-    activeTab: 'rounded-full py-12 px-40 text-20 bg-asphalt text-white font-bold'
+    tab: 'rounded-full py-6 px-20 text-20 text-brown',
+    activeTab: 'rounded-full py-6 px-20 text-20 bg-asphalt text-white font-bold'
   }
+  let currentUser = demoLoginUser;
 
+  if (props.edit) {
+    currentUser = loginUser;
+  }
+  // console.log(props.currentUser, currentUser);
   const validationCharity = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Must be 2 characters at least')
@@ -77,21 +83,21 @@ export const RegistrationPage = () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      name: '',
-      vip: '', // charity information
-      website: '', // charity information
-      phone: '', // charity information
-      linkedin: '', // charity information
-      twitter: '', // charity information
-      facebook: '', // charity information
-      instagram: '', // charity information
-      email: '', // charity information
-      country: '',
-      summary: '',
-      detail: '',
-      title: '',
-      location: '',
-      goal: 1,
+      name: currentUser.name,
+      vip: currentUser.vip, // charity information
+      website: currentUser.website, // charity information
+      phone: currentUser.phone, // charity information
+      linkedin: currentUser.linkedin, // charity information
+      twitter: currentUser.twitter, // charity information
+      facebook: currentUser.facebook, // charity information
+      instagram: currentUser.instagram, // charity information
+      email: currentUser.email, // charity information
+      country: currentUser.country,
+      summary: currentUser.summary,
+      detail: currentUser.detail,
+      title: currentUser.title,
+      location: currentUser.location,
+      goal: currentUser.goal,
       type: ''
     },
     onSubmit:async (values:any) => {
@@ -235,11 +241,6 @@ export const RegistrationPage = () => {
     setUploadFile(null);
   }, [charityType]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    SetCharityType(feature);
-  }, [feature]);
-
   return (
     <div>
       {/* <div className="relative bg-gradient-to-r from-algae to-seagreen h-400 flex items-end justify-between overflow-hidden">
@@ -255,22 +256,22 @@ export const RegistrationPage = () => {
       {/* <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70 px-35 py-50"> */}
       <div>
         <Grid container className="border-b-2 border-dashed my-10 p-10">
-          <Grid item xs={12} sm={6}>
-            <p className="text-38 font-bold text-center">Start your fundraising as a {charityType}</p>
+          <Grid item sm={12} md={6}>
+            <p className="text-38 font-bold text-center">Start your fundraising</p>
           </Grid>
-          <Grid item xs={12} sm={6} className="flex items-center flex-row-reverse">
+          <Grid item sm={12} md={6} className="flex items-center flex-row-reverse">
             <div className="bg-lightgrey rounded-full p-3 flex">
-              <button className={charityType === 'charity' ? style.activeTab : style.tab} onClick={() => SetCharityType('charity')}>Create Charity</button>
-              <button className={charityType === 'fundraiser' ? style.activeTab : style.tab} onClick={() => SetCharityType('fundraiser')}>Create FundRaiser</button>
+              <button className={charityType === 'charity' ? style.activeTab : style.tab} onClick={() => dispatch(setCharityType('charity'))}>Charity</button>
+              <button className={charityType === 'fundraiser' ? style.activeTab : style.tab} onClick={() => dispatch(setCharityType('fundraiser'))}>FundRaiser</button>
             </div>
           </Grid>
         </Grid>
         <form className="w-full" onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item container xs={12} sm={6} spacing={1}>
+            <Grid item container xs={12} md={6} spacing={1}>
               {charityType === 'charity' && (
                 <>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Charity Name</p>
                     <TextField
                       fullWidth
@@ -286,7 +287,7 @@ export const RegistrationPage = () => {
                       placeholder="Enter your charity name"
                     />
                   </Grid>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Charity Registration Number</p>
                     <TextField
                       fullWidth
@@ -302,7 +303,7 @@ export const RegistrationPage = () => {
                       placeholder="Enter registration number"
                     />
                   </Grid>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Website</p>
                     <TextField
                       fullWidth
@@ -320,26 +321,27 @@ export const RegistrationPage = () => {
                   </Grid>
                 </>)}
               {charityType === 'fundraiser' && (
-                  <>
-                    <Grid item sm={12}>
-                      <p className={style.label}>Title of fundRaiser</p>
-                      <TextField
-                        fullWidth
-                        id="title"
-                        name="title"
-                        type="text"
-                        value={formik.values.title}
-                        onChange={formik.handleChange}
-                        error={formik.touched.title && Boolean(formik.errors.title)}
-                        inputProps={{style:{ backgroundColor: '#E6EAF0'}}}
-                        autoComplete='off'
-                        variant="outlined"
-                        placeholder="Enter title of your fundraiser"
-                      />
-                    </Grid>
-                  </>)
+                <>
+                  <Grid item xs={12}>
+                    <p className={style.label}>Title of fundRaiser</p>
+                    <TextField
+                      fullWidth
+                      id="title"
+                      name="title"
+                      type="text"
+                      value={formik.values.title}
+                      onChange={formik.handleChange}
+                      error={formik.touched.title && Boolean(formik.errors.title)}
+                      inputProps={{style:{ backgroundColor: '#E6EAF0'}}}
+                      autoComplete='off'
+                      variant="outlined"
+                      placeholder="Enter title of your fundraiser"
+                      className="w-full"
+                    />
+                  </Grid>
+                </>)
               }
-              <Grid item sm={12}>
+              <Grid item xs={12}>
                 <p className={style.label}>Contact Email</p>
                 <TextField
                   fullWidth
@@ -355,7 +357,7 @@ export const RegistrationPage = () => {
                   placeholder="Enter email"
                 />
               </Grid>
-              <Grid item sm={12}>
+              <Grid item xs={12}>
                 <p className={style.label}>Which Country based on:</p>
                 <TextField
                   fullWidth
@@ -371,7 +373,7 @@ export const RegistrationPage = () => {
                   placeholder="Enter your country"
                 />
               </Grid>
-              <Grid item sm={12}>
+              <Grid item xs={12}>
                 <p className={style.label}>Wallet address to receive</p>
                 <TextField
                   fullWidth
@@ -383,8 +385,8 @@ export const RegistrationPage = () => {
                   placeholder="Connect to your wallet address"
                 />
               </Grid>
-              <Grid item sm={12}>
-                <p className={style.label}>Short summary of {charityType} (100 characters max)</p>
+              <Grid item xs={12}>
+                <p className={style.label}>Short summary (100 characters max)</p>
                 <TextareaAutosize
                   minRows={4}
                   maxRows={4}
@@ -398,10 +400,10 @@ export const RegistrationPage = () => {
                 />
               </Grid>
             </Grid>
-            <Grid item container xs={12} sm={6} spacing={1}>
+            <Grid item container sm={12} md={6} spacing={1}>
               {charityType === 'charity' && (
                 <>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Phone</p>
                     <TextField
                       fullWidth
@@ -417,7 +419,7 @@ export const RegistrationPage = () => {
                       placeholder="Enter your charity phone"
                     />
                   </Grid>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Linkedin</p>
                     <TextField
                       fullWidth
@@ -433,7 +435,7 @@ export const RegistrationPage = () => {
                       placeholder="Enter your charity linkedin"
                     />
                   </Grid>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Twitter</p>
                     <TextField
                       fullWidth
@@ -449,7 +451,7 @@ export const RegistrationPage = () => {
                       placeholder="Enter your charity twitter"
                     />
                   </Grid>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Facebook</p>
                     <TextField
                       fullWidth
@@ -465,7 +467,7 @@ export const RegistrationPage = () => {
                       placeholder="Enter your charity facebook"
                     />
                   </Grid>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Instagram</p>
                     <TextField
                       fullWidth
@@ -485,7 +487,7 @@ export const RegistrationPage = () => {
               }
               {charityType === 'fundraiser' && (
                 <>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Your full name</p>
                     <TextField
                       fullWidth
@@ -501,7 +503,7 @@ export const RegistrationPage = () => {
                       placeholder="Enter your full name"
                     />
                   </Grid>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Goal of fundraising ($):</p>
                     <TextField
                       fullWidth
@@ -517,7 +519,7 @@ export const RegistrationPage = () => {
                       placeholder="Enter your goal of fundraising"
                     />
                   </Grid>
-                  <Grid item sm={12}>
+                  <Grid item xs={12}>
                     <p className={style.label}>Which location based on:</p>
                     <TextField
                       fullWidth
@@ -535,14 +537,14 @@ export const RegistrationPage = () => {
                   </Grid>
                 </>)
               }
-              <Grid item sm={12}>
+              <Grid item xs={12}>
                 <p className={style.label}>Fundraiser type:</p>
                 <select
                   id="type"
                   name="type"
                   value={formik.values.type}
                   onChange={formik.handleChange}
-                  className="w-full h-55 border-1 p-5 pl-10 capitalize bg-[#E6EAF0]"
+                  className="w-full h-55 border-1 p-5 pl-10 capitalize bg-[#E6EAF0] w-full"
                 >
                   <option aria-label="None" value="" >Default</option>
                   {
@@ -555,8 +557,8 @@ export const RegistrationPage = () => {
                   }
                 </select>
               </Grid>
-              <Grid item sm={12}>
-                <p className={style.label}>Detailed summary of {charityType}(1000 characters max)</p>
+              <Grid item xs={12}>
+                <p className={style.label}>Detailed summary (1000 characters max)</p>
                 <TextareaAutosize
                   minRows={4}
                   maxRows={4}

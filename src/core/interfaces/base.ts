@@ -64,7 +64,7 @@ export interface loginUserProp {
     wallet_address: string;
     charity_type: number;
     goal: number;
-    fund_type: number;
+    fund_type: string;
     name: string;
     title: string;
     photo: string;

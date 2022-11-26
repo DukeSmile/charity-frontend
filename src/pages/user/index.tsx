@@ -1,35 +1,32 @@
-import { Grid, TextareaAutosize, TextField, NativeSelect, MenuItem } from "@material-ui/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faUpload } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { Grid } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { useFormik } from "formik";
-import { create } from 'ipfs-http-client';
 import { useParams, useNavigate } from "react-router-dom";
-import * as Yup from "yup";
-import axios from "axios";
 
 import { useWeb3Context } from "../../hooks/web3Context";
-import { allFundTypes, baseServerUrl, getContract, projectId, projectSecret } from "../../core/constants/base";
-import { setLoading, setLoginUser } from "../../core/store/slices/bridgeSlice";
-import { PhotoUpload } from "../../components/photoUpload";
 import { loginUserProp } from "../../core/interfaces/base";
 
 import logoImg from "../../assets/images/logo.png";
 import remoteImg from "../../assets/images/components/remote.png";
+import { useEffect } from "react";
 import { baseStyles } from "../../core/constants/style";
 import { RegistrationPage } from "./registration";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPowerOff, faUser } from "@fortawesome/free-solid-svg-icons";
 
 export const UserPage = () => {
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let { actionType } = useParams();
-  const {connected, address, provider} = useWeb3Context();
+  let { action } = useParams();
+  const {connected, address, provider, disconnect} = useWeb3Context();
   const loginUser:loginUserProp = useSelector((state:any) => state.app.loginUser);
 
-  const sidebarStyle = "p-5 text-center border";
-  console.log(actionType);
+  const sidebarStyle = "p-10 cursor-pointer border border-white hover:border-lightgrey rounded-5";
+  const sidebarActive = "p-10 cursor-pointer border border-white rounded-5 bg-brown text-white";
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <div className="relative bg-gradient-to-r from-algae to-seagreen h-400 flex items-end justify-between overflow-hidden">
@@ -43,29 +40,41 @@ export const UserPage = () => {
         </div>
       </div>
       <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70 px-35 py-50">
-        <Grid item container xs={12} sm={4} md={3}>
-          <div className="p-20 rounded-10 border-1 w-full">
-            <div className="bg-logo py-10 w-full flex justify-center">
-              <img src={logoImg} className="w-120 h-120"/>
+        <Grid container spacing={2}>
+          <Grid item container xs={12} sm={4} md={3}>
+            <div className="p-20 rounded-10 border-1 w-full">
+              <div className="bg-logo py-10 w-full flex justify-center">
+                <img src={logoImg} className="w-120 h-120"/>
+              </div>
+              <div className={action === 'signup' ? sidebarActive : sidebarStyle} onClick={() => navigate('/user/signup')}>
+                Sign up
+              </div>
+              <div className={action === 'profile' ? sidebarActive : sidebarStyle} onClick={() => navigate('/user/profile')}>
+                <FontAwesomeIcon icon={faUser} className="mr-10"/>User Profile
+              </div>
+              <div className={action === 'donations' ? sidebarActive : sidebarStyle} onClick={() => navigate('/user/donations')}>
+                My donations
+              </div>
+              <div className={action === 'fundraising' ? sidebarActive : sidebarStyle} onClick={() => navigate('/user/fundraising')}>
+                My fundraising
+              </div>
+              { connected && (
+                <div className={sidebarStyle} onClick={() => disconnect()}>
+                  <FontAwesomeIcon icon={faPowerOff} className="mr-10" />Disconnect
+                </div>
+              )}
             </div>
-            <div className={sidebarStyle}>
-              Sign up
+          </Grid>
+          <Grid item xs={12} sm={8} md={9}>
+            <div className="p-20 rounded-10 border-1 w-full">
+              {action === "signup" && (
+                <RegistrationPage edit={false}/>
+              )}
+              {action === "profile" && (
+                <RegistrationPage edit={true} />
+              )}
             </div>
-            <div className={sidebarStyle}>
-              Profile
-            </div>
-            <div className={sidebarStyle}>
-              My donations
-            </div>
-            <div className={sidebarStyle}>
-              My fundraising
-            </div>
-          </div>
-        </Grid>
-        <Grid item container xs={12} sm={8} md={9} spacing={1}>
-          {actionType === "signup" && (
-            <RegistrationPage />
-          )}
+          </Grid>
         </Grid>
       </div>
     </div>

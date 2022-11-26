@@ -6,7 +6,7 @@ import LoadingBar from '../components/loadingBar';
 import { Nav } from '../components/Nav';
 import { allFundTypes, baseServerUrl, getContract, handleSignMessage, roleList } from '../core/constants/base';
 import { adminUserProp, charityProp } from '../core/interfaces/base';
-import { demoLoginUser, setAdminUsers, setAllCharities, setCategories, setCharities, setFundRaisers, setLoginUser, setOwnerFlag, setSignHash } from '../core/store/slices/bridgeSlice';
+import { demoLoginUser, setAdminUsers, setAllCharities, setCategories, setCharities, setCharityType, setFundRaisers, setLoginUser, setOwnerFlag, setSignHash } from '../core/store/slices/bridgeSlice';
 import { useWeb3Context } from '../hooks/web3Context';
 import { FromNetwork } from '../networks';
 
@@ -105,7 +105,9 @@ export const Layout = ({children}: any) => {
           response = await axios.post(`${baseServerUrl}/auth/login`, {
             sign_hash: signHash
           });
-          setLoginUser(response);
+          console.log("[logined user]", response.data);
+          dispatch(setLoginUser(response.data));
+          dispatch(setCharityType(response.data.charity_type === 0 ? 'charity' : 'fundraiser'));
         }
         catch (e: any) {
           console.log(e);
