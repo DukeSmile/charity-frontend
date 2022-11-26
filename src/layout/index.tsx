@@ -99,6 +99,8 @@ export const Layout = ({children}: any) => {
       
       if (provider != null){
         const signHash = await handleSignMessage(address, provider);
+        if (signHash === '')
+          return;
         dispatch(setSignHash(signHash));
         let response;
         try {
@@ -106,8 +108,10 @@ export const Layout = ({children}: any) => {
             sign_hash: signHash
           });
           console.log("[logined user]", response.data);
-          dispatch(setLoginUser(response.data));
-          dispatch(setCharityType(response.data.charity_type === 0 ? 'charity' : 'fundraiser'));
+          if (response.data.id) {
+            dispatch(setLoginUser(response.data));
+            dispatch(setCharityType(response.data.charity_type === 0 ? 'charity' : 'fundraiser'));
+          }
         }
         catch (e: any) {
           console.log(e);
@@ -115,10 +119,10 @@ export const Layout = ({children}: any) => {
         // console.log(signHash);
       }
     };
+    dispatch(setSignHash(''));
+    dispatch(setLoginUser(demoLoginUser));
     if (address === '') {
       dispatch(setOwnerFlag(0));
-      dispatch(setSignHash(''));
-      dispatch(setLoginUser(demoLoginUser));
     }
     else
       isOwnerCheck(address);

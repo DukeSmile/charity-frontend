@@ -7,11 +7,13 @@ import { loginUserProp } from "../../core/interfaces/base";
 
 import logoImg from "../../assets/images/logo.png";
 import remoteImg from "../../assets/images/components/remote.png";
+import currenciesImg from "../../assets/images/components/currencies.png";
 import { useEffect } from "react";
 import { baseStyles } from "../../core/constants/style";
 import { RegistrationPage } from "./registration";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff, faUser } from "@fortawesome/free-solid-svg-icons";
+import { DonationHistoryAll } from "../../components/donationHistoryAll";
 
 export const UserPage = () => {
   
@@ -29,16 +31,30 @@ export const UserPage = () => {
 
   return (
     <div>
-      <div className="relative bg-gradient-to-r from-algae to-seagreen h-400 flex items-end justify-between overflow-hidden">
-        <div></div>
-        <img src={remoteImg} className="w-150 h-150 mr-20 sm:w-300 sm:h-300 md:mr-[10%]"/>
-        <div className="absolute left-[10%] top-0 w-full h-full text-white flex items-center">
-          <div className="mt-100 mx-20">
-            <p className="text-48 font-bold">Profile Settings</p>
-            <p className="text-20 my-10">Complete tasks by easily following the profile process.</p>
+      {action != 'signup' && (
+        <div className="relative bg-gradient-to-r from-algae to-seagreen h-400 flex items-end justify-between overflow-hidden">
+          <div></div>
+          <img src={remoteImg} className="w-150 h-150 mr-20 sm:w-300 sm:h-300 md:mr-[10%]"/>
+          <div className="absolute left-[10%] top-0 w-full h-full text-white flex items-center">
+            <div className="mt-100 mx-20">
+              <p className="text-48 font-bold">Profile Settings</p>
+              <p className="text-20 my-10">Complete tasks by easily following the profile process.</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+      {action === 'signup' && (
+        <div className="relative bg-gradient-to-r from-algae to-seagreen h-400 flex items-end justify-between overflow-hidden">
+          <img src={remoteImg} className="w-150 h-150 ml-20 sm:w-300 sm:h-300 md:ml-[5%]"/>
+          <img src={currenciesImg} className="w-250 h-90 mr-20 md:w-500 md:h-180 md:mr-[5%]"/>
+          <div className="absolute left-0 top-0 w-full h-full text-white text-center flex items-center justify-center">
+            <div className="mt-50 mx-20">
+              <p className="text-48 font-bold">Let’s get you started!</p>
+              <p className="text-20">Work your way through our easy to follow registration process.</p>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70 px-35 py-50">
         <Grid container spacing={2}>
           <Grid item container xs={12} sm={4} md={3}>
@@ -47,11 +63,13 @@ export const UserPage = () => {
                 <img src={logoImg} className="w-120 h-120"/>
               </div>
               <div className={action === 'signup' ? sidebarActive : sidebarStyle} onClick={() => navigate('/user/signup')}>
-                Sign up
+                Start Fundraise
               </div>
-              <div className={action === 'profile' ? sidebarActive : sidebarStyle} onClick={() => navigate('/user/profile')}>
-                <FontAwesomeIcon icon={faUser} className="mr-10"/>User Profile
-              </div>
+              {loginUser.id != '' && (
+                <div className={action === 'profile' ? sidebarActive : sidebarStyle} onClick={() => navigate('/user/profile')}>
+                  <FontAwesomeIcon icon={faUser} className="mr-10"/>User Profile
+                </div>
+              )}
               <div className={action === 'donations' ? sidebarActive : sidebarStyle} onClick={() => navigate('/user/donations')}>
                 My donations
               </div>
@@ -72,6 +90,9 @@ export const UserPage = () => {
               )}
               {action === "profile" && (
                 <RegistrationPage edit={true} />
+              )}
+              {action === "donations" && (
+                <DonationHistoryAll />
               )}
             </div>
           </Grid>

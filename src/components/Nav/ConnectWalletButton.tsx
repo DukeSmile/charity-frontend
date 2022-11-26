@@ -1,23 +1,48 @@
-import { faSignOut, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faPowerOff, faSignOut, faUser, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, MenuItem, Button } from '@material-ui/core';
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 
 import { baseStyles } from '../../core/constants/style';
 import { useWeb3Context } from '../../hooks/web3Context';
+import { handleSignMessage, baseServerUrl } from '../../core/constants/base';
+import { setCharityType, setLoginUser, setSignHash } from '../../core/store/slices/bridgeSlice';
+import axios from 'axios';
 
 export const ConnectWalletButton = () => {
   
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const resumeStyle = 'm-5 hover:text-black';
   const ref = useRef<HTMLDivElement | null>(null);
-  const { connect, disconnect, address } = useWeb3Context();
+  const { connect, disconnect, address, provider } = useWeb3Context();
   const [showMenu, setShowMenu] = useState(false);
-  const loginedUser = useSelector((state:any) => state.app.loginedUser);
+  const loginUser = useSelector((state:any) => state.app.loginUser);
 
+  const SiginWalletAddress = async () => {
+    setShowMenu(false);
+    if (provider === null) 
+      return;
+    const signHash = await handleSignMessage(address, provider);
+    if (signHash === '')
+      return;
+    dispatch(setSignHash(signHash));
+    let response;
+    try {
+      response = await axios.post(`${baseServerUrl}/auth/login`, {
+        sign_hash: signHash
+      });
+      console.log("[logined user]", response.data);
+      dispatch(setLoginUser(response.data));
+      dispatch(setCharityType(response.data.charity_type === 0 ? 'charity' : 'fundraiser'));
+    }
+    catch (e: any) {
+      console.log(e);
+    }
+  }
   useEffect(() => {
     const listener = (event: MouseEvent) => {
       if (
@@ -34,6 +59,7 @@ export const ConnectWalletButton = () => {
       document.removeEventListener("click", listener, { capture: true });
     };
   }, []);
+
   return (
     <div className="z-100 flex">
       <div className="text-24 text-iron cursor-pointer m-10 hidden sm:flex">
@@ -60,18 +86,25 @@ export const ConnectWalletButton = () => {
                 </div>
               </button>
               <div className={'w-200 absolute bg-white border-1 ' + (showMenu ? '' : 'hidden')}>
+                {loginUser.id === '' && (
+                  <div>
+                    <Button className="text-center w-full" onClick={SiginWalletAddress}>Sign in</Button>
+                  </div>
+                )}
                 <div>
                   <Button className="text-center w-full" onClick={() => {
                     setShowMenu(false);
                     navigate('/user/signup');
-                  }}>Sign up</Button>
+                  }}>Start fundraising</Button>
                 </div>
-                <div>
-                  <Button className="text-center w-full" onClick={() => {
-                    setShowMenu(false);
-                    navigate('/user/profile');
-                  }}>Profile</Button>
-                </div>
+                {loginUser.id != '' && (
+                  <div>
+                    <Button className="text-center w-full" onClick={() => {
+                      setShowMenu(false);
+                      navigate('/user/profile');
+                    }}>User Profile</Button>
+                  </div>
+                )}
                 <div>
                   <Button className="text-center w-full" onClick={() => {
                     setShowMenu(false);
@@ -82,7 +115,7 @@ export const ConnectWalletButton = () => {
                   <Button className="text-center w-full" onClick={() => {
                     setShowMenu(false);
                     navigate('/user/fundraising');
-                  }}>Donations To Me</Button>
+                  }}>My fundraising</Button>
                 </div>
                 <div>
                   <Button className="text-center w-full" onClick={() => {

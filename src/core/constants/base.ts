@@ -28,7 +28,7 @@ export const roleList:{[key:string]: string} = {
     'black': '0x5b326b543500ae5b817995ef8271cedfc72db65652666aced238ae8d58d8b949'
 };
 
-export const birthDDAContractNumber = 7931008;
+export const birthDDAContractNumber = 8022000;
 export const maximumAllDoantion = 20;
 export const projectId = '2HE3I80EtQeKwCEjmvXVxWooFzx';
 export const projectSecret = '6691d66e4959b01f15a45bbe767326e9';

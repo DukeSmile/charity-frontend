@@ -16,13 +16,15 @@ import { PhotoUpload } from "../../components/photoUpload";
 
 import remoteImg from "../../assets/images/components/remote.png";
 import currenciesImg from "../../assets/images/components/currencies.png";
+import manImg from "../../assets/images/components/man.png";
 import { baseStyles } from "../../core/constants/style";
+import { loginUserProp } from "../../core/interfaces/base";
 
 export const RegistrationPage = (props: any) => {
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loginUser = useSelector((state:any) => state.app.loginUser);
+  const loginUser:loginUserProp = useSelector((state:any) => state.app.loginUser);
   const {connected, address, provider} = useWeb3Context();
   // const [charityType, SetCharityType] = useState('fundraiser');
   const [wallet, setWallet] = useState('');
@@ -31,6 +33,7 @@ export const RegistrationPage = (props: any) => {
   const ipfsInfo = useSelector((state:any) => state.app.ipfs);
   const ownerFlag = useSelector((state:any) => state.app.isOwner);
   const charityType = useSelector((state:any) => state.app.charityType);
+  const walletSign = useSelector((state:any) => state.app.signHash);
   const style = {
     label: 'text-18 my-15',
     tab: 'rounded-full py-6 px-20 text-20 text-brown',
@@ -80,6 +83,189 @@ export const RegistrationPage = (props: any) => {
     location: Yup.string().required("Required"),
     // wallet: Yup.string().required("Required")
   });
+  const createNewCharity = async (values:any) => {
+    if(!connected){
+      return;
+    }
+    if(ownerFlag > 0)
+    {
+      alert("You can not create charity/fundraiser with this wallet address");
+      return;
+    }
+    // check ipfs is enabled
+    let ipfs;
+    try {
+      const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+      ipfs = create({
+          host: 'ipfs.infura.io',
+          port: 5001,
+          protocol: 'https',
+          headers: {
+              authorization: auth,
+          },
+      });
+    } catch (error) {
+      console.error("IPFS error ", error);
+      ipfs = undefined;
+    }
+    // signup charity
+    if (address !== '' && provider != null) {
+      dispatch(setLoading(true));
+      try{
+        //upload image to IPFS
+        let uploadUrl = '';
+        if (ipfsInfo && uploadFile) {
+          console.log(uploadFile);
+          const result = await (ipfsInfo).add(uploadFile);
+          uploadUrl = result.path;
+        }
+
+        // Make transaction for creating
+        let ddaContract = getContract('DDAContract');
+        const _catalog = {
+          charityType: charityType === 'charity' ? 0 : 1,
+          fund: 0,
+          goal: values.goal,
+          donateType: values.type,
+          photo:uploadUrl
+        }
+        const numOfCharityType = charityType === 'charity' ? 0 : 1;
+        await ddaContract.methods.createCharity(_catalog).send({from: address});
+
+        //send signup to backend
+        const ajax_info = {
+          "wallet_address": address.toLowerCase(),
+          "charity_type": numOfCharityType,
+          "goal": values.goal,
+          "fund_type": values.type,
+          "name": values.name,
+          "title": values.title,
+          "photo": uploadUrl,
+          "country": values.country,
+          "location": values.location,
+          "email": values.email,
+          "summary": values.summary,
+          "detail": values.detail,
+          "vip": values.vip,
+          "website": values.website,
+          "phone": values.phone,
+          "linkedin": values.linkedin,
+          "twitter": values.twitter,
+          "facebook": values.facebook,
+          "instagram": values.instagram
+        };
+        let response;
+        try {
+          response = await axios.post(`${baseServerUrl}/users/create`,
+            ajax_info,
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods":
+                  "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers":
+                  "Origin, Content-Type, X-Auth-Token",
+              },
+            }
+          );
+          dispatch(setLoginUser(response));
+        }
+        catch(e:any){
+          console.log(e.response.data.message);
+        }
+
+        
+        // navigate('/celebrate');
+      }
+      catch(error){
+        console.log(error);
+      }
+      dispatch(setLoading(false));
+    }
+  };
+
+  const updateCharity = async (values:any) => {
+    if(!connected){
+      return;
+    }
+    let ipfs;
+    try {
+      const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+      ipfs = create({
+          host: 'ipfs.infura.io',
+          port: 5001,
+          protocol: 'https',
+          headers: {
+              authorization: auth,
+          },
+      });
+    } catch (error) {
+      console.error("IPFS error ", error);
+      ipfs = undefined;
+    }
+    // signup charity
+    if (address !== '' && provider != null) {
+      dispatch(setLoading(true));
+      try{
+        //upload image to IPFS
+        let uploadUrl = '';
+        if (ipfsInfo && uploadFile) {
+          console.log(uploadFile);
+          const result = await (ipfsInfo).add(uploadFile);
+          uploadUrl = result.path;
+        }
+
+        const numOfCharityType = charityType === 'charity' ? 0 : 1;
+        //send update to backend
+        const ajax_info = {
+          "wallet_address": address.toLowerCase(),
+          "charity_type": numOfCharityType,
+          "goal": values.goal,
+          "fund_type": values.type,
+          "name": values.name,
+          "title": values.title,
+          "photo": uploadUrl,
+          "country": values.country,
+          "location": values.location,
+          "email": values.email,
+          "summary": values.summary,
+          "detail": values.detail,
+          "vip": values.vip,
+          "website": values.website,
+          "phone": values.phone,
+          "linkedin": values.linkedin,
+          "twitter": values.twitter,
+          "facebook": values.facebook,
+          "instagram": values.instagram
+        };
+        let response;
+        try {
+          response = await axios.patch(`${baseServerUrl}/users/${loginUser.wallet_address}`,
+            ajax_info,
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods":
+                  "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers":
+                  "Origin, Content-Type, X-Auth-Token",
+                Authorization: `Bearer ${walletSign}`
+              },
+            }
+          );
+          console.log(response);
+          dispatch(setLoginUser(response.data));
+        }
+        catch(e:any){
+          console.log(e.response.data.message);
+        }
+      }
+      catch(error){
+        console.log(error);
+      }
+      dispatch(setLoading(false));
+    }
+  };
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -100,106 +286,7 @@ export const RegistrationPage = (props: any) => {
       goal: currentUser.goal,
       type: ''
     },
-    onSubmit:async (values:any) => {
-      if(!connected){
-        return;
-      }
-      if(ownerFlag > 0)
-      {
-        alert("You can not create charity/fundraiser with this wallet address");
-        return;
-      }
-      // check ipfs is enabled
-      let ipfs;
-      try {
-        const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
-        ipfs = create({
-            host: 'ipfs.infura.io',
-            port: 5001,
-            protocol: 'https',
-            headers: {
-                authorization: auth,
-            },
-        });
-      } catch (error) {
-        console.error("IPFS error ", error);
-        ipfs = undefined;
-      }
-      // signup charity
-      if (address !== '' && provider != null) {
-        dispatch(setLoading(true));
-        try{
-          //upload image to IPFS
-          let uploadUrl = '';
-          if (ipfsInfo && uploadFile) {
-            console.log(uploadFile);
-            const result = await (ipfsInfo).add(uploadFile);
-            uploadUrl = result.path;
-          }
-
-          // Make transaction for creating
-          let ddaContract = getContract('DDAContract');
-          const _catalog = {
-            charityType: charityType === 'charity' ? 0 : 1,
-            fund: 0,
-            goal: values.goal,
-            donateType: values.type,
-            photo:uploadUrl
-          }
-          const numOfCharityType = charityType === 'charity' ? 0 : 1;
-          await ddaContract.methods.createCharity(_catalog).send({from: address});
-
-          //send signup to backend
-          const ajax_info = {
-            "wallet_address": address.toLowerCase(),
-            "charity_type": numOfCharityType,
-            "goal": values.goal,
-            "fund_type": values.type,
-            "name": values.name,
-            "title": values.title,
-            "photo": uploadUrl,
-            "country": values.country,
-            "location": values.location,
-            "email": values.email,
-            "summary": values.summary,
-            "detail": values.detail,
-            "vip": values.vip,
-            "website": values.website,
-            "phone": values.phone,
-            "linkedin": values.linkedin,
-            "twitter": values.twitter,
-            "facebook": values.facebook,
-            "instagram": values.instagram
-          };
-          let response;
-          try {
-            response = await axios.post(`${baseServerUrl}/users/create`,
-              ajax_info,
-              {
-                headers: {
-                  "Access-Control-Allow-Origin": "*",
-                  "Access-Control-Allow-Methods":
-                    "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-                  "Access-Control-Allow-Headers":
-                    "Origin, Content-Type, X-Auth-Token",
-                },
-              }
-            );
-            dispatch(setLoginUser(response));
-          }
-          catch(e:any){
-            console.log(e.response.data.message);
-          }
-
-          
-          // navigate('/celebrate');
-        }
-        catch(error){
-          console.log(error);
-        }
-        dispatch(setLoading(false));
-      }
-    },
+    onSubmit: props.edit ? updateCharity : createNewCharity,
     validationSchema: charityType === 'charity' ? validationCharity : validationFundRaiser
   });
 
@@ -233,29 +320,30 @@ export const RegistrationPage = (props: any) => {
 
   return (
     <div>
-      {/* <div className="relative bg-gradient-to-r from-algae to-seagreen h-400 flex items-end justify-between overflow-hidden">
-        <img src={remoteImg} className="w-150 h-150 ml-20 sm:w-300 sm:h-300 md:ml-[5%]"/>
-        <img src={currenciesImg} className="w-250 h-90 mr-20 md:w-500 md:h-180 md:mr-[5%]"/>
-        <div className="absolute left-0 top-0 w-full h-full text-white text-center flex items-center justify-center">
-          <div className="mt-50 mx-20">
-            <p className="text-48 font-bold">Let’s get you started!</p>
-            <p className="text-20">Work your way through our easy to follow registration process.</p>
-          </div>
-        </div>
-      </div> */}
-      {/* <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70 px-35 py-50"> */}
       <div>
-        <Grid container className="border-b-2 border-dashed my-10 p-10">
-          <Grid item sm={12} md={6}>
-            <p className="text-38 font-bold text-center">Start your fundraising</p>
+        {!props.edit && (
+          <Grid container className="border-b-2 border-dashed my-10 p-10">
+            <Grid item sm={12} md={6}>
+              <p className="text-38 font-bold text-center">Start your fundraising</p>
+            </Grid>
+            <Grid item sm={12} md={6} className="flex items-center flex-row-reverse">
+              <div className="bg-lightgrey rounded-full p-3 flex">
+                <button className={charityType === 'charity' ? style.activeTab : style.tab} onClick={() => dispatch(setCharityType('charity'))}>Charity</button>
+                <button className={charityType === 'fundraiser' ? style.activeTab : style.tab} onClick={() => dispatch(setCharityType('fundraiser'))}>FundRaiser</button>
+              </div>
+            </Grid>
           </Grid>
-          <Grid item sm={12} md={6} className="flex items-center flex-row-reverse">
-            <div className="bg-lightgrey rounded-full p-3 flex">
-              <button className={charityType === 'charity' ? style.activeTab : style.tab} onClick={() => dispatch(setCharityType('charity'))}>Charity</button>
-              <button className={charityType === 'fundraiser' ? style.activeTab : style.tab} onClick={() => dispatch(setCharityType('fundraiser'))}>FundRaiser</button>
+        )}
+        {props.edit && (
+          <div className="flex items-center">
+
+            <img src={loginUser.photo != '' ? ("https://ipfs.io/ipfs/" + loginUser.photo) : manImg} className="mr-20 w-120 h-120 rounded-full border"/>
+            <div>
+              <p className="text-24">{loginUser.name === '' ? 'User name' : loginUser.name}</p>
+              <p className="text-16">Update your photo and personal details</p>
             </div>
-          </Grid>
-        </Grid>
+          </div>
+        )}
         <form className="w-full" onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
             <Grid item container xs={12} md={6} spacing={1}>
@@ -571,7 +659,7 @@ export const RegistrationPage = (props: any) => {
               <img src={uploadFile ? URL.createObjectURL(uploadFile) : ''} className="w-200"/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <button type="submit" className={baseStyles.greenBtn}>Create <FontAwesomeIcon icon={faArrowRight} /></button>
+              <button type="submit" className={baseStyles.greenBtn}>{props.edit ? 'Update' : 'Create'} <FontAwesomeIcon icon={faArrowRight} /></button>
             </Grid>
           </Grid>
         </form>
