@@ -126,13 +126,13 @@ export const Nav = () => {
               <div>
                 <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
                   showMenubar('registry', false);
-                  navigate('/registration/charity');
+                  navigate('/user/signup');
                 }}>Charity</button>
               </div>
               <div>
                 <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
                   showMenubar('registry', false);
-                  navigate('/registration/fundraiser');
+                  navigate('/user/signup');
                 }}>personal fundraiser</button>
               </div>
               {isOwner >= 3 && (<div>

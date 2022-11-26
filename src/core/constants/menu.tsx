@@ -1,26 +1,21 @@
 import { MenuuItemProp, RouteItemProp } from "../interfaces/base";
-import { RegistrationPage } from "../../pages/registry/registration";
-import { FundRaisersPage } from "../../pages/registry/fundraisers";
-import { CharitiesPage } from "../../pages/registry/charities";
+import { RegistrationPage } from "../../pages/user/registration";
+import { FundRaisersPage } from "../../pages/user/fundraisers";
+import { CharitiesPage } from "../../pages/user/charities";
 import { DonationPage } from "../../pages/donation";
-import { AdminsPage } from "../../pages/registry/admins";
+import { AdminsPage } from "../../pages/user/admins";
 import { PhotoUpload } from "../../components/photoUpload";
 import { AboutPage } from "../../pages/about";
 import { HomePage } from "../../pages/home";
-import { CelebratePage } from "../../pages/registry/celebration";
+import { CelebratePage } from "../../pages/user/celebration";
 import { FilterCharitiesPage } from "../../pages/filterPage";
 import { DetailPage } from "../../pages/detailPage";
-import { ProfilePage } from "../../pages/registry/profile";
+import { UserPage } from "../../pages/user";
 export const routeItems: RouteItemProp[] = [
     {
         url: '/',
         owner: 0,
         element: <HomePage />
-    },
-    {
-        url: '/registration/:feature',
-        owner: 0,
-        element: <RegistrationPage />
     },
     {
         url: '/fundraisers',
@@ -63,8 +58,8 @@ export const routeItems: RouteItemProp[] = [
         element: <CelebratePage />
     },
     {
-        url: '/profile',
+        url: '/user/:action',
         owner: 0,
-        element: <ProfilePage />
+        element: <UserPage />
     }
 ];

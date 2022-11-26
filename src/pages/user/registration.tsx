@@ -242,7 +242,7 @@ export const RegistrationPage = () => {
 
   return (
     <div>
-      <div className="relative bg-gradient-to-r from-algae to-seagreen h-400 flex items-end justify-between overflow-hidden">
+      {/* <div className="relative bg-gradient-to-r from-algae to-seagreen h-400 flex items-end justify-between overflow-hidden">
         <img src={remoteImg} className="w-150 h-150 ml-20 sm:w-300 sm:h-300 md:ml-[5%]"/>
         <img src={currenciesImg} className="w-250 h-90 mr-20 md:w-500 md:h-180 md:mr-[5%]"/>
         <div className="absolute left-0 top-0 w-full h-full text-white text-center flex items-center justify-center">
@@ -251,8 +251,9 @@ export const RegistrationPage = () => {
             <p className="text-20">Work your way through our easy to follow registration process.</p>
           </div>
         </div>
-      </div>
-      <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70 px-35 py-50">
+      </div> */}
+      {/* <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70 px-35 py-50"> */}
+      <div>
         <Grid container className="border-b-2 border-dashed my-10 p-10">
           <Grid item xs={12} sm={6}>
             <p className="text-38 font-bold text-center">Start your fundraising as a {charityType}</p>

@@ -63,8 +63,26 @@ export const ConnectWalletButton = () => {
                 <div>
                   <Button className="text-center w-full" onClick={() => {
                     setShowMenu(false);
-                    navigate('/profile');
+                    navigate('/user/signup');
+                  }}>Sign up</Button>
+                </div>
+                <div>
+                  <Button className="text-center w-full" onClick={() => {
+                    setShowMenu(false);
+                    navigate('/user/profile');
                   }}>Profile</Button>
+                </div>
+                <div>
+                  <Button className="text-center w-full" onClick={() => {
+                    setShowMenu(false);
+                    navigate('/user/donations');
+                  }}>My Donations</Button>
+                </div>
+                <div>
+                  <Button className="text-center w-full" onClick={() => {
+                    setShowMenu(false);
+                    navigate('/user/fundraising');
+                  }}>Donations To Me</Button>
                 </div>
                 <div>
                   <Button className="text-center w-full" onClick={() => {

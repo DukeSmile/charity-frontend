@@ -7,7 +7,7 @@ export const demoLoginUser:loginUserProp = {
   charity_type: 0,
   goal: 0,
   fund_type: 0,
-  name: '',
+  name: 'Undefined Name',
   title: '',
   photo: '',
   country: '',

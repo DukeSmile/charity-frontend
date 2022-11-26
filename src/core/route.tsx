@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import { RegistrationPage } from "../pages/registry/registration";
-import { FundRaisersPage } from "../pages/registry/fundraisers";
-import { CharitiesPage } from "../pages/registry/charities";
+import { RegistrationPage } from "../pages/user/registration";
+import { FundRaisersPage } from "../pages/user/fundraisers";
+import { CharitiesPage } from "../pages/user/charities";
 import { DonationPage } from "../pages/donation";
 
 export const siteRouter = createBrowserRouter([
