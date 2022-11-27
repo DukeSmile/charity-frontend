@@ -2,15 +2,15 @@ import { Grid, CircularProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Web3 from "web3";
-import { birthDDAContractNumber, connectWeb3, getContract, maximumAllDoantion } from "../core/constants/base";
+import { birthDDAContractNumber, connectWeb3, getContract, maximumAllDoantion } from "../../core/constants/base";
 
-import { donationProp, charityProp } from "../core/interfaces/base";
-import { useWeb3Context } from "../hooks/web3Context";
-import { FromNetwork, tokenList } from "../networks";
+import { donationProp, charityProp } from "../../core/interfaces/base";
+import { useWeb3Context } from "../../hooks/web3Context";
+import { FromNetwork, tokenList } from "../../networks";
 
 const blankHistory: donationProp[] = [];
 
-export const DonationHistoryAll = (props:any) => {
+export const FundRaisingHistory = (props:any) => {
 
   const {address} = useWeb3Context();
   const [loading, setLoading] = useState(false);
@@ -27,10 +27,10 @@ export const DonationHistoryAll = (props:any) => {
     try{
       for (let i = lastBlock; i >= birthDDAContractNumber - blockCountIteration; i -= blockCountIteration) {
         //get all events related with selected charity
-        if (totalEvents.length < maximumAllDoantion) {
+        if (totalEvents.length < 20) {
           const allEvents = await ddaContract.getPastEvents('Donate', {
             'filter': {
-              '_from': address
+              '_to': address
             },
             'fromBlock': i - blockCountIteration + 1,
             'toBlock': i,
@@ -75,12 +75,12 @@ export const DonationHistoryAll = (props:any) => {
       </div>
         {
           histories.map((history:donationProp, index:number) => {
-            const charityIndex = charities.findIndex((item) => item.address === history.to);
-            const wAddress = charities[charityIndex].address;
+            const charityIndex = charities.findIndex((item) => item.address === history.from);
+            const wAddress = history.from;
             return (
               <Grid container spacing={1} key={index} className="border-b-1 p-5 ">
                 <Grid item xs={4} className="overflow-hidden text-center">
-                    { charityIndex >= 0 ? (wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length)) : 'black charity' }
+                    { wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length) }
                 </Grid>
                 <Grid item xs={4} className="overflow-hidden text-center">
                     { history.currency }

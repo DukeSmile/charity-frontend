@@ -13,8 +13,8 @@ import { charityProp, donationProp } from "../core/interfaces/base";
 import { setDonateHistory, setCaseDonateHistory, setLoading } from "../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../hooks/web3Context";
 import { FromNetwork, networks, tokenList } from "../networks";
-import { DonationHistoryAll } from "../components/donationHistoryAll";
-import { DonationHistoryCase } from "../components/donationHistoryCase";
+import { DonationHistoryAll } from "../components/history/donationHistoryAll";
+import { DonationHistoryCase } from "../components/history/donationHistoryCase";
 
 import donateImg from "../assets/images/components/donate.png";
 import currenciesImg from "../assets/images/components/currencies.png";

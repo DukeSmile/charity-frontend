@@ -13,7 +13,8 @@ import { baseStyles } from "../../core/constants/style";
 import { RegistrationPage } from "./registration";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff, faUser } from "@fortawesome/free-solid-svg-icons";
-import { DonationHistoryAll } from "../../components/donationHistoryAll";
+import { DonationHistoryAll } from "../../components/history/donationHistoryAll";
+import { FundRaisingHistory } from "../../components/history/fundRaisingHistory";
 
 export const UserPage = () => {
   
@@ -93,6 +94,9 @@ export const UserPage = () => {
               )}
               {action === "donations" && (
                 <DonationHistoryAll />
+              )}
+              {action === "fundraising" && (
+                <FundRaisingHistory />
               )}
             </div>
           </Grid>

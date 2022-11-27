@@ -2,7 +2,7 @@ import { Grid, CircularProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Web3 from "web3";
 
-import { donationProp, charityProp } from "../core/interfaces/base";
+import { donationProp, charityProp } from "../../core/interfaces/base";
 
 export const DonationHistoryCase = (props:any) => {
 

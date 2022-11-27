@@ -13,7 +13,7 @@ import { charityProp, donationProp } from "../core/interfaces/base";
 import { setDonateHistory, setCaseDonateHistory, setLoading } from "../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../hooks/web3Context";
 import { FromNetwork, networks, tokenList } from "../networks";
-import { DonationHistoryAll } from "../components/donationHistoryAll";
+import { DonationHistoryAll } from "../components/history/donationHistoryAll";
 import { baseStyles } from "../core/constants/style";
 import { DonateToAnimal } from "../components/donateToAnimal";
 import { BlogCategories } from "../components/blogCategories";
