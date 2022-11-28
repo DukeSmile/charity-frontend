@@ -8,7 +8,7 @@ import { PhotoUpload } from "../../components/photoUpload";
 import { AboutPage } from "../../pages/about";
 import { HomePage } from "../../pages/home";
 import { CelebratePage } from "../../pages/user/celebration";
-import { FilterCharitiesPage } from "../../pages/filterPage";
+import { FilterCharitiesPage } from "../../pages/filter/filterPage";
 import { DetailPage } from "../../pages/detailPage";
 import { UserPage } from "../../pages/user";
 export const routeItems: RouteItemProp[] = [

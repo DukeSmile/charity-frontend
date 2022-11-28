@@ -50,7 +50,6 @@ export const Layout = ({children}: any) => {
       else {
         initialCategories[newOne.fund_type] = {count: 1};
       }
-      console.log(newOne);
       if (newOne.charity_type === 1 || newOne.charity_type === '1') {
           fundRaisers.push(newOne);
       }
@@ -58,8 +57,8 @@ export const Layout = ({children}: any) => {
           charities.push(newOne);
       }
       allCharities.push(newOne);
-    })
-    console.log(fundRaisers, charities);
+    });
+    console.log(fundRaisers);
     dispatch(setFundRaisers(fundRaisers));
     dispatch(setCharities(charities));
     dispatch(setAllCharities(allCharities));

@@ -22,6 +22,7 @@ export const baseIcons: {[key: string]: any} = {
     memorial: defaultImg,
     nonprofit: defaultImg,
     relief: defaultImg,
+    business: defaultImg,
     volunteer: volunteerImg,
     personal: personalImg,
 }

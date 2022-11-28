@@ -1,7 +1,10 @@
+import { useEffect } from "react";
 import { aboutStrs } from "../core/constants/base";
 
 export const AboutPage = () => {
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <div className="relative bg-gradient-to-r from-algae to-seagreen w-full h-200 flex items-end justify-between overflow-hidden">

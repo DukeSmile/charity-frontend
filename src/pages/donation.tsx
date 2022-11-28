@@ -59,7 +59,8 @@ export const DonationPage = () => {
   ];
 
   const style = {
-    btn: 'border-1 py-5 px-10 text-black hover:text-white bg-artySkyBlue rounded-10'
+    btn: 'border-1 py-5 px-10 text-black hover:text-white bg-artySkyBlue rounded-10',
+    aboutlink: 'text-green font-bold underline'
   }
 
   const approve = async () => {
@@ -289,7 +290,7 @@ export const DonationPage = () => {
                     The Okapi DDA is the worlds first decentralised donation application.<br />
                     Please see how "how it works" page to view our donation term.
                   </p>
-                  <Link to="/about" className={style.btn}>How it works</Link>
+                  <Link to="/about" className={style.aboutlink}>How it works</Link>
                   <p className="my-15">
                     Okapi donation protection
                     Okapi donation anonymity is guaranteed.
