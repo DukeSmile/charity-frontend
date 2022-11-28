@@ -61,7 +61,7 @@ export const FeaturedCharities = () => {
         <div className="my-40">
           <Grid container spacing={1}>
             {
-              charities.map((charity:charityProp, index:number) => {
+              charities.map((charity:any, index:number) => {
                 return (
                   <Grid xs={12} sm={6} md={6} lg={4} item key={charity.index}>
                     <CharityInfo info={charity} key={index}/>

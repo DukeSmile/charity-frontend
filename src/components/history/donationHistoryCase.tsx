@@ -2,12 +2,12 @@ import { Grid, CircularProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Web3 from "web3";
 
-import { donationProp, charityProp } from "../../core/interfaces/base";
+import { donationProp } from "../../core/interfaces/base";
 
 export const DonationHistoryCase = (props:any) => {
 
   const donateHistories = useSelector((state:any) => state.app.caseDonateHistory);
-  const charities:charityProp[] = useSelector((state:any) => state.app.allCharities);
+  const charities:any[] = useSelector((state:any) => state.app.allCharities);
 
   return (
     <div className="my-20">
@@ -28,7 +28,7 @@ export const DonationHistoryCase = (props:any) => {
           return (
             <Grid container spacing={1} key={index} className="border p-5 ">
               <Grid item xs={4} className="overflow-hidden">
-                  { charityIndex >= 0 ? charities[charityIndex].catalog.name : 'black charity' }
+                  { charityIndex >= 0 ? charities[charityIndex].name : 'black charity' }
               </Grid>
               <Grid item xs={4} className="overflow-hidden">
                   { history.currency }

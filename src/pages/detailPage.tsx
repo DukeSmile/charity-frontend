@@ -30,9 +30,9 @@ export const DetailPage = () => {
   let targetIndex: number = index === undefined ? -1 : parseInt(index);
   const targetCharity = charities[targetIndex];
 
-  const fundPrice = parseFloat(Web3.utils.fromWei(targetCharity.fund));
+  const fundPrice = parseFloat(Web3.utils.fromWei(targetCharity.contract.fund));
   const fundLabel = Intl.NumberFormat().format(fundPrice);
-  let fundGoal = parseFloat(Web3.utils.fromWei(targetCharity.goal));
+  let fundGoal = parseFloat(Web3.utils.fromWei(targetCharity.goal.toString()));
   fundGoal = fundGoal > 1 ? fundGoal : 1;
   let fundPercent = fundPrice / fundGoal * 100;
   fundPercent = fundPercent > 100 ? 100 : fundPercent;
@@ -52,7 +52,7 @@ export const DetailPage = () => {
   };
 
   const getLast20History = async () => {
-    if(targetCharity.address === '')
+    if(targetCharity.wallet_address === '')
       return;
     setAllHLoading(true);
     let ddaContract = getContract('DDAContract');
@@ -65,7 +65,7 @@ export const DetailPage = () => {
         if (totalEvents.length < maximumAllDoantion) {
           const allEvents = await ddaContract.getPastEvents('Donate', {
             'filter': {
-              '_to': targetCharity ? targetCharity.address.toLowerCase() : ''
+              '_to': targetCharity ? targetCharity.wallet_address.toLowerCase() : ''
             },
             'fromBlock': i - blockCountIteration + 1,
             'toBlock': i,
@@ -125,21 +125,21 @@ export const DetailPage = () => {
               <div className="mx-20">
                 <div>
                   <p className="text-42 font-bold">
-                    {targetCharity.charityType == '0' ? targetCharity.catalog.name : targetCharity.catalog.title}
+                    {targetCharity.charity_type == '0' ? targetCharity.name : targetCharity.title}
                   </p>
                   <p className="text-18">
-                    {targetCharity.catalog.summary}
+                    {targetCharity.summary}
                   </p>
                   <p className="text-18 my-10">
-                    {targetCharity.charityType == '0' ? 'This is charity' : (<>by <label className="capitalize">{targetCharity.catalog.name}</label></>)}
+                    {targetCharity.charity_type == '0' ? 'This is charity' : (<>by <label className="capitalize">{targetCharity.name}</label></>)}
                   </p>
                 </div>
-                <img src={"https://ipfs.io/ipfs/" + targetCharity.catalog.photo} alt={targetCharity.catalog.name} className="w-full  rounded-10 my-10" />
-                <p className="capitalize">{targetCharity.catalog.detail}</p>
+                <img src={"https://ipfs.io/ipfs/" + targetCharity.photo} alt={targetCharity.name} className="w-full  rounded-10 my-10" />
+                <p className="capitalize">{targetCharity.detail}</p>
                 <div className="flex justify-between items-center my-20">
                   <div>
                     <p className="font-bold">Tags</p>
-                    <div className="p-5 px-10 border-1 rounded-full m-5">{targetCharity.fundType}</div>
+                    <div className="p-5 px-10 border-1 rounded-full m-5">{targetCharity.fund_type}</div>
                   </div>
                   <div>
                     <p className="font-bold">Share</p>

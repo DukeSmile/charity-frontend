@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { FaGoogle, FaFlag, FaBook, FaMapMarkedAlt, FaUser, FaBtc } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
-import { charityProp } from "../core/interfaces/base";
 import { baseStyles } from "../core/constants/style";
 import { useWeb3Context } from "../hooks/web3Context";
 import { setLoading } from "../core/store/slices/bridgeSlice";
@@ -13,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export const FilterCharity = (props:any) => {
-  const charity:charityProp = props.info;
+  const charity:any = props.info;
   const dispatch = useDispatch();
   const isOwner = useSelector((state: any) => state.app.isOwner);
   const { connected, address } = useWeb3Context();
@@ -43,12 +42,12 @@ export const FilterCharity = (props:any) => {
   };
   return (
     <div className="relative shadow-default p-10 rounded-10 h-full w-full text-16">
-      <img src={"https://ipfs.io/ipfs/" + charity.catalog.photo} className="w-full h-300"/>
-      <div className="font-bold text-22 mt-20 capitalize">{charity.charityType == '0' ? charity.catalog.name : charity.catalog.title}</div>
+      <img src={"https://ipfs.io/ipfs/" + charity.photo} className="w-full h-300"/>
+      <div className="font-bold text-22 mt-20 capitalize">{charity.charityType == '0' ? charity.name : charity.title}</div>
       <div className="text-16">
       {
         charity.charityType == '0' ? 'This is charity'
-        : (<>by <label className="capitalize">{charity.catalog.name}</label></>)
+        : (<>by <label className="capitalize">{charity.name}</label></>)
       }        
       </div>
       <div className="h-5 bg-greenwhite my-10">

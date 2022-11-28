@@ -75,7 +75,7 @@ export const FundRaisingHistory = (props:any) => {
       </div>
         {
           histories.map((history:donationProp, index:number) => {
-            const charityIndex = charities.findIndex((item) => item.address === history.from);
+            const charityIndex = charities.findIndex((item) => item.wallet_address === history.from);
             const wAddress = history.from;
             return (
               <Grid container spacing={1} key={index} className="border-b-1 p-5 ">

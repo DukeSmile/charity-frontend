@@ -16,7 +16,7 @@ exports.DonationHistoryCase = function (props) {
         donateHistories.map(function (history, index) {
             var charityIndex = charities.findIndex(function (item) { return item.address === history.to; });
             return (React.createElement(core_1.Grid, { container: true, spacing: 1, key: index, className: "border p-5 " },
-                React.createElement(core_1.Grid, { item: true, xs: 4, className: "overflow-hidden" }, charityIndex >= 0 ? charities[charityIndex].catalog.name : 'black charity'),
+                React.createElement(core_1.Grid, { item: true, xs: 4, className: "overflow-hidden" }, charityIndex >= 0 ? charities[charityIndex].name : 'black charity'),
                 React.createElement(core_1.Grid, { item: true, xs: 4, className: "overflow-hidden" }, history.currency),
                 React.createElement(core_1.Grid, { item: true, xs: 4, className: "overflow-hidden" }, web3_1["default"].utils.fromWei(history.amount))));
         })));

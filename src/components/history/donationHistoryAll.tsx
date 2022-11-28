@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Web3 from "web3";
 import { birthDDAContractNumber, connectWeb3, getContract, maximumAllDoantion } from "../../core/constants/base";
 
-import { donationProp, charityProp } from "../../core/interfaces/base";
+import { donationProp } from "../../core/interfaces/base";
 import { useWeb3Context } from "../../hooks/web3Context";
 import { FromNetwork, tokenList } from "../../networks";
 
@@ -15,7 +15,7 @@ export const DonationHistoryAll = (props:any) => {
   const {address} = useWeb3Context();
   const [loading, setLoading] = useState(false);
   const [histories, setHistories] = useState(blankHistory);
-  const charities:charityProp[] = useSelector((state:any) => state.app.allCharities);
+  const charities:any[] = useSelector((state:any) => state.app.allCharities);
   const getLast20History = async () => {
     if(address === '')
       return;

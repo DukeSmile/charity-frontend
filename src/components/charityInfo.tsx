@@ -30,16 +30,16 @@ export const CharityInfo = (props:any) => {
 
   return (
     <div className="shadow-default p-10 rounded-10 h-full w-full text-16">
-      <img src={"https://ipfs.io/ipfs/" + charity.catalog.photo} className="w-full h-300" />
-      <div className="font-bold text-center text-24 my-10">{charity.catalog.name}</div>
-      <p className="text-16 h-50 overflow-hidden">{charity.catalog.summary}</p>
-      {/* <div className="flex text-20 items-center capitalize"><FaRegistered className="mx-5" />{charity.catalog.vip}</div>
-      <div className="flex text-20 items-center"><FaGoogle className="mx-5" />{charity.catalog.email}</div>
+      <img src={"https://ipfs.io/ipfs/" + charity.photo} className="w-full h-300" />
+      <div className="font-bold text-center text-24 my-10">{charity.name}</div>
+      <p className="text-16 h-50 overflow-hidden">{charity.summary}</p>
+      {/* <div className="flex text-20 items-center capitalize"><FaRegistered className="mx-5" />{charity.vip}</div>
+      <div className="flex text-20 items-center"><FaGoogle className="mx-5" />{charity.email}</div>
       <div className="flex h-80 overflow-hidden text-20 items-start">
         <FaBook className="m-5" />
-        <div>{charity.catalog.summary}</div>
+        <div>{charity.summary}</div>
       </div>
-      <div className="flex text-20 items-center capitalize"><FaFlag className="mx-5" />{charity.catalog.country}</div>
+      <div className="flex text-20 items-center capitalize"><FaFlag className="mx-5" />{charity.country}</div>
       <div className="text-24 flex text-asphalt cursor-pointer my-10">
         <FaNetworkWired className={resumeStyle} />
         <FaPhoneAlt className={resumeStyle} />

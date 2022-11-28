@@ -11,13 +11,29 @@ export interface RouteItemProp {
 }
 
 export interface charityProp {
+    id: string;
     index: number;
-    charityType: number | '0' | '1';
-    fund: string;
-    fundType: string;
-    address: string;
-    catalog: any;
-    goal: string;
+    contract: any;
+    wallet_address: string;
+    charity_type: number | '0' | '1';
+    fund_type: string;
+    goal: number;
+    name: string;
+    photo: string;
+    summary: string;
+    detail: string;
+    country: string;
+    location: string;
+    email: string;
+    website: string;
+    phone: string;
+    facebook: string;
+    instagram: string;
+    linkedin: string;
+    title: string;
+    twitter: string;
+    vip: string;
+    createDateTime: string;
 }
 
 export interface adminUserProp {
@@ -29,7 +45,6 @@ export interface adminUserProp {
 export interface adminUserProp {
     index: number;
     address: string;
-    name: string;
 }
 
 interface networkTokenProp {

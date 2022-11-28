@@ -25,27 +25,32 @@ export const Layout = ({children}: any) => {
     //get charities information from contract
     const charitiesFromContract = await ddaContract.methods.getCharities().call();
     // console.log(charitiesFromContract);
-    let charities:charityProp[] = [],
-      fundRaisers:charityProp[] = [],
-      allCharities:charityProp[] = [];
+    let charities:any[] = [],
+      fundRaisers:any[] = [],
+      allCharities:any[] = [];
     let initialCategories:{[key:string]: {count:number}} = {};
+    let charitiesFromDatabase:any[] = [];
+    try {
+      let response = await axios.get(`${baseServerUrl}/users/all`);
+      if(response.data)
+        charitiesFromDatabase = response.data;
+    }
+    catch(e:any) {
+      console.log(e.message);
+      return;
+    }
+    // console.log(charitiesFromDatabase);
     charitiesFromContract.forEach((charity: any, index:number) => {
-      const newOne:charityProp = {
-        index: index,
-        charityType: parseInt(charity.charityType),
-        fund: charity.fund,
-        fundType: charity.donateType,
-        address: charity.walletAddress,
-        catalog: charity.catalog,
-        goal: charity.goal,
-      };
-      if (initialCategories[charity.donateType] != undefined) {
-        initialCategories[charity.donateType]['count'] = initialCategories[charity.donateType]['count'] + 1;
+      let newOne = charitiesFromDatabase.find((record:any) => record.wallet_address.toLowerCase() === charity.wallet_address.toLowerCase());
+      newOne['index'] = index;
+      newOne['contract'] = charity.catalog;
+      if (initialCategories[newOne.fund_type] != undefined) {
+        initialCategories[newOne.fund_type]['count'] = initialCategories[newOne.fund_type]['count'] + 1;
       }
       else {
-        initialCategories[charity.donateType] = {count: 1};
+        initialCategories[newOne.fund_type] = {count: 1};
       }
-      if (newOne.charityType === 1) {
+      if (newOne.fund_type === 1 || newOne.fund_type === '1') {
           fundRaisers.push(newOne);
       }
       else {
@@ -53,17 +58,19 @@ export const Layout = ({children}: any) => {
       }
       allCharities.push(newOne);
     })
+    console.log(fundRaisers, charities);
     dispatch(setFundRaisers(fundRaisers));
     dispatch(setCharities(charities));
     dispatch(setAllCharities(allCharities));
     // get AdminUsers from contract
     const adminsFromContract = await ddaContract.methods.getAdminUsers().call();
+    
     let admins:adminUserProp[] = [];
     adminsFromContract.forEach((admin: any, index:number) => {
       const newOne:adminUserProp = {
           index: index,
-          name: admin.name,
-          address: admin.walletAddress
+          address: admin.walletAddress,
+          name: ''
       };
       admins.push(newOne);
     })

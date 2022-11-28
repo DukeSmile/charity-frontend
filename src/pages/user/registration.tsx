@@ -130,6 +130,7 @@ export const RegistrationPage = (props: any) => {
           photo:uploadUrl
         }
         const numOfCharityType = charityType === 'charity' ? 0 : 1;
+        // console.log(_catalog);
         await ddaContract.methods.createCharity(_catalog).send({from: address});
 
         //send signup to backend

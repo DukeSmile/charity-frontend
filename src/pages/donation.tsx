@@ -144,7 +144,7 @@ export const DonationPage = () => {
   }
 
   const getLast20History = async () => {
-    if(targetCharity.address === '')
+    if(targetCharity.wallet_address === '')
       return;
     setAllHLoading(true);
     let ddaContract = getContract('DDAContract');
@@ -157,7 +157,7 @@ export const DonationPage = () => {
         if (totalEvents.length < maximumAllDoantion) {
           const allEvents = await ddaContract.getPastEvents('Donate', {
             'filter': {
-              '_to': targetCharity ? targetCharity.address.toLowerCase() : ''
+              '_to': targetCharity ? targetCharity.wallet_address.toLowerCase() : ''
             },
             'fromBlock': i - blockCountIteration + 1,
             'toBlock': i,
@@ -200,7 +200,7 @@ export const DonationPage = () => {
         const pastEvents = await ddaContract.getPastEvents('Donate', {
           'filter': {
             '_from': address.toLowerCase(),
-            '_to': targetCharity ? targetCharity.address : ''
+            '_to': targetCharity ? targetCharity.wallet_address : ''
           },
           'fromBlock': i - blockCountIteration + 1,
           'toBlock': i,
@@ -278,13 +278,13 @@ export const DonationPage = () => {
       )}
       {targetCharity && (
         <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70 px-35 py-50">
-          <p className="text-38 ">You're donating to <span className="font-bold">{targetCharity.catalog.name}</span></p>
+          <p className="text-38 ">You're donating to <span className="font-bold">{targetCharity.name}</span></p>
           <Grid container spacing={6}>
             <Grid item sm={12} md={6}>
               <div className="my-20">
-                <img src={"https://ipfs.io/ipfs/" + targetCharity.catalog.photo} alt={targetCharity.catalog.name} className="w-full  rounded-10" />
+                <img src={"https://ipfs.io/ipfs/" + targetCharity.photo} alt={targetCharity.name} className="w-full  rounded-10" />
                 <div className="text-18 py-10 border-b-2 border-dashed">
-                  <p className="text-28 font-bold">{targetCharity.catalog.summary}</p>
+                  <p className="text-28 font-bold">{targetCharity.summary}</p>
                   <p className="my-15">
                     The Okapi DDA is the worlds first decentralised donation application.<br />
                     Please see how "how it works" page to view our donation term.

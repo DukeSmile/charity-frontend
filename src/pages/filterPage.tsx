@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { charityProp } from "../core/interfaces/base";
 import { useWeb3Context } from "../hooks/web3Context";
-import { FilterCharity } from "../components/filterCharity";
+import { FilterCharity } from "../components/filteredCharityInfo";
 import donateImg from "../assets/images/components/filter.png";
 import leaveImg from "../assets/images/components/leave.png";
 import { faCaretDown, faSearch, faSliders } from "@fortawesome/free-solid-svg-icons";
