@@ -41,7 +41,7 @@ export const Layout = ({children}: any) => {
     }
     // console.log(charitiesFromDatabase);
     charitiesFromContract.forEach((charity: any, index:number) => {
-      let newOne = charitiesFromDatabase.find((record:any) => record.wallet_address.toLowerCase() === charity.wallet_address.toLowerCase());
+      let newOne = charitiesFromDatabase.find((record:any) => record.wallet_address.toLowerCase() === charity.walletAddress.toLowerCase());
       newOne['index'] = index;
       newOne['contract'] = charity.catalog;
       if (initialCategories[newOne.fund_type] != undefined) {
@@ -50,7 +50,8 @@ export const Layout = ({children}: any) => {
       else {
         initialCategories[newOne.fund_type] = {count: 1};
       }
-      if (newOne.fund_type === 1 || newOne.fund_type === '1') {
+      console.log(newOne);
+      if (newOne.charity_type === 1 || newOne.charity_type === '1') {
           fundRaisers.push(newOne);
       }
       else {

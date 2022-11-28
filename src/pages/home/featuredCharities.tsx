@@ -45,7 +45,9 @@ export const FeaturedCategories = () => {
 
 export const FeaturedCharities = () => {
   const allCharities = useSelector((state:any) => state.app.charities);
-  const charities = allCharities.slice(allCharities.length - 3, allCharities.length);
+  let startPos = allCharities.length - 3;
+  startPos = startPos < 0 ? 0 : startPos;
+  const charities = allCharities.slice(startPos, allCharities.length);
   const navigate = useNavigate();
   return (
     <div className="bg-alabaster">
@@ -61,7 +63,7 @@ export const FeaturedCharities = () => {
         <div className="my-40">
           <Grid container spacing={1}>
             {
-              charities.map((charity:any, index:number) => {
+              charities.map((charity:charityProp, index:number) => {
                 return (
                   <Grid xs={12} sm={6} md={6} lg={4} item key={charity.index}>
                     <CharityInfo info={charity} key={index}/>
@@ -82,7 +84,9 @@ export const FeaturedFundRaisers = () => {
   const donateTypes = ['health','education','environmental','animal'];
   const navigate = useNavigate();
   const allFundraisers = useSelector((state:any) => state.app.fundRaisers);
-  const fundRaisers = allFundraisers.slice(allFundraisers.length - 3, allFundraisers.length);
+  let startPos = allFundraisers.length - 3;
+  startPos = startPos < 0 ? 0 : startPos;
+  const fundRaisers = allFundraisers.slice(startPos, allFundraisers.length);
   return (
     <div className="w-[95%] md:w-[80%] mx-auto py-100">
       <div className="text-38 font-bold flex justify-between">

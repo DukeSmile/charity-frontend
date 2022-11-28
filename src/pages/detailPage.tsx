@@ -32,7 +32,7 @@ export const DetailPage = () => {
 
   const fundPrice = parseFloat(Web3.utils.fromWei(targetCharity.contract.fund));
   const fundLabel = Intl.NumberFormat().format(fundPrice);
-  let fundGoal = parseFloat(Web3.utils.fromWei(targetCharity.goal.toString()));
+  let fundGoal = targetCharity.goal;
   fundGoal = fundGoal > 1 ? fundGoal : 1;
   let fundPercent = fundPrice / fundGoal * 100;
   fundPercent = fundPercent > 100 ? 100 : fundPercent;
@@ -110,7 +110,7 @@ export const DetailPage = () => {
   // }
 
   const resumeStyle = 'm-5 hover:text-brown p-5 border-1 rounded-full text-16 w-30 h-30 cursor-pointer';
-  
+  const photoUrl = targetCharity.photo == '' ? '' : "https://ipfs.io/ipfs/" + targetCharity.photo;
   return (
     <div>
       <div className="relative bg-gradient-to-r from-algae to-seagreen w-full h-180">
@@ -134,7 +134,9 @@ export const DetailPage = () => {
                     {targetCharity.charity_type == '0' ? 'This is charity' : (<>by <label className="capitalize">{targetCharity.name}</label></>)}
                   </p>
                 </div>
-                <img src={"https://ipfs.io/ipfs/" + targetCharity.photo} alt={targetCharity.name} className="w-full  rounded-10 my-10" />
+                {photoUrl != '' && (
+                  <img src={photoUrl} alt={targetCharity.name} className="w-full min-h-100 rounded-10 my-10 border" />
+                )}
                 <p className="capitalize">{targetCharity.detail}</p>
                 <div className="flex justify-between items-center my-20">
                   <div>
@@ -156,7 +158,7 @@ export const DetailPage = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <div className="w-full bg-white border-1 border-lightgrey rounded-10 p-30">
-                <p className="text-16 text-iron"><span className="text-24 text-black mr-10">$ {fundLabel}</span> raised of $ {fundGoal}</p>
+                <p className="text-16 text-gunsmoke"><span className="text-24 text-black mr-10">$ {fundLabel}</span> raised of $ {Intl.NumberFormat().format(fundGoal)}</p>
                 <div className="h-5 bg-greenwhite my-10">
                   <div className={`h-5 bg-algae`} style={{width: fundPercent+'%'}}></div>
                 </div>
