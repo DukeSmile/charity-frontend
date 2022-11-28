@@ -1,25 +1,25 @@
 
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FaGoogle, FaFlag, FaBook, FaMapMarkedAlt, FaUser, FaBtc } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
-import { baseStyles } from "../core/constants/style";
-import { useWeb3Context } from "../hooks/web3Context";
-import { setLoading } from "../core/store/slices/bridgeSlice";
-import { getContract } from "../core/constants/base";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { baseStyles } from "../../core/constants/style";
+import { useWeb3Context } from "../../hooks/web3Context";
+import { setLoading } from "../../core/store/slices/bridgeSlice";
+import { getContract } from "../../core/constants/base";
 
 export const FilterCharity = (props:any) => {
   const charity:any = props.info;
   const dispatch = useDispatch();
   const isOwner = useSelector((state: any) => state.app.isOwner);
   const { connected, address } = useWeb3Context();
-  const fundPrice = parseFloat(Web3.utils.fromWei(charity.fund));
+  const fundPrice = parseFloat(Web3.utils.fromWei(charity.contract.fund));
   const fundLabel = Intl.NumberFormat().format(fundPrice);
 
-  let fundGoal = parseFloat(Web3.utils.fromWei(charity.goal));
+  let fundGoal = charity.goal;
   fundGoal = fundGoal > 1 ? fundGoal : 1;
   let fundPercent = fundPrice / fundGoal * 100;
   fundPercent = fundPercent > 100 ? 100 : fundPercent;

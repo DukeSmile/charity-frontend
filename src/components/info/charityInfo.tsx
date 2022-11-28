@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram, FaPhoneAlt, FaNetworkWired, FaFlag, FaBook, FaRegistered } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useWeb3Context } from "../hooks/web3Context";
-import { getContract } from "../core/constants/base";
-import { setLoading } from "../core/store/slices/bridgeSlice";
-import { baseStyles } from "../core/constants/style";
+import { useWeb3Context } from "../../hooks/web3Context";
+import { getContract } from "../../core/constants/base";
+import { setLoading } from "../../core/store/slices/bridgeSlice";
+import { baseStyles } from "../../core/constants/style";
 
 export const CharityInfo = (props:any) => {
   const charity = props.info;

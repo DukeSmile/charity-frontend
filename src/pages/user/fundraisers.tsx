@@ -10,7 +10,7 @@ import { charityProp } from "../../core/interfaces/base";
 import { setCharities, setFundRaisers, setLoading } from "../../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../../hooks/web3Context";
 import { FaBook, FaBtc, FaFlag, FaGoogle, FaMapMarkedAlt, FaUser } from "react-icons/fa";
-import { FundraiserInfo } from "../../components/fundraiserInfo";
+import { FundraiserInfo } from "../../components/info/fundraiserInfo";
 
 export const FundRaisersPage = () => {
   const dispatch = useDispatch();

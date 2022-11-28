@@ -11,7 +11,7 @@ import { useWeb3Context } from "../../hooks/web3Context";
 import { getContract } from "../../core/constants/base";
 import { setLoading } from "../../core/store/slices/bridgeSlice";
 import { baseStyles } from "../../core/constants/style";
-import { CharityInfo } from "../../components/charityInfo";
+import { CharityInfo } from "../../components/info/charityInfo";
 
 export const CharitiesPage = () => {
   const dispatch = useDispatch();

@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { FaGoogle, FaFlag, FaBook, FaMapMarkedAlt, FaUser, FaBtc } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
-import { baseStyles } from "../core/constants/style";
-import { useWeb3Context } from "../hooks/web3Context";
-import { setLoading } from "../core/store/slices/bridgeSlice";
-import { getContract } from "../core/constants/base";
+import { baseStyles } from "../../core/constants/style";
+import { useWeb3Context } from "../../hooks/web3Context";
+import { setLoading } from "../../core/store/slices/bridgeSlice";
+import { getContract } from "../../core/constants/base";
 
 export const FundraiserInfo = (props:any) => {
   const currentFundraiser = props.info;

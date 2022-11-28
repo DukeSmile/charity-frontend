@@ -1,16 +1,16 @@
 import { Grid } from "@material-ui/core";
-import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faSearch, faSliders } from "@fortawesome/free-solid-svg-icons";
 import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram, FaPhoneAlt, FaNetworkWired, FaFlag, FaBook, FaRegistered, FaMapMarkedAlt, FaUser, FaBtc } from "react-icons/fa";
 import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { charityProp } from "../core/interfaces/base";
 import { useWeb3Context } from "../hooks/web3Context";
-import { FilterCharity } from "../components/filteredCharityInfo";
+import { FilterCharity } from "../components/info/filteredCharityInfo";
 import donateImg from "../assets/images/components/filter.png";
 import leaveImg from "../assets/images/components/leave.png";
-import { faCaretDown, faSearch, faSliders } from "@fortawesome/free-solid-svg-icons";
 
 export const FilterCharitiesPage = () => {
 
