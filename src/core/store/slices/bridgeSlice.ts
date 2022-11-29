@@ -5,7 +5,7 @@ export const demoLoginUser:loginUserProp = {
   id: '',
   wallet_address: '',
   charity_type: 0,
-  goal: 0,
+  goal: 1,
   fund_type: '',
   name: '',
   title: '',
