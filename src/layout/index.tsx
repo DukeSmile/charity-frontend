@@ -24,7 +24,7 @@ export const Layout = ({children}: any) => {
     const ddaContract = getContract('DDAContract');
     //get charities information from contract
     const charitiesFromContract = await ddaContract.methods.getCharities().call();
-    // console.log(charitiesFromContract);
+    console.log('[contract] : ', charitiesFromContract);
     let charities:any[] = [],
       fundRaisers:any[] = [],
       allCharities:any[] = [];
@@ -39,9 +39,15 @@ export const Layout = ({children}: any) => {
       console.log(e.message);
       return;
     }
-    // console.log(charitiesFromDatabase);
+    console.log(charitiesFromDatabase);
     charitiesFromContract.forEach((charity: any, index:number) => {
-      let newOne = charitiesFromDatabase.find((record:any) => record.wallet_address.toLowerCase() === charity.walletAddress.toLowerCase());
+      let newOne:any = {};
+      let dbInfo = charitiesFromDatabase.find((record:any) => record.wallet_address.toLowerCase() === charity.walletAddress.toLowerCase());
+      if (dbInfo) {
+        Object.keys(dbInfo).forEach((key:any) => {
+          newOne[key] = dbInfo[key];
+        })
+      }
       newOne['index'] = index;
       newOne['contract'] = charity.catalog;
       if (initialCategories[newOne.fund_type] != undefined) {
@@ -58,7 +64,6 @@ export const Layout = ({children}: any) => {
       }
       allCharities.push(newOne);
     });
-    console.log(fundRaisers);
     dispatch(setFundRaisers(fundRaisers));
     dispatch(setCharities(charities));
     dispatch(setAllCharities(allCharities));
@@ -84,10 +89,10 @@ export const Layout = ({children}: any) => {
     };
     checkFromNetwork();
     getDDAInfo();
-    const intervalId = setInterval(getDDAInfo, 5000);
-    return ()=>{
-      clearInterval(intervalId);
-    }
+    // const intervalId = setInterval(getDDAInfo, 5000);
+    // return ()=>{
+    //   clearInterval(intervalId);
+    // }
   }, [])
   
   useEffect(() => {

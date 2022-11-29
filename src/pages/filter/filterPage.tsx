@@ -144,7 +144,7 @@ export const FilterCharitiesPage = () => {
         )}
         {charities.length === 0 &&
           <div className="text-24 p-20">
-            There is no charity & fundraiser on this <label className="font-bold text-black">{category}</label> category
+            There is no charity & fundraiser matched on the filter options
           </div>
         }
         
@@ -201,29 +201,29 @@ export const FilterCharitiesPage = () => {
                   </div>
                 </Grid>
               </Grid>
-              <Grid container className="pt-10" spacing={3}>
-                <Grid item xs={12} sm={3} className="flex items-center">
+              <Grid container spacing={3} className="pt-10 flex items-center">
+                <Grid item xs={12} sm={4} md={3} className="flex items-center justify-center">
                   <div className="mr-20">
                     <p className="text-24 font-bold text-center">Close to Goal</p>
                     <p className="text-gunsmoke text-center">$50 or less needed</p>
                   </div>
                   <LeftLabelSwitch color="primary" className="w-100"/>
                 </Grid>
-                <Grid item xs={12} sm={3} className="flex items-center">
+                <Grid item xs={12} sm={4} md={3} className="flex items-center justify-center">
                   <label className="text-24 font-bold mr-20">Near you</label>
                   <LeftLabelSwitch color="primary" className="w-100" checked={filterNear} onClick={() => setFilterNear(!filterNear)}/>
                 </Grid>
-                <Grid item xs={12} sm={3}>
-                  <div className="flex items-center">
+                <Grid item xs={12} sm={4} md={4}>
+                  <div className="flex items-center justify-center">
                     <label className="text-24 font-bold w-140">Charity</label>
                     <LeftLabelSwitch color="primary" className="w-100" checked={filterCharity} onClick={() => setFilterCharity(!filterCharity)}/>
                   </div>
-                  <div className="flex items-center">
+                  <div className="flex items-center justify-center">
                     <label className="text-24 font-bold w-140">Fundraiser</label>
                     <LeftLabelSwitch color="primary" className="w-100" checked={filterFundraiser} onClick={() => setFilterFundraiser(!filterFundraiser)}/>
                   </div>
                 </Grid>
-                <Grid item xs={12} sm={3} className="flex items-center">
+                <Grid item xs={12} sm={12} md={2} className="flex items-center flex-row-reverse">
                   <button className="p-10 px-20 m-5 bg-iron font-bold cursor-pointer border rounded-full" onClick={filterReset}>
                     Reset
                   </button>

@@ -44,6 +44,21 @@ export const RegistrationPage = (props: any) => {
   if (props.edit) {
     currentUser = loginUser;
   }
+  const loadCurrentData = async() =>{
+    let response;
+    try {
+      response = await axios.post(`${baseServerUrl}/auth/login`, {
+        sign_hash: walletSign
+      });
+      if (response.data.id) {
+        dispatch(setLoginUser(response.data));
+        dispatch(setCharityType(response.data.charity_type === 0 ? 'charity' : 'fundraiser'));
+      }
+    }
+    catch(e:any){
+      console.log(e.message);
+    }
+  };
   // console.log(props.currentUser, currentUser);
   const validationCharity = Yup.object().shape({
     name: Yup.string()
@@ -174,9 +189,8 @@ export const RegistrationPage = (props: any) => {
         catch(e:any){
           console.log(e.response.data.message);
         }
-
-        
-        // navigate('/celebrate');
+        loadCurrentData();
+        navigate('/celebrate');
       }
       catch(error){
         console.log(error);
@@ -260,6 +274,7 @@ export const RegistrationPage = (props: any) => {
         catch(e:any){
           console.log(e.response.data.message);
         }
+        loadCurrentData();
       }
       catch(error){
         console.log(error);
@@ -285,7 +300,7 @@ export const RegistrationPage = (props: any) => {
       title: currentUser.title,
       location: currentUser.location,
       goal: currentUser.goal,
-      type: ''
+      type: currentUser.fund_type
     },
     onSubmit: props.edit ? updateCharity : createNewCharity,
     validationSchema: charityType === 'charity' ? validationCharity : validationFundRaiser
