@@ -2,6 +2,8 @@ import { Grid, CircularProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Web3 from "web3";
 
+import defaultImg from "../../assets/images/components/man.png";
+import { monthLabels } from "../../core/constants/base";
 import { donationProp } from "../../core/interfaces/base";
 
 export const DonationHistoryCase = (props:any) => {
@@ -25,16 +27,23 @@ export const DonationHistoryCase = (props:any) => {
       {
         donateHistories.map((history:donationProp, index:number) => {
           const charityIndex = charities.findIndex((item) => item.address === history.to);
+          const myDate = new Date(history.timeStamp * 1000);
+          const wAddress = history.from;
+          const donaterAddress = wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length);
+          const donaterName = charityIndex >= 0 ? charities[charityIndex].name : donaterAddress;
           return (
             <Grid container spacing={1} key={index} className="border p-5 ">
-              <Grid item xs={4} className="overflow-hidden">
-                  { charityIndex >= 0 ? charities[charityIndex].name : 'black charity' }
+              <Grid item xs={6} className="flex items-center">
+                <img src={defaultImg} className="w-40 h-40 mr-10"/>
+                <div>
+                  <p className="text-16 text-brown font-bold">{donaterName}</p>
+                  <p className="text-14 text-romance">{Web3.utils.fromWei(history.amount)} {history.currency}</p>
+                </div>
               </Grid>
-              <Grid item xs={4} className="overflow-hidden">
-                  { history.currency }
-              </Grid>
-              <Grid item xs={4} className="overflow-hidden">
-                  { Web3.utils.fromWei(history.amount) }
+              <Grid item xs={6}>
+                <div className="flex justify-center items-center h-full">
+                  {monthLabels[myDate.getMonth()]} {myDate.getDate()}, {myDate.getFullYear()}
+                </div>
               </Grid>
             </Grid>
           )

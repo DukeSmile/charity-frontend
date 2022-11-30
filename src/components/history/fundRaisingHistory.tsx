@@ -2,12 +2,12 @@ import { Grid, CircularProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Web3 from "web3";
-import { birthDDAContractNumber, connectWeb3, getContract, maximumAllDoantion } from "../../core/constants/base";
+import { birthDDAContractNumber, connectWeb3, getContract, maximumAllDoantion, monthLabels } from "../../core/constants/base";
 
 import { donationProp, charityProp } from "../../core/interfaces/base";
 import { useWeb3Context } from "../../hooks/web3Context";
 import { FromNetwork, tokenList } from "../../networks";
-
+import defaultImg from "../../assets/images/components/man.png";
 const blankHistory: donationProp[] = [];
 
 export const FundRaisingHistory = (props:any) => {
@@ -75,18 +75,23 @@ export const FundRaisingHistory = (props:any) => {
       </div>
       {
         histories.map((history:donationProp, index:number) => {
-          const charityIndex = charities.findIndex((item) => item.wallet_address === history.from);
+          const charityIndex = charities.findIndex((item) => item.wallet_address.toLowerCase() === history.from.toLowerCase());
           const wAddress = history.from;
+          const wAddressEllipse = wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length);
+          const myDate = new Date(history.timeStamp * 1000);
           return (
             <Grid container spacing={1} key={index} className="border-b-1 p-5 ">
-              <Grid item xs={4} className="overflow-hidden text-center">
-                  { 'From : ' + wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length) }
+              <Grid item xs={6} className="flex items-center">
+                <img src={defaultImg} className="w-40 h-40 mr-10"/>
+                <div>
+                  <p className="text-16 text-brown font-bold">{wAddressEllipse}</p>
+                  <p className="text-14 text-romance">{Web3.utils.fromWei(history.amount)} {history.currency}</p>
+                </div>
               </Grid>
-              <Grid item xs={4} className="overflow-hidden text-center">
-                  { history.currency }
-              </Grid>
-              <Grid item xs={4} className="overflow-hidden text-center">
-                  { Web3.utils.fromWei(history.amount) }
+              <Grid item xs={6}>
+                <div className="flex justify-center items-center h-full">
+                  {monthLabels[myDate.getMonth()]} {myDate.getDate()}, {myDate.getFullYear()}
+                </div>
               </Grid>
             </Grid>
           )

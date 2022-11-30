@@ -172,3 +172,6 @@ export const aboutStrs:string [] = [
     '.01% of all donations above 250k will be used to buy back and burn Okapi tokens on the open market'
 ];
 
+export const monthLabels: string[] = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov', 'Dec'
+];

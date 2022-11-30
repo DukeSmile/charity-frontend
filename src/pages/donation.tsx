@@ -18,6 +18,7 @@ import { DonationHistoryCase } from "../components/history/donationHistoryCase";
 import donateImg from "../assets/images/components/donate.png";
 import currenciesImg from "../assets/images/components/currencies.png";
 import { baseStyles } from "../core/constants/style";
+import { DonationHistoryAll } from "../components/history/donationHistoryAll";
 
 export const DonationPage = () => {
 
@@ -295,7 +296,7 @@ export const DonationPage = () => {
                   </p>
                 </div>
                 <div>
-                  <DonationHistoryCase loading={caseHLoading} />
+                  <DonationHistoryAll />
                 </div>
                 {/* <div>
                   <DonationHistoryAll loading={allHLoading} />
