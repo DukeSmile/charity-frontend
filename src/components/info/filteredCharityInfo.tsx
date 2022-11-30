@@ -43,10 +43,10 @@ export const FilterCharity = (props:any) => {
   return (
     <div className="relative shadow-default p-10 rounded-10 h-full w-full text-16">
       <img src={"https://ipfs.io/ipfs/" + charity.photo} className="w-full h-300"/>
-      <div className="font-bold text-22 mt-20 capitalize">{charity.charityType == '0' ? charity.name : charity.title}</div>
+      <div className="font-bold text-22 mt-20 capitalize">{charity.charity_type == 0 ? charity.name : charity.title}</div>
       <div className="text-16">
       {
-        charity.charityType == '0' ? 'This is charity'
+        charity.charity_type == 0 ? (<>This is charity</>)
         : (<>by <label className="capitalize">{charity.name}</label></>)
       }        
       </div>

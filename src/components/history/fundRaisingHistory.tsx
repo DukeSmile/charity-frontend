@@ -12,12 +12,11 @@ const blankHistory: donationProp[] = [];
 
 export const FundRaisingHistory = (props:any) => {
 
-  const {address} = useWeb3Context();
   const [loading, setLoading] = useState(false);
   const [histories, setHistories] = useState(blankHistory);
   const charities:charityProp[] = useSelector((state:any) => state.app.allCharities);
   const getLast20History = async () => {
-    if(address === '')
+    if(props.address === '')
       return;
       setLoading(true);
     let ddaContract = getContract('DDAContract');
@@ -30,7 +29,7 @@ export const FundRaisingHistory = (props:any) => {
         if (totalEvents.length < 20) {
           const allEvents = await ddaContract.getPastEvents('Donate', {
             'filter': {
-              '_to': address
+              '_to': props.address
             },
             'fromBlock': i - blockCountIteration + 1,
             'toBlock': i,
@@ -61,8 +60,9 @@ export const FundRaisingHistory = (props:any) => {
   };
 
   useEffect(() => {
-    getLast20History();
-  }, [address])
+    if (props.address != '' || props.address)
+      getLast20History();
+  }, [props.address])
 
   return (
     <div className="my-20">
@@ -73,25 +73,30 @@ export const FundRaisingHistory = (props:any) => {
           </div>
         )}
       </div>
-        {
-          histories.map((history:donationProp, index:number) => {
-            const charityIndex = charities.findIndex((item) => item.wallet_address === history.from);
-            const wAddress = history.from;
-            return (
-              <Grid container spacing={1} key={index} className="border-b-1 p-5 ">
-                <Grid item xs={4} className="overflow-hidden text-center">
-                    { wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length) }
-                </Grid>
-                <Grid item xs={4} className="overflow-hidden text-center">
-                    { history.currency }
-                </Grid>
-                <Grid item xs={4} className="overflow-hidden text-center">
-                    { Web3.utils.fromWei(history.amount) }
-                </Grid>
+      {
+        histories.map((history:donationProp, index:number) => {
+          const charityIndex = charities.findIndex((item) => item.wallet_address === history.from);
+          const wAddress = history.from;
+          return (
+            <Grid container spacing={1} key={index} className="border-b-1 p-5 ">
+              <Grid item xs={4} className="overflow-hidden text-center">
+                  { wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length) }
               </Grid>
-            )
-          })
-        }
+              <Grid item xs={4} className="overflow-hidden text-center">
+                  { history.currency }
+              </Grid>
+              <Grid item xs={4} className="overflow-hidden text-center">
+                  { Web3.utils.fromWei(history.amount) }
+              </Grid>
+            </Grid>
+          )
+        })
+      }
+      {histories.length === 0 && (
+        <div>
+          There are no your fundraising.
+        </div>
+      )}
     </div>
   )
 }

@@ -29,7 +29,7 @@ export const roleList:{[key:string]: string} = {
 };
 
 export const birthDDAContractNumber = 8022000;
-export const maximumAllDoantion = 20;
+export const maximumAllDoantion = 10;
 export const projectId = '2HE3I80EtQeKwCEjmvXVxWooFzx';
 export const projectSecret = '6691d66e4959b01f15a45bbe767326e9';
 export const ethTokenAddr = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';

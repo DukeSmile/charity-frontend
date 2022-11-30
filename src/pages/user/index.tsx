@@ -93,10 +93,10 @@ export const UserPage = () => {
                 <RegistrationPage edit={true} />
               )}
               {action === "donations" && (
-                <DonationHistoryAll />
+                <DonationHistoryAll address={address} />
               )}
               {action === "fundraising" && (
-                <FundRaisingHistory />
+                <FundRaisingHistory address={loginUser.wallet_address} />
               )}
             </div>
           </Grid>

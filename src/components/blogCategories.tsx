@@ -16,10 +16,10 @@ export const BlogCategories = (props: any) => {
         return (
           <div
             key={index}
-            className="p-20 text-romance capitalize flex justify-between border-b-2 cursor-pointer"
+            className="p-20 text-romance capitalize flex justify-between border-b-2 cursor-pointer hover:bg-alabaster"
             onClick={() => navigate('/filter/'+typeName)}
           >
-            <label className="text-18">{fundType.title}</label>
+            <label className="text-18 cursor-pointer">{fundType.title}</label>
             <div className="w-30 h-30 flex items-center justify-center bg-white border-1 rounded-full">
               {allCategories[typeName] ? allCategories[typeName].count : 0}
             </div>

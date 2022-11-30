@@ -36,6 +36,37 @@ export interface charityProp {
     createDateTime: string;
 }
 
+export const demoCharity: charityProp = {
+    id: '',
+    index: -1,
+    contract: {
+        walletAddress: '',
+        donateType: 'health',
+        photo: '',
+        fund: '0',
+        goal: '0'
+    },
+    wallet_address: '',
+    charity_type: 0,
+    fund_type: '',
+    goal: 0,
+    name: '',
+    photo: '',
+    summary: '',
+    detail: '',
+    country: '',
+    location: '',
+    email: '',
+    website: '',
+    phone: '',
+    facebook: '',
+    instagram: '',
+    linkedin: '',
+    title: '',
+    twitter: '',
+    vip: '',
+    createDateTime: '',
+}
 export interface adminUserProp {
     index: number;
     name: string;

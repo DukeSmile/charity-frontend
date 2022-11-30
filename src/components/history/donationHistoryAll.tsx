@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Web3 from "web3";
 import { birthDDAContractNumber, connectWeb3, getContract, maximumAllDoantion } from "../../core/constants/base";
 
-import { donationProp } from "../../core/interfaces/base";
+import { charityProp, donationProp } from "../../core/interfaces/base";
 import { useWeb3Context } from "../../hooks/web3Context";
 import { FromNetwork, tokenList } from "../../networks";
 
@@ -12,13 +12,10 @@ const blankHistory: donationProp[] = [];
 
 export const DonationHistoryAll = (props:any) => {
 
-  const {address} = useWeb3Context();
   const [loading, setLoading] = useState(false);
   const [histories, setHistories] = useState(blankHistory);
-  const charities:any[] = useSelector((state:any) => state.app.allCharities);
+  const charities:charityProp[] = useSelector((state:any) => state.app.allCharities);
   const getLast20History = async () => {
-    if(address === '')
-      return;
       setLoading(true);
     let ddaContract = getContract('DDAContract');
     const lastBlock = await connectWeb3.eth.getBlockNumber();
@@ -30,7 +27,7 @@ export const DonationHistoryAll = (props:any) => {
         if (totalEvents.length < maximumAllDoantion) {
           const allEvents = await ddaContract.getPastEvents('Donate', {
             'filter': {
-              '_from': address
+              '_from': props.address
             },
             'fromBlock': i - blockCountIteration + 1,
             'toBlock': i,
@@ -61,8 +58,9 @@ export const DonationHistoryAll = (props:any) => {
   };
 
   useEffect(() => {
-    getLast20History();
-  }, [address])
+    if (props.address != '' || props.address)
+      getLast20History();
+  }, [props.address])
 
   return (
     <div className="my-20">
@@ -73,25 +71,30 @@ export const DonationHistoryAll = (props:any) => {
           </div>
         )}
       </div>
-        {
-          histories.map((history:donationProp, index:number) => {
-            const charityIndex = charities.findIndex((item) => item.address === history.to);
-            const wAddress = charities[charityIndex].address;
-            return (
-              <Grid container spacing={1} key={index} className="border-b-1 p-5 ">
-                <Grid item xs={4} className="overflow-hidden text-center">
-                    { charityIndex >= 0 ? (wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length)) : 'black charity' }
-                </Grid>
-                <Grid item xs={4} className="overflow-hidden text-center">
-                    { history.currency }
-                </Grid>
-                <Grid item xs={4} className="overflow-hidden text-center">
-                    { Web3.utils.fromWei(history.amount) }
-                </Grid>
+      {
+        histories.map((history:donationProp, index:number) => {
+          const charityIndex = charities.findIndex((item) => item.wallet_address === history.to);
+          const wAddress = history.to;
+          return (
+            <Grid container spacing={1} key={index} className="border-b-1 p-5 ">
+              <Grid item xs={4} className="overflow-hidden text-center">
+                  {'To : ' + wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length)}
               </Grid>
-            )
-          })
-        }
+              <Grid item xs={4} className="overflow-hidden text-center">
+                  { history.currency }
+              </Grid>
+              <Grid item xs={4} className="overflow-hidden text-center">
+                  { Web3.utils.fromWei(history.amount) }
+              </Grid>
+            </Grid>
+          )
+        })
+      }
+      {histories.length === 0 && (
+        <div>
+          There are no your donations.
+        </div>
+      )}
     </div>
   )
 }

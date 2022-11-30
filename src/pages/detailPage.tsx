@@ -9,14 +9,15 @@ import { useParams } from "react-router-dom";
 import Web3 from "web3";
 
 import { birthDDAContractNumber, connectWeb3, getContract, getTokenContract, maximumAllDoantion, ethTokenAddr } from "../core/constants/base";
-import { charityProp, donationProp } from "../core/interfaces/base";
-import { setDonateHistory, setCaseDonateHistory, setLoading } from "../core/store/slices/bridgeSlice";
+import { charityProp, demoCharity, donationProp } from "../core/interfaces/base";
+import { setDonateHistory, setCaseDonateHistory, setLoading, demoLoginUser } from "../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../hooks/web3Context";
 import { FromNetwork, networks, tokenList } from "../networks";
 import { DonationHistoryAll } from "../components/history/donationHistoryAll";
 import { baseStyles } from "../core/constants/style";
 import { DonateToAnimal } from "../components/donateToAnimal";
 import { BlogCategories } from "../components/blogCategories";
+import { FundRaisingHistory } from "../components/history/fundRaisingHistory";
 
 export const DetailPage = () => {
 
@@ -28,8 +29,8 @@ export const DetailPage = () => {
   const charities: charityProp[] = useSelector((state: any) => state.app.allCharities);
   const ownerFlag = useSelector((state:any) => state.app.isOwner);
   let targetIndex: number = index === undefined ? -1 : parseInt(index);
-  const targetCharity = charities[targetIndex];
-
+  const targetCharity = charities[targetIndex] ? charities[targetIndex] : demoCharity;
+  
   const fundPrice = parseFloat(Web3.utils.fromWei(targetCharity.contract.fund));
   const fundLabel = Intl.NumberFormat().format(fundPrice);
   let fundGoal = targetCharity.goal;
@@ -115,10 +116,10 @@ export const DetailPage = () => {
     <div>
       <div className="relative bg-gradient-to-r from-algae to-seagreen w-full h-180">
       </div>
-      {!targetCharity && (
+      {targetCharity.index < 0 && (
         <div className="p-20">Please select one charity or fundraiser</div>
       )}
-      {targetCharity && (
+      {targetCharity.index >= 0 && (
         <div className="w-[95%] md:w-[80%] mx-auto py-50">
           <Grid container spacing={6}>
             <Grid item xs={12} sm={6} md={8}>
@@ -138,12 +139,14 @@ export const DetailPage = () => {
                   <img src={photoUrl} alt={targetCharity.name} className="w-full min-h-100 rounded-10 my-10 border" />
                 )}
                 <p className="capitalize">{targetCharity.detail}</p>
-                <div className="flex justify-between items-center my-20">
-                  <div>
+                <Grid container spacing={1}>
+                  <Grid item sm={12} md={6}>
                     <p className="font-bold">Tags</p>
-                    <div className="p-5 px-10 border-1 rounded-full m-5">{targetCharity.fund_type}</div>
-                  </div>
-                  <div>
+                    <div className="flex">
+                      <div className="p-5 px-10 border-1 rounded-full m-5 flex">{targetCharity.fund_type}</div>
+                    </div>
+                  </Grid>
+                  <Grid item sm={12} md={6}>
                     <p className="font-bold">Share</p>
                     <div className="flex">
                       <FaPhoneAlt className={resumeStyle} />
@@ -152,18 +155,23 @@ export const DetailPage = () => {
                       <FaFacebook className={resumeStyle} />
                       <FaInstagram className={resumeStyle} />
                     </div>
-                  </div>
-                </div>
+                  </Grid>
+                </Grid>
               </div>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <div className="w-full bg-white border-1 border-lightgrey rounded-10 p-30">
-                <p className="text-16 text-gunsmoke"><span className="text-24 text-black mr-10">$ {fundLabel}</span> raised of $ {Intl.NumberFormat().format(fundGoal)}</p>
+                <p className="text-16 text-gunsmoke">
+                  <span className="text-24 text-black mr-10">$ {fundLabel}</span>raised 
+                  {targetCharity.charity_type == 1 && (
+                    <>of {Intl.NumberFormat().format(fundGoal)}</>
+                  )}
+                </p>
                 <div className="h-5 bg-greenwhite my-10">
                   <div className={`h-5 bg-algae`} style={{width: fundPercent+'%'}}></div>
                 </div>
                 <div>
-                  <DonationHistoryAll loading={allHLoading} />
+                  <FundRaisingHistory address={targetCharity.wallet_address} />
                 </div>
                 <div className="flex justify-center">
                   <button className={baseStyles.normalBtn}>Show more</button>
@@ -173,7 +181,7 @@ export const DetailPage = () => {
                 className={
                   baseStyles.normalBtn + ' text-green hover:bg-green my-10 w-full'
                 }
-                onClick={() => navigate('/filter/animal')}
+                onClick={() => navigate('/donate/'+targetCharity.index)}
               >
                 Donate Now <FontAwesomeIcon icon={faArrowRight} />
               </button>
