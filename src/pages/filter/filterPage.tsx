@@ -38,19 +38,19 @@ export const FilterCharitiesPage = () => {
     btn: 'border-2 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
   };
 
-  if (category !== 'all') {
-    charities = charities.filter((charity:any)  => filterCategories[charity.contract.donateType] === true);
-  }
   if (filterCharity && filterFundraiser){
-    
   }
   else if (filterCharity)
     charities = charities.filter((charity:any)  => charity.charity_type == 0);
-  if (filterFundraiser)
+  else if (filterFundraiser)
     charities = charities.filter((charity:any)  => charity.charity_type == 1);
   else
     charities = [];
 
+  if (category !== 'all') {
+    charities = charities.filter((charity:any)  => filterCategories[charity.fund_type] === true);
+  }
+  console.log(charities);
   const filterReset = () => {
     setShowAllCategory(false);
     setFilterCharity(true);

@@ -6,7 +6,7 @@ export const demoLoginUser:loginUserProp = {
   wallet_address: '',
   charity_type: 0,
   goal: 1,
-  fund_type: '',
+  fund_type: 'health',
   name: '',
   title: '',
   photo: '',

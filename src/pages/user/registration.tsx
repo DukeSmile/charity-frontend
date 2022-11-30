@@ -645,7 +645,7 @@ export const RegistrationPage = (props: any) => {
                     Object.keys(allFundTypes).map((typeName, index) => {
                       const fundType = allFundTypes[typeName];
                       return (
-                        <option key={fundType.title} className="capitalize">{fundType.title}</option>
+                        <option key={typeName} className="capitalize">{fundType.title}</option>
                       )
                     })
                   }
