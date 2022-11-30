@@ -33,7 +33,7 @@ export const RegistrationPage = (props: any) => {
   const ipfsInfo = useSelector((state:any) => state.app.ipfs);
   const ownerFlag = useSelector((state:any) => state.app.isOwner);
   const charityType = useSelector((state:any) => state.app.charityType);
-  const walletSign = useSelector((state:any) => state.app.signHash);
+  const sign_hash = useSelector((state:any) => state.app.signHash);
   const style = {
     label: 'text-18 my-15',
     tab: 'rounded-full py-6 px-20 text-20 text-brown',
@@ -48,7 +48,12 @@ export const RegistrationPage = (props: any) => {
     let response;
     try {
       response = await axios.post(`${baseServerUrl}/auth/login`, {
-        sign_hash: walletSign
+        wallet_address: address
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${sign_hash}`
+        },
       });
       if (response.data.id) {
         dispatch(setLoginUser(response.data));
@@ -181,6 +186,7 @@ export const RegistrationPage = (props: any) => {
                   "GET, POST, PATCH, PUT, DELETE, OPTIONS",
                 "Access-Control-Allow-Headers":
                   "Origin, Content-Type, X-Auth-Token",
+                "Authorization": `Bearer ${sign_hash}`
               },
             }
           );
@@ -189,7 +195,7 @@ export const RegistrationPage = (props: any) => {
         catch(e:any){
           console.log(e.response.data.message);
         }
-        loadCurrentData();
+        // loadCurrentData();
         navigate('/celebrate');
       }
       catch(error){
@@ -255,7 +261,7 @@ export const RegistrationPage = (props: any) => {
         };
         let response;
         try {
-          response = await axios.patch(`${baseServerUrl}/users/${loginUser.wallet_address}`,
+          response = await axios.patch(`${baseServerUrl}/users`,
             ajax_info,
             {
               headers: {
@@ -264,17 +270,17 @@ export const RegistrationPage = (props: any) => {
                   "GET, POST, PATCH, PUT, DELETE, OPTIONS",
                 "Access-Control-Allow-Headers":
                   "Origin, Content-Type, X-Auth-Token",
-                Authorization: `Bearer ${walletSign}`
+                "Authorization": `Bearer ${sign_hash}`
               },
             }
           );
           console.log(response);
           dispatch(setLoginUser(response.data));
+          // loadCurrentData();
         }
         catch(e:any){
           console.log(e.response.data.message);
         }
-        loadCurrentData();
       }
       catch(error){
         console.log(error);

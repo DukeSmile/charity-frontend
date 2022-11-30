@@ -84,7 +84,7 @@ export const Layout = ({children}: any) => {
     setCount(count+1);
   }
 
-  const getSign = async() => {
+  const SiginWalletAddress = async() => {
     if (provider != null){
       const signHash = await handleSignMessage(address, provider);
       if (signHash === '')
@@ -93,7 +93,12 @@ export const Layout = ({children}: any) => {
       let response;
       try {
         response = await axios.post(`${baseServerUrl}/auth/login`, {
-          sign_hash: signHash
+          wallet_address: address
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${signHash}`
+          },
         });
         console.log("[logined user]", response.data);
         if (response.data.id) {
@@ -107,6 +112,7 @@ export const Layout = ({children}: any) => {
       // console.log(signHash);
     }
   }
+  
   useEffect(() => {
     const checkFromNetwork = async () => {
       await switchEthereumChain(FromNetwork, true);
@@ -143,7 +149,7 @@ export const Layout = ({children}: any) => {
   }, [address]);
 
   useEffect(() => {
-    getSign();
+    SiginWalletAddress();
   }, [connected]);
   return (
     <div className="w-full min-h-screen flex flex-col justify-between bg-cover font-poppins">

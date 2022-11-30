@@ -33,7 +33,12 @@ export const ConnectWalletButton = () => {
     let response;
     try {
       response = await axios.post(`${baseServerUrl}/auth/login`, {
-        sign_hash: signHash
+        wallet_address: address
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${signHash}`
+        },
       });
       console.log("[logined user]", response.data);
       dispatch(setLoginUser(response.data));

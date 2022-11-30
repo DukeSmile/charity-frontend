@@ -80,7 +80,7 @@ export const FundRaisingHistory = (props:any) => {
           return (
             <Grid container spacing={1} key={index} className="border-b-1 p-5 ">
               <Grid item xs={4} className="overflow-hidden text-center">
-                  { wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length) }
+                  { 'From : ' + wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length) }
               </Grid>
               <Grid item xs={4} className="overflow-hidden text-center">
                   { history.currency }
