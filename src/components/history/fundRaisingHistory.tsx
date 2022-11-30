@@ -80,15 +80,15 @@ export const FundRaisingHistory = (props:any) => {
           const wAddressEllipse = wAddress.slice(0,7) + '.....' + wAddress.slice(wAddress.length-5, wAddress.length);
           const myDate = new Date(history.timeStamp * 1000);
           return (
-            <Grid container spacing={1} key={index} className="border-b-1 p-5 ">
-              <Grid item xs={6} className="flex items-center">
+            <Grid container spacing={1} key={index} className="border-b-1 p-5 flex flex-wrap">
+              <Grid item xs={6} className="flex items-center overflow-hidden">
                 <img src={defaultImg} className="w-40 h-40 mr-10"/>
                 <div>
                   <p className="text-16 text-brown font-bold">{wAddressEllipse}</p>
                   <p className="text-14 text-romance">{Web3.utils.fromWei(history.amount)} {history.currency}</p>
                 </div>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={6} className="overflow-hidden">
                 <div className="flex justify-center items-center h-full">
                   {monthLabels[myDate.getMonth()]} {myDate.getDate()}, {myDate.getFullYear()}
                 </div>
