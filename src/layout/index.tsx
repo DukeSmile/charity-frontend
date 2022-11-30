@@ -12,7 +12,7 @@ import { FromNetwork } from '../networks';
 
 export const Layout = ({children}: any) => {
   const dispatch = useDispatch();
-  const {address, switchEthereumChain, provider} = useWeb3Context();
+  const {address, switchEthereumChain, provider, connected} = useWeb3Context();
   const [count, setCount] = useState(0);
   const [footerHeight, setFooterHeight] = useState(0);
   const loading = useSelector((state:any) => state.app.loading);
@@ -83,6 +83,30 @@ export const Layout = ({children}: any) => {
     dispatch(setCategories(initialCategories));
     setCount(count+1);
   }
+
+  const getSign = async() => {
+    if (provider != null){
+      const signHash = await handleSignMessage(address, provider);
+      if (signHash === '')
+        return;
+      dispatch(setSignHash(signHash));
+      let response;
+      try {
+        response = await axios.post(`${baseServerUrl}/auth/login`, {
+          sign_hash: signHash
+        });
+        console.log("[logined user]", response.data);
+        if (response.data.id) {
+          dispatch(setLoginUser(response.data));
+          dispatch(setCharityType(response.data.charity_type === 0 ? 'charity' : 'fundraiser'));
+        }
+      }
+      catch (e: any) {
+        console.log(e);
+      }
+      // console.log(signHash);
+    }
+  }
   useEffect(() => {
     const checkFromNetwork = async () => {
       await switchEthereumChain(FromNetwork, true);
@@ -108,28 +132,6 @@ export const Layout = ({children}: any) => {
       else if(await ddaContract.methods.hasRole(roleList['black'], cAddress).call())
         roleValue = 1;
       dispatch(setOwnerFlag(roleValue));
-      
-      if (provider != null){
-        const signHash = await handleSignMessage(address, provider);
-        if (signHash === '')
-          return;
-        dispatch(setSignHash(signHash));
-        let response;
-        try {
-          response = await axios.post(`${baseServerUrl}/auth/login`, {
-            sign_hash: signHash
-          });
-          console.log("[logined user]", response.data);
-          if (response.data.id) {
-            dispatch(setLoginUser(response.data));
-            dispatch(setCharityType(response.data.charity_type === 0 ? 'charity' : 'fundraiser'));
-          }
-        }
-        catch (e: any) {
-          console.log(e);
-        }
-        // console.log(signHash);
-      }
     };
     dispatch(setSignHash(''));
     dispatch(setLoginUser(demoLoginUser));
@@ -140,6 +142,9 @@ export const Layout = ({children}: any) => {
       isOwnerCheck(address);
   }, [address]);
 
+  useEffect(() => {
+    getSign();
+  }, [connected]);
   return (
     <div className="w-full min-h-screen flex flex-col justify-between bg-cover font-poppins">
       <div className="w-full z-10 py-10 bg-white fixed top-0 left-0 border-b-2 z-200">
