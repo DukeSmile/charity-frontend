@@ -5,8 +5,8 @@ import { contractABIs, networks, FromNetwork, tokenList } from '../../networks';
 import { chains } from '../../providers';
 import { fundTypeProp } from '../interfaces/base';
 
-// export const baseServerUrl = 'https://139.144.170.137/api/';
-export const baseServerUrl = 'http://localhost:3000/api';
+export const baseServerUrl = 'https://139.144.170.137/api/';
+// export const baseServerUrl = 'http://localhost:3000/api';
 
 const connectWeb3 = new Web3(chains[FromNetwork].rpcUrls[0]);
 

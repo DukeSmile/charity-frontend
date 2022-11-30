@@ -1,6 +1,6 @@
 import { Grid } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,14 +13,11 @@ import { charityProp, donationProp } from "../core/interfaces/base";
 import { setDonateHistory, setCaseDonateHistory, setLoading } from "../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../hooks/web3Context";
 import { FromNetwork, networks, tokenList } from "../networks";
-import { DonationHistoryAll } from "../components/history/donationHistoryAll";
 import { DonationHistoryCase } from "../components/history/donationHistoryCase";
 
 import donateImg from "../assets/images/components/donate.png";
 import currenciesImg from "../assets/images/components/currencies.png";
 import { baseStyles } from "../core/constants/style";
-import { chains } from "../providers";
-import { StringLiteral } from "typescript";
 
 export const DonationPage = () => {
 

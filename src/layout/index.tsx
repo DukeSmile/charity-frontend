@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FooterTab } from '../components/footer';
 import LoadingBar from '../components/loadingBar';
 import { Nav } from '../components/Nav';
-import { allFundTypes, baseServerUrl, getContract, handleSignMessage, roleList } from '../core/constants/base';
+import { baseServerUrl, getContract, handleSignMessage, roleList } from '../core/constants/base';
 import { adminUserProp, charityProp } from '../core/interfaces/base';
 import { demoLoginUser, setAdminUsers, setAllCharities, setCategories, setCharities, setCharityType, setFundRaisers, setLoginUser, setOwnerFlag, setSignHash } from '../core/store/slices/bridgeSlice';
 import { useWeb3Context } from '../hooks/web3Context';
@@ -24,10 +24,10 @@ export const Layout = ({children}: any) => {
     const ddaContract = getContract('DDAContract');
     //get charities information from contract
     const charitiesFromContract = await ddaContract.methods.getCharities().call();
-    console.log('[contract] : ', charitiesFromContract);
-    let charities:any[] = [],
-      fundRaisers:any[] = [],
-      allCharities:any[] = [];
+    // console.log('[contract] : ', charitiesFromContract);
+    let charities:charityProp[] = [],
+      fundRaisers:charityProp[] = [],
+      allCharities:charityProp[] = [];
     let initialCategories:{[key:string]: {count:number}} = {};
     let charitiesFromDatabase:any[] = [];
     try {
@@ -39,7 +39,7 @@ export const Layout = ({children}: any) => {
       console.log(e.message);
       return;
     }
-    console.log(charitiesFromDatabase);
+    // console.log(charitiesFromDatabase);
     charitiesFromContract.forEach((charity: any, index:number) => {
       let newOne:any = {};
       let dbInfo = charitiesFromDatabase.find((record:any) => record.wallet_address.toLowerCase() === charity.walletAddress.toLowerCase());
@@ -72,7 +72,6 @@ export const Layout = ({children}: any) => {
     
     let admins:adminUserProp[] = [];
     adminsFromContract.forEach((admin: any, index:number) => {
-      console.log(admin);
       const newOne:adminUserProp = {
           index: index,
           address: admin

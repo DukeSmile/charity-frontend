@@ -1,5 +1,4 @@
 
-import { Grid } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
