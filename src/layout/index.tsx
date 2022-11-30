@@ -72,10 +72,10 @@ export const Layout = ({children}: any) => {
     
     let admins:adminUserProp[] = [];
     adminsFromContract.forEach((admin: any, index:number) => {
+      console.log(admin);
       const newOne:adminUserProp = {
           index: index,
-          address: admin.walletAddress,
-          name: ''
+          address: admin
       };
       admins.push(newOne);
     })

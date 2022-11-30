@@ -48,9 +48,9 @@ export const AdminsPage = () => {
       dispatch(setLoading(true));
       try{
         
-        await ddaContract.methods.addAdmin(newUserAddr, newUserName).send({from: address});
+        await ddaContract.methods.addAdmin(newUserAddr).send({from: address});
         setNewUserAddr('');
-        setNewUserName('AdminUser');
+        // setNewUserName('AdminUser');
       }
       catch (e) {
         console.log(e);
@@ -76,13 +76,13 @@ export const AdminsPage = () => {
     <div>
       <div className="relative bg-gradient-to-r from-algae to-seagreen w-full h-200 flex items-end justify-between overflow-hidden">
       </div>
-      <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70">
+      <div className="w-[95%] md:w-[80%] mx-auto border-1 my-70 p-20">
         <Grid container spacing={2}>
           <Grid item xs={12} className="text-24 font-bold text-center">Admin Users</Grid> 
           {
             isOwner === 4 && (  <Grid item xs={12}>
-              <div className="text-20 flex flex-wrap justify-center shadow-default p-10 rounded-10 text-center">
-                <div className="mx-20">
+              <div className="text-20 flex flex-wrap items-center justify-center shadow-default p-10 rounded-10 text-center">
+                {/* <div className="mx-20">
                   <p>User name </p>
                   <TextField id="outlined-basic" 
                     variant="outlined" 
@@ -91,9 +91,9 @@ export const AdminsPage = () => {
                     onChange={(e) => setNewUserName(e.target.value)}
                     autoComplete='off'
                   />
-                </div>
-                <div className="mx-20">
-                  <p>Wallet Address</p>
+                </div> */}
+                <div className="mx-20 flex items-center">
+                  <label className="mr-20">Wallet Address</label>
                   <TextField id="outlined-basic" 
                     variant="outlined" 
                     size="small"
@@ -109,14 +109,16 @@ export const AdminsPage = () => {
           }
           {
             adminUsers.map((user:adminUserProp) => {
+              console.log(user);
               return (
                 <Grid xs={12} sm={12} md={6} lg={4} item key={user.index}>
                   <div className="shadow-default p-10 rounded-10 h-full w-full">
-                    <div className="font-bold text-center">{user.name}</div>
-                    <p className="break-all">{user.address}</p>
+                    <div className="font-bold text-center">{user.address}</div>
                     {
                       isOwner === 4 && (
-                        <button className={style.btn} onClick={() => removeAdmin(user.index)}>Remove This</button>
+                        <div className="flex flex-row-reverse">
+                          <button className={style.btn} onClick={() => removeAdmin(user.index)}>Remove This</button>
+                        </div>
                       )
                     }
                   </div>

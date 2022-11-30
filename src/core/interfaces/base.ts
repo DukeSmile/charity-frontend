@@ -67,11 +67,6 @@ export const demoCharity: charityProp = {
     vip: '',
     createDateTime: '',
 }
-export interface adminUserProp {
-    index: number;
-    name: string;
-    address: string;
-}
 
 export interface adminUserProp {
     index: number;
