@@ -24,7 +24,7 @@ export const Layout = ({children}: any) => {
     const ddaContract = getContract('DDAContract');
     //get charities information from contract
     const charitiesFromContract = await ddaContract.methods.getCharities().call();
-    console.log('[contract] : ', charitiesFromContract);
+    // console.log('[contract] : ', charitiesFromContract);
     let charities:charityProp[] = [],
       fundRaisers:charityProp[] = [],
       allCharities:charityProp[] = [];
@@ -39,7 +39,7 @@ export const Layout = ({children}: any) => {
       console.log(e.message);
       return;
     }
-    console.log(charitiesFromDatabase);
+    // console.log(charitiesFromDatabase);
     charitiesFromContract.forEach((charity: any, index:number) => {
       let newOne:any = {};
       let dbInfo = charitiesFromDatabase.find((record:any) => record.wallet_address.toLowerCase() === charity.walletAddress.toLowerCase());
