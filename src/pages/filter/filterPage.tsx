@@ -1,6 +1,6 @@
 import { FormControlLabel, Grid, Switch } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faCaretDown, faSearch, faSliders } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft, faCaretRight, faArrowRight, faCaretDown, faSearch, faSliders } from "@fortawesome/free-solid-svg-icons";
 import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram, FaPhoneAlt, FaNetworkWired, FaFlag, FaBook, FaRegistered, FaMapMarkedAlt, FaUser, FaBtc } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -34,9 +34,8 @@ export const FilterCharitiesPage = () => {
   const [filterCategories, setFilterCategories] = useState<categoryProp>({});
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
-  const style = {
-    btn: 'border-2 rounded-10 text-black hover:text-white hover:bg-limedSqruce p-5 m-10'
-  };
+  const [page, setPage] = useState(0);
+  const itemPerPage = 16;
 
   if (filterCharity && filterFundraiser){
   }
@@ -50,7 +49,6 @@ export const FilterCharitiesPage = () => {
   if (category !== 'all') {
     charities = charities.filter((charity:any)  => filterCategories[charity.fund_type] === true);
   }
-  console.log(charities);
   const filterReset = () => {
     setShowAllCategory(false);
     setFilterCharity(true);
@@ -71,6 +69,21 @@ export const FilterCharitiesPage = () => {
       filterCategories[category] = true;
     setFilterCategories(filterCategories);
     setCount(count+1);
+  }
+
+  const pageDecrease = () => {
+    if (page <= 0){
+      setPage(0);
+    }
+    else
+      setPage(page-1);
+  }
+
+  const pageIncrease = () => {
+    if (page >= Math.ceil(charities.length / itemPerPage) - 1)
+      setPage(Math.ceil(charities.length / itemPerPage) - 1);
+    else
+      setPage(page+1);
   }
 
   useEffect(() => {
@@ -141,17 +154,28 @@ export const FilterCharitiesPage = () => {
       
       <div className="relative w-[95%] md:w-[80%] mx-auto border-1 my-70">
         {charities.length > 0 && (
-          <Grid container spacing={2}>
-            {
-              charities.map((charity: charityProp, index:number) => {
-                return (
-                  <Grid xs={12} sm={6} md={4} lg={3} item key={charity.index}>
-                    <FilterCharity info={charity}/>
-                  </Grid>
-                )
-              })
-            }
-          </Grid>
+          <>
+            <Grid container spacing={2}>
+              {
+                charities.map((charity: charityProp, index:number) => {
+                  if (index >= itemPerPage * (page+1) || index < itemPerPage * page )
+                    return <></>;
+                  return (
+                    <Grid xs={12} sm={6} md={4} lg={3} item key={charity.index}>
+                      <FilterCharity info={charity}/>
+                    </Grid>
+                  )
+                })
+              }
+            </Grid>
+            <div className="text-20 flex flex-row-reverse">
+              <div className="flex">
+                <div className="p-5 hover:bg-alabaster cursor-pointer" onClick={pageDecrease}><FontAwesomeIcon icon={faCaretLeft}/></div>
+                <input type="number" value={page} onChange={(e:any) => setPage(e.target.value)} className="w-50 border mx-10"/>
+                <div className="p-5 hover:bg-alabaster cursor-pointer" onClick={pageIncrease}><FontAwesomeIcon icon={faCaretRight} /></div>
+              </div>
+            </div>
+          </>
         )}
         {charities.length === 0 &&
           <div className="text-24 p-20">
