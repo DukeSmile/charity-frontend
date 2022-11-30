@@ -96,6 +96,17 @@ export const FilterCharitiesPage = () => {
     };
   }, []);
 
+  useEffect(() => {
+    let filters:categoryProp = {};
+    if(category != undefined)
+      filters[category] = true;
+    setFilterCategories(filters);
+    setShowAllCategory(false);
+    setFilterCharity(true);
+    setFilterFundraiser(true);
+    setFilterNear(true);
+  }, [category]);
+
   return (
     <div>
       <div className="relative bg-gradient-to-r from-algae to-seagreen w-full h-600 sm:h-450 flex items-end justify-between overflow-hidden">
