@@ -99,7 +99,7 @@ export const DonationHistoryAll = (props:any) => {
       }
       {histories.length === 0 && (
         <div>
-          There are no your donations.
+          There are no donations.
         </div>
       )}
     </div>

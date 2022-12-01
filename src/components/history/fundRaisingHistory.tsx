@@ -99,7 +99,7 @@ export const FundRaisingHistory = (props:any) => {
       }
       {histories.length === 0 && (
         <div>
-          There are no your fundraising.
+          There are no fundraising.
         </div>
       )}
     </div>

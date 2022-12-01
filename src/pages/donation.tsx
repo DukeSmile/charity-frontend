@@ -13,12 +13,11 @@ import { charityProp, donationProp } from "../core/interfaces/base";
 import { setDonateHistory, setCaseDonateHistory, setLoading } from "../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../hooks/web3Context";
 import { FromNetwork, networks, tokenList } from "../networks";
-import { DonationHistoryCase } from "../components/history/donationHistoryCase";
+import { FundRaisingHistory } from "../components/history/fundRaisingHistory";
 
 import donateImg from "../assets/images/components/donate.png";
 import currenciesImg from "../assets/images/components/currencies.png";
 import { baseStyles } from "../core/constants/style";
-import { DonationHistoryAll } from "../components/history/donationHistoryAll";
 
 export const DonationPage = () => {
 
@@ -119,8 +118,6 @@ export const DonationPage = () => {
         return;
       }
       dispatch(setLoading(false));
-      getLast20History();
-      getCaseHistory();
       getCurrentAmount();
       setDonatecomment('');
       setAmount(0);
@@ -142,87 +139,6 @@ export const DonationPage = () => {
     }
   }
 
-  const getLast20History = async () => {
-    if(targetCharity.wallet_address === '')
-      return;
-    setAllHLoading(true);
-    let ddaContract = getContract('DDAContract');
-    const lastBlock = await connectWeb3.eth.getBlockNumber();
-    const blockCountIteration = 5000;
-    let totalEvents: donationProp[] = [];
-    try{
-      for (let i = lastBlock; i >= birthDDAContractNumber - blockCountIteration; i -= blockCountIteration) {
-        //get all events related with selected charity
-        if (totalEvents.length < maximumAllDoantion) {
-          const allEvents = await ddaContract.getPastEvents('Donate', {
-            'filter': {
-              '_to': targetCharity ? targetCharity.wallet_address.toLowerCase() : ''
-            },
-            'fromBlock': i - blockCountIteration + 1,
-            'toBlock': i,
-          });
-          allEvents.reverse().forEach(event => {
-            const currency = tokenList.find((token) => token.address[FromNetwork] === event.returnValues._currency);
-            let history: donationProp = {
-              transaction: event.transactionHash,
-              from: event.returnValues._from,
-              to: event.returnValues._to,
-              currency: currency ? currency.name : '',
-              amount: event.returnValues.amount,
-              timeStamp: event.returnValues.timestamp
-            };
-            if (totalEvents.length < maximumAllDoantion)
-              totalEvents.push(history);
-          });
-          let res = totalEvents;
-        }
-        else
-          break;
-      }
-    }
-    catch(e) {
-      setAllHLoading(false);
-    }
-    dispatch(setDonateHistory(totalEvents));
-    setAllHLoading(false);
-  };
-
-  const getCaseHistory = async () => {
-    setCaseHLoading(true);
-    let ddaContract = getContract('DDAContract');
-    const lastBlock = await connectWeb3.eth.getBlockNumber();
-    const blockCountIteration = 5000;
-    let caseEvents: donationProp[] = []
-    for (let i = lastBlock; i >= birthDDAContractNumber - blockCountIteration; i -= blockCountIteration) {
-      //get all events between current wallet address and selected charity
-      if (address !== '') {
-        const pastEvents = await ddaContract.getPastEvents('Donate', {
-          'filter': {
-            '_from': address.toLowerCase(),
-            '_to': targetCharity ? targetCharity.wallet_address : ''
-          },
-          'fromBlock': i - blockCountIteration + 1,
-          'toBlock': i,
-        });
-        pastEvents.reverse().forEach(event => {
-          const currency = tokenList.find((token) => token.address[FromNetwork] === event.returnValues._currency);
-          let history: donationProp = {
-            transaction: event.transactionHash,
-            from: event.returnValues._from,
-            to: event.returnValues._to,
-            currency: currency ? currency.name : '',
-            amount: event.returnValues.amount,
-            timeStamp: event.returnValues.timestamp
-          };
-          caseEvents.push(history);
-        });
-      }
-    }
-    // console.log(totalEvents);
-    dispatch(setCaseDonateHistory(caseEvents));
-    setCaseHLoading(false);
-  };
-
   const getCurrentAmount = async () => {
     if ( !connected || address === '')
       return;
@@ -241,8 +157,6 @@ export const DonationPage = () => {
   };
 
   useEffect(() => {
-    getLast20History();
-    getCaseHistory();
     setAmount(0);
   }, [address]);
 
@@ -296,11 +210,8 @@ export const DonationPage = () => {
                   </p>
                 </div>
                 <div>
-                  <DonationHistoryAll />
+                  <FundRaisingHistory address={targetCharity.wallet_address} />
                 </div>
-                {/* <div>
-                  <DonationHistoryAll loading={allHLoading} />
-                </div> */}
               </div>
             </Grid>
             <Grid item sm={12} md={6}>
@@ -370,12 +281,6 @@ export const DonationPage = () => {
                 </button>
               )}
             </Grid>
-            {/* <Grid item lg={4} md={5} sm={12}>
-              <div className="border-1 shadow-default p-10">
-                
-                <DonationHistoryAll loading={allHLoading} />
-              </div>
-            </Grid> */}
           </Grid>
         </div>
       )}
