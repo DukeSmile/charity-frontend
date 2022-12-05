@@ -1,5 +1,4 @@
 import { MenuuItemProp, RouteItemProp } from "../interfaces/base";
-import { RegistrationPage } from "../../pages/user/registration";
 import { FundRaisersPage } from "../../pages/user/fundraisers";
 import { CharitiesPage } from "../../pages/user/charities";
 import { DonationPage } from "../../pages/donation";

@@ -186,7 +186,7 @@ export const DetailPage = () => {
                 Donate Now <FontAwesomeIcon icon={faArrowRight} />
               </button>
               <button
-                onClick={() => navigate('/registration/charity')}
+                onClick={() => navigate('/user/signup')}
                 className={baseStyles.normalBtn + ' text-green hover:bg-green mb-10 w-full'}
               >
                 Register with Okapi <FontAwesomeIcon icon={faArrowRight} />

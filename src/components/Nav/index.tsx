@@ -3,7 +3,7 @@ import { faAngleDown, faAngleUp, faBars } from "@fortawesome/free-solid-svg-icon
 import { Drawer, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from 'react';
 
 import { ConnectWalletButton } from './ConnectWalletButton';
@@ -11,6 +11,7 @@ import logoImg from '../../assets/images/logo-white.png';
 import { fundTypeProp } from "../../core/interfaces/base";
 import { baseIcons } from "../../core/constants/icons";
 import { allFundTypes, menuFundTypes } from "../../core/constants/base";
+import { setCharityType } from "../../core/store/slices/bridgeSlice";
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -30,6 +31,7 @@ export const Nav = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const ref = useRef<HTMLDivElement | null>(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const allCategories = useSelector((state:any) => state.app.categories);
   const allCharities = useSelector((state:any) => state.app.charities);
@@ -208,14 +210,16 @@ export const Nav = () => {
                     <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
                       showMenubar('registry', false);
                       setToggleMenu(false);
-                      navigate('/registration/charity');
+                      dispatch(setCharityType('charity'));
+                      navigate('/user/singup');
                     }}>Charity</button>
                   </div>
                   <div>
-                    <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
+                    <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={async() => {
                       showMenubar('registry', false);
                       setToggleMenu(false);
-                      navigate('/registration/fundraiser');
+                      dispatch(setCharityType('fundraiser'));
+                      navigate('/user/fundraiser');
                     }}>personal fundraiser</button>
                   </div>
                   {isOwner >= 3 && (<div>

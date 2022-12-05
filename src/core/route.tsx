@@ -6,10 +6,6 @@ import { DonationPage } from "../pages/donation";
 
 export const siteRouter = createBrowserRouter([
     {
-      path: "/registry",
-      element: <RegistrationPage />
-    },
-    {
       path: "/fundraisers",
       element: <FundRaisersPage />
     },

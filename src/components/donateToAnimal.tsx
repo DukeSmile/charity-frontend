@@ -32,7 +32,7 @@ export const DonateToAnimal = () => {
             Donate Now <FontAwesomeIcon icon={faArrowRight} />
           </button>
           <Link
-            to="/registration/charity"
+            to="/user/signup"
             className={baseStyles.normalBtn + ' text-green hover:bg-green'}
           >
             Register with Okapi <FontAwesomeIcon icon={faArrowRight} />

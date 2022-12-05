@@ -350,7 +350,7 @@ export const RegistrationPage = (props: any) => {
             </Grid>
             <Grid item sm={12} md={6} className="flex items-center flex-row-reverse">
               <div className="bg-lightgrey rounded-full p-3 flex">
-                <button className={charityType === 'charity' ? style.activeTab : style.tab} onClick={() => dispatch(setCharityType('charity'))}>Charity</button>
+                <button className={charityType === 'charity' ? style.activeTab : style.tab} onClick={() => dispatch(setCharityType('charity'))}>Charity{charityType}</button>
                 <button className={charityType === 'fundraiser' ? style.activeTab : style.tab} onClick={() => dispatch(setCharityType('fundraiser'))}>FundRaiser</button>
               </div>
             </Grid>
