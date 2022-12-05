@@ -26,7 +26,6 @@ export const RegistrationPage = (props: any) => {
   const navigate = useNavigate();
   const loginUser:loginUserProp = useSelector((state:any) => state.app.loginUser);
   const {connected, address, provider} = useWeb3Context();
-  // const [charityType, SetCharityType] = useState('fundraiser');
   const [wallet, setWallet] = useState('');
   const [uploadShow, setUploadShow] = useState(false);
   const [uploadFile, setUploadFile] = useState(null);

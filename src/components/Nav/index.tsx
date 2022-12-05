@@ -128,12 +128,14 @@ export const Nav = () => {
               <div>
                 <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
                   showMenubar('registry', false);
+                  dispatch(setCharityType('charity'));
                   navigate('/user/signup');
                 }}>Charity</button>
               </div>
               <div>
                 <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
                   showMenubar('registry', false);
+                  dispatch(setCharityType('fundraiser'));
                   navigate('/user/signup');
                 }}>personal fundraiser</button>
               </div>
@@ -207,7 +209,7 @@ export const Nav = () => {
               registryShow && (
                 <>
                   <div>
-                    <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
+                    <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={ () => {
                       showMenubar('registry', false);
                       setToggleMenu(false);
                       dispatch(setCharityType('charity'));
