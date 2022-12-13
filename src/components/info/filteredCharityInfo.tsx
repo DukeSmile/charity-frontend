@@ -59,7 +59,7 @@ export const FilterCharity = (props:any) => {
       </div>
       <div className="absolute top-270 right-20">
         <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn}>Donate</Link>
-        {isOwner > 2 && 
+        {isOwner === 3 && 
         (<button className={baseStyles.normalBtn} onClick={() => blockCharity(charity.index)}>Block This</button>)
         }
       </div>

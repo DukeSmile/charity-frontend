@@ -51,7 +51,7 @@ export const CharityInfo = (props:any) => {
       <div className="py-10 my-10">
         {/* <Link to={`/detail/${charity.index}`} className={baseStyles.normalBtn + ' mr-10 hover:bg-brown hover:text-white'}>Read more</Link> */}
         <Link to={`/donate/${charity.index}`} className={baseStyles.normalBtn + ' mr-10 hover:bg-brown hover:text-white'}>Donate Now</Link>
-        {/* {isOwner > 2 && (
+        {/* {isOwner === 3 && (
           <button className={baseStyles.normalBtn} onClick={() => blockCharity(charity.index)}>Block This</button>
         )} */}
       </div>

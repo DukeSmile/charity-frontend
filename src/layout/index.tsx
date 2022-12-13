@@ -128,14 +128,15 @@ export const Layout = ({children}: any) => {
     const isOwnerCheck = async (cAddress:string) => {
       let ddaContract = getContract('DDAContract');
       let roleValue = 0;
-      if(await ddaContract.methods.hasRole(roleList['owner'], cAddress).call())
-        roleValue = 4;
+      let ownerAddress = await ddaContract.methods.owner().call();
+      if(ownerAddress.toLowerCase() == cAddress.toLowerCase())
+        roleValue = 4; // owner
       else if(await ddaContract.methods.hasRole(roleList['admin'], cAddress).call())
-        roleValue = 3;
+        roleValue = 3; // admin
       else if(await ddaContract.methods.hasRole(roleList['charity'], cAddress).call())
-        roleValue = 2;
+        roleValue = 2; // charity
       else if(await ddaContract.methods.hasRole(roleList['black'], cAddress).call())
-        roleValue = 1;
+        roleValue = 1; // black
       dispatch(setOwnerFlag(roleValue));
     };
     dispatch(setSignHash(''));

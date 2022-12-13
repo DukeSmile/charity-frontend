@@ -18,7 +18,7 @@ export enum NetworkIds {
   BscTestnet = 97,
 }
 
-export const FromNetwork = NetworkIds.Goerli;
+export const FromNetwork = NetworkIds.Ethereum;
 
 interface INetwork {
   name: string,
@@ -36,7 +36,7 @@ export const networks: INetworks = {
     name: 'Ethereum Goerli',
     isEnabled: true,
     addresses: {
-      DDAContract: '0xD6B2fC46FF8B00025F5f1bc0Ec7cA3c8818d67D5'
+      DDAContract: '0x43AeBAF310be12d840e03316E3a3a97D1d58b44F'
     },
     logo: EthereumIcon
   },
@@ -44,8 +44,8 @@ export const networks: INetworks = {
     name: 'Ethereum',
     isEnabled: true,
     addresses: {
-      DDAContract: '',
-      OKAPI: ''
+      DDAContract: '0x8173A6aD04592BFF319e0825c3AE274897c5Bfbb',
+      OKAPI: '0x29cd78954c023cd9bffc435a816e568edaf732af'
     },
     logo: EthereumIcon
   },
@@ -87,7 +87,8 @@ export const tokenList: tokenProp[] = [
     abi: tusdtABI,
     address: {
       [NetworkIds.BscTestnet]: '0xbF68079500Ea88c84f95cfB8840C9F569b945a74',
-      [NetworkIds.Goerli]: '0x2926EFc3923094478a51f3C476fb7144D562d2c1'
+      [NetworkIds.Goerli]: '0x2926EFc3923094478a51f3C476fb7144D562d2c1',
+      [NetworkIds.Ethereum]: '0xdAC17F958D2ee523a2206206994597C13D831ec7'
     }
   },
   {
@@ -96,7 +97,8 @@ export const tokenList: tokenProp[] = [
     abi: tethABI,
     address: {
       [NetworkIds.BscTestnet]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-      [NetworkIds.Goerli]: ''
+      [NetworkIds.Goerli]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+      [NetworkIds.Ethereum]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
     }
   },
   {
@@ -104,8 +106,9 @@ export const tokenList: tokenProp[] = [
     name:'ETH',
     abi: tethABI,
     address: {
-      [NetworkIds.BscTestnet]: '',
-      [NetworkIds.Goerli]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+      [NetworkIds.BscTestnet]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+      [NetworkIds.Goerli]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+      [NetworkIds.Ethereum]: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
     }
   }
 ];
