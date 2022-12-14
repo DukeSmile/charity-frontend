@@ -191,7 +191,7 @@ export const DetailPage = () => {
               >
                 Register with Okapi <FontAwesomeIcon icon={faArrowRight} />
               </button>
-              <BlogCategories />
+              {/* <BlogCategories /> */}
             </Grid>
           </Grid>
         </div>

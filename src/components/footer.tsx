@@ -25,7 +25,7 @@ export const FooterTab = () => {
     'Pricing',
   ];
   const subMenus3 = [
-    'Donate'
+    { name: 'Donate', url: '/filter/all' }
   ];
   return (
     <div className="bg-dark">
@@ -60,8 +60,8 @@ export const FooterTab = () => {
             {
               subMenus3.map((menu, index) => {
                 return (
-                  <p key={index} className={menuStyle}>
-                    {menu}
+                  <p key={index} className={menuStyle} onClick={() => navigate(menu.url)}>
+                    {menu.name}
                   </p>
                 )
               })

@@ -37,6 +37,8 @@ export const FilterCharitiesPage = () => {
   const [page, setPage] = useState(0);
   const itemPerPage = 16;
 
+  console.log(filterCategories);
+
   if (filterCharity && filterFundraiser){
   }
   else if (filterCharity)
@@ -46,15 +48,23 @@ export const FilterCharitiesPage = () => {
   else
     charities = [];
 
-  if (category !== 'all') {
-    charities = charities.filter((charity:any)  => filterCategories[charity.fund_type] === true);
-  }
+
+  charities = charities.filter((charity:any)  => filterCategories[charity.fund_type] === true);
   const filterReset = () => {
     setShowAllCategory(false);
     setFilterCharity(true);
     setFilterFundraiser(true);
     setFilterNear(true);
-    setFilterCategories({});
+
+    let filters:categoryProp = {};
+    if(category != undefined && category != 'all')
+      filters[category] = true;
+    if (category === 'all') {
+      Object.keys(allFundTypes).map((type:string, index:number) => {
+        filters[allFundTypes[type].title] = true;
+      });
+    }
+    setFilterCategories(filters);
   }
 
   // const filterStart = () => {
@@ -99,8 +109,13 @@ export const FilterCharitiesPage = () => {
     };
     window.scrollTo(0,0);
     
-    if(category != undefined)
+    if(category != undefined && category != 'all')
       filterCategories[category] = true;
+    if (category === 'all') {
+      Object.keys(allFundTypes).map((type:string, index:number) => {
+        filterCategories[allFundTypes[type].title] = true;
+      });
+    }
     setFilterCategories(filterCategories);
 
     document.addEventListener("click", listener, { capture: true });
@@ -111,8 +126,13 @@ export const FilterCharitiesPage = () => {
 
   useEffect(() => {
     let filters:categoryProp = {};
-    if(category != undefined)
+    if(category != undefined && category != 'all')
       filters[category] = true;
+    if (category === 'all') {
+      Object.keys(allFundTypes).map((type:string, index:number) => {
+        filters[allFundTypes[type].title] = true;
+      });
+    }
     setFilterCategories(filters);
     setShowAllCategory(false);
     setFilterCharity(true);
@@ -127,9 +147,9 @@ export const FilterCharitiesPage = () => {
         <img src={leaveImg} className="w-200 h-180 mr-20 md:w-400 md:h-360"/>
         <div className="absolute left-0 top-0 w-full h-full text-white text-center flex items-center justify-center">
           <div className="mt-170 mx-20">
-            <p className="text-48 font-bold">Find your resource</p>
-            <p className="text-20">Quisque dignissim maximus ipsum, sed rutrum metus tincidunt et.</p>
-            <p className="text-20">Sed eget tincidunt ipsum. Quisque dignissim maximus ipsum</p>
+            <p className="text-48 font-bold">Find your Fundraiser</p>
+            <p className="text-20">Below are the charities and fundraisers looking for your help.</p>
+            <p className="text-20">Please donate and make a difference.</p>
             <div className="h-70 bg-white rounded-full my-40 flex items-center justify-between">
               <div className="flex">
                 <div className="text-black ml-35 flex items-center border-r-1 pr-10 cursor-pointer" onClick={() => setOpenBar(openBar == true ? false : true)}>
@@ -140,7 +160,7 @@ export const FilterCharitiesPage = () => {
                   </button>
                 </div>
                 <div className="w-full ml-20">
-                  <input type="text" placeholder="Search for Fundraise" className="w-full text-16 text-black outline-none"/>
+                  <input type="text" placeholder="Search for Fundraisers" className="w-full text-16 text-black outline-none"/>
                 </div>
               </div>
               <div className="w-55 min-w-55 h-55 flex items-center justify-center bg-algae text-white rounded-full mr-10">
