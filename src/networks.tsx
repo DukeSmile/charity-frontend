@@ -18,7 +18,7 @@ export enum NetworkIds {
   BscTestnet = 97,
 }
 
-export const FromNetwork = NetworkIds.Ethereum;
+export const FromNetwork = NetworkIds.Goerli;
 
 interface INetwork {
   name: string,
@@ -36,7 +36,7 @@ export const networks: INetworks = {
     name: 'Ethereum Goerli',
     isEnabled: true,
     addresses: {
-      DDAContract: '0x43AeBAF310be12d840e03316E3a3a97D1d58b44F'
+      DDAContract: '0x13B044A7e7993544ce95122e9D44F44D2c2EafD5'
     },
     logo: EthereumIcon
   },

@@ -25,11 +25,7 @@ export const FooterTab = () => {
     'Pricing',
   ];
   const subMenus3 = [
-    'Donate',
-    'Fundraise',
-    'Volunteer',
-    'Find Other Ways To Give',
-    'Start A Group Volunteer',
+    'Donate'
   ];
   return (
     <div className="bg-dark">
@@ -53,18 +49,6 @@ export const FooterTab = () => {
               subMenus1.map((menu, index) => {
                 return (
                   <p key={index} className={menuStyle} onClick={() => navigate('/filter/'+menu)}>
-                    {menu}
-                  </p>
-                )
-              })
-            }
-          </Grid>
-          <Grid item xs={12} sm={6}  md={4}>
-            <p className="text-white text-22 font-bold">Learn more</p>
-            {
-              subMenus2.map((menu, index) => {
-                return (
-                  <p key={index} className={menuStyle}>
                     {menu}
                   </p>
                 )

@@ -13,14 +13,12 @@ export const DonateToAnimal = () => {
   const navigate = useNavigate();
   return (
     <div className="w-[95%] md:w-[80%] mx-auto p-20 px-40 flex justify-between items-center rounded-40 bg-alabaster">
-      <div className="z-100 w-[90%] sm:w-[70%] md:max-w-[50%]">
+      <div className="z-100 w-[90%] sm:w-[70%] md:max-w-[70%]">
         <p className="text-40 font-bold">
-          Ready to get started? Raise Your Helping Hand For Animals
+          Ready to get started?
         </p>
-        <p className="text-16 my-15">
-          Thanks to the help of our generous supporters, ACE has been working to
-          improve animal welfare for the last decade—influencing millions of
-          donations, conducting rigorous charity evaluations, and funding new.
+        <p className="text-40 font-bold capitalize">
+          Raise your helping hand for animals
         </p>
         <div className="flex mt-40">
           <button

@@ -495,7 +495,7 @@ export const RegistrationPage = (props: any) => {
                   style={{ width: '100%' }}
                   value={formik.values.summary}
                   onChange={formik.handleChange}
-                  placeholder="Enter your short summary"
+                  placeholder="Please give a short summary of the charity to catch the attention of readers and to give a general overview of the charity and its fundraising aims"
                 />
               </Grid>
             </Grid>
@@ -667,7 +667,7 @@ export const RegistrationPage = (props: any) => {
                   style={{ width: '100%' }}
                   value={formik.values.detail}
                   onChange={formik.handleChange}
-                  placeholder="Enter your detail summary"
+                  placeholder="Please give a full description of the charity, Its aims and objectives and detailed information about its operations and structure"
                 />
               </Grid>
             </Grid>

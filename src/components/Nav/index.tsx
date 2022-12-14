@@ -137,7 +137,7 @@ export const Nav = () => {
                   showMenubar('registry', false);
                   dispatch(setCharityType('fundraiser'));
                   navigate('/user/signup');
-                }}>personal fundraiser</button>
+                }}>Personal Fundraising</button>
               </div>
               {isOwner >= 3 && (<div>
                   <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
@@ -222,7 +222,7 @@ export const Nav = () => {
                       setToggleMenu(false);
                       dispatch(setCharityType('fundraiser'));
                       navigate('/user/fundraiser');
-                    }}>personal fundraiser</button>
+                    }}>Personal Fundraising</button>
                   </div>
                   {isOwner >= 3 && (<div>
                       <button className="text-center w-full border-t-1 border-b-1 p-5 hover:bg-iron capitalize" onClick={() => {
