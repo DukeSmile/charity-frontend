@@ -1,22 +1,20 @@
 import { Grid } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faUpload } from "@fortawesome/free-solid-svg-icons";
-import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram, FaPhoneAlt, FaNetworkWired, FaFlag, FaBook, FaRegistered } from "react-icons/fa";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FaLinkedin, FaTwitter, FaFacebook, FaInstagram, FaPhoneAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Web3 from "web3";
 
-import { birthDDAContractNumber, connectWeb3, getContract, getTokenContract, maximumAllDoantion, ethTokenAddr } from "../core/constants/base";
+import { birthDDAContractNumber, connectWeb3, getContract, maximumAllDoantion } from "../core/constants/base";
 import { charityProp, demoCharity, donationProp } from "../core/interfaces/base";
-import { setDonateHistory, setCaseDonateHistory, setLoading, demoLoginUser } from "../core/store/slices/bridgeSlice";
+import { setDonateHistory, setLoading } from "../core/store/slices/bridgeSlice";
 import { useWeb3Context } from "../hooks/web3Context";
-import { FromNetwork, networks, tokenList } from "../networks";
-import { DonationHistoryAll } from "../components/history/donationHistoryAll";
+import { FromNetwork, tokenList } from "../networks";
 import { baseStyles } from "../core/constants/style";
 import { DonateToAnimal } from "../components/donateToAnimal";
-import { BlogCategories } from "../components/blogCategories";
 import { FundRaisingHistory } from "../components/history/fundRaisingHistory";
 
 export const DetailPage = () => {
@@ -27,7 +25,6 @@ export const DetailPage = () => {
   const navigate = useNavigate();
   const [allHLoading, setAllHLoading] = useState(false);
   const charities: charityProp[] = useSelector((state: any) => state.app.allCharities);
-  const ownerFlag = useSelector((state:any) => state.app.isOwner);
   let targetIndex: number = index === undefined ? -1 : parseInt(index);
   const targetCharity = charities[targetIndex] ? charities[targetIndex] : demoCharity;
   
@@ -39,7 +36,7 @@ export const DetailPage = () => {
   fundPercent = fundPercent > 100 ? 100 : fundPercent;
 
   const blockCharity = async (index: number) => {
-    if (connected && address != '') {
+    if (connected && address !== '') {
       dispatch(setLoading(true));
       let ddaContract = getContract('DDAContract');
       try {
@@ -84,7 +81,6 @@ export const DetailPage = () => {
             if (totalEvents.length < maximumAllDoantion)
               totalEvents.push(history);
           });
-          let res = totalEvents;
         }
         else
           break;
@@ -111,7 +107,7 @@ export const DetailPage = () => {
   // }
 
   const resumeStyle = 'm-5 hover:text-brown p-5 border-1 rounded-full text-16 w-30 h-30 cursor-pointer';
-  const photoUrl = targetCharity.photo == '' ? '' : "https://ipfs.io/ipfs/" + targetCharity.photo;
+  const photoUrl = targetCharity.photo === '' ? '' : "https://ipfs.io/ipfs/" + targetCharity.photo;
   return (
     <div>
       <div className="relative bg-gradient-to-r from-algae to-seagreen w-full h-180">
@@ -126,16 +122,16 @@ export const DetailPage = () => {
               <div className="mx-20">
                 <div>
                   <p className="text-42 font-bold">
-                    {targetCharity.charity_type == '0' ? targetCharity.name : targetCharity.title}
+                    {targetCharity.charity_type === '0' ? targetCharity.name : targetCharity.title}
                   </p>
                   <p className="text-18">
                     {targetCharity.summary}
                   </p>
                   <p className="text-18 my-10">
-                    {targetCharity.charity_type == '0' ? 'This is charity' : (<>by <label className="capitalize">{targetCharity.name}</label></>)}
+                    {targetCharity.charity_type === '0' ? 'This is charity' : (<>by <label className="capitalize">{targetCharity.name}</label></>)}
                   </p>
                 </div>
-                {photoUrl != '' && (
+                {photoUrl !== '' && (
                   <img src={photoUrl} alt={targetCharity.name} className="w-full min-h-100 rounded-10 my-10 border" />
                 )}
                 <p className="capitalize">{targetCharity.detail}</p>
@@ -163,7 +159,7 @@ export const DetailPage = () => {
               <div className="w-full bg-white border-1 border-lightgrey rounded-10 p-30">
                 <p className="text-16 text-gunsmoke">
                   <span className="text-24 text-black mr-10">$ {fundLabel}</span>raised 
-                  {targetCharity.charity_type == 1 && (
+                  {targetCharity.charity_type === 1 && (
                     <>of {Intl.NumberFormat().format(fundGoal)}</>
                   )}
                 </p>

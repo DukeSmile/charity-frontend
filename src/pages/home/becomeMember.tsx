@@ -6,7 +6,6 @@ import leaveImg from "../../assets/images/components/leave.png";
 import currenciesImg from "../../assets/images/components/currency.png";
 
 export const BecomeMemberPage = () => {
-  const donateTypes = ['health','education','environmental','animal'];
   const navigate = useNavigate();
   return (
     <div className="relative bg-gradient-to-r from-algae to-seagreen h-500 flex items-center">
@@ -24,8 +23,8 @@ export const BecomeMemberPage = () => {
             </div>
         </div>
         <div className="absolute bottom-0 w-full h-full flex items-end justify-between z-0 overflow-hidden">
-            <img src={currenciesImg} className="w-300 h-100 ml-20 md:w-600 sm:h-200 md:ml-[5%]"/>
-            <img src={leaveImg} className="w-200 h-180 mr-20 md:w-400 md:h-360 md:mr-[5%]"/>
+            <img src={currenciesImg} className="w-300 h-100 ml-20 md:w-600 sm:h-200 md:ml-[5%]" alt=""/>
+            <img src={leaveImg} className="w-200 h-180 mr-20 md:w-400 md:h-360 md:mr-[5%]" alt=""/>
         </div>
     </div>
   );

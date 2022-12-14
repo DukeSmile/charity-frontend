@@ -1,4 +1,4 @@
-import { Grid, TextareaAutosize, TextField, NativeSelect, MenuItem } from "@material-ui/core";
+import { Grid, TextareaAutosize, TextField } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
@@ -14,8 +14,6 @@ import { allFundTypes, baseServerUrl, getContract, projectId, projectSecret } fr
 import { demoLoginUser, setCharityType, setLoading, setLoginUser } from "../../core/store/slices/bridgeSlice";
 import { PhotoUpload } from "../../components/photoUpload";
 
-import remoteImg from "../../assets/images/components/remote.png";
-import currenciesImg from "../../assets/images/components/currencies.png";
 import manImg from "../../assets/images/components/man.png";
 import { baseStyles } from "../../core/constants/style";
 import { loginUserProp } from "../../core/interfaces/base";
@@ -63,7 +61,7 @@ export const RegistrationPage = (props: any) => {
       console.log(e.message);
     }
   };
-  // console.log(props.currentUser, currentUser);
+
   const validationCharity = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Must be 2 characters at least')
@@ -358,7 +356,7 @@ export const RegistrationPage = (props: any) => {
         {props.edit && (
           <div className="flex items-center">
 
-            <img src={loginUser.photo != '' ? ("https://ipfs.io/ipfs/" + loginUser.photo) : manImg} className="mr-20 w-120 h-120 rounded-full border"/>
+            <img src={loginUser.photo !== '' ? ("https://ipfs.io/ipfs/" + loginUser.photo) : manImg} className="mr-20 w-120 h-120 rounded-full border"/>
             <div>
               <p className="text-24">{loginUser.name === '' ? 'User name' : loginUser.name}</p>
               <p className="text-16">Update your photo and personal details</p>

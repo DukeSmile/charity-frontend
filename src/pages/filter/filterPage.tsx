@@ -1,19 +1,17 @@
-import { FormControlLabel, Grid, Switch } from "@material-ui/core";
+import {  Grid } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight, faArrowRight, faCaretDown, faSearch, faSliders } from "@fortawesome/free-solid-svg-icons";
-import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram, FaPhoneAlt, FaNetworkWired, FaFlag, FaBook, FaRegistered, FaMapMarkedAlt, FaUser, FaBtc } from "react-icons/fa";
+// import { FaLinkedin, FaTwitter, FaGoogle, FaFacebook, FaInstagram, FaPhoneAlt, FaNetworkWired, FaFlag, FaBook, FaRegistered, FaMapMarkedAlt, FaUser, FaBtc } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { charityProp } from "../../core/interfaces/base";
-import { useWeb3Context } from "../../hooks/web3Context";
 import { FilterCharity } from "../../components/info/filteredCharityInfo";
 import donateImg from "../../assets/images/components/filter.png";
 import leaveImg from "../../assets/images/components/leave.png";
 import { allFundTypes, menuFundTypes } from "../../core/constants/base";
 import { LeftLabelSwitch } from "./switches";
-import { boolean } from "yup";
 
 interface categoryProp {
   [key:string]: boolean
@@ -22,10 +20,7 @@ interface categoryProp {
 export const FilterCharitiesPage = () => {
 
   let { category } = useParams();
-  const dispatch = useDispatch();
   let charities = useSelector((state: any) => state.app.allCharities);
-  const isOwner = useSelector((state: any) => state.app.isOwner);
-  const { connected, address } = useWeb3Context();
   const [openBar, setOpenBar] = useState(false);
   const [showAllCategory, setShowAllCategory] = useState(false);
   const [filterCharity, setFilterCharity] = useState(true);
@@ -37,14 +32,14 @@ export const FilterCharitiesPage = () => {
   const [page, setPage] = useState(0);
   const itemPerPage = 16;
 
-  console.log(filterCategories);
+  console.log(charities);
 
   if (filterCharity && filterFundraiser){
   }
   else if (filterCharity)
-    charities = charities.filter((charity:any)  => charity.charity_type == 0);
+    charities = charities.filter((charity:any)  => charity.charity_type === 0);
   else if (filterFundraiser)
-    charities = charities.filter((charity:any)  => charity.charity_type == 1);
+    charities = charities.filter((charity:any)  => charity.charity_type === 1);
   else
     charities = [];
 
@@ -57,10 +52,10 @@ export const FilterCharitiesPage = () => {
     setFilterNear(true);
 
     let filters:categoryProp = {};
-    if(category != undefined && category != 'all')
+    if(category !== undefined && category !== 'all')
       filters[category] = true;
     if (category === 'all') {
-      Object.keys(allFundTypes).map((type:string, index:number) => {
+      Object.keys(allFundTypes).forEach((type:string, index:number) => {
         filters[allFundTypes[type].title] = true;
       });
     }
@@ -109,10 +104,10 @@ export const FilterCharitiesPage = () => {
     };
     window.scrollTo(0,0);
     
-    if(category != undefined && category != 'all')
+    if(category !== undefined && category !== 'all')
       filterCategories[category] = true;
     if (category === 'all') {
-      Object.keys(allFundTypes).map((type:string, index:number) => {
+      Object.keys(allFundTypes).forEach((type:string, index:number) => {
         filterCategories[allFundTypes[type].title] = true;
       });
     }
@@ -126,10 +121,10 @@ export const FilterCharitiesPage = () => {
 
   useEffect(() => {
     let filters:categoryProp = {};
-    if(category != undefined && category != 'all')
+    if(category !== undefined && category !== 'all')
       filters[category] = true;
     if (category === 'all') {
-      Object.keys(allFundTypes).map((type:string, index:number) => {
+      Object.keys(allFundTypes).forEach((type:string, index:number) => {
         filters[allFundTypes[type].title] = true;
       });
     }
@@ -143,8 +138,8 @@ export const FilterCharitiesPage = () => {
   return (
     <div>
       <div className="relative bg-gradient-to-r from-algae to-seagreen w-full h-600 sm:h-450 flex items-end justify-between overflow-hidden">
-        <img src={donateImg} className="w-175 h-110 ml-20 sm:w-350 sm:h-220"/>
-        <img src={leaveImg} className="w-200 h-180 mr-20 md:w-400 md:h-360"/>
+        <img src={donateImg} className="w-175 h-110 ml-20 sm:w-350 sm:h-220" alt=""/>
+        <img src={leaveImg} className="w-200 h-180 mr-20 md:w-400 md:h-360" alt=""/>
         <div className="absolute left-0 top-0 w-full h-full text-white text-center flex items-center justify-center">
           <div className="mt-170 mx-20">
             <p className="text-48 font-bold">Find your Fundraiser</p>
@@ -152,7 +147,7 @@ export const FilterCharitiesPage = () => {
             <p className="text-20">Please donate and make a difference.</p>
             <div className="h-70 bg-white rounded-full my-40 flex items-center justify-between">
               <div className="flex">
-                <div className="text-black ml-35 flex items-center border-r-1 pr-10 cursor-pointer" onClick={() => setOpenBar(openBar == true ? false : true)}>
+                <div className="text-black ml-35 flex items-center border-r-1 pr-10 cursor-pointer" onClick={() => setOpenBar(openBar === true ? false : true)}>
                   <FontAwesomeIcon icon={faSliders} className="mr-10 cursor-pointer"/>
                   <button className="w-60 flex justify-between items-center">
                     <span>Filter</span>

@@ -1,30 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp, faBars } from "@fortawesome/free-solid-svg-icons";
-import { Drawer, useMediaQuery } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Link, useNavigate } from 'react-router-dom';
+import { useMediaQuery } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from 'react';
 
 import { ConnectWalletButton } from './ConnectWalletButton';
 import logoImg from '../../assets/images/logo-white.png';
-import { fundTypeProp } from "../../core/interfaces/base";
-import { baseIcons } from "../../core/constants/icons";
 import { allFundTypes, menuFundTypes } from "../../core/constants/base";
 import { setCharityType } from "../../core/store/slices/bridgeSlice";
-
-const useStyles = makeStyles(theme => ({
-  drawer: {
-    [theme.breakpoints.up("md")]: {
-      width: 280,
-      flexShrink: 0,
-    },
-  },
-  drawerPaper: {
-    width: 280,
-    borderRight: 0,
-  },
-}));
 
 export const Nav = () => {
   // const classes = useStyles();
@@ -40,12 +25,11 @@ export const Nav = () => {
   const [categoryShow, setCategoryShow] = useState(false);
   const [registryShow, setRegistryShow] = useState(false);
 
-  const linkStyle = 'mx-10 uppercase text-16 text-black p-10 hover:text-brown hover:bg-limedSqruce';
   const menuStyle = 'w-full border-t-1 border-b-1 p-5 py-10 hover:bg-iron capitalize flex justify-between items-center';
 
-  const handleDrawerToggle = () => {
-    setToggleMenu(!toggleMenu);
-  };
+  // const handleDrawerToggle = () => {
+  //   setToggleMenu(!toggleMenu);
+  // };
   const isOwner = useSelector((state:any) => state.app.isOwner);
   
   const showMenubar = (type:string, flag:boolean) => {
@@ -246,6 +230,7 @@ export const Nav = () => {
             setToggleMenu(false);
             navigate('/');
           }}
+          alt=""
         />
       </div>
     </div>
