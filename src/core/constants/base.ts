@@ -5,8 +5,8 @@ import { contractABIs, networks, FromNetwork, tokenList } from '../../networks';
 import { chains } from '../../providers';
 import { fundTypeProp } from '../interfaces/base';
 
-export const baseServerUrl = 'http://65.108.27.134/api';
-// export const baseServerUrl = 'http://localhost:3100/api';
+// export const baseServerUrl = 'http://65.108.27.134/api';
+export const baseServerUrl = 'http://localhost:3100/api';
 
 const connectWeb3 = new Web3(chains[FromNetwork].rpcUrls[0]);
 
@@ -62,8 +62,22 @@ export const raiserFundTypes: string [] = [
 ];
 
 export const allFundTypes: {[key:string]: fundTypeProp} = {
-    health: {
-        title: 'health',
+    animal: {
+        title: 'animal',
+        img: 'animal',
+        type: 'charities',
+        detail: '',
+        count: 0
+    },
+    arts: {
+        title: 'Arts and culture',
+        img: 'health',
+        type: 'charities',
+        detail: '',
+        count:0
+    },
+    community: {
+        title: 'Community development',
         img: 'health',
         type: 'charities',
         detail: '',
@@ -83,12 +97,26 @@ export const allFundTypes: {[key:string]: fundTypeProp} = {
         detail: '',
         count: 0
     },
-    animal: {
-        title: 'animal',
-        img: 'animal',
+    health: {
+        title: 'health',
+        img: 'health',
         type: 'charities',
         detail: '',
+        count:0
+    },
+    human: {
+        title: 'human',
+        img: 'personal',
+        type: 'services',
+        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.',
         count: 0
+    },
+    international: {
+        title: 'international',
+        img: 'health',
+        type: 'NGOs',
+        detail: '',
+        count:0
     },
     volunteer: {
         title: 'volunteer',
@@ -97,17 +125,10 @@ export const allFundTypes: {[key:string]: fundTypeProp} = {
         detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.',
         count: 0
     },
-    personal: {
-        title: 'personal',
-        img: 'personal',
-        type: 'charities',
-        detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.',
-        count: 0
-    },
     family: {
         title: 'family and friend',
         img: 'family',
-        type: 'fundraisers',
+        type: 'Personal Fundraising',
         detail: 'We’ve talked quite a bit about all the different ways you can lend support and live generously.',
         count: 0
     },

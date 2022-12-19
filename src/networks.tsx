@@ -18,7 +18,7 @@ export enum NetworkIds {
   BscTestnet = 97,
 }
 
-export const FromNetwork = NetworkIds.Goerli;
+export const FromNetwork = NetworkIds.Ethereum;
 
 interface INetwork {
   name: string,
