@@ -50,7 +50,7 @@ export const handleSignMessage = async (
 };
 
 export const menuFundTypes:string [] = [
-    'medical', 'emergency', 'memorial', 'nonprofit', 'relief'
+    'animal', 'arts', 'community', 'education', 'environmental'
 ];
 
 export const blogFundTypes:string [] = [

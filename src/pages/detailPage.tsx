@@ -192,9 +192,9 @@ export const DetailPage = () => {
           </Grid>
         </div>
       )}
-      <div className="my-10">
+      {/* <div className="my-10">
         <DonateToAnimal />
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -12,7 +12,7 @@ export const BecomeMemberPage = () => {
         <div className="max-w-800 mx-auto z-20">
             <p className="text-center text-42 font-bold text-white">Become a Member</p>
             <p className="text-center text-42 font-bold text-white">Register for fundraising or Donate now!</p>
-            <p className="text-center text-16 text-white p-20">Thanks to the help of our generous supporters, ACE has been working to improve animal welfare for the last decade—influencing millions of donations, conducting rigorous charity evaluations, and funding new.</p>
+            {/* <p className="text-center text-16 text-white p-20">Thanks to the help of our generous supporters, ACE has been working to improve animal welfare for the last decade—influencing millions of donations, conducting rigorous charity evaluations, and funding new.</p> */}
             <div className="flex justify-center mt-20">
                 <button className={baseStyles.normalBtn + ' text-white hover:bg-white mr-30'} onClick={() => navigate('/filter/all')}>
                     Donate Now <FontAwesomeIcon icon={faArrowRight} />

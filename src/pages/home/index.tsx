@@ -46,7 +46,7 @@ export const HomePage = () => {
         <FeaturedFundRaisers />
         <LatestNews />
       </div>
-      <DonateToAnimal />
+      {/* <DonateToAnimal /> */}
     </div>
   );
 }

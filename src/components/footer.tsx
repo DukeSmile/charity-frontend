@@ -32,7 +32,6 @@ export const FooterTab = () => {
       <div className="w-[95%] md:w-[80%] mx-auto py-40 flex items-center justify-between flex-wrap px-20">
         <div className="text-white max-w-270 mr-50 my-20">
           <p className="text-40 font-bold">Okapi</p>
-          <p className="text-16 my-10">Thanks to the help of our generous supporters, ACE has been working</p>
           <p className="text-20 font-bold my-10">Follow us</p>
           <div className="text-24 flex text-iron cursor-pointer my-10">
             <FaLinkedin className={resumeStyle} />
