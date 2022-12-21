@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes ,Route } from 'react-router-dom';
+import { HashRouter, Routes ,Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import './App.css';
@@ -10,7 +10,7 @@ import { HomePage } from './pages/home';
 export const App = (): JSX.Element => {
   const ownerFlag = useSelector((state:any) => state.app.isOwner);
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Layout>
         <Routes>
           <Route path='/' element={<HomePage />} />
@@ -23,6 +23,6 @@ export const App = (): JSX.Element => {
           }
         </Routes>
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
