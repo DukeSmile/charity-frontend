@@ -79,7 +79,7 @@ export const Nav = () => {
                         navigate('/filter/'+typeName);
                       }}>
                         {/* <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/> */}
-                        <div className="w-full">{fundType.title} {fundType.type}</div>
+                        <div className="w-full px-10">{fundType.title} {fundType.type}</div>
                       </button>
                     </div>
                   )
@@ -159,7 +159,7 @@ export const Nav = () => {
                         navigate('/filter/'+typeName);
                       }}>
                         {/* <img src={baseIcons[fundType.img]} className="w-30 h-30 mx-10" alt={baseIcons[fundType.img]}/> */}
-                        <div className="w-full">{fundType.title} {fundType.type}</div>
+                        <div className="w-full px-10">{fundType.title} {fundType.type}</div>
                       </button>
                     </div>
                   )

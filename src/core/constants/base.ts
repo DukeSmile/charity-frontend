@@ -187,10 +187,10 @@ export const aboutStrs:string [] = [
     'You might be wondering, “how does this benefit Okapi holders, how will this make me money”…',
     'Don’t worry, we’ve thought about that as well. We plan on using a tiered donation structure that is pro-rata depending on the amount being donated, of which a small portion will be used to buyback and burn Okapi tokens on the open market. Thus giving Okapi a rising price floor while also being fair towards the charitable organization receiving the donation. Our goal is not only to pump the price for Okapi investors, but to give them peace of mind knowing that our utilities will help save others and do something good for society as a whole.',
     '1% of all donations below 10k will be used to buy back and burn Okapi tokens on the open market',
-    '.07% of all donations between 10-50k will be used to buy back and burn Okapi tokens on the open market',
-    '.05% of all donations between 50-100k will be used to buy back and burn Okapi tokens on the open market',
-    '.03% of all donations between 100-250k will be used to buy back and burn Okapi tokens on the open market',
-    '.01% of all donations above 250k will be used to buy back and burn Okapi tokens on the open market'
+    '.7% of all donations between 10-50k will be used to buy back and burn Okapi tokens on the open market',
+    '.5% of all donations between 50-100k will be used to buy back and burn Okapi tokens on the open market',
+    '.3% of all donations between 100-250k will be used to buy back and burn Okapi tokens on the open market',
+    '.1% of all donations above 250k will be used to buy back and burn Okapi tokens on the open market'
 ];
 
 export const monthLabels: string[] = [
