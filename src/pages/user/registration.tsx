@@ -72,10 +72,10 @@ export const RegistrationPage = (props: any) => {
       .required("Required"),
     country: Yup.string().required("Required"),
     summary: Yup.string()
-      .max(100, 'Can not exceed 12 characters')
+      .max(100, 'Can not exceed 100 characters')
       .required("Required"),
     detail: Yup.string()
-      .max(1000, 'Can not exceed 12 characters')
+      .max(1000, 'Can not exceed 100 characters')
       .required("Required"),
     // photo: Yup.string().required("Required"),
     // wallet: Yup.string().required("Required")
@@ -88,10 +88,10 @@ export const RegistrationPage = (props: any) => {
       .required("Required"),
     country: Yup.string().required("Required"),
     summary: Yup.string()
-      .max(100, 'Can not exceed 12 characters')
+      .max(100, 'Can not exceed 100 characters')
       .required("Required"),
     detail: Yup.string()
-      .max(1000, 'Can not exceed 12 characters')
+      .max(1000, 'Can not exceed 1000 characters')
       .required("Required"),
     goal: Yup.string()
       .min(1, 'Goal can\'t be zero')
@@ -330,7 +330,7 @@ export const RegistrationPage = (props: any) => {
         detail: '',
         title: '',
         location: '',
-        goal: 1,
+        goal: 1000,
         type: ''
       }
     });
@@ -489,7 +489,7 @@ export const RegistrationPage = (props: any) => {
                   maxRows={4}
                   id="summary"
                   name="summary"
-                  className={"border-1 p-10 " + (formik.touched.summary || Boolean(formik.errors.summary) ? "border-error" : '' )}
+                  className={"outline-none border-1 p-10 " + (formik.touched.summary && Boolean(formik.errors.summary) ? "border-error" : '' )}
                   style={{ width: '100%' }}
                   value={formik.values.summary}
                   onChange={formik.handleChange}
@@ -661,7 +661,7 @@ export const RegistrationPage = (props: any) => {
                   maxRows={4}
                   id="detail"
                   name="detail"
-                  className={"border-1 p-10 " + (formik.touched.detail && Boolean(formik.errors.detail) ? "border-error" : '' )}
+                  className={"outline-none border-1 p-10 " + (formik.touched.detail && Boolean(formik.errors.detail) ? "border-error" : '' )}
                   style={{ width: '100%' }}
                   value={formik.values.detail}
                   onChange={formik.handleChange}
